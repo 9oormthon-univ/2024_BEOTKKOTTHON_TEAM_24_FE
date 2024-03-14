@@ -60,7 +60,7 @@ export default function Home({ deferredPrompt } : { deferredPrompt: BeforeInstal
             </a>
           </div>
         </div>
-
+        <button onClick={promptAppInstall}>홈 화면에 추가</button>
         <div className={styles.center}>
           <Image
             className={styles.logo}
@@ -130,7 +130,6 @@ export default function Home({ deferredPrompt } : { deferredPrompt: BeforeInstal
             </p>
           </a>
         </div>
-        <button onClick={promptAppInstall}>홈 화면에 추가</button>
       </main>
     </>
   );
