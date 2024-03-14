@@ -27,7 +27,10 @@ export default function App({ Component, pageProps }: AppProps) {
       .catch(() => console.log("failed"))
     }
     return () => {
-      window.removeEventListener("beforeinstallprompt", null);
+      window.removeEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault()
+        setDeferredPrompt(e)
+      });
     }
   })
   return (
