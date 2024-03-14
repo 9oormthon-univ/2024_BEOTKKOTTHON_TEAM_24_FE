@@ -17,7 +17,6 @@ const Upload: NextPage = ({}) => {
           {summary && <p>Summary: {summary}</p>}
         </PageContainer>
     </Wrapper>
-
     </>
   )
 }
@@ -44,7 +43,7 @@ const PageContainer = styled.div`
 `
 
 const Input = styled.input`
-  widht: 200px;
+  width: 200px;
   font-size : 15px;
   border-radius: 30px;
   outline: none;
