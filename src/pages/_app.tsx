@@ -1,25 +1,22 @@
 import "@/styles/globals.css";
-import { BeforeInstallPromptEvent } from '@/types';
+import { BeforeInstallPromptEvent } from '@/types/global';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from "next/app";
 import { useEffect, useState } from 'react';
 
 const queryClient = new QueryClient()
 
-declare global {
-  export interface WindowEventMap {
-    beforeinstallprompt: BeforeInstallPromptEvent;
-  }
-}
-
 export default function App({ Component, pageProps }: AppProps) {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | undefined>(undefined);
 
   useEffect(() => {
-    window.addEventListener("beforeinstallprompt", (e) => {
+    const handleBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
       e.preventDefault()
       setDeferredPrompt(e)
-    })
+    }
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt)
+
     if("serviceWorker" in navigator) {
       navigator.serviceWorker
       .register("/sw.js")
@@ -27,17 +24,15 @@ export default function App({ Component, pageProps }: AppProps) {
       .catch(() => console.log("failed"))
     }
     return () => {
-      window.removeEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault()
-        setDeferredPrompt(e)
-      });
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     }
-  })
+  }, [])
+
   return (
   <QueryClientProvider client={queryClient}>
     <Component
       {...pageProps}
-      deferedPrompt={deferredPrompt}
+      deferredPrompt={deferredPrompt}
       setDeferredPrompt={setDeferredPrompt}
     />
   </QueryClientProvider>
