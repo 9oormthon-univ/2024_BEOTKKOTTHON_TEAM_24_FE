@@ -2,31 +2,29 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { BeforeInstallPromptEvent } from '@/types';
+import { BeforeInstallPromptEvent } from '@/types/global';
 import { Dispatch, SetStateAction } from 'react';
+import { checkUnsupportedBrowser } from "@/utils/index";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ deferredPrompt } : { deferredPrompt: BeforeInstallPromptEvent}, setDeferredPrompt : Dispatch<SetStateAction<BeforeInstallPromptEvent | undefined>> ) {
-  const isIos = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase()
-    return /iphone|ipad|ipod/.test(userAgent)
-  }
+export default function Home({ deferredPrompt, setDeferredPrompt } : { deferredPrompt: BeforeInstallPromptEvent, setDeferredPrompt : Dispatch<SetStateAction<BeforeInstallPromptEvent | undefined>>}) {
 
   const promptAppInstall = async () => {
-    if (isIos()) {
+    const isUnsupportedBrowser = checkUnsupportedBrowser();
+    if (isUnsupportedBrowser) {
       alert("공유 아이콘 -> 홈 화면에 추가를 클릭해 앱으로 편리하게 이용해보세요!")
     }
-    if (!isIos()) {
+    if (!isUnsupportedBrowser) {
       if (deferredPrompt) {
         deferredPrompt.prompt()
         await deferredPrompt.userChoice
         setDeferredPrompt(undefined)
-        } else {
+      } else {
           alert("이미 저희 서비스를 설치해주셨어요!")
-        }
       }
     }
+  }
 
   return (
     <>
