@@ -63,6 +63,10 @@ const LinkInput: NextPage = ({}) => {
     // 이미지 화면에 띄우기
     const newImages = Array.from(files, (file : Blob | MediaSource) => URL.createObjectURL(file));
     const newList = imageList.concat(newImages);
+    if(newList.length > 10) {
+      alert("이미지는 10장 이상 추가할 수 없습니다.")
+      return
+    }
     setImageList(newList);
   }
 
@@ -357,7 +361,7 @@ const MemoInput = styled.textarea`
   font-weight: 500;
   line-height: 19px;
   border-radius: 8px 8px 0px 0px;
-  field-sizing: normal;
+  resize: none;
 `;
 
 const LetterCounter = styled.div`
