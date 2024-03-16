@@ -1,5 +1,5 @@
 import { useGetSummary } from '@/api/Insight';
-import { NextPage } from 'next'
+import { NextPage } from 'next';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -8,18 +8,22 @@ const Upload: NextPage = ({}) => {
   const { isLoading, error, summary } = useGetSummary(link);
   return (
     <>
-    <Wrapper>
-      <PageContainer>
+      <Wrapper>
+        <PageContainer>
           This is Upload Page
-          <Input type="text" value={link} onChange={(e) => setLink(e.target.value)}/>
+          <Input
+            type="text"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+          />
           {isLoading && <p>Loading...</p>}
           {error && <p>{error.message}</p>}
           {summary && <p>Summary: {summary}</p>}
         </PageContainer>
-    </Wrapper>
+      </Wrapper>
     </>
-  )
-}
+  );
+};
 
 export default Upload;
 
@@ -40,11 +44,11 @@ const PageContainer = styled.div`
   justify-content: center;
   max-width: 393px;
   height: 852px;
-`
+`;
 
 const Input = styled.input`
   width: 200px;
-  font-size : 15px;
+  font-size: 15px;
   border-radius: 30px;
   outline: none;
   padding: 10px;
