@@ -1,30 +1,39 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import Head from 'next/head';
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+import styles from '@/styles/Home.module.css';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { Dispatch, SetStateAction } from 'react';
-import { checkUnsupportedBrowser } from "@/utils/index";
+import { checkUnsupportedBrowser } from '@/utils/index';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
-export default function Home({ deferredPrompt, setDeferredPrompt } : { deferredPrompt: BeforeInstallPromptEvent, setDeferredPrompt : Dispatch<SetStateAction<BeforeInstallPromptEvent | undefined>>}) {
-
+export default function Home({
+  deferredPrompt,
+  setDeferredPrompt,
+}: {
+  deferredPrompt: BeforeInstallPromptEvent;
+  setDeferredPrompt: Dispatch<
+    SetStateAction<BeforeInstallPromptEvent | undefined>
+  >;
+}) {
   const promptAppInstall = async () => {
     const isUnsupportedBrowser = checkUnsupportedBrowser();
     if (isUnsupportedBrowser) {
-      alert("공유 아이콘 -> 홈 화면에 추가를 클릭해 앱으로 편리하게 이용해보세요!")
+      alert(
+        '공유 아이콘 -> 홈 화면에 추가를 클릭해 앱으로 편리하게 이용해보세요!',
+      );
     }
     if (!isUnsupportedBrowser) {
       if (deferredPrompt) {
-        deferredPrompt.prompt()
-        await deferredPrompt.userChoice
-        setDeferredPrompt(undefined)
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        setDeferredPrompt(undefined);
       } else {
-          alert("이미 저희 서비스를 설치해주셨어요!")
+        alert('이미 저희 서비스를 설치해주셨어요!');
       }
     }
-  }
+  };
 
   return (
     <>
@@ -46,7 +55,7 @@ export default function Home({ deferredPrompt, setDeferredPrompt } : { deferredP
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{" "}
+              By{' '}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"

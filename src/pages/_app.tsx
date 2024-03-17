@@ -1,40 +1,45 @@
-import "@/styles/globals.css";
+import '@/styles/globals.css';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import type { AppProps } from "next/app";
+import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | undefined>(undefined);
+  const [deferredPrompt, setDeferredPrompt] = useState<
+    BeforeInstallPromptEvent | undefined
+  >(undefined);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
-      e.preventDefault()
-      setDeferredPrompt(e)
-    }
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
 
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt)
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
-    if("serviceWorker" in navigator) {
+    if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-      .register("/sw.js")
-      .then((reg) => console.log("sw worker registered", reg))
-      .catch(() => console.log("failed"))
+        .register('/sw.js')
+        .then((reg) => console.log('sw worker registered', reg))
+        .catch(() => console.log('failed'));
     }
     return () => {
-      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-    }
-  }, [])
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt,
+      );
+    };
+  }, []);
 
   return (
-  <QueryClientProvider client={queryClient}>
-    <Component
-      {...pageProps}
-      deferredPrompt={deferredPrompt}
-      setDeferredPrompt={setDeferredPrompt}
-    />
-  </QueryClientProvider>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Component
+        {...pageProps}
+        deferredPrompt={deferredPrompt}
+        setDeferredPrompt={setDeferredPrompt}
+      />
+    </QueryClientProvider>
+  );
 }
