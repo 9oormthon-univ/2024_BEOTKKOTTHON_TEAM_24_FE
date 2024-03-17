@@ -51,17 +51,16 @@ const LinkInput: NextPage = ({}) => {
     }
   }
 
-  const handleClickDelete = (idx: number, event: React.MouseEvent<SVGSVGElement>) => {
+  const handleClickDelete = (idx: number) => {
     console.log("handleClickDelete")
     const newList = imageList.filter((img) => idx !== imageList.indexOf(img))
     setImageList(newList)
   }
 
-  const handleImage = async (e: any) => {
-	const files = e.target.files
-    if(!files) return
+  const handleImage = async (e: React.ChangeEvent<HTMLInputElement>)  => {
+    if(!e?.target.files) return
     // 이미지 화면에 띄우기
-    const newImages = Array.from(files, (file : Blob | MediaSource) => URL.createObjectURL(file));
+    const newImages = Array.from(e?.target.files, (file : Blob | MediaSource) => URL.createObjectURL(file));
     const newList = imageList.concat(newImages);
     if(newList.length > 10) {
       alert("이미지는 10장 이상 추가할 수 없습니다.")
@@ -114,7 +113,7 @@ const LinkInput: NextPage = ({}) => {
               {imageList.map((url, idx) =>
                 <div key={idx} className='image-wrapper'>
                   <Image src={url} alt={"preview"} className="addedImg" key={idx} width={131} height={131} />
-                  <svg xmlns="http://www.w3.org/2000/svg" onClick={(e) => handleClickDelete(idx,e)} className="delete-btn" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                  <svg xmlns="http://www.w3.org/2000/svg" onClick={() => handleClickDelete(idx)} className="delete-btn" width="19" height="19" viewBox="0 0 19 19" fill="none">
                       <path d="M13.5265 13.5266C11.0363 16.0168 6.99888 16.0168 4.5087 13.5266C2.01851 11.0365 2.01851 6.99907 4.5087 4.50888C6.99888 2.01869 11.0363 2.01869 13.5265 4.50888C16.0166 6.99907 16.0166 11.0365 13.5265 13.5266Z" fill="#2B2B2B"/>
                       <path fillRule="evenodd" clipRule="evenodd" d="M11.3432 6.69278C11.5068 6.85642 11.5068 7.12174 11.3432 7.28538L7.28518 11.3434C7.12154 11.507 6.85623 11.507 6.69258 11.3434C6.52894 11.1797 6.52894 10.9144 6.69258 10.7508L10.7506 6.69278C10.9142 6.52914 11.1795 6.52914 11.3432 6.69278Z" fill="white"/>
                       <path fillRule="evenodd" clipRule="evenodd" d="M11.3443 11.3432C11.1807 11.5068 10.9154 11.5068 10.7517 11.3432L6.69374 7.28518C6.5301 7.12154 6.5301 6.85622 6.69374 6.69258C6.85738 6.52894 7.12269 6.52894 7.28634 6.69258L11.3443 10.7506C11.508 10.9142 11.508 11.1795 11.3443 11.3432Z" fill="white"/>
