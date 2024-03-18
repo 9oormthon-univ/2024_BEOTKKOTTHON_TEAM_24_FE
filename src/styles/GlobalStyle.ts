@@ -29,12 +29,12 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Pretendard-Bold', 'Pretendard-SemiBold', 'Pretendard-Medium';
+    font-family: 'Pretendard-Bold', 'Pretendard-SemiBold', 'Pretendard-Medium', sans-serif;
   }
 
   html,
   body {
-    font-family: 'Pretendard-Bold', 'Pretendard-SemiBold', 'Pretendard-Medium';
+    font-family: 'Pretendard-Bold', 'Pretendard-SemiBold', 'Pretendard-Medium', sans-serif;
     max-width: 100vw;
     overflow-x: hidden;
   }
