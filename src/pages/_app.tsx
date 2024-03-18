@@ -1,5 +1,5 @@
+import MainLayout from '@/components/common/MainLayout';
 import { GlobalStyles } from '@/styles/GlobalStyle';
-import '@/styles/globals.css';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
@@ -37,11 +37,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyles />
-      <Component
-        {...pageProps}
-        deferredPrompt={deferredPrompt}
-        setDeferredPrompt={setDeferredPrompt}
-      />
+      <MainLayout>
+        <Component
+          {...pageProps}
+          deferredPrompt={deferredPrompt}
+          setDeferredPrompt={setDeferredPrompt}
+        />
+      </MainLayout>
     </QueryClientProvider>
   );
 }
