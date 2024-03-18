@@ -24,10 +24,12 @@ const LinkInput: NextPage = ({}) => {
           title: result.title,
           summary: result.summary,
           keywords: result.keywords,
+          imageList: imageList,
+          memo: memo
         },
       }, '/upload/input-text')
     }
-  }, [result, router])
+  }, [result, router, imageList, memo])
 
   const handleClickNext = async () => {
     // 입력 링크 유효성 검사
@@ -52,7 +54,6 @@ const LinkInput: NextPage = ({}) => {
   }
 
   const handleClickDelete = (idx: number) => {
-    console.log("handleClickDelete")
     const newList = imageList.filter((img) => idx !== imageList.indexOf(img))
     setImageList(newList)
   }
