@@ -337,6 +337,7 @@ const Upload: NextPage = ({}) => {
             {isModal === 'folder' && (
               <SelectFolderModal
                 onClose={() => setIsModal('')}
+                selectedFolder={insightInput.folder}
                 insightInput={insightInput}
                 onSelect={setInsightInput}
               />

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 type Props = {
   onClose: () => void;
   onSelect: React.Dispatch<React.SetStateAction<insightInput>>;
+  selectedFolder: {name: string, mainColor: string, subColor: string}
   insightInput: insightInput;
 };
 
@@ -17,11 +18,7 @@ type Folder = {
 const SelectFolderModal = (props: Props) => {
   const [isMakingFolder, setIsMakingFolder] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
-  const [selectedFolder, setSelectedFolder] = useState({
-    name: '',
-    mainColor: '',
-    subColor: '',
-  });
+  const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
   const [folderList, setFolderList] = useState([
     {
       name: 'UX/UI',
