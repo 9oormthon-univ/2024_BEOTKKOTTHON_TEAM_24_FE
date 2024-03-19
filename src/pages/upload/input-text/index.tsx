@@ -383,7 +383,7 @@ const Wrapper = styled.div`
 
 const LoadingWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 852px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -421,7 +421,9 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 393px;
+  position: relative;
+  width: 393px;
+  padding: 0px 20px;
   height: 852px;
   margin-bottom: 200px;
   overflow-y: scroll;
@@ -442,7 +444,6 @@ const Input = styled.input`
 
 const Header = styled.div`
   display: flex;
-  position: relative;
   margin-bottom: 30px;
   width: 100%;
   height: 28px;
@@ -464,12 +465,12 @@ const PageName = styled.span`
 const CancelBtn = styled.div`
   position: absolute;
   font-size: 12px;
-  left: 18px;
+  left: 20px;
+  top: 6px;
 `;
 
 const PageIntro = styled.div`
-  width: 351px;
-  padding-right: 40px;
+  width: 353px;
   text-align: left;
   font-family: Pretendard;
   font-size: 18px;
@@ -484,7 +485,7 @@ const ImageSection = styled.div`
   flex-direction: column;
   margin-top: 17px;
   position: relative;
-  width: 364px;
+  width: 353px;
   height: 220px;
   border-radius: 13px;
   .image-wrapper {
