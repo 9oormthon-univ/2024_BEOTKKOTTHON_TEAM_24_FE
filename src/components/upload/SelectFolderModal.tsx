@@ -377,7 +377,7 @@ const Title = styled.div`
 const CompleteBtn = styled.div`
   position: absolute;
   top: 18px;
-  right: 0px;
+  right: 18px;
   color: var(--Primary-500, #3184ff);
   font-family: Pretendard;
   font-size: 18px;
