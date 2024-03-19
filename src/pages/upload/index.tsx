@@ -88,7 +88,6 @@ const LinkInput: NextPage = ({}) => {
               </Link>
             </CancelBtn>
           </Header>
-          <PageIntro>저장하고 싶은 인사이트 정보를 입력해주세요.</PageIntro>
           <LinkSection>
             <SubTitle>인사이트 링크</SubTitle>
             <ErrorText>{errorText}</ErrorText>
@@ -259,7 +258,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: center;
+  flex-direction: column;
   justify-content: center;
   margin: auto;
   .no-scroll::-webkit-scrollbar {
@@ -270,7 +269,6 @@ const Wrapper = styled.div`
 const PageContainer = styled.div`
   display: flex;
   position: relative;
-  margin: 0px 20px 0px 20px;
   flex-direction: column;
   align-items: center;
   width: 393px;
@@ -278,7 +276,7 @@ const PageContainer = styled.div`
   margin-bottom: 200px;
   .absolute {
     position: absolute;
-    bottom: 40px;
+    bottom: 35px;
   }
 `;
 
@@ -322,23 +320,11 @@ const CancelBtn = styled.div`
   left: 18px;
 `;
 
-const PageIntro = styled.div`
-  width: 351px;
-  padding-right: 40px;
-  text-align: left;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 25px;
-  word-break: keep-all;
-`;
-
 const LinkSection = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 44px;
   .link-icon {
     position: absolute;
     top: 41px;
@@ -365,6 +351,7 @@ const ErrorText = styled.div`
 
 const ImageSection = styled(LinkSection)`
   position: relative;
+  margin-top: 24px;
   width: 353px;
   .no-scroll::-webkit-scrollbar {
     display: none;
@@ -425,7 +412,7 @@ const AddBtnWrapper = styled.div`
 `;
 
 const MemoSection = styled(LinkSection)`
-  margin-top: 35px;
+  margin-top: 24px;
 `;
 
 const SubTitle = styled.div`
@@ -437,7 +424,7 @@ const SubTitle = styled.div`
   font-weight: 600;
   line-height: 21px; /* 131.25% */
   letter-spacing: -0.32px;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 `;
 
 const ImageCounter = styled.div`
@@ -494,7 +481,9 @@ const LetterCounter = styled.div`
   padding: 16px;
 `;
 
-const SourceSection = styled(LinkSection)``;
+const SourceSection = styled(LinkSection)`
+  margin-top: 24px;
+`;
 
 const SourceInput = styled(Input)`
   padding: 14px 16px;
