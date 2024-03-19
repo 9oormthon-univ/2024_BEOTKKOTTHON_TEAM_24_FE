@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import coverImg from '@image/디자인1.jpg';
+import coverImg2 from '@image/디자인2.jpg';
 
 type Props = {
   isSmall: boolean;
@@ -26,14 +27,27 @@ const InsightCard = (props: Props) => {
     </WrapperSmall>
   ) : (
     <WrapperLarge>
-      <div>d</div>
+      <Image
+        src={coverImg2}
+        width={96}
+        height={68}
+        alt="Insight Card image"
+        className="img"
+      />
+      <div className="card-title-tag">
+        <div className="card-title">
+          디자인시스템에 모션 가이드 추가하는 방법
+        </div>
+        <div className="card-tag">UI/UX</div>
+        <div className="card-tag">사용자 경험</div>
+      </div>
     </WrapperLarge>
   );
 };
 
 const WrapperSmall = styled.div`
   width: 100%;
-  height: 200px;
+  height: 90px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -69,6 +83,42 @@ const WrapperSmall = styled.div`
   }
 `;
 
-const WrapperLarge = styled.div``;
+const WrapperLarge = styled.div`
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: #ffffff;
+
+  .img {
+    border-radius: 12px;
+    margin: 8px 20px 8px 12px;
+  }
+
+  .title-tag {
+    margin: 0;
+    justify-content: space-between;
+  }
+
+  .card-title {
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    word-break: keep-all;
+  }
+
+  .card-tag {
+    font-size: 10px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 4px 10px;
+    margin: 0 6px 0 0;
+    border-radius: 6px;
+    background-color: #d7ebff;
+  }
+`;
 
 export default InsightCard;

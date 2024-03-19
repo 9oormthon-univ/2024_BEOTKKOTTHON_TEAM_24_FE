@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import InsightCard from './InsightCard';
+import InsightCard from '../InsightCard';
 
 const ReminderQuestionBox = () => {
   return (
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   width: calc(100% - 40px);
   height: 197px;
   border-radius: 12px;
-  margin: 0 20px;
+  margin: 0 20px 48px;
   padding: 16px;
   background-color: #e9efff;
   display: flex;
