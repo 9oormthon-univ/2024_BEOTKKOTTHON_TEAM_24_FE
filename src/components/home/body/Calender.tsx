@@ -5,59 +5,59 @@ import RenderCalenderBoard from './RenderCalenderBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
 const Calender = () => {
-  const [selectedDate, setSelectedDate] = useState(dayjs().format('MM/DD/YY'));
+  const today = dayjs().format('MM/DD/YY');
+  const [selectedDate, setSelectedDate] = useState(today);
   const splited = selectedDate.split('/');
 
   const handleSelectDate = (v: string) => {
     setSelectedDate(v);
   };
 
-  const handlePrevMonth = () => {
-    const newDate = dayjs(selectedDate)
-      .subtract(1, 'month')
-      .endOf('month')
-      .format('MM/DD/YY');
+  const handlePrevWeek = () => {
+    const newDate = dayjs(selectedDate).subtract(1, 'week').format('MM/DD/YY');
     setSelectedDate(newDate);
   };
 
-  const handleNextMonth = () => {
-    const newDate = dayjs(selectedDate)
-      .add(1, 'month')
-      .startOf('month')
-      .format('MM/DD/YY');
+  const handleNextWeek = () => {
+    const newDate = dayjs(selectedDate).add(1, 'week').format('MM/DD/YY');
     setSelectedDate(newDate);
   };
 
-  const board = RenderCalenderBoard(selectedDate, handleSelectDate);
+  const board = RenderCalenderBoard(today, selectedDate, handleSelectDate);
 
   return (
     <Wrapper>
       <Head>
-        <p>
+        <p className="year-month">
           20{splited[2]}년 {splited[0]}월
         </p>
-        <div>
-          <Left onClick={handlePrevMonth} />
-          <Right onClick={handleNextMonth} />
+        <div className="arrows">
+          <Left onClick={handlePrevWeek} />
+          <Right onClick={handleNextWeek} />
         </div>
       </Head>
-      <Days>
-        {days.map((v) => (
-          <div key={v}>{v}</div>
-        ))}
-      </Days>
       <Board>{board}</Board>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  margin-top: 16px;
-  transform: translate3d(-14px, 0, 0);
-  width: calc(100% + 28px);
+  margin-bottom: 14px;
+  padding: 28px 20px 0;
+  border-bottom: 3px solid #f4f5f7;
+
+  .year-month {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .arrows {
+    width: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 const Board = styled.div`
@@ -70,27 +70,10 @@ const Head = styled.div`
   font-weight: 700;
   display: flex;
   justify-content: space-between;
-  margin: auto 14px;
-  margin-bottom: 10px;
+  margin: 0 14px 16px;
 
   p {
     line-height: 28px;
-  }
-
-  img {
-    width: 26px;
-    margin-left: 8px;
-    cursor: pointer;
-  }
-`;
-
-const Days = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-
-  & > div {
-    margin: 4px auto;
-    font-size: 10px;
   }
 `;
 

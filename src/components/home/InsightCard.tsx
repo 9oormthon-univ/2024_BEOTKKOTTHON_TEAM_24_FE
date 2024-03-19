@@ -51,13 +51,17 @@ const WrapperSmall = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-radius: 12px;
   background-color: #ffffff;
 
   .img {
     border-radius: 12px;
     margin: 8px 20px 8px 12px;
+  }
+
+  .card-title-tag {
+    margin: 0 20px 0 0;
   }
 
   .title-tag {
@@ -89,7 +93,7 @@ const WrapperLarge = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-radius: 12px;
   background-color: #ffffff;
   margin: 22px 20px 0 20px;
@@ -97,6 +101,10 @@ const WrapperLarge = styled.div`
   .img {
     border-radius: 12px;
     margin: 8px 20px 8px 12px;
+  }
+
+  .card-title-tag {
+    margin: 0 20px 0 0;
   }
 
   .title-tag {
