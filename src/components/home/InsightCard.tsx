@@ -29,8 +29,8 @@ const InsightCard = (props: Props) => {
     <WrapperLarge>
       <Image
         src={coverImg2}
-        width={96}
-        height={68}
+        width={109}
+        height={78}
         alt="Insight Card image"
         className="img"
       />
@@ -66,10 +66,11 @@ const WrapperSmall = styled.div`
   }
 
   .card-title {
-    margin: 0 0 12px;
+    margin: 0 10px 12px 0;
     font-size: 12px;
     font-weight: 700;
     word-break: keep-all;
+    line-height: 18px;
   }
 
   .card-tag {
@@ -84,14 +85,14 @@ const WrapperSmall = styled.div`
 `;
 
 const WrapperLarge = styled.div`
-  width: 100%;
-  height: 90px;
+  height: 102px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
   background-color: #ffffff;
+  margin: 22px 20px 0 20px;
 
   .img {
     border-radius: 12px;
@@ -104,14 +105,15 @@ const WrapperLarge = styled.div`
   }
 
   .card-title {
-    margin: 0 0 12px;
-    font-size: 12px;
-    font-weight: 700;
+    margin: 0 10px 12px 0;
+    font-size: 16px;
+    font-weight: 600;
     word-break: keep-all;
+    line-height: 20px;
   }
 
   .card-tag {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     display: inline-block;
     padding: 4px 10px;

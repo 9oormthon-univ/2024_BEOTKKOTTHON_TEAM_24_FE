@@ -1,9 +1,19 @@
 import withPWA from 'next-pwa';
 
+const PWA = withPWA({
+  dest: 'build',
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
-  dest: 'build',
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
 };
 
-export default withPWA(nextConfig);
+export default PWA(nextConfig);
