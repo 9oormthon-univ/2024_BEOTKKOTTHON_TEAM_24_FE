@@ -10,8 +10,8 @@ const Calender = () => {
   const [selectedDate, setSelectedDate] = useState(today);
   const splited = selectedDate.split('/');
 
-  const handleSelectDate = (v: string) => {
-    setSelectedDate(v);
+  const handleSelectDate = (v: string | null) => {
+    v ? setSelectedDate(v) : setSelectedDate(today);
   };
 
   const handlePrevWeek = () => {

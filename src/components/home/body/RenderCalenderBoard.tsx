@@ -7,7 +7,7 @@ const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const RenderCalenderBoard = (
   today: string,
   selectedDay: string,
-  handleSelectDate: (v: string) => void,
+  handleSelectDate: (v: string | null) => void,
 ) => {
   const initArr = (firstDay: number) => {
     return Array.from({ length: 7 }, (v, i) =>
@@ -25,8 +25,13 @@ const RenderCalenderBoard = (
   }, [selectedDay]);
 
   const content = arr.map((v, i) => (
-    <Item key={v ? v.toString() : `${v}${i}`} isToday={today === v}>
-      {v && <CalenderItem date={v} onClick={() => handleSelectDate(v)} />}
+    <Item
+      key={v ? v.toString() : `${v}${i}`}
+      isToday={today === v}
+      isSelected={selectedDay === v}
+      onClick={() => handleSelectDate(v)}
+    >
+      {v && <CalenderItem date={v} />}
     </Item>
   ));
 
@@ -48,38 +53,35 @@ const CalenderItem = ({ date }: CalenderItemProps) => {
   );
 };
 
-const Item = styled.div<{ isToday: boolean }>`
+interface ItemProps {
+  isToday: boolean;
+  isSelected: boolean;
+}
+
+const Item = styled.div<ItemProps>`
   width: 100%;
   padding: 14px auto;
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-bottom: -3px;
 
-  & > button {
-    height: 21px;
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 4px;
-
-    .count {
-      position: absolute;
-      padding-top: 3px;
-      font-size: 13px;
-      text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-      font-weight: 700;
-    }
-  }
+  ${(props) =>
+    props.isSelected
+      ? css`
+          border-bottom: 3px solid #3184ff;
+        `
+      : css`
+          border-bottom: 0;
+        `}
 
   .day {
     font-size: 12px;
     font-weight: 600;
     margin: 0 0 14px 0;
-    color: ${({ isToday }) => (isToday ? '#3184FF' : '#1F1F1F')};
-    ${({ isToday }) =>
-      isToday
+    color: ${(props) => (props.isToday ? '#3184FF' : '#1F1F1F')};
+    ${(props) =>
+      props.isToday
         ? css`
             color: #3184ff;
             opacity: 1;
@@ -95,9 +97,9 @@ const Item = styled.div<{ isToday: boolean }>`
     font-weight: 500;
     padding: 0 0 5px 0;
     margin: 0 0 14px 0;
-    color: ${({ isToday }) => (isToday ? '#3184FF' : '#1F1F1F')};
-    ${({ isToday }) =>
-      isToday
+    color: ${(props) => (props.isToday ? '#3184FF' : '#1F1F1F')};
+    ${(props) =>
+      props.isToday
         ? css`
             color: #3184ff;
             font-size: 17px;
