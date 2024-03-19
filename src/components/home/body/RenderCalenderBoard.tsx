@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
-import { ButtonHTMLAttributes, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+import Stamp from '@svg/calender-stamp.svg';
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -31,7 +32,7 @@ const RenderCalenderBoard = (
       isSelected={selectedDay === v}
       onClick={() => handleSelectDate(v)}
     >
-      {v && <CalenderItem date={v} />}
+      {v && <CalenderItem date={v} stamp={today === v} />}
     </Item>
   ));
 
@@ -40,15 +41,19 @@ const RenderCalenderBoard = (
 
 export default RenderCalenderBoard;
 
-interface CalenderItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface CalenderItemProps {
   date: string;
+  stamp: boolean;
 }
 
-const CalenderItem = ({ date }: CalenderItemProps) => {
+const CalenderItem = ({ date, stamp }: CalenderItemProps) => {
   return (
     <>
       <span className="day">{days[dayjs(date).day()]}</span>
-      <span className="date">{dayjs(date).date()}</span>
+      <div className="date-container">
+        <span className="date">{dayjs(date).date()}</span>
+        {stamp ? <Stamp /> : <div className="no-stamp"></div>}
+      </div>
     </>
   );
 };
@@ -78,7 +83,7 @@ const Item = styled.div<ItemProps>`
   .day {
     font-size: 12px;
     font-weight: 600;
-    margin: 0 0 14px 0;
+    margin: 0;
     color: ${(props) => (props.isToday ? '#3184FF' : '#1F1F1F')};
     ${(props) =>
       props.isToday
@@ -92,11 +97,21 @@ const Item = styled.div<ItemProps>`
           `}
   }
 
+  .date-container {
+    margin: 10px auto;
+    width: 33px;
+    height: 33px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .date {
+    position: absolute;
     font-size: 17px;
     font-weight: 500;
-    padding: 0 0 5px 0;
-    margin: 0 0 14px 0;
     color: ${(props) => (props.isToday ? '#3184FF' : '#1F1F1F')};
     ${(props) =>
       props.isToday
@@ -108,5 +123,13 @@ const Item = styled.div<ItemProps>`
             color: #1f1f1f;
             font-size: 17px;
           `}
+  }
+
+  .stamp {
+    position: absolute;
+  }
+
+  .no-stamp {
+    position: absolute;
   }
 `;
