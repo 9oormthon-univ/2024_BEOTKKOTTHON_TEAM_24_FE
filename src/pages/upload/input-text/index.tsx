@@ -11,6 +11,7 @@ import { useGetSummary } from '@/api/Insight';
 import loadingGIF from '../../../../public/loading.gif';
 import { loadingBlurURL } from '@/constants/index';
 import Image from 'next/image';
+import MoveToNextBtn from '@/components/upload/MoveToNextBtn';
 export interface insightInput {
   title: string | string[] | undefined;
   summary: string | string[] | undefined;
@@ -25,7 +26,9 @@ export interface insightInput {
 
 const Upload: NextPage = ({}) => {
   const router = useRouter();
-  const [insightLink, setInsightLink] = useState<string | string[] | undefined>("");
+  const [insightLink, setInsightLink] = useState<string | string[] | undefined>(
+    '',
+  );
   const { isLoading, error, result } = useGetSummary(String(insightLink));
   const [insightInput, setInsightInput] = useState<insightInput>({
     title: '',
@@ -46,7 +49,7 @@ const Upload: NextPage = ({}) => {
 
   useEffect(() => {
     setInsightLink(link);
-  },[])
+  }, []);
 
   useEffect(() => {
     if (result.title) {
@@ -65,14 +68,17 @@ const Upload: NextPage = ({}) => {
             ? imageList
             : [imageList]
           : [],
-      })
+      });
     }
     if (error) {
       console.error(error);
-      alert('정보를 받아오는데 실패했습니다. 다시 시도해주세요.')
-      router.push({
-        pathname: '/upload',
-      }, '/upload')
+      alert('정보를 받아오는데 실패했습니다. 다시 시도해주세요.');
+      router.push(
+        {
+          pathname: '/upload',
+        },
+        '/upload',
+      );
     }
   }, [result.title]);
 
@@ -342,6 +348,18 @@ const Upload: NextPage = ({}) => {
                 onSelect={setInsightInput}
               />
             )}
+            <BtnWrapper>
+              <MoveToNextBtn
+                onClick={() => router.push('/')}
+                title="완료"
+                width="353px"
+                height="72px"
+                fontSize="20px"
+                background="#3184FF"
+                isDisabled={false}
+              />
+            </BtnWrapper>
+
           </PageContainer>
         )}
       </Wrapper>
@@ -621,4 +639,9 @@ const RemindSetter = styled(FolderIndicator)`
   display: flex;
   align-items: center;
   padding: 14px 16px;
+`;
+
+const BtnWrapper = styled.div`
+  position: fixed;
+  bottom: 35px;
 `;
