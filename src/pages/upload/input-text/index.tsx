@@ -604,7 +604,7 @@ const RemindIndicator = styled.div`
   display: flex;
   align-items: center;
   justify-content: right;
-  width: 121px;
+  max-width: 200px;
   color: var(--Primary-500, #3184ff);
   text-align: right;
   /* Body-14-M */

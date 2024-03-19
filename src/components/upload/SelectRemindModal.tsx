@@ -17,27 +17,27 @@ const SelectRemindModal = (props: Props) => {
 
   const renderRemindTerm = () => {
     const weekData = ['월', '화', '수', '목', '금', '토', '일'];
-    switch (props.insightInput.remindType) {
+    switch (remindType) {
       case '':
         return;
       case 'recommend':
         props.setRemindTerm('추천 주기');
         break;
       case 'weekly':
-        if (props.insightInput.remindDay?.length === 7) {
+        if (selectedWeekDay.length === 7) {
           props.setRemindTerm('매일 마다 ');
           break;
         }
         const resultWeek = weekData.filter((day) =>
-          props.insightInput.remindDay?.includes(weekData.indexOf(day) + 1),
+          selectedWeekDay.includes(weekData.indexOf(day) + 1),
         );
         const printContentWeek = resultWeek?.join('/');
         props.setRemindTerm(printContentWeek + '마다 ');
         break;
       case 'monthly':
         const resultMonth =
-          props.insightInput.remindDay &&
-          Array.from(props.insightInput.remindDay, (day) => `${day}일`);
+          selectedMonthDay &&
+          Array.from(selectedMonthDay, (day) => `${day}일`);
         const printContent = resultMonth?.join(', ');
         props.setRemindTerm(printContent + '마다 ');
         break;
@@ -53,6 +53,7 @@ const SelectRemindModal = (props: Props) => {
     }
     const selectedDay = remindType === "weekly" ? selectedWeekDay : selectedMonthDay
     props.onSelect({ ...props.insightInput, isRemind: true, remindType: remindType , remindDay: selectedDay});
+    renderRemindTerm();
     props.onClose();
   };
 
@@ -76,6 +77,10 @@ const SelectRemindModal = (props: Props) => {
       if (selectedMonthDay.includes(day)) {
         const newMonthDay = selectedMonthDay.filter((element) => element !== day)
         setSelectedMonthDay(newMonthDay)
+        return;
+      }
+      if (selectedMonthDay.length === 3) {
+        alert("반복 일은 최대 3일까지 선택 가능합니다.")
         return;
       }
       const newMonthDay = [...selectedMonthDay, day].sort();
