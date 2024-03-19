@@ -4,10 +4,13 @@ import InsightCard from './InsightCard';
 const ReminderQuestionBox = () => {
   return (
     <Wrapper>
-      <div className="title">
+      <div className="reminder-title">
         <strong>Q. 해당 인사이트를 어떻게 활용할 수 있을까요?</strong>
       </div>
-      <input className="input" placeholder="답변을 입력해보세요."></input>
+      <input
+        className="reminder-input"
+        placeholder="답변을 입력해보세요."
+      ></input>
       <InsightCard isSmall={true} />
     </Wrapper>
   );
@@ -24,7 +27,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  .title {
+  .reminder-title {
     width: 100%;
     font-size: 16px;
     font-weight: 600;
@@ -32,7 +35,7 @@ const Wrapper = styled.div`
     justify-content: left;
   }
 
-  .input {
+  .reminder-input {
     width: 100%;
     font-size: 12px;
     font-weight: 500;

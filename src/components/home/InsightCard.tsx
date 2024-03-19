@@ -16,10 +16,12 @@ const InsightCard = (props: Props) => {
         alt="Insight Card image"
         className="img"
       />
-      <div className="title-tag">
-        <div className="title">UX/UI 디자인에 미드저니 58,000% 활용하기</div>
-        <div className="tag">AI</div>
-        <div className="tag">미드저니</div>
+      <div className="card-title-tag">
+        <div className="card-title">
+          UX/UI 디자인에 미드저니 58,000% 활용하기
+        </div>
+        <div className="card-tag">AI</div>
+        <div className="card-tag">미드저니</div>
       </div>
     </WrapperSmall>
   ) : (
@@ -49,14 +51,14 @@ const WrapperSmall = styled.div`
     justify-content: space-between;
   }
 
-  .title {
+  .card-title {
     margin: 0 0 12px;
     font-size: 12px;
     font-weight: 700;
     word-break: keep-all;
   }
 
-  .tag {
+  .card-tag {
     font-size: 10px;
     font-weight: 600;
     display: inline-block;
