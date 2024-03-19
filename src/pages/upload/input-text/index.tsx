@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AutosizeInput from 'react-input-autosize';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
+import SelectFolderModal from '@/components/upload/SelectFolderModal';
 export interface insightInput {
   title: string | string[] | undefined;
   summary: string | string[] | undefined;
   keywords: string[];
   memo: string | string[] | undefined;
   imageList: string | string[] | undefined;
-  folder: string | undefined;
+  folder: { name: string; mainColor: string; subColor: string; };
   isRemind: boolean;
   remindType: string;
   remindDay?: number[];
@@ -26,7 +27,7 @@ const Upload: NextPage = ({}) => {
     keywords: [],
     memo: '',
     imageList: [],
-    folder: '미드저니',
+    folder: { name: '미드저니', mainColor: '#A1D0FF', subColor: '#D7EBFF' },
     isRemind: false,
     remindType: '',
     remindDay: [],
@@ -68,38 +69,45 @@ const Upload: NextPage = ({}) => {
 
   const handleRemindToggle = () => {
     insightInput.isRemind === true &&
-      setInsightInput({ ...insightInput, isRemind: false, remindType: "" });
+      setInsightInput({ ...insightInput, isRemind: false, remindType: '' });
     if (insightInput.isRemind === false) {
       setIsModal('remind');
-      setInsightInput({ ...insightInput, isRemind: true, remindType: "recommend" });
+      setInsightInput({
+        ...insightInput,
+        isRemind: true,
+        remindType: 'recommend',
+      });
     }
   };
 
   const renderRemindTerm = () => {
-    const weekData = ["월", "화", "수", "목", "금", "토", "일"]
-    switch(insightInput.remindType) {
-      case "":
-        return
-      case "recommend":
-        setRemindTerm("추천 주기")
+    const weekData = ['월', '화', '수', '목', '금', '토', '일'];
+    switch (insightInput.remindType) {
+      case '':
+        return;
+      case 'recommend':
+        setRemindTerm('추천 주기');
         break;
-      case "weekly":
+      case 'weekly':
         if (insightInput.remindDay?.length === 7) {
-          setRemindTerm("매일 마다 ")
+          setRemindTerm('매일 마다 ');
           break;
         }
-        const resultWeek = weekData.filter((day) => insightInput.remindDay?.includes(weekData.indexOf(day)+1))
-        const printContentWeek = resultWeek?.join("/")
-        console.log("텍스트: ", printContentWeek)
-        setRemindTerm(printContentWeek + "마다 ")
+        const resultWeek = weekData.filter((day) =>
+          insightInput.remindDay?.includes(weekData.indexOf(day) + 1),
+        );
+        const printContentWeek = resultWeek?.join('/');
+        setRemindTerm(printContentWeek + '마다 ');
         break;
-      case "monthly":
-        const resultMonth = insightInput.remindDay && Array.from(insightInput.remindDay, (day) => `${day}일`)
-        const printContent = resultMonth?.join(", ")
-        setRemindTerm(printContent + "마다 ")
+      case 'monthly':
+        const resultMonth =
+          insightInput.remindDay &&
+          Array.from(insightInput.remindDay, (day) => `${day}일`);
+        const printContent = resultMonth?.join(', ');
+        setRemindTerm(printContent + '마다 ');
         break;
     }
-  }
+  };
 
   useEffect(() => {
     const { title, summary, keywords, memo, imageList } = router.query;
@@ -117,12 +125,17 @@ const Upload: NextPage = ({}) => {
           ? imageList
           : [imageList]
         : [],
-      folder: '미드저니',
+      folder: insightInput.folder,
       isRemind: insightInput.isRemind,
       remindType: insightInput.remindType,
-    })
-    renderRemindTerm()
-    }, [router.query, insightInput.remindType, insightInput.isRemind, insightInput.remindDay]);
+    });
+    renderRemindTerm();
+  }, [
+    router.query,
+    insightInput.remindType,
+    insightInput.isRemind,
+    insightInput.remindDay,
+  ]);
   return (
     <>
       <Wrapper>
@@ -281,8 +294,8 @@ const Upload: NextPage = ({}) => {
           <FolderSection>
             <SubTitle>폴더 설정</SubTitle>
             <FolderIndicator>
-              {insightInput.folder}
-              <ChangeFolderBtn>
+              {insightInput.folder.name}
+              <ChangeFolderBtn onClick={() => setIsModal('folder')}>
                 <span>폴더 설정</span>
                 <svg
                   width="9"
@@ -318,6 +331,13 @@ const Upload: NextPage = ({}) => {
               onClose={() => setIsModal('')}
               onSelect={setInsightInput}
               insightInput={insightInput}
+            />
+          )}
+          {isModal === 'folder' && (
+            <SelectFolderModal
+              onClose={() => setIsModal('')}
+              insightInput={insightInput}
+              onSelect={setInsightInput}
             />
           )}
         </PageContainer>
@@ -424,6 +444,7 @@ const ChangeImgBtn = styled.div`
   height: 36px;
   border-radius: 100%;
   background: #2b2b2b;
+  cursor: pointer;
 `;
 
 const FileInput = styled.input`
@@ -534,6 +555,7 @@ const ChangeFolderBtn = styled.div`
   font-weight: 500;
   line-height: 18px; /* 131.25% */
   letter-spacing: -0.32px;
+  cursor: pointer;
 `;
 
 const RemindSection = styled(ImageSection)``;
