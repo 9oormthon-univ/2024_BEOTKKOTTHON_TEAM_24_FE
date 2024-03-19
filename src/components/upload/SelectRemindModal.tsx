@@ -15,8 +15,13 @@ const SelectRemindModal = (props: Props) => {
   const [selectedMonthDay, setSelectedMonthDay] = useState<number[]>([])
 
   const handleComplete = () => {
-    console.log(remindType);
-    props.onSelect({ ...props.insightInput, remindType: remindType });
+    if (remindType === "recommend"){
+      props.onSelect({ ...props.insightInput, isRemind: true, remindType: remindType });
+      props.onClose();
+      return;
+    }
+    const selectedDay = remindType === "weekly" ? selectedWeekDay : selectedMonthDay
+    props.onSelect({ ...props.insightInput, isRemind: true, remindType: remindType , remindDay: selectedDay});
     props.onClose();
   };
 

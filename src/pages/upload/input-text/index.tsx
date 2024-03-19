@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AutosizeInput from 'react-input-autosize';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
-
 export interface insightInput {
   title: string | string[] | undefined;
   summary: string | string[] | undefined;
@@ -16,6 +15,7 @@ export interface insightInput {
   folder: string | undefined;
   isRemind: boolean;
   remindType: string;
+  remindDay?: number[];
 }
 
 const Upload: NextPage = ({}) => {
@@ -29,10 +29,12 @@ const Upload: NextPage = ({}) => {
     folder: '미드저니',
     isRemind: false,
     remindType: '',
+    remindDay: [],
   });
   const [isAddingTag, setIsAddingTag] = useState(false);
   const [tagInput, setTagInput] = useState('');
   const [isModal, setIsModal] = useState('');
+  const [remindTerm, setRemindTerm] = useState('');
 
   const handleImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e?.target.files) return;
@@ -66,12 +68,38 @@ const Upload: NextPage = ({}) => {
 
   const handleRemindToggle = () => {
     insightInput.isRemind === true &&
-      setInsightInput({ ...insightInput, isRemind: false });
+      setInsightInput({ ...insightInput, isRemind: false, remindType: "" });
     if (insightInput.isRemind === false) {
       setIsModal('remind');
       setInsightInput({ ...insightInput, isRemind: true, remindType: "recommend" });
     }
   };
+
+  const renderRemindTerm = () => {
+    const weekData = ["월", "화", "수", "목", "금", "토", "일"]
+    switch(insightInput.remindType) {
+      case "":
+        return
+      case "recommend":
+        setRemindTerm("추천 주기")
+        break;
+      case "weekly":
+        if (insightInput.remindDay?.length === 7) {
+          setRemindTerm("매일 마다 ")
+          break;
+        }
+        const resultWeek = weekData.filter((day) => insightInput.remindDay?.includes(weekData.indexOf(day)+1))
+        const printContentWeek = resultWeek?.join("/")
+        console.log("텍스트: ", printContentWeek)
+        setRemindTerm(printContentWeek + "마다 ")
+        break;
+      case "monthly":
+        const resultMonth = insightInput.remindDay && Array.from(insightInput.remindDay, (day) => `${day}일`)
+        const printContent = resultMonth?.join(", ")
+        setRemindTerm(printContent + "마다 ")
+        break;
+    }
+  }
 
   useEffect(() => {
     const { title, summary, keywords, memo, imageList } = router.query;
@@ -90,10 +118,11 @@ const Upload: NextPage = ({}) => {
           : [imageList]
         : [],
       folder: '미드저니',
-      isRemind: false,
+      isRemind: insightInput.isRemind,
       remindType: insightInput.remindType,
-    });
-  }, [router.query, insightInput.remindType]);
+    })
+    renderRemindTerm()
+    }, [router.query, insightInput.remindType, insightInput.isRemind, insightInput.remindDay]);
   return (
     <>
       <Wrapper>
@@ -275,7 +304,7 @@ const Upload: NextPage = ({}) => {
             <RemindSetter>
               <span>인사이트 다시 읽기</span>
               <RemindIndicator>
-                {insightInput.isRemind === true && insightInput.remindType}
+                {insightInput.isRemind === true && remindTerm}
                 <ToggleSlider
                   isSelected={insightInput.isRemind}
                   onClick={handleRemindToggle}
@@ -287,7 +316,7 @@ const Upload: NextPage = ({}) => {
             <SelectRemindModal
               remindType={insightInput.remindType}
               onClose={() => setIsModal('')}
-              onSelect={() => setInsightInput}
+              onSelect={setInsightInput}
               insightInput={insightInput}
             />
           )}
