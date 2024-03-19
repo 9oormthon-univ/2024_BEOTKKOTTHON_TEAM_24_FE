@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { useState } from 'react';
-import RenderCalenderBoard from './renderCalenderBoard';
+import RenderCalenderBoard from './RenderCalenderBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 
