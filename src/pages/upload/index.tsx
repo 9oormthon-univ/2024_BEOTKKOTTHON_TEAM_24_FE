@@ -37,7 +37,9 @@ const LinkInput: NextPage = ({}) => {
     setLink(link);
     const regex =
       /^(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
-    regex.test(link) ? setErrorText("") : setErrorText('*유효하지 않은 링크입니다.');
+    regex.test(link)
+      ? setErrorText('')
+      : setErrorText('*유효하지 않은 링크입니다.');
   };
 
   const handleClickDelete = (idx: number) => {
@@ -66,7 +68,7 @@ const LinkInput: NextPage = ({}) => {
   return (
     <>
       <Wrapper>
-        <PageContainer className='no-scroll'>
+        <PageContainer className="no-scroll">
           <Header>
             <PageName>인사이트 저장</PageName>
             <CancelBtn>
@@ -225,14 +227,14 @@ const LinkInput: NextPage = ({}) => {
               <MemoInput
                 value={memo}
                 onChange={(e) => handleMemo(e.target.value)}
-                placeholder='메모를 입력하세요.'
+                placeholder="메모를 입력하세요."
               />
               <LetterCounter>{memo.length}/500자</LetterCounter>
             </MemoWrapper>
           </MemoSection>
           <SourceSection>
             <SubTitle>출처</SubTitle>
-            <SourceInput placeholder='출처를 입력하세요.'/>
+            <SourceInput placeholder="출처를 입력하세요." />
           </SourceSection>
           <div className="absolute">
             <MoveToNextBtn
@@ -273,6 +275,7 @@ const PageContainer = styled.div`
   align-items: center;
   width: 393px;
   height: 852px;
+  margin-bottom: 200px;
   .absolute {
     position: absolute;
     bottom: 40px;
@@ -491,8 +494,7 @@ const LetterCounter = styled.div`
   padding: 16px;
 `;
 
-const SourceSection = styled(LinkSection)`
-`;
+const SourceSection = styled(LinkSection)``;
 
 const SourceInput = styled(Input)`
   padding: 14px 16px;

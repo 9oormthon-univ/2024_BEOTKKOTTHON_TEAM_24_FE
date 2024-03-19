@@ -216,6 +216,7 @@ const Upload: NextPage = ({}) => {
             </SummarySection>
             <TagSection>
               <SubTitle>태그</SubTitle>
+              <TagCounter>{insightInput.keywords.length}/3</TagCounter>
               <TagList>
                 {insightInput.keywords.map((tag, idx) => (
                   <TagWrapper key={idx}>
@@ -359,7 +360,6 @@ const Upload: NextPage = ({}) => {
                 isDisabled={false}
               />
             </BtnWrapper>
-
           </PageContainer>
         )}
       </Wrapper>
@@ -373,7 +373,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: center;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -424,6 +423,7 @@ const PageContainer = styled.div`
   justify-content: center;
   max-width: 393px;
   height: 852px;
+  margin-bottom: 200px;
   overflow-y: scroll;
 `;
 
@@ -554,6 +554,19 @@ const SumamryInput = styled.textarea`
 `;
 
 const TagSection = styled(ImageSection)``;
+
+const TagCounter = styled.div`
+  position: absolute;
+  top: 0;
+  left: 34px;
+  color: var(--Primary-500, #3184ff);
+  /* Body-14-M */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 19.6px */
+`;
 
 const TagList = styled.div`
   display: flex;
