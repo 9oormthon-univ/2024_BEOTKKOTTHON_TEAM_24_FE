@@ -295,7 +295,6 @@ const Input = styled.input`
 
 const Header = styled.div`
   display: flex;
-  position: relative;
   margin-bottom: 30px;
   width: 100%;
   height: 28px;
@@ -317,7 +316,8 @@ const PageName = styled.span`
 const CancelBtn = styled.div`
   position: absolute;
   font-size: 12px;
-  left: 18px;
+  left: 20px;
+  top: 7px;
 `;
 
 const LinkSection = styled.div`
