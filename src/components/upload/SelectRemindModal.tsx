@@ -6,6 +6,7 @@ type Props = {
   remindType: string | undefined;
   onClose: () => void;
   onSelect: React.Dispatch<React.SetStateAction<insightInput>>;
+  setRemindTerm: React.Dispatch<React.SetStateAction<string>>;
   insightInput: insightInput;
 };
 
@@ -14,14 +15,45 @@ const SelectRemindModal = (props: Props) => {
   const [selectedWeekDay, setSelectedWeekDay] = useState<number[]>([])
   const [selectedMonthDay, setSelectedMonthDay] = useState<number[]>([])
 
+  const renderRemindTerm = () => {
+    const weekData = ['월', '화', '수', '목', '금', '토', '일'];
+    switch (remindType) {
+      case '':
+        return;
+      case 'recommend':
+        props.setRemindTerm('추천 주기');
+        break;
+      case 'weekly':
+        if (selectedWeekDay.length === 7) {
+          props.setRemindTerm('매일 마다 ');
+          break;
+        }
+        const resultWeek = weekData.filter((day) =>
+          selectedWeekDay.includes(weekData.indexOf(day) + 1),
+        );
+        const printContentWeek = resultWeek?.join('/');
+        props.setRemindTerm(printContentWeek + '마다 ');
+        break;
+      case 'monthly':
+        const resultMonth =
+          selectedMonthDay &&
+          Array.from(selectedMonthDay, (day) => `${day}일`);
+        const printContent = resultMonth?.join(', ');
+        props.setRemindTerm(printContent + '마다 ');
+        break;
+    }
+  };
+
   const handleComplete = () => {
     if (remindType === "recommend"){
       props.onSelect({ ...props.insightInput, isRemind: true, remindType: remindType });
+      renderRemindTerm();
       props.onClose();
       return;
     }
     const selectedDay = remindType === "weekly" ? selectedWeekDay : selectedMonthDay
     props.onSelect({ ...props.insightInput, isRemind: true, remindType: remindType , remindDay: selectedDay});
+    renderRemindTerm();
     props.onClose();
   };
 
@@ -45,6 +77,10 @@ const SelectRemindModal = (props: Props) => {
       if (selectedMonthDay.includes(day)) {
         const newMonthDay = selectedMonthDay.filter((element) => element !== day)
         setSelectedMonthDay(newMonthDay)
+        return;
+      }
+      if (selectedMonthDay.length === 3) {
+        alert("반복 일은 최대 3일까지 선택 가능합니다.")
         return;
       }
       const newMonthDay = [...selectedMonthDay, day].sort();
