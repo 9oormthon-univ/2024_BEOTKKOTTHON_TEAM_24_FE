@@ -3,8 +3,16 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+interface Location {
+  href: string;
+}
+interface window {
+  addEventListener(event: string, handler: (event: Event) => void): void;
+  location: Location;
+}
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -12,6 +20,14 @@ const LinkInput: NextPage = ({}) => {
   const [memo, setMemo] = useState('');
   const [imageList, setImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
+
+  useEffect(() => {
+    const parsedUrl = new URL(window.location.href);
+    setLink(String(parsedUrl.searchParams.get('url')));
+    console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
+    console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
+    console.log('URL shared: ' + parsedUrl.searchParams.get('url'));
+  }, []);
 
   const handleClickNext = async () => {
     // 입력 링크 유효성 검사
