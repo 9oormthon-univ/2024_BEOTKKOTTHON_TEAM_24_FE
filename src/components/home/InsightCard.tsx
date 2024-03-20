@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import coverImg2 from '@image/디자인2.jpg';
+import coverImg from '@image/디자인2.jpg';
 
 const InsightCard = () => {
   return (
     <Wrapper>
       <Image
-        src={coverImg2}
+        src={coverImg}
         width={109}
         height={78}
         alt="Insight Card image"
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   border-radius: 12px;
   background-color: #ffffff;
-  margin: 22px 20px 0 20px;
+  margin: 22px 20px;
 
   .img {
     border-radius: 12px;
