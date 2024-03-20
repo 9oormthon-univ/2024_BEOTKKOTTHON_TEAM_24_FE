@@ -72,7 +72,7 @@ const LinkInput: NextPage = ({}) => {
           <Header>
             <PageName>인사이트 저장</PageName>
             <CancelBtn>
-              <Link href="/">
+              <Link href="/home">
                 <svg
                   width="11"
                   height="18"
