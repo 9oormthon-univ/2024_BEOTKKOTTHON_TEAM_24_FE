@@ -1,23 +1,26 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import coverImg from '@image/디자인2.jpg';
+import { RemindInsight } from '@/types/reminder';
 
-const InsightCard = () => {
+interface Props {
+  insightData: RemindInsight;
+}
+
+const InsightCard = ({ insightData }: Props) => {
   return (
     <Wrapper>
       <Image
-        src={coverImg}
+        src={insightData.insightMainImage}
         width={109}
         height={78}
         alt="Insight Card image"
         className="img"
       />
       <div className="card-title-tag">
-        <div className="card-title">
-          디자인시스템에 모션 가이드 추가하는 방법
+        <div className="card-title">{insightData.insightTitle}</div>
+        <div className="card-tag">
+          {insightData.insightTagList.map((value) => value)}
         </div>
-        <div className="card-tag">UI/UX</div>
-        <div className="card-tag">사용자 경험</div>
       </div>
     </Wrapper>
   );
@@ -28,7 +31,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   border-radius: 12px;
   background-color: #ffffff;
   margin: 22px 20px;
@@ -48,6 +50,7 @@ const Wrapper = styled.div`
   }
 
   .card-title {
+    width: 100%;
     margin: 0 10px 12px 0;
     font-size: 16px;
     font-weight: 600;
