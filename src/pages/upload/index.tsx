@@ -15,7 +15,8 @@ const LinkInput: NextPage = ({}) => {
 
   useEffect(() => {
     const parsedUrl = new URL(window.location.href);
-    setLink(String(parsedUrl.searchParams.get('url')));
+    const url = String(parsedUrl).split('url=')[1];
+    url !== null && setLink(url);
   }, []);
 
   const handleClickNext = async () => {
