@@ -6,14 +6,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-interface Location {
-  href: string;
-}
-interface window {
-  addEventListener(event: string, handler: (event: Event) => void): void;
-  location: Location;
-}
-
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
   const [link, setLink] = useState<string>('');
