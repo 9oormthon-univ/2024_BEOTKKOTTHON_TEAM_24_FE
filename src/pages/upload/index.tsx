@@ -15,10 +15,9 @@ const LinkInput: NextPage = ({}) => {
 
   useEffect(() => {
     const parsedUrl = new URL(window.location.href);
-    setLink(String(parsedUrl.searchParams.get('url')));
-    console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
-    console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
-    console.log('URL shared: ' + parsedUrl.searchParams.get('url'));
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    alert(urlSearchParams);
+    setLink(String(parsedUrl));
   }, []);
 
   const handleClickNext = async () => {

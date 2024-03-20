@@ -1,14 +1,14 @@
 {
   "theme_color": "#9aa7f9",
   "background_color": "#9aa7f9",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
   "name": "리인풋",
   "short_name": "리인풋",
   "description": "인사이트 공유 및 리마인더 서비스",
   "share_target": {
-    "action": "/upload",
+    "action": "/upload/",
     "method": "GET",
     "params": {
       "title": "title",
