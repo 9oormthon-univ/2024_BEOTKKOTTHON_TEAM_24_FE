@@ -4,6 +4,7 @@ import styles from '@/styles/Home.module.css';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { Dispatch, SetStateAction } from 'react';
 import { checkUnsupportedBrowser } from '@/utils/index';
+import Link from 'next/link';
 
 export default function Home({
   deferredPrompt,
@@ -65,6 +66,9 @@ export default function Home({
           </div>
         </div>
         <button onClick={promptAppInstall}>홈 화면에 추가</button>
+        <Link href="/home">
+          <button>HOME</button>
+        </Link>
         <div className={styles.center}>
           <Image
             className={styles.logo}

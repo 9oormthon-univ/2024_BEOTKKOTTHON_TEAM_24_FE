@@ -1,5 +1,5 @@
-import MainLayout from '@/components/common/MainLayout';
-import { GlobalStyles } from '@/styles/GlobalStyle';
+import MainLayout from '@components/common/MainLayout';
+import { GlobalStyles } from '@styles/GlobalStyle';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
