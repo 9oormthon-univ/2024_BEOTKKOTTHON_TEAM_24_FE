@@ -12,7 +12,7 @@ const Landing: NextPage<Props> = ({}) => {
   return (
     <>
       <Wrapper>
-        <Carousel Slides={CarouselSlides}/>
+        <Carousel Slides={CarouselSlides} indicatorMargin={60}/>
         <MoveToNextBtn
           title="로그인"
           onClick={() => router.push('/signin')}
