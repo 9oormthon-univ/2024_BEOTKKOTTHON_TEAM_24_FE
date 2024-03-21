@@ -109,27 +109,6 @@ const InputContainer = styled.div`
   align-items: center;
   justify-content: start;
   flex: 1;
-
-  .login-btn {
-    position: absolute;
-    bottom: 124px;
-  }
-  .kakao-login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 353px;
-    position: absolute;
-    bottom: 42px;
-    color: var(--Primary-500, #3184ff);
-    text-align: center;
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
-  }
 `;
 
 const PageIntro = styled.div`

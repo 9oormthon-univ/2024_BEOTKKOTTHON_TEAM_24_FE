@@ -21,33 +21,30 @@ const Onboard: NextPage<Props> = ({}) => {
   };
   return (
     <Wrapper>
-      <Header />
-      <span className="page-indicator">1/3</span>
-      <div>
-        <Body>
-          <div className="title">
-            <p>회원님의</p>
-            이름을 입력해주세요.
-          </div>
-          <NameSection>
-            <SubTitle>이름</SubTitle>
-            <Input
-              value={signupInput.userName}
-              onChange={(e) => handleInput(e.target.value)}
-              type="text"
-              placeholder="이름을 입력해주세요."
-            />
-            <ValidateText className={isValidName ? '' : 'error'}>
-              *2글자 이상의 한글 혹은 영문으로 작성해주세요.
-            </ValidateText>
-          </NameSection>
-        </Body>
-        {isValidName ? (
-          <BottomBtn text="다음" state="activated" nextUrl="/onboard/job" />
-        ) : (
-          <BottomBtn text="다음" state="disabled" />
-        )}
-      </div>
+      <Header rightText="1/3" />
+      <Body>
+        <div className="title">
+          <p>회원님의</p>
+          이름을 입력해주세요.
+        </div>
+        <NameSection>
+          <SubTitle>이름</SubTitle>
+          <Input
+            value={signupInput.userName}
+            onChange={(e) => handleInput(e.target.value)}
+            type="text"
+            placeholder="이름을 입력해주세요."
+          />
+          <ValidateText className={isValidName ? '' : 'error'}>
+            *2글자 이상의 한글 혹은 영문으로 작성해주세요.
+          </ValidateText>
+        </NameSection>
+      </Body>
+      {isValidName ? (
+        <BottomBtn text="다음" state="activated" nextUrl="/onboard/job" />
+      ) : (
+        <BottomBtn text="다음" state="disabled" />
+      )}
     </Wrapper>
   );
 };
@@ -55,8 +52,12 @@ const Onboard: NextPage<Props> = ({}) => {
 export default Onboard;
 
 const Wrapper = styled.div`
-  max-height: 100vh;
-  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
   .title,
   p {
     color: var(--Neutral-500, #1f1f1f);
@@ -66,7 +67,7 @@ const Wrapper = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 33.6px */
-    margin-top: 36px;
+    margin-top: 20px;
   }
   span {
     position: absolute;
@@ -89,6 +90,10 @@ const Wrapper = styled.div`
     font-weight: 500;
     line-height: 140%; /* 19.6px */
   }
+
+  :nth-child(3) {
+    margin-bottom: 36px;
+  }
 `;
 
 const Body = styled.div`
@@ -105,6 +110,7 @@ const NameSection = styled.div`
   .error {
     color: var(--System-Warning, #f1404b);
   }
+  flex: 1;
 `;
 
 const SubTitle = styled.div`
@@ -115,7 +121,7 @@ const SubTitle = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 140%; /* 33.6px */
-  margin-top: 36px;
+  margin-top: 48px;
 `;
 
 const Input = styled.input`

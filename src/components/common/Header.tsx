@@ -19,7 +19,9 @@ const Header = (props: Props) => {
     <Wrapper>
       <BackIcon onClick={() => router.back()} />
       <div className="title">{props.title}</div>
-      <div onClick={onClickRight}>{props.rightText}</div>
+      <div className="right-text" onClick={onClickRight}>
+        {props.rightText}
+      </div>
     </Wrapper>
   );
 };
@@ -29,11 +31,18 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 18px 20px 16px;
+  height: 52px;
 
   .title {
     font-size: 20px;
     font-weight: 700;
     color: #1f1f1f;
+  }
+
+  .right-text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #3184ff;
   }
 `;
 
