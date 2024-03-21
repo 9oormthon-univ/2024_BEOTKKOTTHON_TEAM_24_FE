@@ -6,17 +6,18 @@ import styled from 'styled-components';
 import VisibleIcon from '@svg/visible-icon.svg';
 import UnvisibleIcon from '@svg/unvisible-icon.svg';
 import MoveToNextBtn from '@/components/upload/MoveToNextBtn';
+import { SignupPostRequest } from '@/types/user';
 
 interface Props {}
 
 const SignUp: NextPage<Props> = ({}) => {
   const router = useRouter();
   const [isPWOpen, setIsPWOpen] = useState(false);
-  const [signUpInput, setSignUpInput] = useState({
+  const [signUpInput, setSignUpInput] = useState<SignupPostRequest>({
     userEmail: '',
-    password: '',
+    userPassword: '',
     userName: '',
-    job: '',
+    job: 'ETC',
     topicList: [],
   });
   const [PWCheck, setPWCheck] = useState('');
@@ -25,6 +26,7 @@ const SignUp: NextPage<Props> = ({}) => {
     password: true,
     check: true,
   });
+
   const validate = (type: string, value: string) => {
     const regexEmail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,20 +36,20 @@ const SignUp: NextPage<Props> = ({}) => {
     type === 'password' &&
       setIsValid({ ...isValid, password: regexPW.test(value) });
     type === 'check' &&
-      setIsValid({ ...isValid, check: signUpInput.password === value });
+      setIsValid({ ...isValid, check: signUpInput.userPassword === value });
   };
 
   const handleInput = (type: string, value: string) => {
     type === 'email'
       ? setSignUpInput({ ...signUpInput, userEmail: value })
       : type === 'password'
-        ? setSignUpInput({ ...signUpInput, password: value })
+        ? setSignUpInput({ ...signUpInput, userPassword: value })
         : setPWCheck(value);
     validate(type, value);
   };
 
   const handleSignUp = () => {
-    router.push('/onboarding')
+    router.push({ pathname: '/onboard', query: signUpInput }, '/onboard');
   };
 
   const handleKakao = () => {
@@ -79,7 +81,7 @@ const SignUp: NextPage<Props> = ({}) => {
             <SubTitle>비밀번호*</SubTitle>
             <div className="input-container">
               <Input
-                value={signUpInput.password}
+                value={signUpInput.userPassword}
                 onChange={(e) => handleInput('password', e.target.value)}
                 type={isPWOpen ? 'text' : 'password'}
                 placeholder="비밀번호를 입력해주세요"
@@ -134,7 +136,14 @@ const SignUp: NextPage<Props> = ({}) => {
               fontSize="20px"
               onClick={handleSignUp}
               isDisabled={
-                signUpInput.userEmail === '' || signUpInput.password === '' || !isValid.email || !isValid.password || !isValid.check
+                !(
+                  signUpInput.userEmail !== '' &&
+                  signUpInput.userPassword !== '' &&
+                  PWCheck !== '' &&
+                  isValid.email &&
+                  isValid.password &&
+                  isValid.check
+                )
               }
             />
           </div>
