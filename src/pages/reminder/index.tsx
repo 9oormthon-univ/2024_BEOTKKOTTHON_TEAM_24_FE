@@ -24,7 +24,7 @@ const Reminder: NextPage = () => {
         tags={['UI/UX', '사용자 경험']}
       />
       <div className="answer-box">
-        <Pencil />
+        <Pencil className="pencil" />
         <textarea
           placeholder="답변을 입력해보세요."
           onChange={(e) => {
@@ -63,12 +63,14 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
+    justify-content: space-between;
 
     textarea {
-      height: 100%;
+      min-height: 160px;
+      padding: 40px 0;
       font-size: 14px;
       font-weight: 500;
-      margin: 12px 0;
+      padding: 12px 0;
       border: 0;
       color: #1f1f1f;
       outline: none;
