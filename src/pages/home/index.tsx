@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
-import { useState } from 'react';
 import styled from 'styled-components';
 import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
-import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
+// import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
 import ReminderCalender from '@/components/home/body/ReminderCalender';
 import BottomNavigation from '@/components/common/BottomNavigation';
 import { QuestionGetResponse } from '@/types/reminder';
+import Carousel from '@/components/landing/Carousel';
 
 export const questionData: QuestionGetResponse = {
   todayClear: false,
@@ -31,18 +31,22 @@ export const questionData: QuestionGetResponse = {
 };
 
 const Home: NextPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [remind, setRemind] = useState<boolean>(false);
-
   return (
     <>
       <Wrapper>
         <TitleSettingsPanel questionData={questionData} />
-        {questionData.ReminderQuestionList.length ? (
+        <Carousel
+          Slides={[
+            <ReminderQuestionBox key={1} />,
+            <ReminderQuestionBox key={2} />,
+            <ReminderQuestionBox key={3} />,
+          ]}
+        />
+        {/* {questionData.ReminderQuestionList.length ? (
           <ReminderQuestionBox />
         ) : (
           <EmptyQuestionBox />
-        )}
+        )} */}
         <HrLine />
         <ReminderCalender />
         <BottomNavigation />

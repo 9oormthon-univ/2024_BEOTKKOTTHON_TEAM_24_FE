@@ -1,5 +1,5 @@
 import { useMotionValue, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -19,6 +19,7 @@ const SPRING_OPTIONS = {
 const Carousel = (props: Props) => {
   const [page, setPage] = useState(0);
   const dragX = useMotionValue(0);
+  const [width, setWidth] = useState<number>(0);
 
   // 마우스 드래그를 통한 슬라이드 이동 함수
   const onDragEnd = () => {
@@ -29,14 +30,22 @@ const Carousel = (props: Props) => {
       setPage((point) => point + 1);
     x >= DRAG_BUFFER && page > 0 && setPage((point) => point - 1);
   };
+
+  useEffect(() => {
+    setWidth(document.documentElement.clientWidth);
+  }, [width]);
+
   return (
     <>
-      <Wrapper>
+      <Wrapper width={width}>
         <motion.div
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          style={{ x: dragX, width: props.Slides.length * 393 }}
-          animate={{ translateX: `-${page * 393}px` }}
+          style={{
+            x: dragX,
+            width: props.Slides.length * width,
+          }}
+          animate={{ translateX: `-${page * width}px` }}
           transition={SPRING_OPTIONS}
           onDragEnd={onDragEnd}
           className="container"
@@ -69,8 +78,12 @@ const Carousel = (props: Props) => {
 
 export default Carousel;
 
-const Wrapper = styled.div`
-  width: 393px;
+interface CSSProps {
+  width: number;
+}
+
+const Wrapper = styled.div<CSSProps>`
+  width: ${(props) => props.width}px;
   overflow: hidden;
   .container {
     display: flex;
@@ -82,7 +95,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 393px;
+    width: ${(props) => props.width}px;
     overflow: hidden;
   }
 `;
