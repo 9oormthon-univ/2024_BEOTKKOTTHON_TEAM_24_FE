@@ -1,16 +1,14 @@
-import { PrevIcon } from '@/constants/PrevIcon';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import VisibleIcon from '@svg/visible-icon.svg';
 import UnvisibleIcon from '@svg/unvisible-icon.svg';
-import MoveToNextBtn from '@/components/upload/MoveToNextBtn';
+import Header from '@/components/common/Header';
+import BottomBtn from '@/components/common/BottomBtn';
 
 interface Props {}
 
 const SignIn: NextPage<Props> = ({}) => {
-  const router = useRouter();
   const [isPWOpen, setIsPWOpen] = useState(false);
   const [loginInput, setLoginInput] = useState({
     userEmail: '',
@@ -26,10 +24,8 @@ const SignIn: NextPage<Props> = ({}) => {
   };
   return (
     <Wrapper>
-      <div>
-        <PrevButton onClick={() => router.push('/landing')}>
-          {PrevIcon}
-        </PrevButton>
+      <Header rightUrl="/landing" />
+      <InputContainer>
         <PageIntro>
           <p>로그인하고</p>인사이트를 리마인드 해보세요 !
         </PageIntro>
@@ -68,23 +64,21 @@ const SignIn: NextPage<Props> = ({}) => {
             )}
           </div>
         </PWSection>
-        <div className="login-btn">
-          <MoveToNextBtn
-            title="로그인"
-            width="353px"
-            height="72px"
-            background="#3184FF"
-            fontSize="20px"
-            onClick={() => handleLogin}
-            isDisabled={
-              loginInput.userEmail === '' || loginInput.password === ''
-            }
-          />
-        </div>
-        <div className="kakao-login">
-          <span onClick={() => handleKakao}>카카오톡으로 로그인하기</span>
-        </div>
-      </div>
+      </InputContainer>
+      <BottomBtn
+        text="로그인"
+        state={
+          loginInput.userEmail === '' || loginInput.password === ''
+            ? 'disabled'
+            : 'activated'
+        }
+        onClick={handleLogin}
+      />
+      <BottomBtn
+        text="카카오톡으로 로그인하기"
+        state="transparent"
+        onClick={() => handleKakao}
+      />
     </Wrapper>
   );
 };
@@ -95,10 +89,27 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  position: relative;
+  flex-direction: column;
+  justify-content: start;
+
+  :nth-child(3) {
+    margin-bottom: 16px;
+  }
+
+  :nth-child(4) {
+    margin-bottom: 36px;
+  }
+`;
+
+const InputContainer = styled.div`
+  width: 100%;
+  display: flex;
   padding: 0px 20px;
-  align-items: start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  flex: 1;
+
   .login-btn {
     position: absolute;
     bottom: 124px;
@@ -121,12 +132,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const PrevButton = styled.div`
-  position: absolute;
-  top: 24px;
-  cursor: pointer;
-`;
-
 const PageIntro = styled.div`
   color: var(--Neutral-500, #1f1f1f);
   /* Head-24-B */
@@ -135,13 +140,14 @@ const PageIntro = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 33.6px */
-  margin-top: 78px;
+  margin-top: 20px;
+  width: 100%;
 `;
 
 const EmailSection = styled.div`
   display: flex;
   flex-direction: column;
-  width: 353px;
+  width: 100%;
   gap: 10px;
 `;
 
@@ -170,10 +176,11 @@ const Input = styled.input`
 `;
 
 const PWSection = styled(EmailSection)`
+  width: 100%;
   .input-container {
     display: flex;
     flex-direction: column;
-    width: 353px;
+    width: 100%;
     position: relative;
   }
   .icon {

@@ -108,7 +108,7 @@ const Wrapper = styled.div<CSSProps>`
 
 const PageIndicator = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   gap: 6px;
   .current {
