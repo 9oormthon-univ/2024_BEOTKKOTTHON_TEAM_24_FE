@@ -7,6 +7,7 @@ import BottomNavigation from '@/components/common/BottomNavigation';
 import { QuestionGetResponse } from '@/types/reminder';
 import Carousel from '@/components/landing/Carousel';
 import { useRouter } from 'next/router';
+import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
 
 export const questionData: QuestionGetResponse = {
   todayClear: false,
@@ -36,33 +37,41 @@ const Home: NextPage = () => {
   const onClick = () => {
     router.push('/reminder');
   };
+
+  const renderInnerComponent = () => {
+    const dataLength = questionData.ReminderQuestionList.length;
+    if (dataLength === 0) {
+      return <EmptyQuestionBox />;
+    } else if (dataLength === 1) {
+      return (
+        <ReminderQuestionBox
+          totalLength={questionData.ReminderQuestionList.length}
+          reminderInfo={questionData.ReminderQuestionList[0]}
+        />
+      );
+    } else {
+      return (
+        <div className="carousel">
+          <Carousel
+            Slides={questionData.ReminderQuestionList.map((value, index) => (
+              <ReminderQuestionBox
+                key={index}
+                totalLength={questionData.ReminderQuestionList.length}
+                reminderInfo={value}
+              />
+            ))}
+            indicatorMargin={16}
+          />
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       <Wrapper>
         <TitleSettingsPanel questionData={questionData} />
-        <div onClick={onClick}>
-          {questionData.ReminderQuestionList.length === 1 ? (
-            <ReminderQuestionBox
-              totalLength={questionData.ReminderQuestionList.length}
-              reminderInfo={questionData.ReminderQuestionList[0]}
-            />
-          ) : (
-            <div className="carousel">
-              <Carousel
-                Slides={questionData.ReminderQuestionList.map(
-                  (value, index) => (
-                    <ReminderQuestionBox
-                      key={index}
-                      totalLength={questionData.ReminderQuestionList.length}
-                      reminderInfo={value}
-                    />
-                  ),
-                )}
-                indicatorMargin={16}
-              />
-            </div>
-          )}
-        </div>
+        <div onClick={onClick}>{renderInnerComponent()}</div>
         <HrLine />
         <ReminderCalender />
         <BottomNavigation />
