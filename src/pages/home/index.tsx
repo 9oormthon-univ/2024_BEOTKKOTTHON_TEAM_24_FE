@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
-// import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
 import ReminderCalender from '@/components/home/body/ReminderCalender';
 import BottomNavigation from '@/components/common/BottomNavigation';
 import { QuestionGetResponse } from '@/types/reminder';
 import Carousel from '@/components/landing/Carousel';
+import { useRouter } from 'next/router';
 
 export const questionData: QuestionGetResponse = {
   todayClear: false,
@@ -31,29 +31,38 @@ export const questionData: QuestionGetResponse = {
 };
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push('/reminder');
+  };
   return (
     <>
       <Wrapper>
         <TitleSettingsPanel questionData={questionData} />
-        {questionData.ReminderQuestionList.length === 1 ? (
-          <ReminderQuestionBox
-            totalLenght={questionData.ReminderQuestionList.length}
-            reminderInfo={questionData.ReminderQuestionList[0]}
-          />
-        ) : (
-          <div className="carousel">
-            <Carousel
-              Slides={questionData.ReminderQuestionList.map((value, index) => (
-                <ReminderQuestionBox
-                  key={index}
-                  totalLenght={questionData.ReminderQuestionList.length}
-                  reminderInfo={value}
-                />
-              ))}
-              indicatorMargin={16}
+        <div onClick={onClick}>
+          {questionData.ReminderQuestionList.length === 1 ? (
+            <ReminderQuestionBox
+              totalLength={questionData.ReminderQuestionList.length}
+              reminderInfo={questionData.ReminderQuestionList[0]}
             />
-          </div>
-        )}
+          ) : (
+            <div className="carousel">
+              <Carousel
+                Slides={questionData.ReminderQuestionList.map(
+                  (value, index) => (
+                    <ReminderQuestionBox
+                      key={index}
+                      totalLength={questionData.ReminderQuestionList.length}
+                      reminderInfo={value}
+                    />
+                  ),
+                )}
+                indicatorMargin={16}
+              />
+            </div>
+          )}
+        </div>
         <HrLine />
         <ReminderCalender />
         <BottomNavigation />

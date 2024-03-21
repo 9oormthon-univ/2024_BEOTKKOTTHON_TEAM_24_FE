@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 interface Props {
-  totalLenght: number;
+  totalLength: number;
   reminderInfo: {
     reminderQuestion: string;
     insightId: number;
@@ -11,19 +11,18 @@ interface Props {
     insightMainImage: string;
     insightTagList: string[];
   };
+  onClick?: () => void;
 }
 
-const ReminderQuestionBox = ({ totalLenght, reminderInfo }: Props) => {
-  const margin = totalLenght === 1 ? 50 : 0;
+const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
+  const margin = totalLength === 1 ? 50 : 0;
+
   return (
     <Wrapper margin={margin}>
       <div className="reminder-title">
         <strong>Q. {reminderInfo.reminderQuestion}</strong>
       </div>
-      <input
-        className="reminder-input"
-        placeholder="답변을 입력해보세요."
-      ></input>
+      <button className="reminder-input">답변을 입력해보세요.</button>
       <Insight>
         <Image
           src={reminderInfo.insightMainImage}
@@ -76,6 +75,8 @@ const Wrapper = styled.div<CSSProps>`
     margin: 12px 0;
     border: 0;
     border-radius: 8px;
+    background-color: #ffffff;
+    text-align: left;
   }
 `;
 
