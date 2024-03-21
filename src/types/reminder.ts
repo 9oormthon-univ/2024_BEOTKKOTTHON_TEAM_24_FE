@@ -31,11 +31,13 @@ export type CalenderPostResponse = {
   date: string;
   remindRead: number;
   remindTotal: number;
-  remindInsightList: {
-    insightId: number;
-    insightTitle: string;
-    insightMainImage: string;
-    insightTagList: string[];
-    todayRead: boolean;
-  }[];
+  remindInsightList: RemindInsight[];
+};
+
+export type RemindInsight = {
+  insightId: number;
+  insightTitle: string;
+  insightMainImage: string;
+  insightTagList: string[];
+  todayRead: boolean;
 };

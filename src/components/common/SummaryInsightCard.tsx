@@ -41,6 +41,7 @@ const Wrapper = styled.div`
   border-radius: 12px;
   background-color: #ffffff;
   margin: 22px 20px;
+  box-shadow: 9px 9px 30px 0px #00000014;
 
   .img {
     width: 100%;

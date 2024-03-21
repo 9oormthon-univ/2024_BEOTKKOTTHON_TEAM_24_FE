@@ -1,21 +1,68 @@
 import { NextPage } from 'next';
-import { useState } from 'react';
 import styled from 'styled-components';
 import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
-import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
 import ReminderCalender from '@/components/home/body/ReminderCalender';
 import BottomNavigation from '@/components/common/BottomNavigation';
+import { QuestionGetResponse } from '@/types/reminder';
+import Carousel from '@/components/landing/Carousel';
+import { useRouter } from 'next/router';
+
+export const questionData: QuestionGetResponse = {
+  todayClear: false,
+  ReminderQuestionList: [
+    {
+      reminderQuestion: '해당 인사이트를 어떻게 활용할 수 있을까요?',
+      insightId: 23,
+      reminderId: 18,
+      insightTitle: 'UX/UI 디자인에 미드저니 58,000% 활용하기',
+      insightMainImage: '/image/디자인2.jpg',
+      insightTagList: ['AI', '미드저니'],
+    },
+    {
+      reminderQuestion: '이 인사이트를 어떤 사람에게 추천해주고 싶나요?',
+      insightId: 25,
+      reminderId: 20,
+      insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
+      insightMainImage: '/image/디자인1.jpg',
+      insightTagList: ['디자인', '퍼블리싱'],
+    },
+  ],
+};
 
 const Home: NextPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [remind, setRemind] = useState<boolean>(false);
+  const router = useRouter();
 
+  const onClick = () => {
+    router.push('/reminder');
+  };
   return (
     <>
       <Wrapper>
-        <TitleSettingsPanel />
-        {remind ? <ReminderQuestionBox /> : <EmptyQuestionBox />}
+        <TitleSettingsPanel questionData={questionData} />
+        <div onClick={onClick}>
+          {questionData.ReminderQuestionList.length === 1 ? (
+            <ReminderQuestionBox
+              totalLength={questionData.ReminderQuestionList.length}
+              reminderInfo={questionData.ReminderQuestionList[0]}
+            />
+          ) : (
+            <div className="carousel">
+              <Carousel
+                Slides={questionData.ReminderQuestionList.map(
+                  (value, index) => (
+                    <ReminderQuestionBox
+                      key={index}
+                      totalLength={questionData.ReminderQuestionList.length}
+                      reminderInfo={value}
+                    />
+                  ),
+                )}
+                indicatorMargin={16}
+              />
+            </div>
+          )}
+        </div>
         <HrLine />
         <ReminderCalender />
         <BottomNavigation />
@@ -29,6 +76,10 @@ export default Home;
 const Wrapper = styled.div`
   max-height: 100vh;
   background-color: #fbfbfb;
+
+  .carousel {
+    padding-bottom: 28px;
+  }
 `;
 
 const HrLine = styled.hr`
