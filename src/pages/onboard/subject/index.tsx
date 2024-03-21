@@ -82,7 +82,7 @@ const OnboardSubject: NextPage<Props> = ({}) => {
                 value={addingTopic}
                 onKeyDownCapture={(e) => checkEnter(e.key)}
                 onChange={(e) => setAddingTopic(e.target.value)}
-                onBlur={handleBlur}
+                onBlur={()=>handleBlur()}
                 inputStyle={{
                   display: 'flex',
                   padding: '7.27px 11.765px',
