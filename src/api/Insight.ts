@@ -16,7 +16,7 @@ const fetchSummary = async (link: string) => {
       Authorization: `Bearer ${apiKey}`,
     },
     data: {
-      model: 'gpt-4',
+      model: 'gpt-3.5 turbo',
       messages: [
         { role: 'system', content: 'You are helpful assistant. Your job is Get title of article, and summarize the article accessible through the provided link in one sentence in Korean, and extract three keywords that can be used for classification purposes.' },
         { role: 'user', content: link },
