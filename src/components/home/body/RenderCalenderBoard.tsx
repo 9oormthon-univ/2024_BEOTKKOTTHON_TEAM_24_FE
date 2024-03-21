@@ -23,6 +23,7 @@ const RenderCalenderBoard = (
   useEffect(() => {
     const monday = dayjs(selectedDay).startOf('week');
     setArr(initArr(monday.day()));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDay]);
 
   const content = arr.map((v, i) => (

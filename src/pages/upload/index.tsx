@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const LinkInput: NextPage = ({}) => {
@@ -12,6 +12,12 @@ const LinkInput: NextPage = ({}) => {
   const [memo, setMemo] = useState('');
   const [imageList, setImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
+
+  useEffect(() => {
+    const parsedUrl = new URL(window.location.href);
+    const url = String(parsedUrl.searchParams.get('text'))
+    url !== "null" && setLink(url)
+  }, []);
 
   const handleClickNext = async () => {
     // 입력 링크 유효성 검사
