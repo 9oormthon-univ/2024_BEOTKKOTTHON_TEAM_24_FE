@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 
 interface Props {
   text?: string;
-  color?: string;
   nextUrl?: string;
+  state: 'disabled' | 'activated' | 'borderline';
 }
 
 const BottomBtn = (props: Props) => {
@@ -14,27 +14,59 @@ const BottomBtn = (props: Props) => {
     if (props.nextUrl) router.push(props.nextUrl);
   };
 
-  return (
-    <Button color={props.color} onClick={onClick}>
-      {props.text}
-    </Button>
-  );
+  const renderInnerBtn = () => {
+    switch (props.state) {
+      case 'disabled':
+        return (
+          <Button onClick={onClick} className="disabled">
+            {props.text}
+          </Button>
+        );
+      case 'activated':
+        return (
+          <Button onClick={onClick} className="activated">
+            {props.text}
+          </Button>
+        );
+      case 'borderline':
+        return (
+          <Button onClick={onClick} className="borderline">
+            {props.text}
+          </Button>
+        );
+    }
+  };
+
+  return renderInnerBtn();
 };
 
-const Button = styled.button<Props>`
+const Button = styled.button`
   width: calc(100% - 40px);
   height: 72px;
   margin: 0 20px;
   border-radius: 14px;
   font-size: 20px;
-  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.color};
-  position: absolute;
-  bottom: 36px;
-  border: 0;
+
+  &.disabled {
+    color: #ffffff;
+    border: 0;
+    background-color: #848484;
+  }
+
+  &.activated {
+    color: #ffffff;
+    border: 0;
+    background-color: #3184ff;
+  }
+
+  &.borderline {
+    color: #3184ff;
+    border: #3184ff solid 2px;
+    background-color: #f4f5f7;
+  }
 `;
 
 export default BottomBtn;

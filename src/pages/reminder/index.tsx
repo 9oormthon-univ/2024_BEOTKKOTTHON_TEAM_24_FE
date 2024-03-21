@@ -36,8 +36,8 @@ const Reminder: NextPage = () => {
       </div>
       <BottomBtn
         text="완료"
-        color={wordCount > 0 ? '#3184FF' : '#848484'}
         nextUrl={'/reminder/remind-saved'}
+        state={wordCount > 0 ? 'activated' : 'disabled'}
       />
     </Wrapper>
   );
