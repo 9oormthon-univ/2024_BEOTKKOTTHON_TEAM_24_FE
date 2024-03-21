@@ -82,7 +82,7 @@ const OnboardSubject: NextPage<Props> = ({}) => {
                 value={addingTopic}
                 onKeyDownCapture={(e) => checkEnter(e.key)}
                 onChange={(e) => setAddingTopic(e.target.value)}
-                onBlur={()=>handleBlur()}
+                onBlur={() => handleBlur()}
                 inputStyle={{
                   display: 'flex',
                   padding: '7.27px 11.765px',
@@ -112,9 +112,9 @@ const OnboardSubject: NextPage<Props> = ({}) => {
         </Body>
       </Wrapper>
       {signupInput.topicList.length > 2 ? (
-        <BottomBtn text="다음" color="#3184FF" nextUrl="/onboard/addhome" />
+        <BottomBtn text="다음" state="activated" nextUrl="/onboard/addhome" />
       ) : (
-        <BottomBtn text="다음" color="#848484" />
+        <BottomBtn text="다음" state="disabled" />
       )}
     </div>
   );

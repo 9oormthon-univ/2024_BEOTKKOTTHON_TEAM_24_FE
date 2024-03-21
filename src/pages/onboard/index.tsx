@@ -43,9 +43,9 @@ const Onboard: NextPage<Props> = ({}) => {
           </NameSection>
         </Body>
         {isValidName ? (
-          <BottomBtn text="다음" color="#3184FF" nextUrl="/onboard/job" />
+          <BottomBtn text="다음" state="activated" nextUrl="/onboard/job" />
         ) : (
-          <BottomBtn text="다음" color="#848484" />
+          <BottomBtn text="다음" state="disabled" />
         )}
       </div>
     </Wrapper>

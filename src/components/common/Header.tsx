@@ -18,7 +18,7 @@ const Header = (props: Props) => {
   return (
     <Wrapper>
       <BackIcon onClick={() => router.back()} />
-      <div>{props.title}</div>
+      <div className="title">{props.title}</div>
       <div onClick={onClickRight}>{props.rightText}</div>
     </Wrapper>
   );
@@ -27,6 +27,7 @@ const Header = (props: Props) => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
   padding: 18px 20px 16px;
 
   .title {

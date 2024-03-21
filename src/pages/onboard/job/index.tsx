@@ -67,9 +67,9 @@ const OnboardJob: NextPage<Props> = ({}) => {
         </Body>
       </Wrapper>
       {selectedJob ? (
-        <BottomBtn text="다음" color="#3184FF" nextUrl="/onboard/subject" />
+        <BottomBtn text="다음" state="activated" nextUrl="/onboard/subject" />
       ) : (
-        <BottomBtn text="다음" color="#848484" />
+        <BottomBtn text="다음" state="disabled" />
       )}
     </div>
   );

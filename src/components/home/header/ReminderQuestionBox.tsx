@@ -74,6 +74,7 @@ const Wrapper = styled.div<CSSProps>`
     padding: 10px;
     margin: 12px 0;
     border: 0;
+    color: #848484;
     border-radius: 8px;
     background-color: #ffffff;
     text-align: left;

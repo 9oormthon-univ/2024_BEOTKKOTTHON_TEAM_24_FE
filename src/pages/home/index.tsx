@@ -68,21 +68,20 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
-      <Wrapper>
-        <TitleSettingsPanel questionData={questionData} />
-        <div onClick={onClick}>{renderInnerComponent()}</div>
-        <HrLine />
-        <ReminderCalender />
-        <BottomNavigation />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <TitleSettingsPanel questionData={questionData} />
+      <div onClick={onClick}>{renderInnerComponent()}</div>
+      <HrLine />
+      <ReminderCalender />
+      <BottomNavigation />
+    </Wrapper>
   );
 };
 
 export default Home;
 
 const Wrapper = styled.div`
+  width: 100%;
   max-height: 100vh;
   background-color: #fbfbfb;
 

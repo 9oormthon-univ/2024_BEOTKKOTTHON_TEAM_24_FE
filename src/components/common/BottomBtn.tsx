@@ -5,6 +5,7 @@ interface Props {
   text?: string;
   nextUrl?: string;
   state: 'disabled' | 'activated' | 'borderline';
+  onClick?: () => void;
 }
 
 const BottomBtn = (props: Props) => {
@@ -18,19 +19,19 @@ const BottomBtn = (props: Props) => {
     switch (props.state) {
       case 'disabled':
         return (
-          <Button onClick={onClick} className="disabled">
+          <Button onClick={props.onClick ?? onClick} className="disabled">
             {props.text}
           </Button>
         );
       case 'activated':
         return (
-          <Button onClick={onClick} className="activated">
+          <Button onClick={props.onClick ?? onClick} className="activated">
             {props.text}
           </Button>
         );
       case 'borderline':
         return (
-          <Button onClick={onClick} className="borderline">
+          <Button onClick={props.onClick ?? onClick} className="borderline">
             {props.text}
           </Button>
         );
@@ -42,7 +43,7 @@ const BottomBtn = (props: Props) => {
 
 const Button = styled.button`
   width: calc(100% - 40px);
-  height: 72px;
+  min-height: 72px;
   margin: 0 20px;
   border-radius: 14px;
   font-size: 20px;
