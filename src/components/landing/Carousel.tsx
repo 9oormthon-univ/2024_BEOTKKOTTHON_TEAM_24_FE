@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 type Props = {
   Slides: JSX.Element[];
+  indicatorMargin: number; // px 없이 수치만
 };
 
 const DRAG_BUFFER = 50; // 페이지 이동을 유발하는 드래그 길이
@@ -44,8 +45,9 @@ const Carousel = (props: Props) => {
           style={{
             x: dragX,
             width: props.Slides.length * width,
+            marginBottom: props.indicatorMargin,
           }}
-          animate={{ translateX: `-${page * width}px` }}
+          animate={{ translateX: `-${page * 393}px` }}
           transition={SPRING_OPTIONS}
           onDragEnd={onDragEnd}
           className="container"
@@ -104,7 +106,6 @@ const PageIndicator = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 60px;
   gap: 6px;
   .current {
     width: 16px;

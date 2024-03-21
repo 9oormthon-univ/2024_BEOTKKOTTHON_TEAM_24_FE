@@ -7,6 +7,15 @@
   "name": "리인풋",
   "short_name": "리인풋",
   "description": "인사이트 공유 및 리마인더 서비스",
+  "share_target": {
+    "action": "/upload/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
