@@ -4,8 +4,11 @@ import Header from '@/components/common/Header';
 import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import Pencil from '@svg/pencil-icon.svg';
 import BottomBtn from '@/components/common/BottomBtn';
+import { useState } from 'react';
 
 const Reminder: NextPage = () => {
+  const [wordCount, setWordCount] = useState<number>(0);
+
   return (
     <Wrapper>
       <Header title="리마인드" />
@@ -22,12 +25,18 @@ const Reminder: NextPage = () => {
       />
       <div className="answer-box">
         <Pencil />
-        <textarea placeholder="답변을 입력해보세요."></textarea>
-        <p>165/500자</p>
+        <textarea
+          placeholder="답변을 입력해보세요."
+          onChange={(e) => {
+            setWordCount(e.target.value.length);
+          }}
+          maxLength={500}
+        ></textarea>
+        <p>{wordCount}/500자</p>
       </div>
       <BottomBtn
         text="완료"
-        color={'#848484'}
+        color={wordCount > 0 ? '#3184FF' : '#848484'}
         nextUrl={'/reminder/remind-saved'}
       />
     </Wrapper>
