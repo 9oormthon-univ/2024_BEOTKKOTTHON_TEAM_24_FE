@@ -16,15 +16,15 @@ export const questionData: QuestionGetResponse = {
       insightId: 23,
       reminderId: 18,
       insightTitle: 'UX/UI 디자인에 미드저니 58,000% 활용하기',
-      insightMainImage: 'src/resources/static/1891288.png',
+      insightMainImage: '/image/디자인2.jpg',
       insightTagList: ['AI', '미드저니'],
     },
     {
-      reminderQuestion: '...',
+      reminderQuestion: '이 인사이트를 어떤 사람에게 추천해주고 싶나요?',
       insightId: 25,
       reminderId: 20,
-      insightTitle: '...?',
-      insightMainImage: 'src/resources/static/1891280.png',
+      insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
+      insightMainImage: '/image/디자인1.jpg',
       insightTagList: ['디자인', '퍼블리싱'],
     },
   ],
@@ -35,18 +35,25 @@ const Home: NextPage = () => {
     <>
       <Wrapper>
         <TitleSettingsPanel questionData={questionData} />
-        <Carousel
-          Slides={[
-            <ReminderQuestionBox key={1} />,
-            <ReminderQuestionBox key={2} />,
-            <ReminderQuestionBox key={3} />,
-          ]}
-        />
-        {/* {questionData.ReminderQuestionList.length ? (
-          <ReminderQuestionBox />
+        {questionData.ReminderQuestionList.length === 1 ? (
+          <ReminderQuestionBox
+            totalLenght={questionData.ReminderQuestionList.length}
+            reminderInfo={questionData.ReminderQuestionList[0]}
+          />
         ) : (
-          <EmptyQuestionBox />
-        )} */}
+          <div className="carousel">
+            <Carousel
+              Slides={questionData.ReminderQuestionList.map((value, index) => (
+                <ReminderQuestionBox
+                  key={index}
+                  totalLenght={questionData.ReminderQuestionList.length}
+                  reminderInfo={value}
+                />
+              ))}
+              indicatorMargin={16}
+            />
+          </div>
+        )}
         <HrLine />
         <ReminderCalender />
         <BottomNavigation />
@@ -60,6 +67,10 @@ export default Home;
 const Wrapper = styled.div`
   max-height: 100vh;
   background-color: #fbfbfb;
+
+  .carousel {
+    padding-bottom: 28px;
+  }
 `;
 
 const HrLine = styled.hr`

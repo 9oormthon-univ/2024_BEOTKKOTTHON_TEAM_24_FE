@@ -33,8 +33,12 @@ const Carousel = (props: Props) => {
   };
 
   useEffect(() => {
-    setWidth(document.documentElement.clientWidth);
-  }, [width]);
+    const maxWidth =
+      document.documentElement.clientWidth < 480
+        ? document.documentElement.clientWidth
+        : 480;
+    setWidth(maxWidth);
+  }, []);
 
   return (
     <>
@@ -47,7 +51,7 @@ const Carousel = (props: Props) => {
             width: props.Slides.length * width,
             marginBottom: props.indicatorMargin,
           }}
-          animate={{ translateX: `-${page * 393}px` }}
+          animate={{ translateX: `-${page * width}px` }}
           transition={SPRING_OPTIONS}
           onDragEnd={onDragEnd}
           className="container"
