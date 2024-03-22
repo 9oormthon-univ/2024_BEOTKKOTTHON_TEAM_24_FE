@@ -89,7 +89,7 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 480px;
   bottom: 0;
-  z-index: 100;
+  z-index: 10;
 `;
 
 const EmptyBox = styled.div`
@@ -97,7 +97,7 @@ const EmptyBox = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10;
+  z-index: 5;
   height: 50px;
   background-color: #ffffff;
 `;

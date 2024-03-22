@@ -494,8 +494,8 @@ const ModalBg = styled.div`
   justify-content: flex-end;
   position: fixed;
   top: 0;
-  width: 393px;
-  height: 856px;
+  width: 100%;
+  height: 100vh;
   flex-shrink: 0;
   background: rgba(0, 0, 0, 0.63);
   backdrop-filter: blur(1.5px);
@@ -508,15 +508,15 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   position: fixed;
   top: 0;
-  width: 393px;
-  height: 856px;
+  width: 100%;
+  height: 100vh;
   flex-shrink: 0;
-  z-index: 2;
+  z-index: 20;
 `;
 
 const ModalHeader = styled.div`
   display: flex;
-  width: 393px;
+  width: 100%;
   height: 38px;
   justify-content: center;
   align-items: center;
@@ -527,7 +527,7 @@ const ModalHeader = styled.div`
 `;
 
 const ModalBody = styled.div`
-  width: 393px;
+  width: 100%;
   height: 608px;
   background: white;
   display: flex;
@@ -583,7 +583,7 @@ const SubTitle = styled.div`
 
 const TermList = styled.div`
   display: flex;
-  width: 354px;
+  width: calc(100% - 40px);
   height: 48px;
   border-radius: 8px;
   background: var(--Neutral-100, #f4f5f7);
@@ -694,7 +694,7 @@ const WeekDay = styled.div`
 
 const MonthDayBg = styled.div`
   display: flex;
-  width: 353px;
+  width: 100%;
   padding: 18px 0px;
   flex-direction: column;
   align-items: flex-start;

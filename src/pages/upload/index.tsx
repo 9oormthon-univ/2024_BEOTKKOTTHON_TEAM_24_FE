@@ -74,8 +74,8 @@ const LinkInput: NextPage = ({}) => {
   return (
     <>
       <Wrapper>
+        <Header title="인사이트 저장" />
         <PageContainer className="no-scroll">
-          <Header title="인사이트 저장" />
           <LinkSection>
             <SubTitle>인사이트 링크</SubTitle>
             <ErrorText>{errorText}</ErrorText>
@@ -223,14 +223,14 @@ const LinkInput: NextPage = ({}) => {
             <SubTitle>출처</SubTitle>
             <SourceInput placeholder="출처를 입력하세요." />
           </SourceSection>
-          <BottomBtn
-            text="다음"
-            onClick={handleClickNext}
-            state={
-              link.length === 0 && memo.length === 0 ? 'disabled' : 'activated'
-            }
-          />
         </PageContainer>
+        <BottomBtn
+          text="다음"
+          onClick={handleClickNext}
+          state={
+            link.length === 0 && memo.length === 0 ? 'disabled' : 'activated'
+          }
+        />
       </Wrapper>
     </>
   );
@@ -247,6 +247,10 @@ const Wrapper = styled.div`
   .no-scroll::-webkit-scrollbar {
     display: none;
   }
+
+  :nth-child(3) {
+    margin-bottom: 36px;
+  }
 `;
 
 const PageContainer = styled.div`
@@ -254,12 +258,13 @@ const PageContainer = styled.div`
   position: relative;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   height: 100vh;
-  padding-bottom: 36px;
+  padding: 0 20px;
 `;
 
 const Input = styled.input`
-  width: 353px;
+  width: 100%;
   height: 51px;
   font-size: 15px;
   border: none;
@@ -276,6 +281,8 @@ const LinkSection = styled.div`
   position: relative;
   flex-direction: column;
   margin-top: 28px;
+  width: 100%;
+
   .link-icon {
     position: absolute;
     top: 41px;
@@ -303,7 +310,7 @@ const ErrorText = styled.div`
 const ImageSection = styled(LinkSection)`
   position: relative;
   margin-top: 24px;
-  width: 353px;
+  width: 100%;
   .no-scroll::-webkit-scrollbar {
     display: none;
   }
@@ -327,7 +334,7 @@ const FileInput = styled.input`
 
 const ImageListContainer = styled.div`
   display: flex;
-  width: 353px;
+  width: 100%;
   overflow-x: scroll;
   .add-btn {
     margin-left: 23px;
@@ -406,7 +413,7 @@ const MemoWrapper = styled.div`
 `;
 
 const MemoInput = styled.textarea`
-  width: 353px;
+  width: 100%;
   min-height: 51px;
   border: none;
   outline: none;

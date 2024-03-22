@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-
 const EditModal = () => {
   const router = useRouter();
   const { folderId } = router.query;
 
-  const handleDelete = (folderId: number) => { // 서버 연결시 수정 필요
+  const handleDelete = (folderId: number) => {
+    // 서버 연결시 수정 필요
     return folderId;
-  }
+  };
   return (
     <Wrapper>
       <ModalBg />
@@ -21,8 +21,12 @@ const EditModal = () => {
             </SubTitle>
           </ModalTitle>
           <div className="button-row">
-            <ModalButton onClick={()=>router.back()} className="cancel">취소</ModalButton>
-            <ModalButton onClick={()=>handleDelete(Number(folderId))}>삭제</ModalButton>
+            <ModalButton onClick={() => router.back()} className="cancel">
+              취소
+            </ModalButton>
+            <ModalButton onClick={() => handleDelete(Number(folderId))}>
+              삭제
+            </ModalButton>
           </div>
         </ModalBody>
       </Modal>
@@ -53,7 +57,7 @@ const Modal = styled.div`
   align-items: center;
   border-radius: 18px;
   background: #fff;
-  z-index: 2;
+  z-index: 20;
 `;
 
 const ModalBg = styled.div`

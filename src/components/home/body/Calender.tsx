@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 interface Props {
+  onClickModal: () => void;
   selectedDate: string;
   setSelectedDate: (date: string) => void;
 }
@@ -39,7 +40,7 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-const Calender = ({ selectedDate, setSelectedDate }: Props) => {
+const Calender = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
 
@@ -68,7 +69,7 @@ const Calender = ({ selectedDate, setSelectedDate }: Props) => {
   return (
     <Wrapper>
       <Head>
-        <p className="year-month">
+        <p className="year-month" onClick={onClickModal}>
           20{splited[2]}년 {splited[0]}월 <Down />
         </p>
         <div className="arrows">

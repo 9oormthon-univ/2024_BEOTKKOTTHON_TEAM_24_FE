@@ -1,18 +1,9 @@
 import styled from 'styled-components';
-import EditPencilIcon from '@svg/folder/edit-pencil-icon.svg';
-import TrashIcon from '@svg/folder/trash-icon.svg';
 
-interface Props {
-  onClose: () => void;
-  onColor: () => void;
-  onDelete: () => void;
-}
-
-const EditModal = (props: Props) => {
+const CalenderModal = () => {
   return (
-    <Wrapper>
-      <ModalBg onClick={() => props.onClose()} />
-      <Modal>
+    <>
+      <Wrapper>
         <ModalHeader>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,54 +15,23 @@ const EditModal = (props: Props) => {
             <path
               d="M0 2.5C0 1.11929 1.11929 0 2.5 0H33.5C34.8807 0 36 1.11929 36 2.5C36 3.88071 34.8807 5 33.5 5H2.5C1.11929 5 0 3.88071 0 2.5Z"
               fill="#3C3C43"
-              fill-opacity="0.3"
+              fillOpacity="0.3"
             />
           </svg>
         </ModalHeader>
         <ModalBody>
           <ModalTitle>
-            <Title>편집하기</Title>
+            <Title>리마인드 주기 설정</Title>
+            <CompleteBtn>완료</CompleteBtn>
           </ModalTitle>
-          <div className="modal-btn edit-btn" onClick={() => props.onColor()}>
-            폴더 색상 수정
-            <EditPencilIcon />
-          </div>
-          <div
-            className="modal-btn delete-btn"
-            onClick={() => props.onDelete()}
-          >
-            삭제하기
-            <TrashIcon />
-          </div>
         </ModalBody>
-      </Modal>
-    </Wrapper>
+      </Wrapper>
+      <ModalBg />
+    </>
   );
 };
 
-export default EditModal;
-
-const Wrapper = styled.div`
-  position: fixed;
-  top: 0;
-  display: flex;
-  width: 100%;
-  max-width: 480px;
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-`;
-
-const Modal = styled.div`
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  width: 100%;
-  max-width: 480px;
-  flex-shrink: 0;
-  z-index: 20;
-`;
+export default CalenderModal;
 
 const ModalBg = styled.div`
   position: fixed;
@@ -79,13 +39,26 @@ const ModalBg = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: fixed;
+  top: 0;
   width: 100%;
-  max-width: 480px;
   height: 100%;
   flex-shrink: 0;
   background: rgba(0, 0, 0, 0.63);
   backdrop-filter: blur(1.5px);
   z-index: 1;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  z-index: 20;
 `;
 
 const ModalHeader = styled.div`
@@ -102,30 +75,12 @@ const ModalHeader = styled.div`
 
 const ModalBody = styled.div`
   width: 100%;
+  height: 608px;
   background: white;
   display: flex;
   flex-direction: column;
   padding: 0px 20px;
-  gap: 18px;
-  padding-bottom: 51px;
-  .modal-btn {
-    display: flex;
-    width: 100%;
-    height: 60px;
-    padding: 18px 16px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px;
-    background: var(--Neutral-100, #f4f5f7);
-
-    color: #000;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 21px; /* 131.25% */
-    letter-spacing: -0.32px;
-  }
+  gap: 34px;
 `;
 
 const ModalTitle = styled.div`
@@ -145,4 +100,17 @@ const Title = styled.div`
   font-weight: 700;
   line-height: 140%; /* 25.2px */
   margin-top: 18px;
+`;
+
+const CompleteBtn = styled.div`
+  position: absolute;
+  top: 18px;
+  right: 0px;
+  color: var(--Primary-500, #3184ff);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 25.2px */
+  cursor: pointer;
 `;
