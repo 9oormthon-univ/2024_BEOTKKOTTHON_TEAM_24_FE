@@ -36,8 +36,12 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <meta name="theme-color" content="#ffffff" />
+          <meta name="apple-mobile-web-app-capable" content="yes"></meta>
           <link rel="manifest" href="/manifest.json" />
-          <meta name="theme-color" content="#FBFBFB" />
+          <link rel="icon" href="/svg/favicon.svg" type="image/svg+xml" />
+          <link rel="mask-icon" href="/svg/favicon.svg" color="#87B3FF" />
+          <link rel="apple-touch-icon" href="/icons/icon-512x512.png" />
         </Head>
         <body>
           <Main />
