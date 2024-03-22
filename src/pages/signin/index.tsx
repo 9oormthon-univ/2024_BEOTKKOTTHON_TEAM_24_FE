@@ -15,6 +15,7 @@ const SignIn: NextPage<Props> = ({}) => {
     userEmail: '',
     password: '',
   });
+  const [isValid, setIsValid] = useState(true);
   const router = useRouter();
 
   const handleLogin = () => {
@@ -22,6 +23,7 @@ const SignIn: NextPage<Props> = ({}) => {
   };
 
   const handleKakao = () => {
+    setIsValid(false);
     return;
   };
   return (
@@ -65,6 +67,7 @@ const SignIn: NextPage<Props> = ({}) => {
               />
             )}
           </div>
+          <ErrorText>{!isValid && '*잘못된 이메일 혹은 비밀번호입니다.'}</ErrorText>
         </PWSection>
       </InputContainer>
       <BottomBtn
@@ -79,7 +82,7 @@ const SignIn: NextPage<Props> = ({}) => {
       <BottomBtn
         text="카카오톡으로 로그인하기"
         state="transparent"
-        onClick={() => handleKakao}
+        onClick={handleKakao}
       />
     </Wrapper>
   );
@@ -169,4 +172,16 @@ const PWSection = styled(EmailSection)`
     top: 20px;
     right: 18px;
   }
+`;
+
+const ErrorText = styled.div`
+  height: 36px;
+  padding: 8px 0;
+  color: var(--System-Warning, #f1404b);
+  /* Body-14-M */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 19.6px */
 `;
