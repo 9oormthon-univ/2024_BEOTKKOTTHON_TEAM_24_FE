@@ -1,13 +1,12 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import BottomNavigation from '@/components/common/BottomNavigation';
+import NavigationLayout from '@/components/common/NavigationLayout';
 
 const Folder: NextPage = () => {
   return (
-    <Wrapper>
-      <div></div>
-      <BottomNavigation />
-    </Wrapper>
+    <NavigationLayout>
+      <Wrapper></Wrapper>
+    </NavigationLayout>
   );
 };
 

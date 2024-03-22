@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { SignupPostRequest } from '../types/user';
 
 interface SignupPostRequestStore {

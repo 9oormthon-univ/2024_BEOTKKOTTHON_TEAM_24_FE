@@ -1,11 +1,23 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import PlusIcon from '@svg/nav-plus-icon.svg';
-import HomeIcon from '@svg/nav-home-icon.svg';
-import FolderIcon from '@svg/nav-folder-icon.svg';
+import HomeIcon from '@svg/HomeIcon';
+import FolderIcon from '@svg/FolderIcon';
+import { useNavigation } from '@/store/navigation';
 
 const BottomNavigation = () => {
   const router = useRouter();
+  const { setNavigation } = useNavigation();
+
+  const clickHome = () => {
+    setNavigation('home');
+    router.push('/home');
+  };
+
+  const clickFolder = () => {
+    setNavigation('folder');
+    router.push('/folder');
+  };
 
   return (
     <>
@@ -26,8 +38,8 @@ const BottomNavigation = () => {
               fill="white"
             />
           </g>
-          <HomeIcon onClick={() => router.push('/home')} />
-          <FolderIcon onClick={() => router.push('/folder')} />
+          <HomeIcon onClick={clickHome} />
+          <FolderIcon onClick={clickFolder} />
           <defs>
             <filter
               id="filter0_d_512_6239"

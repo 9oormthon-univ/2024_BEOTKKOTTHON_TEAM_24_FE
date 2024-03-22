@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
 import ReminderCalender from '@/components/home/body/ReminderCalender';
-import BottomNavigation from '@/components/common/BottomNavigation';
+// import BottomNavigation from '@/components/common/BottomNavigation';
 import { QuestionGetResponse } from '@/types/reminder';
 import Carousel from '@/components/landing/Carousel';
 import { useRouter } from 'next/router';
 import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
+import NavigationLayout from '@/components/common/NavigationLayout';
 
 export const questionData: QuestionGetResponse = {
   todayClear: false,
@@ -68,13 +69,15 @@ const Home: NextPage = () => {
   };
 
   return (
-    <Wrapper>
-      <TitleSettingsPanel questionData={questionData} />
-      <div onClick={onClick}>{renderInnerComponent()}</div>
-      <HrLine />
-      <ReminderCalender />
-      <BottomNavigation />
-    </Wrapper>
+    <NavigationLayout>
+      <Wrapper>
+        <TitleSettingsPanel questionData={questionData} />
+        <div onClick={onClick}>{renderInnerComponent()}</div>
+        <HrLine />
+        <ReminderCalender />
+        {/* <BottomNavigation /> */}
+      </Wrapper>
+    </NavigationLayout>
   );
 };
 
@@ -82,7 +85,7 @@ export default Home;
 
 const Wrapper = styled.div`
   width: 100%;
-  max-height: 100vh;
+  min-height: 100vh;
   background-color: #fbfbfb;
 
   .carousel {

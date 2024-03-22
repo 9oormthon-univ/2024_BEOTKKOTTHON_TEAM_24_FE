@@ -1,5 +1,6 @@
-import Landing from './landing';
+// import Landing from './landing';
+import Home from './home';
 
-export default function Home() {
-  return <Landing />;
+export default function Index() {
+  return <Home />;
 }
