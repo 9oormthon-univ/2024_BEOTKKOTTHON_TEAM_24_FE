@@ -5,6 +5,9 @@ import { Job } from '@/types/user';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import styled from 'styled-components';
+import DesignerImage from '@svg/onboard/design-image.svg';
+import PlannerImage from '@svg/onboard/planner-image.svg';
+import DeveloperImage from '@svg/onboard/developer-image.svg';
 
 interface Props {}
 
@@ -37,6 +40,7 @@ const OnboardJob: NextPage<Props> = ({}) => {
               }
             >
               기획
+              <PlannerImage className="icon" />
             </div>
             <div
               onClick={() => handleJob('DESIGNER')}
@@ -45,6 +49,7 @@ const OnboardJob: NextPage<Props> = ({}) => {
               }
             >
               디자인
+              <DesignerImage className="icon" />
             </div>
             <div
               onClick={() => handleJob('DEVELOPER')}
@@ -53,6 +58,7 @@ const OnboardJob: NextPage<Props> = ({}) => {
               }
             >
               개발자
+              <DeveloperImage className="icon" />
             </div>
             <div
               onClick={() => handleJob('ETC')}
@@ -155,6 +161,7 @@ const Grid = styled.div`
     color: var(--System-Warning, #f1404b);
   }
   .job-card {
+    position: relative;
     width: 167px;
     height: 167px;
     flex-shrink: 0;
@@ -166,5 +173,10 @@ const Grid = styled.div`
   }
   .selected {
     border: 2px solid #3184ff;
+  }
+  .icon {
+    position: absolute;
+    bottom: 25px;
+    right: 20px;
   }
 `;
