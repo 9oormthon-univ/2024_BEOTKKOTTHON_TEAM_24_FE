@@ -18,7 +18,7 @@ const Header = (props: Props) => {
   return (
     <Wrapper>
       <BackIcon onClick={() => router.back()} />
-      <div>{props.title}</div>
+      <div className='title'>{props.title}</div>
       <div onClick={onClickRight}>{props.rightText}</div>
     </Wrapper>
   );
