@@ -1,12 +1,12 @@
-import { PrevIcon } from '@/constants/PrevIcon';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import VisibleIcon from '@svg/visible-icon.svg';
 import UnvisibleIcon from '@svg/unvisible-icon.svg';
-import MoveToNextBtn from '@/components/upload/MoveToNextBtn';
 import { SignupPostRequest } from '@/types/user';
+import BottomBtn from '@/components/common/BottomBtn';
+import Header from '@/components/common/Header';
 
 interface Props {}
 
@@ -56,103 +56,96 @@ const SignUp: NextPage<Props> = ({}) => {
     return;
   };
   return (
-    <>
-      <Wrapper>
-        <div>
-          <PrevButton onClick={() => router.push('/landing')}>
-            {PrevIcon}
-          </PrevButton>
-          <PageIntro>
-            <p>회원가입하고</p>인사이트를 리마인드 해보세요 !
-          </PageIntro>
-          <EmailSection>
-            <SubTitle>이메일*</SubTitle>
+    <Wrapper>
+      <Header onClick={() => router.back()} />
+      <InputContainer>
+        <PageIntro>
+          <p>회원가입하고</p>인사이트를 리마인드 해보세요 !
+        </PageIntro>
+        <EmailSection>
+          <SubTitle className="email">이메일*</SubTitle>
+          <Input
+            value={signUpInput.userEmail}
+            onChange={(e) => handleInput('email', e.target.value)}
+            type="text"
+            placeholder="이메일 주소를 입력해주세요."
+          />
+          <ErrorText>
+            {!isValid.email && '*유효하지 않은 이메일 주소 양식입니다.'}
+          </ErrorText>
+        </EmailSection>
+        <PWSection>
+          <SubTitle>비밀번호*</SubTitle>
+          <div className="input-container">
             <Input
-              value={signUpInput.userEmail}
-              onChange={(e) => handleInput('email', e.target.value)}
-              type="text"
-              placeholder="이메일 주소를 입력해주세요."
+              value={signUpInput.userPassword}
+              onChange={(e) => handleInput('password', e.target.value)}
+              type={isPWOpen ? 'text' : 'password'}
+              placeholder="비밀번호를 입력해주세요"
             />
-            {!isValid.email && (
-              <ErrorText>*유효하지 않은 이메일 주소 양식입니다.</ErrorText>
-            )}
-          </EmailSection>
-          <PWSection>
-            <SubTitle>비밀번호*</SubTitle>
-            <div className="input-container">
-              <Input
-                value={signUpInput.userPassword}
-                onChange={(e) => handleInput('password', e.target.value)}
-                type={isPWOpen ? 'text' : 'password'}
-                placeholder="비밀번호를 입력해주세요"
+            {isPWOpen ? (
+              <VisibleIcon
+                onClick={() => setIsPWOpen(false)}
+                className="icon"
               />
-              {isPWOpen ? (
-                <VisibleIcon
-                  onClick={() => setIsPWOpen(false)}
-                  className="icon"
-                />
-              ) : (
-                <UnvisibleIcon
-                  onClick={() => setIsPWOpen(true)}
-                  className="icon"
-                />
-              )}
-            </div>
-            {!isValid.password && (
-              <ErrorText>
-                *8자리 이상의 영어 소문자와 숫자만 입력 가능해요.
-              </ErrorText>
-            )}
-          </PWSection>
-          <PWSection>
-            <SubTitle>비밀번호 확인*</SubTitle>
-            <div className="input-container">
-              <Input
-                value={PWCheck}
-                onChange={(e) => handleInput('check', e.target.value)}
-                type={isPWOpen ? 'text' : 'password'}
-                placeholder="비밀번호를 한 번 더 입력해주세요"
+            ) : (
+              <UnvisibleIcon
+                onClick={() => setIsPWOpen(true)}
+                className="icon"
               />
-              {isPWOpen ? (
-                <VisibleIcon
-                  onClick={() => setIsPWOpen(false)}
-                  className="icon"
-                />
-              ) : (
-                <UnvisibleIcon
-                  onClick={() => setIsPWOpen(true)}
-                  className="icon"
-                />
-              )}
-            </div>
-            {!isValid.check && <ErrorText>*비밀번호가 다릅니다.</ErrorText>}
-          </PWSection>
-          <div className="login-btn">
-            <MoveToNextBtn
-              title="회원가입"
-              width="353px"
-              height="72px"
-              background="#3184FF"
-              fontSize="20px"
-              onClick={handleSignUp}
-              isDisabled={
-                !(
-                  signUpInput.userEmail !== '' &&
-                  signUpInput.userPassword !== '' &&
-                  PWCheck !== '' &&
-                  isValid.email &&
-                  isValid.password &&
-                  isValid.check
-                )
-              }
+            )}
+          </div>
+          <ErrorText>
+            {!isValid.password &&
+              '*8자리 이상의 영어 소문자와 숫자만 입력 가능해요.'}
+          </ErrorText>
+        </PWSection>
+        <PWSection>
+          <SubTitle>비밀번호 확인*</SubTitle>
+          <div className="input-container">
+            <Input
+              value={PWCheck}
+              onChange={(e) => handleInput('check', e.target.value)}
+              type={isPWOpen ? 'text' : 'password'}
+              placeholder="비밀번호를 한 번 더 입력해주세요"
             />
+            {isPWOpen ? (
+              <VisibleIcon
+                onClick={() => setIsPWOpen(false)}
+                className="icon"
+              />
+            ) : (
+              <UnvisibleIcon
+                onClick={() => setIsPWOpen(true)}
+                className="icon"
+              />
+            )}
           </div>
-          <div className="kakao-login">
-            <span onClick={() => handleKakao}>카카오톡으로 로그인하기</span>
-          </div>
-        </div>
-      </Wrapper>
-    </>
+          <ErrorText>{!isValid.check && '*비밀번호가 다릅니다.'}</ErrorText>
+        </PWSection>
+      </InputContainer>
+      <BottomBtn
+        text="회원가입"
+        state={
+          !(
+            signUpInput.userEmail !== '' &&
+            signUpInput.userPassword !== '' &&
+            PWCheck !== '' &&
+            isValid.email &&
+            isValid.password &&
+            isValid.check
+          )
+            ? 'disabled'
+            : 'activated'
+        }
+        onClick={handleSignUp}
+      />
+      <BottomBtn
+        text="카카오톡으로 로그인하기"
+        state="transparent"
+        onClick={() => handleKakao}
+      />
+    </Wrapper>
   );
 };
 
@@ -160,38 +153,27 @@ export default SignUp;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 852px;
+  height: 100vh;
   display: flex;
-  position: relative;
-  padding: 0px 20px;
-  align-items: start;
-  justify-content: center;
-  .login-btn {
-    position: absolute;
-    bottom: 124px;
+  flex-direction: column;
+  justify-content: start;
+
+  > :nth-child(3) {
+    margin-bottom: 16px;
   }
-  .kakao-login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 353px;
-    position: absolute;
-    bottom: 42px;
-    color: var(--Primary-500, #3184ff);
-    text-align: center;
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
+
+  > :nth-child(4) {
+    margin-bottom: 36px;
   }
 `;
 
-const PrevButton = styled.div`
-  position: absolute;
-  top: 24px;
-  cursor: pointer;
+const InputContainer = styled.div`
+  width: 100%;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  flex: 1;
 `;
 
 const PageIntro = styled.div`
@@ -202,21 +184,24 @@ const PageIntro = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 33.6px */
-  margin-top: 78px;
+  margin-top: 20px;
 `;
 
 const EmailSection = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 353px;
-  gap: 10px;
+  /* width: 100%; */
 `;
 
 const SubTitle = styled(PageIntro)`
   font-size: 20px;
   font-weight: 500;
-  margin-top: 48px;
+  margin-top: 0;
+
+  &.email {
+    margin-top: 48px;
+  }
 `;
 
 const Input = styled.input`
@@ -235,6 +220,7 @@ const Input = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: 140%; /* 25.2px */
+  margin-top: 10px;
 `;
 
 const PWSection = styled(EmailSection)`
@@ -242,19 +228,19 @@ const PWSection = styled(EmailSection)`
   .input-container {
     display: flex;
     flex-direction: column;
-    width: 353px;
+    width: 100%;
     position: relative;
   }
   .icon {
     position: absolute;
-    top: 20px;
+    top: 30px;
     right: 18px;
   }
 `;
 
 const ErrorText = styled.div`
-  position: absolute;
-  top: 152px;
+  height: 36px;
+  padding: 8px 0;
   color: var(--System-Warning, #f1404b);
   /* Body-14-M */
   font-family: Pretendard;

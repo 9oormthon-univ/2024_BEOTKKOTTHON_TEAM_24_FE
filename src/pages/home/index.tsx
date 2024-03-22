@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
 import ReminderCalender from '@/components/home/body/ReminderCalender';
-import BottomNavigation from '@/components/common/BottomNavigation';
+// import BottomNavigation from '@/components/common/BottomNavigation';
 import { QuestionGetResponse } from '@/types/reminder';
 import Carousel from '@/components/landing/Carousel';
 import { useRouter } from 'next/router';
+import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
+import NavigationLayout from '@/components/common/NavigationLayout';
 
 export const questionData: QuestionGetResponse = {
   todayClear: false,
@@ -36,45 +38,54 @@ const Home: NextPage = () => {
   const onClick = () => {
     router.push('/reminder');
   };
+
+  const renderInnerComponent = () => {
+    const dataLength = questionData.ReminderQuestionList.length;
+    if (dataLength === 0) {
+      return <EmptyQuestionBox />;
+    } else if (dataLength === 1) {
+      return (
+        <ReminderQuestionBox
+          totalLength={questionData.ReminderQuestionList.length}
+          reminderInfo={questionData.ReminderQuestionList[0]}
+        />
+      );
+    } else {
+      return (
+        <div className="carousel">
+          <Carousel
+            Slides={questionData.ReminderQuestionList.map((value, index) => (
+              <ReminderQuestionBox
+                key={index}
+                totalLength={questionData.ReminderQuestionList.length}
+                reminderInfo={value}
+              />
+            ))}
+            indicatorMargin={16}
+          />
+        </div>
+      );
+    }
+  };
+
   return (
-    <>
+    <NavigationLayout>
       <Wrapper>
         <TitleSettingsPanel questionData={questionData} />
-        <div onClick={onClick}>
-          {questionData.ReminderQuestionList.length === 1 ? (
-            <ReminderQuestionBox
-              totalLength={questionData.ReminderQuestionList.length}
-              reminderInfo={questionData.ReminderQuestionList[0]}
-            />
-          ) : (
-            <div className="carousel">
-              <Carousel
-                Slides={questionData.ReminderQuestionList.map(
-                  (value, index) => (
-                    <ReminderQuestionBox
-                      key={index}
-                      totalLength={questionData.ReminderQuestionList.length}
-                      reminderInfo={value}
-                    />
-                  ),
-                )}
-                indicatorMargin={16}
-              />
-            </div>
-          )}
-        </div>
+        <div onClick={onClick}>{renderInnerComponent()}</div>
         <HrLine />
         <ReminderCalender />
-        <BottomNavigation />
+        {/* <BottomNavigation /> */}
       </Wrapper>
-    </>
+    </NavigationLayout>
   );
 };
 
 export default Home;
 
 const Wrapper = styled.div`
-  max-height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   background-color: #fbfbfb;
 
   .carousel {

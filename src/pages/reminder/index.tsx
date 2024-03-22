@@ -36,8 +36,8 @@ const Reminder: NextPage = () => {
       </div>
       <BottomBtn
         text="완료"
-        color={wordCount > 0 ? '#3184FF' : '#848484'}
         nextUrl={'/reminder/remind-saved'}
+        state={wordCount > 0 ? 'activated' : 'disabled'}
       />
     </Wrapper>
   );
@@ -48,14 +48,16 @@ export default Reminder;
 const Wrapper = styled.div`
   height: 100vh;
   background-color: #fbfbfb;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 36px;
 
   .question {
-    margin: 20px;
+    margin: 20px 20px 0;
     color: #1f1f1f;
   }
 
   .answer-box {
-    height: 242px;
     margin: 20px;
     border-radius: 13px;
     padding: 18px;
@@ -63,17 +65,17 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    justify-content: space-between;
+    flex: 1;
 
     textarea {
-      min-height: 160px;
-      padding: 40px 0;
+      padding: 12px 0;
       font-size: 14px;
       font-weight: 500;
-      padding: 12px 0;
       border: 0;
       color: #1f1f1f;
       outline: none;
+      flex: 1;
+      resize: none;
     }
 
     p {

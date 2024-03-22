@@ -1,3 +1,4 @@
+import BottomBtn from '@/components/common/BottomBtn';
 import { useSignupInputStore } from '@/store/signup';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { promptAppInstall } from '@/utils';
@@ -18,40 +19,44 @@ const AddHome: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
   const { signupInput } = useSignupInputStore();
 
   return (
-    <>
-      <Wrapper>
-        <div className="text-section">
-          <div className="main-title">{signupInput.userName}님, 환영해요!</div>
-          <div className="sub-title">
-            <p>리인풋을 홈 화면에 추가하면</p>
-            다양한 기능을 사용하실 수 있어요 !
-          </div>
+    <Wrapper>
+      <div className="text-section">
+        <div className="main-title">{signupInput.userName}님, 환영해요!</div>
+        <div className="sub-title">
+          <p>리인풋을 홈 화면에 추가하면</p>
+          다양한 기능을 사용하실 수 있어요 !
         </div>
-        <BottomSection>
-          <button className="bottom-btn" onClick={()=>promptAppInstall({deferredPrompt, setDeferredPrompt, router})}>
-            홈 화면에 추가
-          </button>
-          <span className="sub-text" onClick={() => router.push('/home')}>
-            나중에 할게요
-          </span>
-        </BottomSection>
-      </Wrapper>
-    </>
+      </div>
+      <BottomBtn
+        text="홈 화면에 추가"
+        state="activated"
+        onClick={() =>
+          promptAppInstall({ deferredPrompt, setDeferredPrompt, router })
+        }
+      />
+      <BottomBtn text="나중에 할게요" state="transparent" nextUrl="/home" />
+    </Wrapper>
   );
 };
 
 export default AddHome;
 
 const Wrapper = styled.div`
+  width: 100%;
   height: 100vh;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+
   .text-section {
     display: flex;
     flex-direction: column;
     margin-top: 73px;
     gap: 16px;
+    flex: 1;
+    height: 100%;
   }
+
   .main-title {
     color: var(--Neutral-500, #1f1f1f);
     text-align: center;
@@ -71,38 +76,12 @@ const Wrapper = styled.div`
     font-weight: 600;
     line-height: 140%; /* 22.4px */
   }
-`;
 
-const BottomSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .sub-text {
-    position: absolute;
-    bottom: 89px;
-    color: var(--Primary-500, #3184ff);
-    text-align: center;
-    /* Body-14-B */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
-    cursor: pointer;
+  :nth-child(2) {
+    margin-bottom: 16px;
   }
-  .bottom-btn {
-    width: calc(100% - 40px);
-    height: 72px;
-    margin: 0 20px;
-    border-radius: 14px;
-    font-size: 20px;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #3184ff;
-    position: absolute;
-    bottom: 137px;
-    border: 0;
+
+  :nth-child(3) {
+    margin-bottom: 36px;
   }
 `;

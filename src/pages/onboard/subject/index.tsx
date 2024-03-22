@@ -53,79 +53,86 @@ const OnboardSubject: NextPage<Props> = ({}) => {
   };
 
   return (
-    <div>
-      <Wrapper>
-        <Header />
-        <span className="page-indicator">3/3</span>
-        <Body>
-          <div className="title">
-            <p>주로 저장하는 인사이트의</p>
-            주제는 무엇인가요?
-          </div>
-          <div className="subtitle">
-            선택한 주제로 폴더의 이름을 지정해드려요.
-          </div>
-          <TopicSection>
-            {topicList.map((topic, idx) => (
-              <Topic
-                key={idx}
-                className={
-                  signupInput.topicList.includes(topic) ? 'selected' : ''
-                }
-                onClick={() => selectTopic(topic)}
-              >
-                {topic}
-              </Topic>
-            ))}
-            {isAdding ? (
-              <AutosizeInput
-                value={addingTopic}
-                onKeyDownCapture={(e) => checkEnter(e.key)}
-                onChange={(e) => setAddingTopic(e.target.value)}
-                onBlur={()=>handleBlur()}
-                inputStyle={{
-                  display: 'flex',
-                  padding: '7.27px 11.765px',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: '8.985px',
-                  background: 'var(--Neutral-100, #f4f5f7)',
-                  color: 'var(--Neutral-400, #565656)',
-                  textAlign: 'center',
-                  /* Body-16-SB */
-                  fontFamily: 'Pretendard',
-                  fontSize: '16px',
-                  fontStyle: 'normal',
-                  fontWeight: '600',
-                  lineHeight: '140%' /* 22.4px */,
-                  outline: 'none',
-                  border: 'none',
-                }}
-              />
-            ) : (
-              <Topic onClick={() => setIsAdding(true)}>
-                직접 입력
-                <AddButton />
-              </Topic>
-            )}
-          </TopicSection>
-        </Body>
-      </Wrapper>
+    <Wrapper>
+      <Header rightText="3/3" />
+      <Body>
+        <div className="title">
+          <p>주로 저장하는 인사이트의</p>
+          주제는 무엇인가요?
+        </div>
+        <div className="subtitle">
+          선택한 주제로 폴더의 이름을 지정해드려요.
+        </div>
+        <TopicSection>
+          {topicList.map((topic, idx) => (
+            <Topic
+              key={idx}
+              className={
+                signupInput.topicList.includes(topic) ? 'selected' : ''
+              }
+              onClick={() => selectTopic(topic)}
+            >
+              {topic}
+            </Topic>
+          ))}
+          {isAdding ? (
+            <AutosizeInput
+              value={addingTopic}
+              onKeyDownCapture={(e) => checkEnter(e.key)}
+              onChange={(e) => {
+                console.log('hi');
+                setAddingTopic(e.target.value);
+              }}
+              onBlur={() => handleBlur()}
+              inputStyle={{
+                display: 'flex',
+                padding: '7.27px 11.765px',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: '8.985px',
+                background: 'var(--Neutral-100, #f4f5f7)',
+                color: 'var(--Neutral-400, #565656)',
+                textAlign: 'center',
+                /* Body-16-SB */
+                fontFamily: 'Pretendard',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: '600',
+                lineHeight: '140%' /* 22.4px */,
+                outline: 'none',
+                border: 'none',
+              }}
+            />
+          ) : (
+            <Topic onClick={() => setIsAdding(true)}>
+              직접 입력
+              <AddButton />
+            </Topic>
+          )}
+        </TopicSection>
+      </Body>
       {signupInput.topicList.length > 2 ? (
-        <BottomBtn text="다음" color="#3184FF" nextUrl="/onboard/addhome" />
+        <BottomBtn text="완료" state="activated" nextUrl="/onboard/addhome" />
       ) : (
-        <BottomBtn text="다음" color="#848484" />
+        <BottomBtn text="완료" state="disabled" />
       )}
-    </div>
+    </Wrapper>
   );
 };
 
 export default OnboardSubject;
 
 const Wrapper = styled.div`
-  max-height: 100vh;
-  position: relative;
-  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  > :last-child {
+    margin-bottom: 36px;
+  }
+
   .title,
   p {
     width: 100%;
@@ -136,8 +143,13 @@ const Wrapper = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 33.6px */
-    margin-top: 36px;
+    margin-top: 20px;
   }
+
+  p {
+    margin-top: 0px;
+  }
+
   span {
     position: absolute;
     right: 20px;
