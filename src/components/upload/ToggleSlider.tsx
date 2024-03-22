@@ -2,28 +2,32 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 type Props = {
-  onClick: React.MouseEventHandler<HTMLDivElement>,
-  isSelected: boolean,
-}
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  $isSelected: boolean;
+};
 
 const ToggleSlider = (props: Props) => {
   return (
     <>
       <Wrapper>
-        <SlideContainer className="switch" data-ison={!props.isSelected} onClick={props.onClick}>
+        <SlideContainer
+          className="switch"
+          data-ison={!props.$isSelected}
+          onClick={props.onClick}
+        >
           <motion.div className="handle" layout transition={spring} />
         </SlideContainer>
       </Wrapper>
     </>
-    )
-}
+  );
+};
 
 const spring = {
-  type: "spring",
+  type: 'spring',
   stiffness: 500,
-  damping: 30
+  damping: 30,
 };
-export default ToggleSlider
+export default ToggleSlider;
 
 const Wrapper = styled.div`
   .switch {
@@ -35,9 +39,9 @@ const Wrapper = styled.div`
     border-radius: 50px;
     cursor: pointer;
   }
-  .switch[data-ison="false"] {
+  .switch[data-ison='false'] {
     justify-content: flex-end;
-    background: var(--blue, #3184FF);
+    background: var(--blue, #3184ff);
   }
 `;
 
@@ -51,7 +55,7 @@ const SlideContainer = styled.div`
   align-items: center;
   line-height: 13px;
   .selected {
-    background: var(--icon-color, #FFF);
+    background: var(--icon-color, #fff);
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
     color: black;
   }
@@ -62,6 +66,9 @@ const SlideContainer = styled.div`
     margin: 0px 2px;
     border-radius: 30px;
     background: white;
-    box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.06), 0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+    box-shadow:
+      0px 3px 1px 0px rgba(0, 0, 0, 0.06),
+      0px 3px 8px 0px rgba(0, 0, 0, 0.15),
+      0px 0px 0px 1px rgba(0, 0, 0, 0.04);
   }
 `;
