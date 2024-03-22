@@ -84,7 +84,7 @@ const Home: NextPage = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  background-color: #ffffff;
+  background-color: #fbfbfb;
   overflow-x: hidden;
   overflow-y: auto;
 

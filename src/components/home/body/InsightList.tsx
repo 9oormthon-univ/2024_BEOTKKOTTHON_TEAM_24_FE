@@ -19,9 +19,13 @@ const InsightList = ({ $isSmall, calenderData }: Props) => {
           </span>
         </div>
         {$isSmall ? (
-          <InsightCard insightData={calenderData.remindInsightList[0]} />
+          <InsightCard
+            favicon="/svg/insight-favicon.svg"
+            insightData={calenderData.remindInsightList[0]}
+          />
         ) : (
           <SummaryInsightCard
+            favicon="/svg/insight-favicon.svg"
             coverImg="/image/디자인3.jpg"
             title="디자인시스템에 모션 가이드 추가하는 방법"
             summary="미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수
@@ -37,9 +41,13 @@ const InsightList = ({ $isSmall, calenderData }: Props) => {
           <span>1/3</span>
         </div>
         {$isSmall ? (
-          <InsightCard insightData={calenderData.remindInsightList[0]} />
+          <InsightCard
+            favicon="/svg/insight-favicon.svg"
+            insightData={calenderData.remindInsightList[0]}
+          />
         ) : (
           <SummaryInsightCard
+            favicon="/svg/insight-favicon.svg"
             coverImg="/image/디자인3.jpg"
             title="디자인시스템에 모션 가이드 추가하는 방법"
             summary="미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수

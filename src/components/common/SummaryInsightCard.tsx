@@ -2,15 +2,33 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 interface CardProps {
+  favicon: string;
   coverImg: string;
   title: string;
   summary: string;
   tags: string[];
 }
 
-const SummaryInsightCard = ({ coverImg, title, summary, tags }: CardProps) => {
+const SummaryInsightCard = ({
+  favicon,
+  coverImg,
+  title,
+  summary,
+  tags,
+}: CardProps) => {
   return (
     <Wrapper>
+      {favicon ? (
+        <Image
+          src={favicon}
+          width={52}
+          height={52}
+          alt="Insight Card image"
+          className="favicon"
+        />
+      ) : (
+        <></>
+      )}
       <Image
         src={coverImg}
         width={353}
@@ -42,6 +60,15 @@ const Wrapper = styled.div`
   background-color: #ffffff;
   margin: 22px 20px;
   box-shadow: 9px 9px 30px 0px #00000014;
+  position: relative;
+
+  .favicon {
+    border: 10px solid #f9f9f9;
+    border-radius: 100%;
+    position: absolute;
+    right: 26px;
+    top: -26px;
+  }
 
   .img {
     width: 100%;

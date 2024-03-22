@@ -85,13 +85,9 @@ const BottomNavigation = () => {
 };
 
 const Wrapper = styled.div`
-  /* position: sticky;
-  left: 0;
-  bottom: -5px;
-  width: 100%; */
   position: fixed;
-  left: 0;
-  right: 0;
+  width: 100%;
+  max-width: 480px;
   bottom: 0;
   z-index: 100;
 `;
