@@ -74,7 +74,8 @@ const ReminderCalender = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #fbfbfb;
+  background-color: #ffffff;
+  margin-bottom: 140px;
 `;
 
 type IconProps = {

@@ -84,9 +84,9 @@ const Home: NextPage = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 120vh;
-  background-color: #fbfbfb;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .carousel {
     padding-bottom: 28px;

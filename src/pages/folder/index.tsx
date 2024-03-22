@@ -13,7 +13,7 @@ const Folder: NextPage = () => {
 const Wrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

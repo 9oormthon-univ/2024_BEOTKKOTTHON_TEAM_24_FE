@@ -79,15 +79,31 @@ const BottomNavigation = () => {
           </defs>
         </svg>
       </Wrapper>
+      <EmptyBox />
     </>
   );
 };
 
 const Wrapper = styled.div`
-  position: sticky;
+  /* position: sticky;
   left: 0;
   bottom: -5px;
-  width: 100%;
+  width: 100%; */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+`;
+
+const EmptyBox = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  height: 50px;
+  background-color: #ffffff;
 `;
 
 export default BottomNavigation;

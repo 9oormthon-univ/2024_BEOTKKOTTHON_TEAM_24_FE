@@ -47,7 +47,7 @@ export default Reminder;
 
 const Wrapper = styled.div`
   height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   padding-bottom: 36px;
