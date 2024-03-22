@@ -80,80 +80,80 @@ export const CarouselSlides = [
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M209.261 219.949C209.757 220.313 210.214 220.706 210.631 221.121C210.875 220.585 211.164 220.056 211.499 219.541C214.337 215.175 219.411 213.439 222.831 215.663C226.252 217.887 226.724 223.228 223.885 227.594C223.633 227.982 223.364 228.349 223.079 228.694C223.467 228.916 223.849 229.164 224.222 229.438C228.422 232.517 229.87 237.68 227.457 240.971C225.044 244.261 219.685 244.431 215.485 241.352C214.99 240.989 214.532 240.596 214.115 240.181C213.872 240.717 213.583 241.246 213.248 241.761C210.409 246.127 205.335 247.863 201.915 245.639C198.494 243.415 198.023 238.073 200.861 233.708C201.113 233.32 201.383 232.953 201.667 232.607C201.279 232.385 200.897 232.137 200.524 231.864C196.325 228.784 194.877 223.621 197.289 220.331C199.702 217.041 205.062 216.87 209.261 219.949Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M257.086 222.725C256.97 223.329 256.811 223.91 256.614 224.465C257.203 224.456 257.805 224.49 258.414 224.572C263.575 225.267 267.317 229.108 266.773 233.151C266.229 237.194 261.604 239.909 256.443 239.215C255.985 239.153 255.538 239.067 255.104 238.957C255.069 239.404 255.009 239.855 254.922 240.309C253.938 245.423 249.893 248.943 245.887 248.173C241.88 247.402 239.43 242.632 240.413 237.519C240.529 236.915 240.688 236.333 240.885 235.779C240.296 235.788 239.694 235.754 239.085 235.672C233.924 234.977 230.182 231.136 230.726 227.093C231.27 223.049 235.895 220.335 241.056 221.029C241.514 221.091 241.961 221.177 242.395 221.287C242.429 220.84 242.49 220.389 242.577 219.935C243.561 214.821 247.606 211.301 251.612 212.071C255.619 212.842 258.069 217.612 257.086 222.725Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M241.338 195.378C241.222 195.981 241.064 196.563 240.867 197.118C241.456 197.108 242.057 197.143 242.667 197.225C247.827 197.919 251.57 201.76 251.026 205.803C250.481 209.847 245.857 212.562 240.696 211.867C240.238 211.805 239.791 211.719 239.357 211.61C239.322 212.056 239.262 212.507 239.175 212.962C238.191 218.075 234.146 221.596 230.139 220.825C226.133 220.055 223.682 215.285 224.666 210.171C224.782 209.567 224.941 208.986 225.137 208.431C224.549 208.441 223.947 208.406 223.338 208.324C218.177 207.63 214.435 203.789 214.979 199.745C215.523 195.702 220.148 192.987 225.308 193.682C225.767 193.743 226.214 193.83 226.648 193.939C226.682 193.493 226.743 193.041 226.83 192.587C227.813 187.473 231.859 183.953 235.865 184.723C239.872 185.494 242.322 190.264 241.338 195.378Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M87.7729 220.17C87.2048 220.707 86.609 221.19 85.9943 221.617C86.609 222.044 87.2047 222.526 87.7728 223.063C92.5852 227.612 93.597 234.356 90.0328 238.127C86.4687 241.897 79.6782 241.266 74.8658 236.717C74.4385 236.313 74.0411 235.892 73.6743 235.457C73.3073 235.892 72.9098 236.314 72.4823 236.718C67.67 241.267 60.8795 241.898 57.3153 238.127C53.7511 234.357 54.763 227.613 59.5753 223.064C60.1435 222.527 60.7392 222.044 61.354 221.617C60.7392 221.19 60.1436 220.708 59.5754 220.171C54.7631 215.622 53.7512 208.877 57.3154 205.107C60.8796 201.336 67.6701 201.967 72.4824 206.516C72.9097 206.92 73.3071 207.342 73.674 207.777C74.041 207.341 74.4385 206.92 74.8659 206.516C79.6783 201.967 86.4688 201.336 90.0329 205.106C93.5971 208.877 92.5853 215.621 87.7729 220.17Z"
       fill="#A0C3FF"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M245.317 378.827C244.749 378.29 244.153 377.807 243.539 377.38C244.153 376.953 244.749 376.471 245.317 375.934C250.129 371.385 251.141 364.641 247.577 360.87C244.013 357.1 237.222 357.731 232.41 362.28C231.982 362.684 231.585 363.105 231.218 363.54C230.851 363.105 230.454 362.684 230.027 362.28C225.214 357.731 218.424 357.1 214.86 360.87C211.295 364.641 212.307 371.385 217.12 375.934C217.688 376.471 218.284 376.954 218.899 377.381C218.284 377.808 217.688 378.29 217.12 378.827C212.307 383.376 211.295 390.121 214.86 393.891C218.424 397.662 225.214 397.031 230.027 392.482C230.454 392.078 230.852 391.656 231.219 391.221C231.585 391.656 231.983 392.077 232.41 392.481C237.222 397.03 244.013 397.661 247.577 393.89C251.141 390.12 250.129 383.376 245.317 378.827Z"
       fill="#A0C3FF"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M83.2284 359.829C82.9413 359.557 82.6402 359.314 82.3295 359.098C82.6402 358.882 82.9413 358.638 83.2284 358.367C85.661 356.067 86.1724 352.658 84.3708 350.752C82.5692 348.846 79.1367 349.165 76.7041 351.465C76.4881 351.669 76.2872 351.882 76.1018 352.102C75.9163 351.882 75.7154 351.669 75.4994 351.465C73.0668 349.165 69.6344 348.846 67.8327 350.752C66.0311 352.658 66.5426 356.067 68.9751 358.367C69.2624 358.638 69.5636 358.882 69.8744 359.098C69.5636 359.314 69.2624 359.558 68.9751 359.829C66.5426 362.129 66.0311 365.538 67.8327 367.444C69.6344 369.35 73.0668 369.031 75.4994 366.731C75.7155 366.527 75.9165 366.314 76.102 366.094C76.2874 366.314 76.4882 366.527 76.7041 366.731C79.1367 369.03 82.5692 369.349 84.3708 367.443C86.1724 365.537 85.661 362.128 83.2284 359.829Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M172.675 206.205H176.835V256.355H283.335V206.205H287.495V260.5H172.675V206.205Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M153.539 171.049C125.703 171.049 110.691 191.966 106.692 202.394L103.367 201.119C107.675 189.888 123.697 167.488 153.539 167.488C182.898 167.488 196.786 180.803 200.108 188.114L196.867 189.587C194.256 183.843 181.857 171.049 153.539 171.049Z"
       fill="#A0C3FF"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M176.266 176.964C171.477 173.672 164.859 171.492 153.094 171.492V167.932C165.313 167.932 172.713 170.202 178.283 174.03C182.416 176.871 185.498 180.581 188.72 184.459C188.811 184.568 188.902 184.678 188.993 184.788L189.766 173.189C189.832 172.208 190.68 171.466 191.661 171.531C192.642 171.597 193.384 172.445 193.319 173.426L192.253 189.412C192.188 190.393 191.34 191.135 190.359 191.07L174.373 190.004C173.392 189.939 172.649 189.09 172.715 188.109C172.78 187.128 173.628 186.386 174.609 186.452L186.392 187.237C186.175 186.977 185.961 186.719 185.749 186.464C182.614 182.695 179.957 179.501 176.266 176.964Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M114.639 399.052C122.718 402.482 133.8 404.696 153.094 404.696V408.256C133.555 408.256 121.94 406.019 113.247 402.329C106.702 399.55 101.836 395.933 96.6418 392.073C96.1205 391.685 95.5959 391.295 95.066 390.903L97.0447 402.38C97.2117 403.349 96.5617 404.27 95.5929 404.437C94.624 404.604 93.7032 403.954 93.5361 402.985L90.814 387.196C90.6469 386.228 91.2969 385.307 92.2658 385.14L108.054 382.418C109.023 382.25 109.944 382.9 110.111 383.869C110.278 384.838 109.628 385.759 108.659 385.926L97.0381 387.93C97.703 388.42 98.3525 388.902 98.9914 389.377C104.096 393.168 108.518 396.453 114.639 399.052Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M247.98 416.597C245.668 420.347 244.26 423.618 243.849 425.991L243.529 427.836H220.375L219.928 426.196C217.978 419.047 211.24 411.186 203.153 404.11C195.158 397.115 186.228 391.213 180.475 387.936L182.678 384.069C188.644 387.467 197.827 393.537 206.083 400.761C213.724 407.445 220.915 415.411 223.71 423.385H239.893C240.69 420.608 242.214 417.469 244.192 414.261C246.648 410.278 249.906 406.027 253.655 401.989C261.101 393.971 270.748 386.511 280.22 383.859L281.42 388.145C273.09 390.477 264.12 397.259 256.917 405.017C253.341 408.868 250.266 412.889 247.98 416.597Z"
       fill="#A0C3FF"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M231.421 306.784V266.285H234.981V306.784H231.421Z"
       fill="white"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M231.42 311.389L231.42 286.314L234.981 286.314L234.981 311.389L243.271 303.099C243.966 302.404 245.093 302.404 245.788 303.099C246.483 303.795 246.483 304.922 245.788 305.617L234.459 316.946C233.764 317.641 232.637 317.641 231.942 316.946L220.613 305.617C219.918 304.922 219.918 303.795 220.613 303.099C221.308 302.404 222.435 302.404 223.13 303.099L231.42 311.389Z"
       fill="#A0C3FF"
     />
@@ -208,8 +208,8 @@ export const CarouselSlides = [
       fill="url(#paint0_linear_589_6306)"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M173.5 343.992C267.093 343.992 342.965 268.12 342.965 174.527C342.965 80.9343 267.093 5.06223 173.5 5.06223C79.907 5.06223 4.03488 80.9343 4.03488 174.527C4.03488 268.12 79.907 343.992 173.5 343.992ZM173.5 348.027C269.321 348.027 347 270.349 347 174.527C347 78.7059 269.321 1.02734 173.5 1.02734C77.6786 1.02734 0 78.7059 0 174.527C0 270.349 77.6786 348.027 173.5 348.027Z"
       fill="url(#paint1_linear_589_6306)"
     />
@@ -232,8 +232,8 @@ export const CarouselSlides = [
       fill="url(#paint4_linear_589_6306)"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M169.929 176.461L81.6756 110.978C67.84 100.712 48.3018 103.606 38.036 117.442C27.7702 131.277 30.664 150.816 44.4997 161.081L132.753 226.564C146.589 236.83 166.127 233.936 176.393 220.101C186.659 206.265 183.765 186.727 169.929 176.461ZM82.5032 109.863C68.0515 99.1399 47.6436 102.163 36.9207 116.614C26.1978 131.066 29.2205 151.474 43.6722 162.197L131.926 227.68C146.378 238.403 166.786 235.38 177.508 220.928C188.231 206.477 185.209 186.069 170.757 175.346L82.5032 109.863Z"
       fill="url(#paint5_linear_589_6306)"
     />
@@ -297,13 +297,13 @@ export const CarouselSlides = [
       <path
         d="M165.047 128.754C160.852 111.255 171.638 93.6679 189.138 89.4732L296.005 63.857C313.504 59.6623 331.091 70.4481 335.286 87.9477C339.48 105.447 328.694 123.034 311.195 127.229L204.328 152.845C186.828 157.039 169.242 146.254 165.047 128.754Z"
         fill="url(#paint14_linear_589_6306)"
-        fill-opacity="0.8"
+        fillOpacity="0.8"
       />
     </g>
     <g filter="url(#filter2_b_589_6306)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M296.328 65.2076L189.461 90.8238C172.708 94.8397 162.382 111.677 166.398 128.43C170.413 145.184 187.25 155.51 204.004 151.494L310.871 125.878C327.625 121.862 337.951 105.025 333.935 88.2714C329.919 71.5177 313.082 61.1917 296.328 65.2076ZM189.138 89.4732C171.638 93.6679 160.852 111.255 165.047 128.754C169.242 146.254 186.828 157.039 204.328 152.845L311.195 127.229C328.694 123.034 339.48 105.447 335.286 87.9477C331.091 70.4481 313.504 59.6623 296.005 63.857L189.138 89.4732Z"
         fill="url(#paint15_linear_589_6306)"
       />
@@ -332,8 +332,8 @@ export const CarouselSlides = [
     </g>
     <g filter="url(#filter4_b_589_6306)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M163.125 31.3016L83.0583 8.78162C70.6856 5.30162 57.8345 12.5106 54.3545 24.8833C50.8745 37.2559 58.0835 50.1071 70.4562 53.5871L150.523 76.1071C162.896 79.5871 175.747 72.3781 179.227 60.0054C182.707 47.6328 175.498 34.7816 163.125 31.3016ZM83.4344 7.4447C70.3233 3.75703 56.7053 11.3962 53.0176 24.5072C49.3299 37.6183 56.9691 51.2363 70.0801 54.924L150.147 77.444C163.258 81.1317 176.876 73.4925 180.564 60.3815C184.252 47.2704 176.612 33.6524 163.501 29.9647L83.4344 7.4447Z"
         fill="url(#paint17_linear_589_6306)"
       />
@@ -362,9 +362,9 @@ export const CarouselSlides = [
         width="184.706"
         height="148.142"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.98233" />
         <feComposite
           in2="SourceAlpha"
@@ -385,9 +385,9 @@ export const CarouselSlides = [
         width="179.691"
         height="98.4414"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.91065" />
         <feComposite
           in2="SourceAlpha"
@@ -408,9 +408,9 @@ export const CarouselSlides = [
         width="179.691"
         height="98.4414"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.91065" />
         <feComposite
           in2="SourceAlpha"
@@ -431,9 +431,9 @@ export const CarouselSlides = [
         width="137.044"
         height="79.4961"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.91065" />
         <feComposite
           in2="SourceAlpha"
@@ -454,9 +454,9 @@ export const CarouselSlides = [
         width="137.044"
         height="79.4961"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.91065" />
         <feComposite
           in2="SourceAlpha"
@@ -478,8 +478,8 @@ export const CarouselSlides = [
         y2="436.579"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#C6D4F7" />
-        <stop offset="1" stop-color="#3184FF" stop-opacity="0" />
+        <stop stopColor="#C6D4F7" />
+        <stop offset="1" stopColor="#3184FF" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_589_6306"
@@ -489,8 +489,8 @@ export const CarouselSlides = [
         y2="594.634"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="0.709317" stop-color="#90BDFF" />
+        <stop stopColor="white" />
+        <stop offset="0.709317" stopColor="#90BDFF" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_589_6306"
@@ -500,8 +500,8 @@ export const CarouselSlides = [
         y2="312.865"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+        <stop offset="0.01" stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint3_linear_589_6306"
@@ -511,8 +511,8 @@ export const CarouselSlides = [
         y2="245.392"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="#0067FF" />
-        <stop offset="1" stop-color="#85A6FF" />
+        <stop offset="0.01" stopColor="#0067FF" />
+        <stop offset="1" stopColor="#85A6FF" />
       </linearGradient>
       <linearGradient
         id="paint4_linear_589_6306"
@@ -522,8 +522,8 @@ export const CarouselSlides = [
         y2="220.697"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.65" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.65" />
       </linearGradient>
       <linearGradient
         id="paint5_linear_589_6306"
@@ -533,8 +533,8 @@ export const CarouselSlides = [
         y2="216.232"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#3184FF" />
-        <stop offset="1" stop-color="#3184FF" stop-opacity="0" />
+        <stop stopColor="#3184FF" />
+        <stop offset="1" stopColor="#3184FF" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint6_linear_589_6306"
@@ -544,8 +544,8 @@ export const CarouselSlides = [
         y2="316.443"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.125067" stop-color="#85A6FF" />
-        <stop offset="0.620015" stop-color="#0067FF" />
+        <stop offset="0.125067" stopColor="#85A6FF" />
+        <stop offset="0.620015" stopColor="#0067FF" />
       </linearGradient>
       <linearGradient
         id="paint7_linear_589_6306"
@@ -555,8 +555,8 @@ export const CarouselSlides = [
         y2="424.563"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint8_linear_589_6306"
@@ -566,8 +566,8 @@ export const CarouselSlides = [
         y2="403.204"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint9_linear_589_6306"
@@ -577,8 +577,8 @@ export const CarouselSlides = [
         y2="303.892"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint10_linear_589_6306"
@@ -588,8 +588,8 @@ export const CarouselSlides = [
         y2="432.914"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint11_linear_589_6306"
@@ -599,8 +599,8 @@ export const CarouselSlides = [
         y2="415.409"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint12_linear_589_6306"
@@ -610,8 +610,8 @@ export const CarouselSlides = [
         y2="424.056"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint13_linear_589_6306"
@@ -621,8 +621,8 @@ export const CarouselSlides = [
         y2="416.813"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint14_linear_589_6306"
@@ -632,8 +632,8 @@ export const CarouselSlides = [
         y2="149.304"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.49" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.49" />
       </linearGradient>
       <linearGradient
         id="paint15_linear_589_6306"
@@ -643,8 +643,8 @@ export const CarouselSlides = [
         y2="160.956"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#3184FF" />
-        <stop offset="1" stop-color="#3184FF" stop-opacity="0" />
+        <stop stopColor="#3184FF" />
+        <stop offset="1" stopColor="#3184FF" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint16_linear_589_6306"
@@ -654,8 +654,8 @@ export const CarouselSlides = [
         y2="84.4326"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.53" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.53" />
       </linearGradient>
       <linearGradient
         id="paint17_linear_589_6306"
@@ -665,8 +665,8 @@ export const CarouselSlides = [
         y2="82.8077"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#3184FF" />
-        <stop offset="1" stop-color="#3184FF" stop-opacity="0" />
+        <stop stopColor="#3184FF" />
+        <stop offset="1" stopColor="#3184FF" stopOpacity="0" />
       </linearGradient>
     </defs>
   </svg>,
@@ -686,7 +686,7 @@ export const CarouselSlides = [
       d="M0 61.9336L127.862 333.064L231.154 358.833L376 61.9336H0Z"
       fill="url(#paint0_linear_589_6307)"
     />
-    <g clip-path="url(#clip0_589_6307)">
+    <g clipPath="url(#clip0_589_6307)">
       <path
         d="M43.343 17.5645H216.715V109.025C216.715 114.131 212.569 118.279 207.465 118.279H52.593C47.4888 118.279 43.343 114.131 43.343 109.025V17.5645Z"
         fill="#C6D4F7"
@@ -724,7 +724,7 @@ export const CarouselSlides = [
         fill="#B8BABC"
       />
     </g>
-    <g clip-path="url(#clip1_589_6307)">
+    <g clipPath="url(#clip1_589_6307)">
       <path
         d="M82.3516 111.834H256.807V203.295C256.807 208.401 252.635 212.548 247.499 212.548H91.6594C86.5233 212.548 82.3516 208.401 82.3516 203.295V111.834Z"
         fill="#C6D4F7"
@@ -862,9 +862,9 @@ export const CarouselSlides = [
         width="181.372"
         height="108.715"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -897,9 +897,9 @@ export const CarouselSlides = [
         width="125.326"
         height="100.404"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="2.07504" />
         <feComposite
           in2="SourceAlpha"
@@ -921,8 +921,8 @@ export const CarouselSlides = [
         y2="350.648"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" stop-opacity="0" />
-        <stop offset="0.680958" stop-color="#B7CFFA" />
+        <stop stopColor="white" stopOpacity="0" />
+        <stop offset="0.680958" stopColor="#B7CFFA" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_589_6307"
@@ -932,8 +932,8 @@ export const CarouselSlides = [
         y2="8.86929"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4B83E8" />
-        <stop offset="1" stop-color="#6997F8" />
+        <stop stopColor="#4B83E8" />
+        <stop offset="1" stopColor="#6997F8" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_589_6307"
@@ -943,8 +943,8 @@ export const CarouselSlides = [
         y2="103.139"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4B83E8" />
-        <stop offset="1" stop-color="#6997F8" />
+        <stop stopColor="#4B83E8" />
+        <stop offset="1" stopColor="#6997F8" />
       </linearGradient>
       <linearGradient
         id="paint3_linear_589_6307"
@@ -954,8 +954,8 @@ export const CarouselSlides = [
         y2="37.0412"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4B83E8" />
-        <stop offset="1" stop-color="#6997F8" />
+        <stop stopColor="#4B83E8" />
+        <stop offset="1" stopColor="#6997F8" />
       </linearGradient>
       <linearGradient
         id="paint4_linear_589_6307"
@@ -965,8 +965,8 @@ export const CarouselSlides = [
         y2="339.638"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="#3184FF" />
-        <stop offset="1" stop-color="#85A6FF" />
+        <stop offset="0.01" stopColor="#3184FF" />
+        <stop offset="1" stopColor="#85A6FF" />
       </linearGradient>
       <linearGradient
         id="paint5_linear_589_6307"
@@ -976,8 +976,8 @@ export const CarouselSlides = [
         y2="293.819"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="0.64453" stop-color="#558AEE" />
+        <stop stopColor="white" />
+        <stop offset="0.64453" stopColor="#558AEE" />
       </linearGradient>
       <linearGradient
         id="paint6_linear_589_6307"
@@ -987,8 +987,8 @@ export const CarouselSlides = [
         y2="325.782"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="0.438106" stop-color="#81AAFD" />
+        <stop stopColor="white" />
+        <stop offset="0.438106" stopColor="#81AAFD" />
       </linearGradient>
       <linearGradient
         id="paint7_linear_589_6307"
@@ -998,8 +998,8 @@ export const CarouselSlides = [
         y2="361"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="0.857776" stop-color="#72A3FB" />
+        <stop stopColor="white" />
+        <stop offset="0.857776" stopColor="#72A3FB" />
       </linearGradient>
       <linearGradient
         id="paint8_linear_589_6307"
@@ -1009,8 +1009,8 @@ export const CarouselSlides = [
         y2="365.94"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.262276" stop-color="#3184FF" />
-        <stop offset="1" stop-color="#85A6FF" />
+        <stop offset="0.262276" stopColor="#3184FF" />
+        <stop offset="1" stopColor="#85A6FF" />
       </linearGradient>
       <linearGradient
         id="paint9_linear_589_6307"
@@ -1020,8 +1020,8 @@ export const CarouselSlides = [
         y2="427.466"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint10_linear_589_6307"
@@ -1031,8 +1031,8 @@ export const CarouselSlides = [
         y2="413.372"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint11_linear_589_6307"
@@ -1042,8 +1042,8 @@ export const CarouselSlides = [
         y2="347.831"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint12_linear_589_6307"
@@ -1053,8 +1053,8 @@ export const CarouselSlides = [
         y2="432.979"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint13_linear_589_6307"
@@ -1064,8 +1064,8 @@ export const CarouselSlides = [
         y2="421.427"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint14_linear_589_6307"
@@ -1075,8 +1075,8 @@ export const CarouselSlides = [
         y2="427.132"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint15_linear_589_6307"
@@ -1086,8 +1086,8 @@ export const CarouselSlides = [
         y2="422.132"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <clipPath id="clip0_589_6307">
         <rect
@@ -1123,7 +1123,7 @@ export const CarouselSlides = [
       d="M342 171C342 265.441 265.441 342 171 342C76.5593 342 0 265.441 0 171C0 76.5593 76.5593 0 171 0C265.441 0 342 76.5593 342 171Z"
       fill="url(#paint0_linear_589_6308)"
     />
-    <g clip-path="url(#clip0_589_6308)">
+    <g clipPath="url(#clip0_589_6308)">
       <path
         d="M107.473 145.031L108.364 144.778L111.14 154.491L110.25 154.744L107.473 145.031ZM102.871 153.514L103.676 153.285C105.295 152.825 106.725 152.349 108.361 151.583L108.666 152.285C106.99 153.074 105.549 153.553 103.887 154.025L103.083 154.254L102.871 153.514ZM101.213 147.796L105.696 146.521L106.686 149.984L103.115 150.999L103.841 153.54L102.951 153.793L102.016 150.523L105.577 149.511L105.004 147.507L101.422 148.525L101.213 147.796ZM110.937 145.102L115.388 143.837L117.181 150.108L112.73 151.373L110.937 145.102ZM114.724 144.802L112.011 145.573L113.393 150.408L116.106 149.637L114.724 144.802ZM116.839 142.381L117.739 142.125L120.51 151.816L119.609 152.072L116.839 142.381ZM118.631 146.056L120.433 145.544L120.648 146.294L118.846 146.806L118.631 146.056ZM127.201 139.448L128.102 139.192L130.125 146.267L129.224 146.523L127.201 139.448ZM124.369 149.699L130.889 147.846L131.098 148.575L124.577 150.428L124.369 149.699ZM123.685 147.309L124.565 147.059L125.318 149.696L124.439 149.946L123.685 147.309ZM123.09 141.334C124.538 140.923 125.893 141.604 126.294 143.009C126.693 144.402 125.905 145.704 124.457 146.116C123.009 146.527 121.641 145.838 121.243 144.444C120.841 143.04 121.642 141.746 123.09 141.334ZM123.311 142.106C122.367 142.375 121.839 143.243 122.111 144.198C122.381 145.141 123.29 145.601 124.233 145.333C125.177 145.065 125.706 144.196 125.436 143.253C125.163 142.299 124.255 141.838 123.311 142.106ZM132.449 142.963L139.11 141.07L139.318 141.799L132.658 143.692L132.449 142.963ZM132.203 146.279L140.987 143.782L141.198 144.522L132.414 147.019L132.203 146.279ZM131.377 139.211L137.94 137.346L138.152 138.085L132.478 139.698L133.432 143.032L132.541 143.285L131.377 139.211ZM147.768 134.843L150.524 134.059L150.73 134.777L147.973 135.561L147.768 134.843ZM148.341 136.847L151.097 136.064L151.3 136.771L148.543 137.555L148.341 136.847ZM145.631 134.546C147.078 134.134 148.39 134.747 148.764 136.055C149.132 137.341 148.341 138.551 146.893 138.963C145.445 139.374 144.134 138.762 143.766 137.475C143.392 136.167 144.183 134.957 145.631 134.546ZM145.842 135.286C144.887 135.557 144.376 136.363 144.624 137.231C144.869 138.089 145.73 138.505 146.685 138.234C147.639 137.962 148.162 137.153 147.917 136.296C147.668 135.427 146.797 135.014 145.842 135.286ZM149.979 132.962L150.869 132.709L152.288 137.673L151.398 137.926L149.979 132.962ZM146.187 139.94L152.429 138.166L153.097 140.503L147.745 142.024L148.162 143.482L147.293 143.729L146.686 141.606L152.028 140.088L151.752 139.123L146.389 140.647L146.187 139.94ZM147.18 143.332L153.754 141.464L153.957 142.171L147.382 144.04L147.18 143.332ZM159.823 130.164L160.714 129.911L163.484 139.602L162.594 139.855L159.823 130.164ZM157.279 132.012L158.158 131.762C158.961 134.571 158.397 137.385 155.612 139.892L154.935 139.308C157.348 137.162 158.057 134.735 157.321 132.162L157.279 132.012ZM153.621 133.051L157.665 131.902L157.873 132.631L153.83 133.78L153.621 133.051Z"
         fill="white"
@@ -1282,7 +1282,7 @@ export const CarouselSlides = [
         fill="white"
       />
     </g>
-    <g clip-path="url(#clip1_589_6308)">
+    <g clipPath="url(#clip1_589_6308)">
       <path
         d="M234.008 202.639C266.577 202.639 293.016 229.147 293.016 261.802V312.234C293.016 313.211 292.23 313.999 291.255 313.999H176.76C175.786 313.999 175 313.196 175 312.234V261.802C175 229.147 201.439 202.639 234.008 202.639Z"
         fill="url(#paint2_linear_589_6308)"
@@ -1382,9 +1382,9 @@ export const CarouselSlides = [
         width="158.929"
         height="126.929"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.98233" />
         <feComposite
           in2="SourceAlpha"
@@ -1406,8 +1406,8 @@ export const CarouselSlides = [
         y2="453.039"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#C6D4F7" />
-        <stop offset="1" stop-color="#3184FF" stop-opacity="0" />
+        <stop stopColor="#C6D4F7" />
+        <stop offset="1" stopColor="#3184FF" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_589_6308"
@@ -1417,8 +1417,8 @@ export const CarouselSlides = [
         y2="169.501"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-opacity="0.21" />
-        <stop offset="1" stop-color="#666666" stop-opacity="0" />
+        <stop stopOpacity="0.21" />
+        <stop offset="1" stopColor="#666666" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_589_6308"
@@ -1428,8 +1428,8 @@ export const CarouselSlides = [
         y2="210.377"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#6A98F8" />
-        <stop offset="1" stop-color="#6692F3" />
+        <stop stopColor="#6A98F8" />
+        <stop offset="1" stopColor="#6692F3" />
       </linearGradient>
       <linearGradient
         id="paint3_linear_589_6308"
@@ -1439,8 +1439,8 @@ export const CarouselSlides = [
         y2="118.092"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.205" stop-color="#FFF6F1" />
-        <stop offset="0.87" stop-color="#F5C8B6" />
+        <stop offset="0.205" stopColor="#FFF6F1" />
+        <stop offset="0.87" stopColor="#F5C8B6" />
       </linearGradient>
       <linearGradient
         id="paint4_linear_589_6308"
@@ -1450,8 +1450,8 @@ export const CarouselSlides = [
         y2="341.887"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+        <stop offset="0.01" stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint5_linear_589_6308"
@@ -1461,8 +1461,8 @@ export const CarouselSlides = [
         y2="264.374"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0067FF" />
-        <stop offset="0.237205" stop-color="#9DB7FF" />
+        <stop stopColor="#0067FF" />
+        <stop offset="0.237205" stopColor="#9DB7FF" />
       </linearGradient>
       <linearGradient
         id="paint6_linear_589_6308"
@@ -1472,8 +1472,8 @@ export const CarouselSlides = [
         y2="314.184"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#85A6FF" />
-        <stop offset="1" stop-color="#0067FF" />
+        <stop stopColor="#85A6FF" />
+        <stop offset="1" stopColor="#0067FF" />
       </linearGradient>
       <linearGradient
         id="paint7_linear_589_6308"
@@ -1483,8 +1483,8 @@ export const CarouselSlides = [
         y2="437.901"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint8_linear_589_6308"
@@ -1494,8 +1494,8 @@ export const CarouselSlides = [
         y2="419.69"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint9_linear_589_6308"
@@ -1505,8 +1505,8 @@ export const CarouselSlides = [
         y2="335.01"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint10_linear_589_6308"
@@ -1516,8 +1516,8 @@ export const CarouselSlides = [
         y2="445.022"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint11_linear_589_6308"
@@ -1527,8 +1527,8 @@ export const CarouselSlides = [
         y2="430.097"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint12_linear_589_6308"
@@ -1538,8 +1538,8 @@ export const CarouselSlides = [
         y2="437.469"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint13_linear_589_6308"
@@ -1549,8 +1549,8 @@ export const CarouselSlides = [
         y2="431.294"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0.93" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0.93" />
       </linearGradient>
       <linearGradient
         id="paint14_linear_589_6308"
@@ -1560,8 +1560,8 @@ export const CarouselSlides = [
         y2="332.539"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" stop-opacity="0" />
-        <stop offset="0.680958" stop-color="#FF7D34" stop-opacity="0.47" />
+        <stop stopColor="white" stopOpacity="0" />
+        <stop offset="0.680958" stopColor="#FF7D34" stopOpacity="0.47" />
       </linearGradient>
       <linearGradient
         id="paint15_linear_589_6308"
@@ -1571,8 +1571,8 @@ export const CarouselSlides = [
         y2="350.539"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" stop-opacity="0" />
-        <stop offset="0.680958" stop-color="#FF7D34" stop-opacity="0.47" />
+        <stop stopColor="white" stopOpacity="0" />
+        <stop offset="0.680958" stopColor="#FF7D34" stopOpacity="0.47" />
       </linearGradient>
       <clipPath id="clip0_589_6308">
         <rect

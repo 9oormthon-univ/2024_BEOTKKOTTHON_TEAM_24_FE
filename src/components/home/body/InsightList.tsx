@@ -4,11 +4,11 @@ import SummaryInsightCard from '@components/common/SummaryInsightCard';
 import { CalenderPostResponse } from '@/types/reminder';
 
 interface Props {
-  isSmall: boolean;
+  $isSmall: boolean;
   calenderData: CalenderPostResponse;
 }
 
-const InsightList = ({ isSmall, calenderData }: Props) => {
+const InsightList = ({ $isSmall, calenderData }: Props) => {
   return (
     <View>
       <div>
@@ -18,7 +18,7 @@ const InsightList = ({ isSmall, calenderData }: Props) => {
             {calenderData.remindRead}/{calenderData.remindTotal}
           </span>
         </div>
-        {isSmall ? (
+        {$isSmall ? (
           <InsightCard insightData={calenderData.remindInsightList[0]} />
         ) : (
           <SummaryInsightCard
@@ -36,7 +36,7 @@ const InsightList = ({ isSmall, calenderData }: Props) => {
           <span>추천 인사이트</span>
           <span>1/3</span>
         </div>
-        {isSmall ? (
+        {$isSmall ? (
           <InsightCard insightData={calenderData.remindInsightList[0]} />
         ) : (
           <SummaryInsightCard
