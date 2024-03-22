@@ -6,6 +6,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import PhoneImage from '@svg/onboard/phone-image.svg';
 
 interface Props {
   deferredPrompt: BeforeInstallPromptEvent;
@@ -24,8 +25,11 @@ const AddHome: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
         <div className="main-title">{signupInput.userName}님, 환영해요!</div>
         <div className="sub-title">
           <p>리인풋을 홈 화면에 추가하면</p>
-          다양한 기능을 사용하실 수 있어요 !
+          <p>다양한 기능을 사용하실 수 있어요 !</p>
         </div>
+      </div>
+      <div className="image">
+        <PhoneImage />
       </div>
       <BottomBtn
         text="홈 화면에 추가"
@@ -58,7 +62,7 @@ const Wrapper = styled.div`
   }
 
   .main-title {
-    color: var(--Neutral-500, #1f1f1f);
+    color: var(--Neutral-500, #3184FF);
     text-align: center;
     font-family: Pretendard;
     font-size: 26px;
@@ -75,13 +79,24 @@ const Wrapper = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 140%; /* 22.4px */
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
   }
 
   :nth-child(2) {
-    margin-bottom: 16px;
+    height: calc(100% - 250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   :nth-child(3) {
+    margin-bottom: 16px;
+  }
+
+  :nth-child(4) {
     margin-bottom: 36px;
   }
 `;

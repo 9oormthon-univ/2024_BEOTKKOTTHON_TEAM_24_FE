@@ -19,7 +19,7 @@ const BottomBtn = (props: Props) => {
     switch (props.state) {
       case 'disabled':
         return (
-          <Button onClick={props.onClick ?? onClick} className="disabled">
+          <Button className="disabled">
             {props.text}
           </Button>
         );
