@@ -71,6 +71,8 @@ const Wrapper = styled.div`
     font-weight: 700;
     line-height: 27.146px; /* 135.732% */
     height: 28px;
+    padding: 18px 20px 16px;
+    height: 52px;
   }
   .link {
     color: var(--Primary-500, #3184ff);
@@ -84,7 +86,7 @@ const Wrapper = styled.div`
   }
   .edit {
     position: absolute;
-    top: 5px;
+    top: 20px;
     right: 20px;
   }
 `;
