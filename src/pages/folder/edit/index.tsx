@@ -7,15 +7,18 @@ import { colorDecoder } from '@/utils/folder';
 import { useState } from 'react';
 import { Folder } from '@/types/folder';
 import EditModal from '@/components/folder/EditModal';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
 const FolderEdit: NextPage<Props> = ({}) => {
+  const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
   const [newFolderList, setNewFolderList] = useState<Folder[]>(FolderList);
   const [searchedFolderList, setSearchedFolderList] = useState<Folder[]>([]);
   const folderNameList = newFolderList.map((folder) => folder.folderName);
   const [isEditingFolder, setIsEditingFolder] = useState('');
+  const [targetFolder, setTargetFolder] = useState<Folder>(newFolderList[0]);
   const [newFolderName, setNewFolderName] = useState('');
   const [isModalOn, setIsModalOn] = useState(false);
 
@@ -49,9 +52,26 @@ const FolderEdit: NextPage<Props> = ({}) => {
     }
   };
 
-  const handleModalOn = () => {
-    setIsModalOn(true)
+  const handleModalOn = (folder: Folder) => {
+    setTargetFolder(folder);
+    setIsModalOn(true);
   };
+
+  const handleColorChange = () => {
+    router.push(
+      {
+        pathname: '/folder/edit-color',
+        query: {
+          folderId: targetFolder.folderId,
+          folderName: targetFolder.folderName,
+          folderColor: targetFolder.folderColor,
+          insightCount: targetFolder.insightCount,
+        },
+      },
+      '/folder/edit-color',
+    );
+  };
+
   const saveFolder = () => {};
   return (
     <>
@@ -93,7 +113,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
                   )}
                   <span
                     className="edit text"
-                    onClick={() => setIsModalOn(true)}
+                    onClick={() => handleModalOn(folder)}
                   >
                     편집
                   </span>
@@ -124,7 +144,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
                   )}
                   <span
                     className="edit text"
-                    onClick={() => setIsModalOn(true)}
+                    onClick={() => handleModalOn(folder)}
                   >
                     편집
                   </span>
@@ -132,7 +152,12 @@ const FolderEdit: NextPage<Props> = ({}) => {
               </FolderRow>
             ))}
         </FolderSection>
-        {isModalOn && <EditModal onClose={()=>setIsModalOn(false)}/>}
+        {isModalOn && (
+          <EditModal
+            onColor={() => handleColorChange()}
+            onClose={() => setIsModalOn(false)}
+          />
+        )}
       </Wrapper>
     </>
   );
@@ -141,6 +166,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
 export default FolderEdit;
 
 const Wrapper = styled.div`
+  width: 100%;
   height: 100vh;
   position: relative;
   justify-content: center;

@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import EditPencilIcon from '@svg/folder/edit-pencil-icon.svg';
 import TrashIcon from '@svg/folder/trash-icon.svg';
-import { useRouter } from 'next/router';
 
 interface Props {
   onClose: () => void;
+  onColor: () => void;
 }
 
 const EditModal = (props: Props) => {
-  const router = useRouter()
   return (
     <Wrapper>
       <ModalBg onClick={() => props.onClose()} />
@@ -32,11 +31,17 @@ const EditModal = (props: Props) => {
           <ModalTitle>
             <Title>편집하기</Title>
           </ModalTitle>
-          <div className="modal-btn edit-btn" onClick={()=>router.push("/folder/edit-color")}>
+          <div
+            className="modal-btn edit-btn"
+            onClick={() => props.onColor()}
+          >
             폴더 색상 수정
             <EditPencilIcon />
           </div>
-          <div className="modal-btn delete-btn" onClick={()=>router.push("/folder/delete")}>
+          <div
+            className="modal-btn delete-btn"
+            onClick={() => props.onColor()}
+          >
             삭제하기
             <TrashIcon />
           </div>
@@ -55,7 +60,7 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 480px;
   height: 100%;
-  flex-direction :column;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
 `;
