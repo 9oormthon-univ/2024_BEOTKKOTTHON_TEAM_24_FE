@@ -16,12 +16,12 @@ const fetchSummary = async (link: string) => {
       Authorization: `Bearer ${apiKey}`,
     },
     data: {
-      model: 'gpt-3.5 turbo',
+      model: 'gpt-3.5-turbo-16k',
       messages: [
-        { role: 'system', content: 'You are helpful assistant. Your job is Get title of article, and summarize the article accessible through the provided link in one sentence in Korean, and extract three keywords that can be used for classification purposes.' },
+        { role: 'system', content: 'You are helpful assistant. Your job is Get title of article, and summarize the article accessible through the provided link in one sentence in Korean, and extract three keywords that can be used for classification purposes. Your response form is as follows: 제목:  , 요약: , 키워드: ' },
         { role: 'user', content: link },
       ],
-      max_tokens: 5000,
+      max_tokens: 2000,
     },
   };
   const response = await axios.request(config);
@@ -31,6 +31,7 @@ const fetchSummary = async (link: string) => {
 
 export const useGetSummary = (link: string) => {
   const { isLoading, error, data } = useQuery({queryKey: ["get-summary"], queryFn: () => fetchSummary(link), enabled: !!link});
+  console.log(data?.choices)
   const result = {
     title: data?.choices?.[0]?.message.content.split("요약:")[0].split("제목:")[1],
     summary: data?.choices?.[0]?.message.content.split("요약:")[1].split("키워드:")[0],
