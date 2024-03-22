@@ -5,21 +5,17 @@ import BackIcon from '@svg/backspace-icon.svg';
 interface Props {
   title?: string;
   rightText?: string;
-  rightUrl?: string;
+  onClick?: () => void;
 }
 
 const Header = (props: Props) => {
   const router = useRouter();
 
-  const onClickRight = () => {
-    if (props.rightUrl) router.push(props.rightUrl);
-  };
-
   return (
     <Wrapper>
       <BackIcon onClick={() => router.back()} />
       <div className="title">{props.title}</div>
-      <div className="right-text" onClick={onClickRight}>
+      <div className="right-text" onClick={props.onClick}>
         {props.rightText}
       </div>
     </Wrapper>

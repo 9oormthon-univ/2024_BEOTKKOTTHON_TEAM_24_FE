@@ -57,7 +57,7 @@ const SignUp: NextPage<Props> = ({}) => {
   };
   return (
     <Wrapper>
-      <Header rightUrl="/landing" />
+      <Header onClick={() => router.back()} />
       <InputContainer>
         <PageIntro>
           <p>회원가입하고</p>인사이트를 리마인드 해보세요 !

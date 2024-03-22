@@ -5,6 +5,7 @@ import VisibleIcon from '@svg/visible-icon.svg';
 import UnvisibleIcon from '@svg/unvisible-icon.svg';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
@@ -14,6 +15,7 @@ const SignIn: NextPage<Props> = ({}) => {
     userEmail: '',
     password: '',
   });
+  const router = useRouter();
 
   const handleLogin = () => {
     return;
@@ -24,7 +26,7 @@ const SignIn: NextPage<Props> = ({}) => {
   };
   return (
     <Wrapper>
-      <Header rightUrl="/landing" />
+      <Header onClick={() => router.back()} />
       <InputContainer>
         <PageIntro>
           <p>로그인하고</p>인사이트를 리마인드 해보세요 !

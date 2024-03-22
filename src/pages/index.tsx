@@ -1,6 +1,6 @@
-// import Landing from './landing';
-import Home from './home';
+import Landing from './landing';
+// import Home from './home';
 
 export default function Index() {
-  return <Home />;
+  return <Landing />;
 }
