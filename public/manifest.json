@@ -1,12 +1,12 @@
 {
-  "theme_color": "#9aa7f9",
-  "background_color": "#9aa7f9",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "리인풋",
-  "short_name": "리인풋",
-  "description": "인사이트 공유 및 리마인더 서비스",
+  "name": "REINPUT",
+  "short_name": "REINPUT",
+  "description": "아웃풋을 위한 인풋",
   "share_target": {
     "action": "/upload/",
     "method": "GET",
@@ -18,24 +18,9 @@
   },
   "icons": [
     {
-      "src": "/icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "/svg/favicon.svg",
+      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]

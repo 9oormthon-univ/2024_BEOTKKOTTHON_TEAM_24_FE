@@ -36,8 +36,9 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="manifest" href="/manifest.json" />
-          <meta name="theme-color" content="#FBFBFB" />
+          <meta name="theme-color" content="#ffffff" />
+          <link rel="manifest" href="/manifest.json" />\
+          <link rel="icon" href="/svg/favicon.svg" />
         </Head>
         <body>
           <Main />
