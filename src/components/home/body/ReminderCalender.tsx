@@ -74,7 +74,6 @@ const ReminderCalender = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   background-color: #fbfbfb;
 `;
 
@@ -124,6 +123,7 @@ const EmptyInsight = styled.div`
   padding: 50px 20px;
   font-size: 16px;
   font-weight: 600;
+  flex: 1;
 
   :first-child {
     color: #565656;

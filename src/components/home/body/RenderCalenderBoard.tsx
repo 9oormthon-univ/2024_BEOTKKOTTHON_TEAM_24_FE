@@ -37,10 +37,16 @@ const RenderCalenderBoard = (
     </Item>
   ));
 
-  return content;
+  return <Board>{content}</Board>;
 };
 
 export default RenderCalenderBoard;
+
+const Board = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  min-height: 65px;
+`;
 
 interface CalenderItemProps {
   date: string;

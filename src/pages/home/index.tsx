@@ -85,7 +85,7 @@ export default Home;
 
 const Wrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 120vh;
   background-color: #fbfbfb;
 
   .carousel {

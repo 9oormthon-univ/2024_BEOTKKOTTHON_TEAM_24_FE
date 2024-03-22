@@ -54,6 +54,9 @@ const InsightList = ({ $isSmall, calenderData }: Props) => {
 };
 
 const View = styled.div`
+  display: flex;
+  flex-direction: column;
+
   .view-title {
     :first-child {
       margin-left: 20px;
