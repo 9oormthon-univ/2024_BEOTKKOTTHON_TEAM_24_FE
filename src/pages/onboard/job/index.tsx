@@ -18,19 +18,18 @@ const OnboardJob: NextPage<Props> = ({}) => {
     setSelectedJob(job);
   };
   return (
-    <div>
-      <Wrapper>
-        <Header />
-        <span className="page-indicator">2/3</span>
-        <Body>
-          <div className="title">
-            <p>{signupInput.userName}님의</p>
-            직무를 알려주세요!
-          </div>
-          <div className="subtitle">
-            인사이트를 효율적으로 관리할 수 있도록 도와드릴게요!
-          </div>
-          <JobSection>
+    <Wrapper>
+      <Header rightText="2/3" />
+      <Body>
+        <div className="title">
+          <p>{signupInput.userName}님의</p>
+          직무를 알려주세요!
+        </div>
+        <div className="subtitle">
+          인사이트를 효율적으로 관리할 수 있도록 도와드릴게요!
+        </div>
+        <JobSection>
+          <Grid>
             <div
               onClick={() => handleJob('PLANNER')}
               className={
@@ -63,24 +62,26 @@ const OnboardJob: NextPage<Props> = ({}) => {
             >
               기타
             </div>
-          </JobSection>
-        </Body>
-      </Wrapper>
+          </Grid>
+        </JobSection>
+      </Body>
       {selectedJob ? (
-        <BottomBtn text="다음" color="#3184FF" nextUrl="/onboard/subject" />
+        <BottomBtn text="다음" state="activated" nextUrl="/onboard/subject" />
       ) : (
-        <BottomBtn text="다음" color="#848484" />
+        <BottomBtn text="다음" state="disabled" />
       )}
-    </div>
+    </Wrapper>
   );
 };
 
 export default OnboardJob;
 
 const Wrapper = styled.div`
-  max-height: 100vh;
-  position: relative;
-  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   .title,
   p {
     width: 100%;
@@ -91,8 +92,13 @@ const Wrapper = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 33.6px */
-    margin-top: 36px;
+    margin-top: 20px;
   }
+
+  p {
+    margin-top: 0;
+  }
+
   span {
     position: absolute;
     right: 20px;
@@ -115,22 +121,36 @@ const Wrapper = styled.div`
     font-weight: 500;
     line-height: 140%; /* 19.6px */
   }
+
+  > :nth-child(3) {
+    margin-bottom: 36px;
+  }
 `;
 
 const Body = styled.div`
-  position: relative;
   padding: 0px 20px;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const JobSection = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  position: relative;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
   margin-top: 56px;
-  gap: 19px;
+  flex: 1;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 16px 16px;
+
   .error {
     color: var(--System-Warning, #f1404b);
   }

@@ -1,10 +1,10 @@
-import BottomNavigation from '@/components/common/BottomNavigation';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import SearchIcon from '@svg/search-icon.svg';
 import { FolderList } from '@/constants/FolderList';
 import { colorDecoder } from '@/utils/folder';
+import NavigationLayout from '@/components/common/NavigationLayout';
 
 interface Props {}
 
@@ -12,39 +12,46 @@ const Folder: NextPage<Props> = ({}) => {
   const router = useRouter();
   return (
     <>
-      <Wrapper>
-        <div className="title">폴더</div>
-        <span className="link edit" onClick={() => router.push('/folder/edit')}>
-          편집
-        </span>
-        <SearchSection>
-          <SearchIcon />
-          <SearchInput placeholder="인사이트 검색" />
-        </SearchSection>
-        <FolderSection>
-          <div className="header">
-            <div>
-              <span className="title-m">전체 폴더</span>
-              <span>{FolderList.length}</span>
+      <NavigationLayout>
+        <Wrapper>
+          <div className="title">폴더</div>
+          <span
+            className="link edit"
+            onClick={() => router.push('/folder/edit')}
+          >
+            편집
+          </span>
+          <SearchSection>
+            <SearchIcon />
+            <SearchInput placeholder="인사이트 검색" />
+          </SearchSection>
+          <FolderSection>
+            <div className="header">
+              <div>
+                <span className="title-m">전체 폴더</span>
+                <span>{FolderList.length}</span>
+              </div>
+              <span
+                className="link"
+                onClick={() => router.push('/folder/make')}
+              >
+                폴더 생성
+              </span>
             </div>
-            <span className="link" onClick={() => router.push('/folder/make')}>
-              폴더 생성
-            </span>
-          </div>
-          <div className="list-container">
-            {FolderList.map((folder) => (
-              <>
-                <IconContainer>
-                  {colorDecoder(folder.folderColor, 'big')}
-                  <span className="name">{folder.folderName}</span>
-                  <span className="count">{folder.insightCount}</span>
-                </IconContainer>
-              </>
-            ))}
-          </div>
-        </FolderSection>
-        <BottomNavigation />
-      </Wrapper>
+            <div className="list-container">
+              {FolderList.map((folder) => (
+                <>
+                  <IconContainer>
+                    {colorDecoder(folder.folderColor, 'big')}
+                    <span className="name">{folder.folderName}</span>
+                    <span className="count">{folder.insightCount}</span>
+                  </IconContainer>
+                </>
+              ))}
+            </div>
+          </FolderSection>
+        </Wrapper>
+      </NavigationLayout>
     </>
   );
 };
