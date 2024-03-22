@@ -137,6 +137,7 @@ const FolderSection = styled.div`
   }
   .list-container {
     display: flex;
+    justify-content: space-between;
     margin-top: 36px;
     gap: 52px 23px;
     flex-flow: wrap;
