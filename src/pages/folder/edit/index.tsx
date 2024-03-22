@@ -72,6 +72,18 @@ const FolderEdit: NextPage<Props> = ({}) => {
     );
   };
 
+  const handleDelete = () => {
+    router.push(
+      {
+        pathname: '/folder/delete',
+        query: {
+          folderId: targetFolder.folderId,
+        },
+      },
+      '/folder/delete',
+    );
+  };
+
   const saveFolder = () => {};
   return (
     <>
@@ -155,6 +167,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
         {isModalOn && (
           <EditModal
             onColor={() => handleColorChange()}
+            onDelete={() => handleDelete()}
             onClose={() => setIsModalOn(false)}
           />
         )}

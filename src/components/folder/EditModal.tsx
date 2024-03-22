@@ -5,6 +5,7 @@ import TrashIcon from '@svg/folder/trash-icon.svg';
 interface Props {
   onClose: () => void;
   onColor: () => void;
+  onDelete: () => void;
 }
 
 const EditModal = (props: Props) => {
@@ -40,7 +41,7 @@ const EditModal = (props: Props) => {
           </div>
           <div
             className="modal-btn delete-btn"
-            onClick={() => props.onColor()}
+            onClick={() => props.onDelete()}
           >
             삭제하기
             <TrashIcon />
