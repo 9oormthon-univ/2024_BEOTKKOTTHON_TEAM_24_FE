@@ -6,6 +6,7 @@ import { FolderList } from '@/constants/FolderList';
 import { colorDecoder } from '@/utils/folder';
 import { useState } from 'react';
 import { Folder } from '@/types/folder';
+import EditModal from '@/components/folder/EditModal';
 
 interface Props {}
 
@@ -16,6 +17,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
   const folderNameList = newFolderList.map((folder) => folder.folderName);
   const [isEditingFolder, setIsEditingFolder] = useState('');
   const [newFolderName, setNewFolderName] = useState('');
+  const [isModalOn, setIsModalOn] = useState(false);
 
   const handleSearch = (value: string) => {
     setSearchInput(value);
@@ -47,7 +49,9 @@ const FolderEdit: NextPage<Props> = ({}) => {
     }
   };
 
-  const handleModalOn = (isOn: boolean, folder: Folder) => {};
+  const handleModalOn = () => {
+    setIsModalOn(true)
+  };
   const saveFolder = () => {};
   return (
     <>
@@ -89,7 +93,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
                   )}
                   <span
                     className="edit text"
-                    onClick={() => handleModalOn(true, folder)}
+                    onClick={() => setIsModalOn(true)}
                   >
                     편집
                   </span>
@@ -120,7 +124,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
                   )}
                   <span
                     className="edit text"
-                    onClick={() => handleModalOn(true, folder)}
+                    onClick={() => setIsModalOn(true)}
                   >
                     편집
                   </span>
@@ -128,6 +132,7 @@ const FolderEdit: NextPage<Props> = ({}) => {
               </FolderRow>
             ))}
         </FolderSection>
+        {isModalOn && <EditModal onClose={()=>setIsModalOn(false)}/>}
       </Wrapper>
     </>
   );
