@@ -1,7 +1,7 @@
-import MoveToNextBtn from '@/components/upload/MoveToNextBtn';
+import BottomBtn from '@/components/common/BottomBtn';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import Header from '@/components/common/Header';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -15,8 +15,8 @@ const LinkInput: NextPage = ({}) => {
 
   useEffect(() => {
     const parsedUrl = new URL(window.location.href);
-    const url = String(parsedUrl).split('url=')[1];
-    url !== null && setLink(url);
+    const url = String(parsedUrl.searchParams.get('text'));
+    url !== 'null' && setLink(url);
   }, []);
 
   const handleClickNext = async () => {
@@ -75,25 +75,7 @@ const LinkInput: NextPage = ({}) => {
     <>
       <Wrapper>
         <PageContainer className="no-scroll">
-          <Header>
-            <PageName>인사이트 저장</PageName>
-            <CancelBtn>
-              <Link href="/home">
-                <svg
-                  width="11"
-                  height="18"
-                  viewBox="0 0 11 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0.25 8.94922C0.25 8.77995 0.279297 8.6237 0.337891 8.48047C0.402995 8.33724 0.500651 8.20052 0.630859 8.07031L8.23828 0.628906C8.45964 0.414062 8.72656 0.306641 9.03906 0.306641C9.25391 0.306641 9.44596 0.358724 9.61523 0.462891C9.79102 0.560547 9.93099 0.69401 10.0352 0.863281C10.1393 1.03255 10.1914 1.22461 10.1914 1.43945C10.1914 1.74544 10.071 2.01888 9.83008 2.25977L2.97461 8.94922L9.83008 15.6387C10.071 15.8796 10.1914 16.1562 10.1914 16.4688C10.1914 16.6771 10.1393 16.8659 10.0352 17.0352C9.93099 17.2109 9.79102 17.3477 9.61523 17.4453C9.44596 17.5495 9.25391 17.6016 9.03906 17.6016C8.72656 17.6016 8.45964 17.4909 8.23828 17.2695L0.630859 9.82812C0.500651 9.69792 0.402995 9.5612 0.337891 9.41797C0.279297 9.27474 0.25 9.11849 0.25 8.94922Z"
-                    fill="#6F6F6F"
-                  />
-                </svg>
-              </Link>
-            </CancelBtn>
-          </Header>
+          <Header title="인사이트 저장" />
           <LinkSection>
             <SubTitle>인사이트 링크</SubTitle>
             <ErrorText>{errorText}</ErrorText>
@@ -241,17 +223,13 @@ const LinkInput: NextPage = ({}) => {
             <SubTitle>출처</SubTitle>
             <SourceInput placeholder="출처를 입력하세요." />
           </SourceSection>
-          <div className="absolute">
-            <MoveToNextBtn
-              width="351px"
-              height="69px"
-              title="다음"
-              fontSize="20px"
-              background="#3184FF"
-              onClick={handleClickNext}
-              isDisabled={link.length === 0 && memo.length === 0}
-            />
-          </div>
+          <BottomBtn
+            text="다음"
+            onClick={handleClickNext}
+            state={
+              link.length === 0 && memo.length === 0 ? 'disabled' : 'activated'
+            }
+          />
         </PageContainer>
       </Wrapper>
     </>
@@ -262,11 +240,10 @@ export default LinkInput;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
+  position: relative;
   flex-direction: column;
-  justify-content: center;
-  margin: auto;
+  height: 100vh;
   .no-scroll::-webkit-scrollbar {
     display: none;
   }
@@ -277,13 +254,8 @@ const PageContainer = styled.div`
   position: relative;
   flex-direction: column;
   align-items: center;
-  width: 393px;
-  height: 852px;
-  margin-bottom: 200px;
-  .absolute {
-    position: absolute;
-    bottom: 35px;
-  }
+  height: 100vh;
+  padding-bottom: 36px;
 `;
 
 const Input = styled.input`
@@ -299,38 +271,11 @@ const Input = styled.input`
   padding-left: 54px;
 `;
 
-const Header = styled.div`
-  display: flex;
-  margin-bottom: 30px;
-  width: 100%;
-  height: 28px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PageName = styled.span`
-  color: rgba(31, 31, 31, 0.9);
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 27.146px; /* 135.732% */
-  letter-spacing: 0.8px;
-`;
-
-const CancelBtn = styled.div`
-  position: absolute;
-  font-size: 12px;
-  left: 20px;
-  top: 7px;
-`;
-
 const LinkSection = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  margin-top: 44px;
+  margin-top: 28px;
   .link-icon {
     position: absolute;
     top: 41px;
@@ -419,6 +364,10 @@ const AddBtnWrapper = styled.div`
 
 const MemoSection = styled(LinkSection)`
   margin-top: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const SubTitle = styled.div`
@@ -452,6 +401,8 @@ const MemoWrapper = styled.div`
   textarea::-webkit-scrollbar {
     display: none;
   }
+  flex: 1;
+  height: 100%;
 `;
 
 const MemoInput = styled.textarea`
@@ -470,6 +421,7 @@ const MemoInput = styled.textarea`
   line-height: 19px;
   border-radius: 8px 8px 0px 0px;
   resize: none;
+  flex: 1;
 `;
 
 const LetterCounter = styled.div`
@@ -488,9 +440,10 @@ const LetterCounter = styled.div`
 `;
 
 const SourceSection = styled(LinkSection)`
-  margin-top: 24px;
+  margin: 24px 0 38px;
 `;
 
 const SourceInput = styled(Input)`
+  height: 48px;
   padding: 14px 16px;
 `;

@@ -6,6 +6,7 @@ const MainLayout = (props: { children: React.ReactNode }) => {
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 480px;

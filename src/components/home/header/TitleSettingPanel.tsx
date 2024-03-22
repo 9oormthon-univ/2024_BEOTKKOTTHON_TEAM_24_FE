@@ -1,9 +1,19 @@
 import styled from 'styled-components';
 import SettingIcon from '@svg/setting-icon.svg';
 import { useRouter } from 'next/navigation';
+import { QuestionGetResponse } from '@/types/reminder';
 
-const TitleSettingsPanel = () => {
+interface Props {
+  questionData: QuestionGetResponse;
+}
+
+const TitleSettingsPanel = ({ questionData }: Props) => {
   const router = useRouter();
+  const reminderTitle = questionData.todayClear
+    ? 'OO님, 오늘 모든 질문에 답하셨어요!'
+    : questionData.ReminderQuestionList.length === 0
+      ? '인사이트를 저장하면 매일 리마인드 질문을 드려요!'
+      : '다음 질문에 답하여 인사이트를 리마인드 해보세요!';
 
   function onClick() {
     router.push(`/setting`);
@@ -13,9 +23,7 @@ const TitleSettingsPanel = () => {
     <Wrapper>
       <InfoBox>
         <strong className="title">오늘의 질문</strong>
-        <span className="description">
-          저장된 인사이트를 바탕으로 리마인드 질문을 드려요
-        </span>
+        <span className="description">{reminderTitle}</span>
       </InfoBox>
       <SettingIcon onClick={onClick} />
     </Wrapper>

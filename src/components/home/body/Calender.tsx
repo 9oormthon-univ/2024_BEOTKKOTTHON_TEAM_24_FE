@@ -1,13 +1,16 @@
 import dayjs from 'dayjs';
 import styled from 'styled-components';
-import { useState } from 'react';
 import RenderCalenderBoard from './RenderCalenderBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 
-const Calender = () => {
+interface Props {
+  selectedDate: string;
+  setSelectedDate: (date: string) => void;
+}
+
+const Calender = ({ selectedDate, setSelectedDate }: Props) => {
   const today = dayjs().format('MM/DD/YY');
-  const [selectedDate, setSelectedDate] = useState(today);
   const splited = selectedDate.split('/');
 
   const handleSelectDate = (v: string | null) => {

@@ -1,42 +1,58 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import coverImg from '@image/디자인1.jpg';
 
-const ReminderQuestionBox = () => {
+interface Props {
+  totalLength: number;
+  reminderInfo: {
+    reminderQuestion: string;
+    insightId: number;
+    reminderId: number;
+    insightTitle: string;
+    insightMainImage: string;
+    insightTagList: string[];
+  };
+  onClick?: () => void;
+}
+
+const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
+  const margin = totalLength === 1 ? 50 : 0;
+
   return (
-    <Wrapper>
+    <Wrapper margin={margin}>
       <div className="reminder-title">
-        <strong>Q. 해당 인사이트를 어떻게 활용할 수 있을까요?</strong>
+        <strong>Q. {reminderInfo.reminderQuestion}</strong>
       </div>
-      <input
-        className="reminder-input"
-        placeholder="답변을 입력해보세요."
-      ></input>
+      <button className="reminder-input">답변을 입력해보세요.</button>
       <Insight>
         <Image
-          src={coverImg}
+          src={reminderInfo.insightMainImage}
           width={96}
           height={68}
           alt="Insight Card image"
           className="img"
         />
         <div className="card-title-tag">
-          <div className="card-title">
-            UX/UI 디자인에 미드저니 58,000% 활용하기
-          </div>
-          <div className="card-tag">AI</div>
-          <div className="card-tag">미드저니</div>
+          <div className="card-title">{reminderInfo.insightTitle}</div>
+          {reminderInfo.insightTagList.map((value, i) => (
+            <div className="card-tag" key={i}>
+              {value}
+            </div>
+          ))}
         </div>
       </Insight>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+interface CSSProps {
+  margin: number;
+}
+
+const Wrapper = styled.div<CSSProps>`
   width: calc(100% - 40px);
   height: 197px;
   border-radius: 12px;
-  margin: 0 20px 48px;
+  margin: 0 20px ${(props) => props.margin}px;
   padding: 16px;
   background-color: #e9efff;
   display: flex;
@@ -58,7 +74,10 @@ const Wrapper = styled.div`
     padding: 10px;
     margin: 12px 0;
     border: 0;
+    color: #848484;
     border-radius: 8px;
+    background-color: #ffffff;
+    text-align: left;
   }
 `;
 
