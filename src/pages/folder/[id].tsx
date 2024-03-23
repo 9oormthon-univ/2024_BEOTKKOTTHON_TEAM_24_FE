@@ -11,6 +11,7 @@ import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import { calenderData } from '@/components/home/body/ReminderCalender';
 import InsightCard from '@/components/home/InsightCard';
 import ShareIcon from '@svg/share-icon-blue.svg';
+import EditModal from '@components/folder/EditModal';
 
 interface Props {}
 
@@ -24,15 +25,25 @@ const FolderDetail: NextPage<Props> = ({}) => {
   const [insightList, setInsightList] = useState<RemindInsight[]>(
     calenderData.remindInsightList,
   );
+  const [isModalOn, setIsModalOn] = useState(false);
   const onClick = () => {
     setIsSmall(!isSmall);
+  };
+  const handleModalOn = () => {
+    setIsModalOn(true);
+    setInsightList(insightList); // 추후 삭제
+  };
+  const handleShare = (type: string) => {
+    if (type === 'readonly') return;
+    setIsModalOn(false);
+    return;
   };
   return (
     <>
       <Wrapper>
         <Header title={String(folderId)} />
         <span className="link edit">편집</span>
-        <ShareIcon className="share" />
+        <ShareIcon className="share" onClick={() => handleModalOn()} />
         <SearchSection>
           <SearchIcon />
           <SearchInput
@@ -63,7 +74,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
           </div>
         </InfoSection>
         <InsightSection>
-          {insightList?.map((insight, idx) => (
+          {insightList?.map((insight, idx) =>
             isSmall ? (
               <InsightCard key={idx} insightData={insight} />
             ) : (
@@ -76,10 +87,19 @@ const FolderDetail: NextPage<Props> = ({}) => {
                       퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다."
                 tags={['UI/UX', '사용자 경험']}
               />
-            )
-          ))}
+            ),
+          )}
         </InsightSection>
       </Wrapper>
+      {isModalOn && (
+        <EditModal
+          type="share"
+          onClose={() => setIsModalOn(false)}
+          onClick1={() => handleShare('readonly')}
+          onClick2={() => handleShare('copy')}
+        />
+      )}
+      <FloatButton>URL 복사가 완료되었습니다.</FloatButton>
     </>
   );
 };
@@ -215,3 +235,28 @@ const LargeViewIcon = styled(LargeView)<IconProps>`
 `;
 
 const InsightSection = styled.div``;
+
+const FloatButton = styled.button`
+position: fixed;
+bottom: 43px;
+display: flex;
+width: 353px;
+height: 56px;
+outline: none;
+border: none;
+padding: 10px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+border-radius: 8px;
+background: var(--Primary-500, #3184FF);
+
+color: #FFF;
+/* Body-16-SB */
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 140%; /* 22.4px */
+`;
