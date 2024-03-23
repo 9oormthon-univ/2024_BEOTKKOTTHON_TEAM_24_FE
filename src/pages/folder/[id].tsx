@@ -80,12 +80,8 @@ const FolderDetail: NextPage<Props> = ({}) => {
             ) : (
               <SummaryInsightCard
                 key={idx}
-                coverImg="/image/디자인3.jpg"
-                title="디자인시스템에 모션 가이드 추가하는 방법"
-                summary="미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수
-                      있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와
-                      퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다."
-                tags={['UI/UX', '사용자 경험']}
+                favicon="/svg/insight-favicon.svg"
+                insightData={insight}
               />
             ),
           )}
@@ -237,26 +233,26 @@ const LargeViewIcon = styled(LargeView)<IconProps>`
 const InsightSection = styled.div``;
 
 const FloatButton = styled.button`
-position: fixed;
-bottom: 43px;
-display: flex;
-width: 353px;
-height: 56px;
-outline: none;
-border: none;
-padding: 10px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-flex-shrink: 0;
-border-radius: 8px;
-background: var(--Primary-500, #3184FF);
+  position: fixed;
+  bottom: 43px;
+  display: flex;
+  width: 353px;
+  height: 56px;
+  outline: none;
+  border: none;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--Primary-500, #3184ff);
 
-color: #FFF;
-/* Body-16-SB */
-font-family: Pretendard;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: 140%; /* 22.4px */
+  color: #fff;
+  /* Body-16-SB */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%; /* 22.4px */
 `;

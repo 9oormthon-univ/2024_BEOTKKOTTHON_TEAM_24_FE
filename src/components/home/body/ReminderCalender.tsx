@@ -6,6 +6,7 @@ import Calender from './Calender';
 import { CalenderPostResponse } from '@/types/reminder';
 import InsightList from './InsightList';
 import dayjs from 'dayjs';
+import CalenderModal from './CalenderModal';
 
 export const calenderData: CalenderPostResponse = {
   date: '2024-03-18',
@@ -16,6 +17,7 @@ export const calenderData: CalenderPostResponse = {
       insightId: 1,
       insightTitle: '스프링 어노테이션',
       insightMainImage: '/image/개발2.jpg',
+      insightSummary: 'bla bla',
       insightTagList: ['Spring'],
       todayRead: true,
     },
@@ -23,6 +25,7 @@ export const calenderData: CalenderPostResponse = {
       insightId: 2,
       insightTitle: '스프링 어노테이션',
       insightMainImage: '/image/디자인1.jpg',
+      insightSummary: 'bla bla',
       insightTagList: ['Spring'],
       todayRead: false,
     },
@@ -34,6 +37,7 @@ const ReminderCalender = () => {
   const [infoText, setInfoText] = useState<string>('');
   const [$isSmall, set$isSmall] = useState<boolean>(true);
   const [selectedDate, setSelectedDate] = useState(dayjs().format('MM/DD/YY'));
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const infoList = [
@@ -43,20 +47,28 @@ const ReminderCalender = () => {
     setInfoText(infoList[Math.floor(Math.random() * 2)]);
   }, []);
 
-  const onClick = () => {
+  const onClickView = () => {
     set$isSmall(!$isSmall);
+  };
+
+  const onClickModal = () => {
+    setModalOpen(!modalOpen);
   };
 
   return (
     <Wrapper>
-      <Calender selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <Calender
+        onClickModal={onClickModal}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
       <ViewSetting>
         <div className="instruction">
           <p>{infoText}</p>
         </div>
         <div className="icons-box">
-          <LargeViewIcon $isSmall={$isSmall} onClick={onClick} />
-          <SmallViewIcon $isSmall={$isSmall} onClick={onClick} />
+          <LargeViewIcon $isSmall={$isSmall} onClick={onClickView} />
+          <SmallViewIcon $isSmall={$isSmall} onClick={onClickView} />
         </div>
       </ViewSetting>
       {dayjs().isSame(selectedDate, 'day') ? (
@@ -67,6 +79,15 @@ const ReminderCalender = () => {
           <p>추천 인사이트는 당일에만 확인할 수 있어요!</p>
         </EmptyInsight>
       )}
+      {modalOpen ? (
+        <CalenderModal
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          onClickModal={onClickModal}
+        />
+      ) : (
+        <></>
+      )}
     </Wrapper>
   );
 };
@@ -74,8 +95,8 @@ const ReminderCalender = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   background-color: #fbfbfb;
+  margin-bottom: 140px;
 `;
 
 type IconProps = {
@@ -124,6 +145,7 @@ const EmptyInsight = styled.div`
   padding: 50px 20px;
   font-size: 16px;
   font-weight: 600;
+  flex: 1;
 
   :first-child {
     color: #565656;

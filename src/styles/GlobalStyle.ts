@@ -33,6 +33,11 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
   }
 
+  .scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+
   html,
   body {
     font-family: 'Pretendard', sans-serif;

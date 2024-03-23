@@ -1,30 +1,40 @@
 import styled from 'styled-components';
 import Image from 'next/image';
+import { RemindInsight } from '@/types/reminder';
 
 interface CardProps {
-  coverImg: string;
-  title: string;
-  summary: string;
-  tags: string[];
+  favicon: string;
+  insightData: RemindInsight;
 }
 
-const SummaryInsightCard = ({ coverImg, title, summary, tags }: CardProps) => {
+const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
   return (
-    <Wrapper>
+    <Wrapper opacity={insightData.todayRead ? 0.6 : 1}>
+      {favicon ? (
+        <Image
+          src={favicon}
+          width={52}
+          height={52}
+          alt="Insight Card image"
+          className="favicon"
+        />
+      ) : (
+        <></>
+      )}
       <Image
-        src={coverImg}
+        src={insightData.insightMainImage}
         width={353}
         height={86}
         alt="Insight Card image"
         className="img"
       />
       <Description>
-        <div className="card-title">{title}</div>
-        <div className="card-summary">{summary}</div>
+        <div className="card-title">{insightData.insightTitle}</div>
+        <div className="card-summary">{insightData.insightSummary}</div>
         <div className="card-tags">
-          {tags.map((v, i) => (
+          {insightData.insightTagList.map((v: string, i: number) => (
             <div key={v ? v.toString() : `${v}${i}`} className="card-tag">
-              UI/UX
+              {v}
             </div>
           ))}
         </div>
@@ -33,7 +43,11 @@ const SummaryInsightCard = ({ coverImg, title, summary, tags }: CardProps) => {
   );
 };
 
-const Wrapper = styled.div`
+interface CSSProps {
+  opacity: number;
+}
+
+const Wrapper = styled.div<CSSProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +56,16 @@ const Wrapper = styled.div`
   background-color: #ffffff;
   margin: 22px 20px;
   box-shadow: 9px 9px 30px 0px #00000014;
+  position: relative;
+  opacity: ${(props) => props.opacity};
+
+  .favicon {
+    border: 10px solid #f9f9f9;
+    border-radius: 100%;
+    position: absolute;
+    right: 26px;
+    top: -26px;
+  }
 
   .img {
     width: 100%;

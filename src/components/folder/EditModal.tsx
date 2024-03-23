@@ -99,7 +99,7 @@ const Modal = styled.div`
   width: 100%;
   max-width: 480px;
   flex-shrink: 0;
-  z-index: 2;
+  z-index: 20;
 `;
 
 const ModalBg = styled.div`

@@ -311,8 +311,9 @@ const ModalBg = styled.div`
   justify-content: flex-end;
   position: fixed;
   top: 0;
-  width: 393px;
-  height: 856px;
+  width: 100%;
+  height: 100vh;
+  max-width: 480px;
   flex-shrink: 0;
   background: rgba(0, 0, 0, 0.63);
   backdrop-filter: blur(1.5px);
@@ -325,15 +326,16 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   position: fixed;
   top: 0;
-  width: 393px;
-  height: 856px;
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
   flex-shrink: 0;
-  z-index: 2;
+  z-index: 20;
 `;
 
 const ModalHeader = styled.div`
   display: flex;
-  width: 393px;
+  width: 100%;
   height: 38px;
   justify-content: center;
   align-items: center;
@@ -344,7 +346,7 @@ const ModalHeader = styled.div`
 `;
 
 const ModalBody = styled.div`
-  width: 393px;
+  width: 100%;
   height: 608px;
   background: white;
   display: flex;
@@ -387,9 +389,8 @@ const CompleteBtn = styled.div`
 
 const SearchSection = styled.div`
   display: flex;
-  width: 353px;
   padding: 10px 16px;
-  margin-left: 20px;
+  margin: 0 20px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -413,6 +414,7 @@ const SearchInput = styled.input`
 const FolderSection = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 const AddFolder = styled.div`
@@ -456,7 +458,7 @@ const FolderList = styled.div`
 
 const Folder = styled(AddFolder)`
   display: flex;
-  width: 393px;
+  width: 100%;
   height: 96px;
   padding: 0px 20px;
 `;

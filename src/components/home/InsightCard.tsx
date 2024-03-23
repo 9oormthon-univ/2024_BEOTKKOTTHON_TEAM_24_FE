@@ -3,12 +3,24 @@ import Image from 'next/image';
 import { RemindInsight } from '@/types/reminder';
 
 interface Props {
+  favicon?: string;
   insightData: RemindInsight;
 }
 
-const InsightCard = ({ insightData }: Props) => {
+const InsightCard = ({ favicon, insightData }: Props) => {
   return (
     <Wrapper>
+      {favicon ? (
+        <Image
+          src={favicon}
+          width={52}
+          height={52}
+          alt="Insight Card image"
+          className="favicon"
+        />
+      ) : (
+        <></>
+      )}
       <Image
         src={insightData.insightMainImage}
         width={109}
@@ -35,6 +47,15 @@ const Wrapper = styled.div`
   background-color: #ffffff;
   margin: 22px 20px;
   box-shadow: 9px 9px 30px 0px #00000014;
+  position: relative;
+
+  .favicon {
+    border: 10px solid #f9f9f9;
+    border-radius: 100%;
+    position: absolute;
+    right: 26px;
+    top: -26px;
+  }
 
   .img {
     border-radius: 12px;
