@@ -32,8 +32,8 @@ const BottomNavigation = () => {
           <PlusIcon onClick={() => router.push('/upload')} />
           <g filter="url(#filter0_d_512_6239)">
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M175.987 49.9285C168.584 41.9003 160.243 32 149.323 32H20C8.95431 32 0 40.9543 0 52V118.5H393V52C393 40.9543 384.046 32 373 32H249.677C238.757 32 230.416 41.9003 223.013 49.9285C217.419 55.9955 208.963 59.5 199.5 59.5C190.037 59.5 181.581 55.9955 175.987 49.9285Z"
               fill="white"
             />
@@ -48,9 +48,9 @@ const BottomNavigation = () => {
               width="423"
               height="116.5"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"

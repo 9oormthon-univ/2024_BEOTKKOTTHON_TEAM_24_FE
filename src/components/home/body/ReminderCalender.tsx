@@ -32,7 +32,7 @@ export const calenderData: CalenderPostResponse = {
 // TODO [2] - 날짜 클릭 시 해당 날짜에 리마인드 해야 하는 인사이트 호출
 const ReminderCalender = () => {
   const [infoText, setInfoText] = useState<string>('');
-  const [isSmall, setIsSmall] = useState<boolean>(true);
+  const [$isSmall, set$isSmall] = useState<boolean>(true);
   const [selectedDate, setSelectedDate] = useState(dayjs().format('MM/DD/YY'));
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const ReminderCalender = () => {
   }, []);
 
   const onClick = () => {
-    setIsSmall(!isSmall);
+    set$isSmall(!$isSmall);
   };
 
   return (
@@ -55,12 +55,12 @@ const ReminderCalender = () => {
           <p>{infoText}</p>
         </div>
         <div className="icons-box">
-          <LargeViewIcon isSmall={isSmall} onClick={onClick} />
-          <SmallViewIcon isSmall={isSmall} onClick={onClick} />
+          <LargeViewIcon $isSmall={$isSmall} onClick={onClick} />
+          <SmallViewIcon $isSmall={$isSmall} onClick={onClick} />
         </div>
       </ViewSetting>
       {dayjs().isSame(selectedDate, 'day') ? (
-        <InsightList isSmall={isSmall} calenderData={calenderData} />
+        <InsightList $isSmall={$isSmall} calenderData={calenderData} />
       ) : (
         <EmptyInsight>
           <p>확인 할 인사이트가 없습니다.</p>
@@ -79,18 +79,18 @@ const Wrapper = styled.div`
 `;
 
 type IconProps = {
-  isSmall: boolean;
+  $isSmall: boolean;
 };
 
 const SmallViewIcon = styled(SmallView)<IconProps>`
   rect {
-    fill: ${(props) => (props.isSmall ? '#1F1F1F' : '#E1E1E1')};
+    fill: ${(props) => (props.$isSmall ? '#1F1F1F' : '#E1E1E1')};
   }
 `;
 
 const LargeViewIcon = styled(LargeView)<IconProps>`
   rect {
-    fill: ${(props) => (props.isSmall ? '#E1E1E1' : '#1F1F1F')};
+    fill: ${(props) => (props.$isSmall ? '#E1E1E1' : '#1F1F1F')};
   }
 `;
 

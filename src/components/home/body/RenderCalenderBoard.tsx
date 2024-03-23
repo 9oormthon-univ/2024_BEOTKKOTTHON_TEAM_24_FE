@@ -29,8 +29,8 @@ const RenderCalenderBoard = (
   const content = arr.map((v, i) => (
     <Item
       key={v ? v.toString() : `${v}${i}`}
-      isToday={today === v}
-      isSelected={selectedDay === v}
+      $istoday={today === v}
+      $isSelected={selectedDay === v}
       onClick={() => handleSelectDate(v)}
     >
       {v && <CalenderItem date={v} stamp={today === v} />}
@@ -60,8 +60,8 @@ const CalenderItem = ({ date, stamp }: CalenderItemProps) => {
 };
 
 interface ItemProps {
-  isToday: boolean;
-  isSelected: boolean;
+  $istoday: boolean;
+  $isSelected: boolean;
 }
 
 const Item = styled.div<ItemProps>`
@@ -73,7 +73,7 @@ const Item = styled.div<ItemProps>`
   margin-bottom: -3px;
 
   ${(props) =>
-    props.isSelected
+    props.$isSelected
       ? css`
           border-bottom: 3px solid #3184ff;
         `
@@ -85,9 +85,9 @@ const Item = styled.div<ItemProps>`
     font-size: 12px;
     font-weight: 600;
     margin: 0;
-    color: ${(props) => (props.isToday ? '#3184FF' : '#1F1F1F')};
-    ${(props) =>
-      props.isToday
+    color: ${(props) => (props.$istoday ? '#3184FF' : '#1F1F1F')};
+    /* ${(props) =>
+      props.$istoday
         ? css`
             color: #3184ff;
             opacity: 1;
@@ -95,7 +95,7 @@ const Item = styled.div<ItemProps>`
         : css`
             color: #1f1f1f;
             opacity: 0.6;
-          `}
+          `} */
   }
 
   .date-container {
@@ -113,9 +113,9 @@ const Item = styled.div<ItemProps>`
     position: absolute;
     font-size: 17px;
     font-weight: 500;
-    color: ${(props) => (props.isToday ? '#3184FF' : '#1F1F1F')};
-    ${(props) =>
-      props.isToday
+    color: ${(props) => (props.$istoday ? '#3184FF' : '#1F1F1F')};
+    /* ${(props) =>
+      props.$istoday
         ? css`
             color: #3184ff;
             font-size: 17px;
@@ -123,7 +123,7 @@ const Item = styled.div<ItemProps>`
         : css`
             color: #1f1f1f;
             font-size: 17px;
-          `}
+          `} */
   }
 
   .stamp {
