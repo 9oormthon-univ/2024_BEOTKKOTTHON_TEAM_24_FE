@@ -1,4 +1,4 @@
-import { api, apiWithoutAuth } from '@/api';
+import { api } from '@/api';
 import {
   FolderInsightGetResponse,
   FolderSearchTagGetResponse,
@@ -71,7 +71,7 @@ export const useGetSummary = (link: string) => {
 export async function getSharedFolder(
   folderId: number,
 ): Promise<FolderShareGetResponse> {
-  const response = await apiWithoutAuth.get(`/insight/share/${folderId}`);
+  const response = await api.get(`/insight/share/${folderId}`);
   return response.data;
 }
 

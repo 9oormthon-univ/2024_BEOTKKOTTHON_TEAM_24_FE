@@ -15,7 +15,7 @@ export type SignupPostResponse = {
 
 export type LoginPostRequest = {
   userEmail: string;
-  password: string;
+  userPassword: string;
 };
 
 export type LoginPostResponse = SignupPostResponse;

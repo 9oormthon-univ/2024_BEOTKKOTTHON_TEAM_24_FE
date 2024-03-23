@@ -4,22 +4,17 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import VisibleIcon from '@svg/visible-icon.svg';
 import UnvisibleIcon from '@svg/unvisible-icon.svg';
-import { SignupPostRequest } from '@/types/user';
 import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
+import { useSignupInputStore } from '@/store/signup';
 
 interface Props {}
 
 const SignUp: NextPage<Props> = ({}) => {
   const router = useRouter();
   const [isPWOpen, setIsPWOpen] = useState(false);
-  const [signUpInput, setSignUpInput] = useState<SignupPostRequest>({
-    userEmail: '',
-    userPassword: '',
-    userName: '',
-    job: 'ETC',
-    topicList: [],
-  });
+  const { signupInput, setSignupInput } = useSignupInputStore();
+
   const [PWCheck, setPWCheck] = useState('');
   const [isValid, setIsValid] = useState({
     email: true,
@@ -36,20 +31,20 @@ const SignUp: NextPage<Props> = ({}) => {
     type === 'password' &&
       setIsValid({ ...isValid, password: regexPW.test(value) });
     type === 'check' &&
-      setIsValid({ ...isValid, check: signUpInput.userPassword === value });
+      setIsValid({ ...isValid, check: signupInput.userPassword === value });
   };
 
   const handleInput = (type: string, value: string) => {
     type === 'email'
-      ? setSignUpInput({ ...signUpInput, userEmail: value })
+      ? setSignupInput({ ...signupInput, userEmail: value })
       : type === 'password'
-        ? setSignUpInput({ ...signUpInput, userPassword: value })
+        ? setSignupInput({ ...signupInput, userPassword: value })
         : setPWCheck(value);
     validate(type, value);
   };
 
   const handleSignUp = () => {
-    router.push({ pathname: '/onboard', query: signUpInput }, '/onboard');
+    router.push({ pathname: '/onboard', query: signupInput }, '/onboard');
   };
 
   const handleKakao = () => {
@@ -65,7 +60,7 @@ const SignUp: NextPage<Props> = ({}) => {
         <EmailSection>
           <SubTitle className="email">이메일*</SubTitle>
           <Input
-            value={signUpInput.userEmail}
+            value={signupInput.userEmail}
             onChange={(e) => handleInput('email', e.target.value)}
             type="text"
             placeholder="이메일 주소를 입력해주세요."
@@ -78,7 +73,7 @@ const SignUp: NextPage<Props> = ({}) => {
           <SubTitle>비밀번호*</SubTitle>
           <div className="input-container">
             <Input
-              value={signUpInput.userPassword}
+              value={signupInput.userPassword}
               onChange={(e) => handleInput('password', e.target.value)}
               type={isPWOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요"
@@ -128,8 +123,8 @@ const SignUp: NextPage<Props> = ({}) => {
         text="회원가입"
         state={
           !(
-            signUpInput.userEmail !== '' &&
-            signUpInput.userPassword !== '' &&
+            signupInput.userEmail !== '' &&
+            signupInput.userPassword !== '' &&
             PWCheck !== '' &&
             isValid.email &&
             isValid.password &&

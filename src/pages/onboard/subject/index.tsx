@@ -7,10 +7,13 @@ import { useEffect, useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import styled from 'styled-components';
 import AddButton from '@svg/addBtn.svg';
+import { signup } from '@/api/auth';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
 const OnboardSubject: NextPage<Props> = ({}) => {
+  const router = useRouter();
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [topicList, setTopicList] = useState<string[]>(
     SubjectList[signupInput.job].sort(),
@@ -50,6 +53,21 @@ const OnboardSubject: NextPage<Props> = ({}) => {
           ...signupInput,
           topicList: [...signupInput.topicList, topic].sort(),
         });
+  };
+
+  const handleSignup = async() => {
+    try {
+      console.log(signupInput)
+      const result = await signup(signupInput);
+      console.log(result);
+      router.push('/onboard/addhome');
+    } catch (e) {
+      console.log(e);
+      alert(
+        '회원가입에 실패했습니다. 올바르게 정보를 입력했는지 확인해주세요!',
+      );
+      router.push('/signup');
+    }
   };
 
   return (
@@ -112,7 +130,11 @@ const OnboardSubject: NextPage<Props> = ({}) => {
         </TopicSection>
       </Body>
       {signupInput.topicList.length > 2 ? (
-        <BottomBtn text="완료" state="activated" nextUrl="/onboard/addhome" />
+        <BottomBtn
+          text="완료"
+          state="activated"
+          onClick={() => handleSignup()}
+        />
       ) : (
         <BottomBtn text="완료" state="disabled" />
       )}
