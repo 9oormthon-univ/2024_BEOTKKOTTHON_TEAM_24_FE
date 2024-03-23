@@ -6,9 +6,6 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import favicon from '@svg/favicon.svg';
-import InsightList from '@/components/home/body/InsightList';
-import { calenderData } from '@/components/home/body/ReminderCalender';
 
 interface Props {}
 
@@ -43,7 +40,7 @@ const Saved: NextPage<Props> = ({}) => {
         <Wrapper>
           <Header title="저장 완료" />
           <CardSection>
-            <SummaryInsightCard favicon={favicon} insightData={cardData} />
+            <SummaryInsightCard favicon={"/svg/insight-favicon.svg"} insightData={cardData} />
           </CardSection>
           <div className="blue">확인하러 가기</div>
           <HrLine />
