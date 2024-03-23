@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { insightInput } from '@/pages/upload/input-text';
 import { useState } from 'react';
+import { InsightPostRequest, RemindType } from '@/types/insight';
 
 type Props = {
   remindType: string | undefined;
   onClose: () => void;
-  onSelect: React.Dispatch<React.SetStateAction<insightInput>>;
+  onSelect: React.Dispatch<React.SetStateAction<InsightPostRequest>>;
   setRemindTerm: React.Dispatch<React.SetStateAction<string>>;
-  insightInput: insightInput;
+  insightInput: InsightPostRequest;
 };
 
 const SelectRemindModal = (props: Props) => {
@@ -18,12 +18,10 @@ const SelectRemindModal = (props: Props) => {
   const renderRemindTerm = () => {
     const weekData = ['월', '화', '수', '목', '금', '토', '일'];
     switch (remindType) {
-      case '':
-        return;
-      case 'recommend':
+      case 'DEFAULT':
         props.setRemindTerm('추천 주기');
         break;
-      case 'weekly':
+      case 'WEEK':
         if (selectedWeekDay.length === 7) {
           props.setRemindTerm('매일 마다 ');
           break;
@@ -34,7 +32,7 @@ const SelectRemindModal = (props: Props) => {
         const printContentWeek = resultWeek?.join('/');
         props.setRemindTerm(printContentWeek + '마다 ');
         break;
-      case 'monthly':
+      case 'MONTH':
         const resultMonth =
           selectedMonthDay && Array.from(selectedMonthDay, (day) => `${day}일`);
         const printContent = resultMonth?.join(', ');
@@ -44,36 +42,50 @@ const SelectRemindModal = (props: Props) => {
   };
 
   const handleComplete = () => {
-    if (remindType === 'recommend') {
+    if (remindType === 'DEFAULT') {
       props.onSelect({
         ...props.insightInput,
-        isRemind: true,
+        enable: true,
         remindType: remindType,
+        remindDays: [0],
       });
       renderRemindTerm();
       props.onClose();
       return;
     }
     const selectedDay =
-      remindType === 'weekly' ? selectedWeekDay : selectedMonthDay;
+      remindType === 'WEEK' ? selectedWeekDay : selectedMonthDay;
+    if (selectedDay.length === 0) {
+      console.log("emptuy")
+      setRemindType("DEFAULT")
+      props.onSelect({
+        ...props.insightInput,
+        enable: true,
+        remindType: 'DEFAULT',
+        remindDays: [0],
+      });
+      renderRemindTerm();
+      props.onClose();
+      return;
+    }
     props.onSelect({
       ...props.insightInput,
-      isRemind: true,
+      enable: true,
       remindType: remindType,
-      remindDay: selectedDay,
+      remindDays: selectedDay,
     });
     renderRemindTerm();
     props.onClose();
   };
 
-  const handleType = (type: string) => {
+  const handleType = (type: RemindType) => {
     setRemindType(type);
     setSelectedWeekDay([]);
     setSelectedMonthDay([]);
   };
 
   const handleDay = (day: number) => {
-    if (remindType === 'weekly') {
+    if (remindType === 'WEEK') {
       if (selectedWeekDay.includes(day)) {
         const newWeekDay = selectedWeekDay.filter((element) => element !== day);
         setSelectedWeekDay(newWeekDay);
@@ -82,7 +94,7 @@ const SelectRemindModal = (props: Props) => {
       const newWeekDay = [...selectedWeekDay, day].sort();
       setSelectedWeekDay(newWeekDay);
     }
-    if (remindType === 'monthly') {
+    if (remindType === 'MONTH') {
       if (selectedMonthDay.includes(day)) {
         const newMonthDay = selectedMonthDay.filter(
           (element) => element !== day,
@@ -151,26 +163,26 @@ const SelectRemindModal = (props: Props) => {
             <SubTitle>리마인드 주기 선택</SubTitle>
             <TermList>
               <Term
-                onClick={() => handleType('recommend')}
-                className={remindType === 'recommend' ? 'selected' : ''}
+                onClick={() => handleType('DEFAULT')}
+                className={remindType === 'DEFAULT' ? 'selected' : ''}
               >
                 추천 주기
               </Term>
               <Term
-                onClick={() => handleType('weekly')}
-                className={remindType === 'weekly' ? 'selected' : ''}
+                onClick={() => handleType('WEEK')}
+                className={remindType === 'WEEK' ? 'selected' : ''}
               >
                 매주 반복
               </Term>
               <Term
-                onClick={() => handleType('monthly')}
-                className={remindType === 'monthly' ? 'selected' : ''}
+                onClick={() => handleType('MONTH')}
+                className={remindType === 'MONTH' ? 'selected' : ''}
               >
                 매월 반복
               </Term>
             </TermList>
           </RemindTermSection>
-          {remindType === 'recommend' && (
+          {remindType === 'DEFAULT' && (
             <RecommendBg>
               <RecommendText>
                 <span className="colored">망각곡선 주기</span>에 맞추어 리마인드
@@ -422,7 +434,7 @@ const SelectRemindModal = (props: Props) => {
               </SubText>
             </RecommendBg>
           )}
-          {remindType === 'weekly' && (
+          {remindType === 'WEEK' && (
             <div>
               <SubTitle>반복 요일 선택</SubTitle>
               <WeekDayList>
@@ -471,7 +483,7 @@ const SelectRemindModal = (props: Props) => {
               </WeekDayList>
             </div>
           )}
-          {remindType === 'monthly' && (
+          {remindType === 'MONTH' && (
             <div>
               <SubTitle>반복 일 선택</SubTitle>
               <MonthDayBg>{renderCalendar()}</MonthDayBg>

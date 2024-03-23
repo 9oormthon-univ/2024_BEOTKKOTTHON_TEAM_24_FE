@@ -1,4 +1,4 @@
-type RemindType = 'DEFAULT' | 'WEEK' | 'MONTH';
+export type RemindType = 'DEFAULT' | 'WEEK' | 'MONTH';
 
 export type Insight = {
   insightId: number;

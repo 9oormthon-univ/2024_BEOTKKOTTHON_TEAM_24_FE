@@ -15,12 +15,21 @@ import BottomBtn from '@/components/common/BottomBtn';
 import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
 
+type aiInput = {
+  link: string;
+  folderList: string[];
+};
+
 const Upload: NextPage = ({}) => {
   const router = useRouter();
-  const [insightLink, setInsightLink] = useState<string | string[] | undefined>(
-    '',
+  const [insightLink, setInsightLink] = useState<aiInput>({
+    link: '',
+    folderList: [],
+  });
+  const { isLoading, error, result } = useGetSummary(
+    String(insightLink.link),
+    insightLink.folderList,
   );
-  const { isLoading, error, result } = useGetSummary(String(insightLink));
   const [insightInput, setInsightInput] = useState<InsightPostRequest>({
     insightUrl: '',
     insightTitle: '',
@@ -40,11 +49,19 @@ const Upload: NextPage = ({}) => {
   const [tagInput, setTagInput] = useState('');
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { memo, imageList, insightImageList, link } = router.query;
+  const { memo, imageList, insightImageList, link, folderNameList } = router.query;
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
 
   useEffect(() => {
-    setInsightLink(link);
+    const newLink = String(link);
+    setInsightLink({
+      link: newLink,
+      folderList: folderNameList
+        ? Array.isArray(folderNameList)
+          ? folderNameList
+          : [folderNameList]
+        : [],
+    });
   }, []);
 
   useEffect(() => {
@@ -64,6 +81,7 @@ const Upload: NextPage = ({}) => {
             ? insightImageList
             : [insightImageList]
           : [],
+        folderName: String(result.folderName),
       });
       setThumbnail(
         imageList ? (Array.isArray(imageList) ? imageList : [imageList]) : [],
@@ -80,7 +98,6 @@ const Upload: NextPage = ({}) => {
       );
     }
   }, [result.title]);
-
 
   const handleDeleteTag = (idx: number) => {
     if (insightInput.hashTagList.length === 1) {
@@ -151,7 +168,11 @@ const Upload: NextPage = ({}) => {
               <ImageSection className="image-section">
                 <div className="image-wrapper">
                   {insightImageList !== undefined && (
-                    <CardCover src={thumbnail?.[0]} alt="preview" className='thumbnail'/>
+                    <CardCover
+                      src={thumbnail?.[0]}
+                      alt="preview"
+                      className="thumbnail"
+                    />
                   )}
                   {insightImageList === undefined && (
                     <Image
@@ -159,7 +180,7 @@ const Upload: NextPage = ({}) => {
                       alt="default"
                       width={364}
                       height={220}
-                      className='thumbnail'
+                      className="thumbnail"
                     />
                   )}
                 </div>

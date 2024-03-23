@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useUserTokenStore } from '@/store/signup';
 import { postImage } from '@/api/insight';
+import { useGetFolder } from '@/hooks/api/useFolder';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const LinkInput: NextPage = ({}) => {
   const [cdnImageList, setCdnImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
   const { userToken } = useUserTokenStore();
+  const { data } = useGetFolder(userToken.accessToken);
 
   useEffect(() => {
     if (userToken.accessToken === '') {
@@ -42,6 +44,7 @@ const LinkInput: NextPage = ({}) => {
           imageList: imageList,
           insightImageList: cdnImageList,
           memo: memo,
+          folderNameList: data?.map((folder) => folder.folderName)
         },
       },
       '/upload/input-text',
