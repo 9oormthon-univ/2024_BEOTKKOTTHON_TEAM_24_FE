@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import AutosizeInput from 'react-input-autosize';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
-import { postInsight, useGetSummary } from '@/api/insight';
+import { useGetSummary } from '@/api/insight';
 import loadingGIF from '../../../../public/loading.gif';
 import { loadingBlurURL } from '@/constants/index';
 import Image from 'next/image';
@@ -14,7 +14,6 @@ import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
-import LocalStorage from '@/hooks/LocalStorage';
 
 type aiInput = {
   link: string;
@@ -50,10 +49,9 @@ const Upload: NextPage = ({}) => {
   const [tagInput, setTagInput] = useState('');
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { memo, imageList, insightImageList, link, folderNameList } =
+  const { source, memo, imageList, insightImageList, link, folderNameList } =
     router.query;
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
-  const accessToken = LocalStorage.getItem('accessToken');
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
@@ -72,8 +70,11 @@ const Upload: NextPage = ({}) => {
     if (result.title) {
       setInsightInput({
         ...insightInput,
+        insightSource: String(source),
+        insightUrl: String(link),
         insightTitle: result.title,
         insightSummary: String(result.summary),
+        insightMainImage: String(imageList?.[0]),
         hashTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
@@ -88,7 +89,7 @@ const Upload: NextPage = ({}) => {
         folderName: String(result.folderName),
       });
       setThumbnail(
-        imageList ? (Array.isArray(imageList) ? imageList : [imageList]) : [],
+        imageList ? (Array.isArray(imageList) ? imageList[0] : imageList) : [],
       );
     }
     if (error) {
@@ -147,8 +148,27 @@ const Upload: NextPage = ({}) => {
   };
 
   const handleSubmit = async () => {
-    setIsSaving(true);
-    await postInsight(insightInput, String(accessToken));
+    setIsSaving(true)
+    setTimeout(()=>{},2000);
+    router.push({
+      pathname: '/upload/saved',
+      query: {
+        id: 0,
+        insightUrl: insightInput.insightUrl,
+        title: insightInput.insightTitle,
+        summary: insightInput.insightSummary,
+        image: thumbnail,
+        insightSource: insightInput.insightSource,
+        viewCount: 0,
+        tagList: insightInput.hashTagList,
+        insightMemo: insightInput.insightMemo,
+        insightImageList: insightInput.insightImageList,
+        folderName: insightInput.folderName,
+        enable: insightInput.enable,
+        remindType: insightInput.remindType,
+        remindDays: insightInput.remindDays,
+      }
+    }, '/upload/saved')
   };
 
   return (
