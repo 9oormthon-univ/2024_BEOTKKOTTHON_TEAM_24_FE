@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import EditPencilIcon from '@svg/folder/edit-pencil-icon.svg';
 import TrashIcon from '@svg/folder/trash-icon.svg';
+import GlassIcon from '@svg/glass-icon.svg';
+import CopyIcon from '@svg/copy-icon.svg';
 
 interface Props {
+  type: string;
   onClose: () => void;
-  onColor: () => void;
-  onDelete: () => void;
+  onClick1: () => void;
+  onClick2: () => void;
 }
 
 const EditModal = (props: Props) => {
@@ -30,19 +33,45 @@ const EditModal = (props: Props) => {
         </ModalHeader>
         <ModalBody>
           <ModalTitle>
-            <Title>편집하기</Title>
+            {props.type === 'share' ? (
+              <Title>공유하기</Title>
+            ) : (
+              <Title>편집하기</Title>
+            )}
           </ModalTitle>
-          <div className="modal-btn edit-btn" onClick={() => props.onColor()}>
-            폴더 색상 수정
-            <EditPencilIcon />
-          </div>
-          <div
-            className="modal-btn delete-btn"
-            onClick={() => props.onDelete()}
-          >
-            삭제하기
-            <TrashIcon />
-          </div>
+          {props.type === 'share' ? (
+            <div
+              className="modal-btn edit-btn"
+              onClick={() => props.onClick1()}
+            >
+              보기 전용으로 공유하기
+              <GlassIcon />
+            </div>
+          ) : (
+            <div
+              className="modal-btn edit-btn"
+              onClick={() => props.onClick1()}
+            >
+              폴더 색상 수정
+              <EditPencilIcon />
+            </div>
+          )}
+          {props.type === 'share' ? (
+            <div
+              className="modal-btn delete-btn"
+              onClick={() => props.onClick2()}
+            >
+              복제 허용으로 공유하기 <CopyIcon />
+            </div>
+          ) : (
+            <div
+              className="modal-btn delete-btn"
+              onClick={() => props.onClick2()}
+            >
+              삭제하기
+              <TrashIcon />
+            </div>
+          )}
         </ModalBody>
       </Modal>
     </Wrapper>
