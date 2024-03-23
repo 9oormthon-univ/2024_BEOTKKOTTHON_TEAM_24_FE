@@ -85,24 +85,3 @@ pnpm run dev
 ## 개발 환경
 
 - Front-end: Next.js, TypeScript, Zustand, styled-component, framer-motion, next-pwa, tanstack/react-query
-
-## 동작 화면
-
-### 온보딩 화면
-
-| --                       | --                       | --                       |
-| ------------------------ | ------------------------ | ------------------------ |
-| ![alt text](image.png)   | ![alt text](image-1.png) | ![alt text](image-2.png) |
-| ![alt text](image-3.png) | ![alt text](image-4.png) | ![alt text](image-5.png) |
-
-### 홈 화면
-
-![alt text](image-14.png)
-
-### 저장 화면
-
-![alt text](image-15.png)
-![alt text](image-16.png)
-![alt text](image-17.png)
-![alt text](image-18.png)
-![alt text](image-19.png)
