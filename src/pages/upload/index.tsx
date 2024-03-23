@@ -14,7 +14,6 @@ const LinkInput: NextPage = ({}) => {
   const [link, setLink] = useState<string>('');
   const [memo, setMemo] = useState('');
   const [imageList, setImageList] = useState<string[]>([]);
-  const [cdnImageList, setCdnImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
   const [source, setSource] = useState('');
   const accessToken = LocalStorage.getItem('accessToken')
@@ -44,7 +43,7 @@ const LinkInput: NextPage = ({}) => {
         query: {
           link: link,
           imageList: imageList,
-          insightImageList: cdnImageList,
+          insightImageList: imageList,
           memo: memo,
           folderNameList: data?.map((folder) => folder.folderName),
           source: source,
@@ -75,25 +74,16 @@ const LinkInput: NextPage = ({}) => {
       URL.createObjectURL(file),
     );
     const newList = imageList.concat(newImagesURL);
-    const finalList = imageList;
     if (newList.length > 10) {
       alert('이미지는 10장 이상 추가할 수 없습니다.');
       return;
     }
-    const newImages = Array.from(e?.target.files);
-    newImages.forEach(async (image: Blob) => {
-      const imageData = new FormData()
-      imageData.append('image', image)
-      const result = await postImage(imageData, String(accessToken));
-      finalList.push(result);
-      setImageList(newList);
-      setCdnImageList(finalList)
-    });
     setImageList(newList);
   };
 
   const handleMemo = (newMemo: string) => {
     memo.length < 500 && setMemo(newMemo);
+    console.log(imageList);
   };
 
   return (
