@@ -26,6 +26,8 @@ const SignIn: NextPage<Props> = ({}) => {
     try {
       const res = await login(loginInput);
       setUserToken(res);
+      localStorage.setItem('accessToken', res.accessToken)
+      localStorage.setItem('refreshItem', res.refreshToken)
     } catch (e) {
       console.log(e);
       setIsValid(false);
