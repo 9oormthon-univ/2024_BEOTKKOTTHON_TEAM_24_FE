@@ -127,6 +127,7 @@ const Upload: NextPage = ({}) => {
   const handleBlur = () => {
     setIsAddingTag(false);
     setTagInput('');
+    console.log(imageList);
     console.log(thumbnail);
   };
 
@@ -148,27 +149,31 @@ const Upload: NextPage = ({}) => {
   };
 
   const handleSubmit = async () => {
-    setIsSaving(true)
-    setTimeout(()=>{},2000);
-    router.push({
-      pathname: '/upload/saved',
-      query: {
-        id: 0,
-        insightUrl: insightInput.insightUrl,
-        title: insightInput.insightTitle,
-        summary: insightInput.insightSummary,
-        image: thumbnail,
-        insightSource: insightInput.insightSource,
-        viewCount: 0,
-        tagList: insightInput.hashTagList,
-        insightMemo: insightInput.insightMemo,
-        insightImageList: insightInput.insightImageList,
-        folderName: insightInput.folderName,
-        enable: insightInput.enable,
-        remindType: insightInput.remindType,
-        remindDays: insightInput.remindDays,
-      }
-    }, '/upload/saved')
+    setIsSaving(true);
+    setTimeout(() => {
+      router.push(
+        {
+          pathname: '/upload/saved',
+          query: {
+            id: 0,
+            insightUrl: insightInput.insightUrl,
+            title: insightInput.insightTitle,
+            summary: insightInput.insightSummary,
+            image: thumbnail,
+            insightSource: insightInput.insightSource,
+            viewCount: 0,
+            tagList: insightInput.hashTagList,
+            insightMemo: insightInput.insightMemo,
+            insightImageList: insightInput.insightImageList,
+            folderName: insightInput.folderName,
+            enable: insightInput.enable,
+            remindType: insightInput.remindType,
+            remindDays: insightInput.remindDays,
+          },
+        },
+        '/upload/saved',
+      );
+    }, 3000);
   };
 
   return (
@@ -189,202 +194,204 @@ const Upload: NextPage = ({}) => {
               쉽게 리마인드 할 수 있도록 인사이트를 정리하고 있어요!
             </LoadingContent>
           </LoadingWrapper>
-        ) : ( !isSaving && (
-          <>
-            <Header title="인사이트 저장" />
-            <PageContainer className="no-scroll">
-              <PageIntro>리마인드 카드 설정</PageIntro>
-              <ImageSection className="image-section">
-                <div className="image-wrapper">
-                  {insightImageList !== undefined && (
-                    <CardCover
-                      src={thumbnail?.[0]}
-                      alt="preview"
-                      className="thumbnail"
-                    />
-                  )}
-                  {insightImageList === undefined && (
-                    <Image
-                      src={defaultImage}
-                      alt="default"
-                      width={364}
-                      height={220}
-                      className="thumbnail"
-                    />
-                  )}
-                </div>
-              </ImageSection>
-              <TitleSection>
-                <SubTitle>제목</SubTitle>
-                <Input
-                  type="text"
-                  value={insightInput.insightTitle}
-                  onChange={(e) =>
-                    setInsightInput({
-                      ...insightInput,
-                      insightTitle: e.target.value,
-                    })
-                  }
-                />
-              </TitleSection>
-              <SummarySection>
-                <SubTitle>인사이트 요약</SubTitle>
-                <SumamryInput
-                  value={insightInput.insightSummary}
-                  className="no-scroll"
-                  onChange={(e) =>
-                    setInsightInput({
-                      ...insightInput,
-                      insightSummary: e.target.value,
-                    })
-                  }
-                />
-              </SummarySection>
-              <TagSection>
-                <SubTitle>태그</SubTitle>
-                <TagCounter>{insightInput.hashTagList.length}/3</TagCounter>
-                <TagList>
-                  {insightInput.hashTagList.map((tag, idx) => (
-                    <TagWrapper key={idx}>
-                      <span>{tag}</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={() => handleDeleteTag(idx)}
-                        className="delete-btn"
-                        width="19"
-                        height="20"
-                        viewBox="0 0 19 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M13.5265 14.5091C11.0363 16.9992 6.99888 16.9992 4.5087 14.5091C2.01851 12.0189 2.01851 7.98149 4.5087 5.4913C6.99888 3.00112 11.0363 3.00112 13.5265 5.4913C16.0166 7.98149 16.0166 12.0189 13.5265 14.5091Z"
-                          fill="#848484"
-                        />
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M11.3432 7.6752C11.5068 7.83884 11.5068 8.10416 11.3432 8.2678L7.28518 12.3258C7.12154 12.4894 6.85623 12.4894 6.69258 12.3258C6.52894 12.1622 6.52894 11.8968 6.69258 11.7332L10.7506 7.6752C10.9142 7.51156 11.1795 7.51156 11.3432 7.6752Z"
-                          fill="white"
-                        />
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M11.3434 12.3256C11.1797 12.4892 10.9144 12.4892 10.7508 12.3256L6.69276 8.2676C6.52912 8.10396 6.52912 7.83865 6.69276 7.67501C6.8564 7.51137 7.12172 7.51137 7.28536 7.67501L11.3434 11.733C11.507 11.8966 11.507 12.162 11.3434 12.3256Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </TagWrapper>
-                  ))}
-                  {insightInput.hashTagList.length < 3 && (
-                    <TagWrapper key="addTag">
-                      {isAddingTag ? (
-                        <AutosizeInput
-                          name="add-tag"
-                          value={tagInput}
-                          onKeyDownCapture={(e) => checkEnter(e.key)}
-                          onChange={(e) => setTagInput(e.target.value)}
-                          onBlur={handleBlur}
-                          inputStyle={{
-                            background: '#F4F5F7',
-                            border: 'none',
-                            outline: 'none',
-                            fontSize: '14px',
-                            color: '#1F1F1F',
-                            textAlign: 'center',
-                            fontFamily: 'Pretendard',
-                            fontStyle: 'normal',
-                            fontWeight: '500',
-                            lineHeight: '140%',
-                          }}
-                        />
-                      ) : (
+        ) : (
+          !isSaving && (
+            <>
+              <Header title="인사이트 저장" />
+              <PageContainer className="no-scroll">
+                <PageIntro>리마인드 카드 설정</PageIntro>
+                <ImageSection className="image-section">
+                  <div className="image-wrapper">
+                    {insightImageList !== undefined && (
+                      <CardCover
+                        src={String(thumbnail)}
+                        alt="preview"
+                        className="thumbnail"
+                      />
+                    )}
+                    {insightImageList === undefined && (
+                      <Image
+                        src={defaultImage}
+                        alt="default"
+                        width={364}
+                        height={220}
+                        className="thumbnail"
+                      />
+                    )}
+                  </div>
+                </ImageSection>
+                <TitleSection>
+                  <SubTitle>제목</SubTitle>
+                  <Input
+                    type="text"
+                    value={insightInput.insightTitle}
+                    onChange={(e) =>
+                      setInsightInput({
+                        ...insightInput,
+                        insightTitle: e.target.value,
+                      })
+                    }
+                  />
+                </TitleSection>
+                <SummarySection>
+                  <SubTitle>인사이트 요약</SubTitle>
+                  <SumamryInput
+                    value={insightInput.insightSummary}
+                    className="no-scroll"
+                    onChange={(e) =>
+                      setInsightInput({
+                        ...insightInput,
+                        insightSummary: e.target.value,
+                      })
+                    }
+                  />
+                </SummarySection>
+                <TagSection>
+                  <SubTitle>태그</SubTitle>
+                  <TagCounter>{insightInput.hashTagList.length}/3</TagCounter>
+                  <TagList>
+                    {insightInput.hashTagList.map((tag, idx) => (
+                      <TagWrapper key={idx}>
+                        <span>{tag}</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          onClick={() => setIsAddingTag(true)}
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
+                          onClick={() => handleDeleteTag(idx)}
+                          className="delete-btn"
+                          width="19"
+                          height="20"
+                          viewBox="0 0 19 20"
                           fill="none"
                         >
                           <path
-                            d="M7.84473 1.42969V14.5703"
-                            stroke="#565656"
-                            stroke-width="1.8125"
-                            stroke-linecap="round"
+                            d="M13.5265 14.5091C11.0363 16.9992 6.99888 16.9992 4.5087 14.5091C2.01851 12.0189 2.01851 7.98149 4.5087 5.4913C6.99888 3.00112 11.0363 3.00112 13.5265 5.4913C16.0166 7.98149 16.0166 12.0189 13.5265 14.5091Z"
+                            fill="#848484"
                           />
                           <path
-                            d="M14.6416 7.77344L1.50098 7.77344"
-                            stroke="#565656"
-                            stroke-width="1.8125"
-                            stroke-linecap="round"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M11.3432 7.6752C11.5068 7.83884 11.5068 8.10416 11.3432 8.2678L7.28518 12.3258C7.12154 12.4894 6.85623 12.4894 6.69258 12.3258C6.52894 12.1622 6.52894 11.8968 6.69258 11.7332L10.7506 7.6752C10.9142 7.51156 11.1795 7.51156 11.3432 7.6752Z"
+                            fill="white"
+                          />
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M11.3434 12.3256C11.1797 12.4892 10.9144 12.4892 10.7508 12.3256L6.69276 8.2676C6.52912 8.10396 6.52912 7.83865 6.69276 7.67501C6.8564 7.51137 7.12172 7.51137 7.28536 7.67501L11.3434 11.733C11.507 11.8966 11.507 12.162 11.3434 12.3256Z"
+                            fill="white"
                           />
                         </svg>
-                      )}
-                    </TagWrapper>
-                  )}
-                </TagList>
-              </TagSection>
-              <FolderSection>
-                <SubTitle>폴더 설정</SubTitle>
-                <FolderIndicator>
-                  {insightInput.folderName}
-                  <ChangeFolderBtn onClick={() => setIsModal('folder')}>
-                    <span>폴더 설정</span>
-                    <svg
-                      width="9"
-                      height="15"
-                      viewBox="0 0 9 15"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M8.95833 7.37565C8.95833 7.51671 8.93392 7.64692 8.88509 7.76628C8.83084 7.88563 8.74946 7.99957 8.64095 8.10807L2.30143 14.3092C2.11697 14.4883 1.89453 14.5778 1.63411 14.5778C1.45508 14.5778 1.29503 14.5344 1.15397 14.4476C1.00749 14.3662 0.890842 14.255 0.804036 14.1139C0.717231 13.9729 0.673828 13.8128 0.673828 13.6338C0.673828 13.3788 0.774197 13.1509 0.974935 12.9502L6.68783 7.37565L0.974936 1.80111C0.774198 1.60037 0.673829 1.36979 0.673829 1.10937C0.673829 0.935763 0.717232 0.778428 0.804038 0.637369C0.890843 0.490885 1.00749 0.376952 1.15397 0.295572C1.29503 0.208767 1.45508 0.165364 1.63412 0.165364C1.89453 0.165364 2.11697 0.257595 2.30143 0.442057L8.64095 6.64323C8.74946 6.75174 8.83084 6.86567 8.88509 6.98503C8.93392 7.10438 8.95833 7.23459 8.95833 7.37565Z"
-                        fill="#7F7F7F"
+                      </TagWrapper>
+                    ))}
+                    {insightInput.hashTagList.length < 3 && (
+                      <TagWrapper key="addTag">
+                        {isAddingTag ? (
+                          <AutosizeInput
+                            name="add-tag"
+                            value={tagInput}
+                            onKeyDownCapture={(e) => checkEnter(e.key)}
+                            onChange={(e) => setTagInput(e.target.value)}
+                            onBlur={handleBlur}
+                            inputStyle={{
+                              background: '#F4F5F7',
+                              border: 'none',
+                              outline: 'none',
+                              fontSize: '14px',
+                              color: '#1F1F1F',
+                              textAlign: 'center',
+                              fontFamily: 'Pretendard',
+                              fontStyle: 'normal',
+                              fontWeight: '500',
+                              lineHeight: '140%',
+                            }}
+                          />
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            onClick={() => setIsAddingTag(true)}
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                          >
+                            <path
+                              d="M7.84473 1.42969V14.5703"
+                              stroke="#565656"
+                              stroke-width="1.8125"
+                              stroke-linecap="round"
+                            />
+                            <path
+                              d="M14.6416 7.77344L1.50098 7.77344"
+                              stroke="#565656"
+                              stroke-width="1.8125"
+                              stroke-linecap="round"
+                            />
+                          </svg>
+                        )}
+                      </TagWrapper>
+                    )}
+                  </TagList>
+                </TagSection>
+                <FolderSection>
+                  <SubTitle>폴더 설정</SubTitle>
+                  <FolderIndicator>
+                    {insightInput.folderName}
+                    <ChangeFolderBtn onClick={() => setIsModal('folder')}>
+                      <span>폴더 설정</span>
+                      <svg
+                        width="9"
+                        height="15"
+                        viewBox="0 0 9 15"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.95833 7.37565C8.95833 7.51671 8.93392 7.64692 8.88509 7.76628C8.83084 7.88563 8.74946 7.99957 8.64095 8.10807L2.30143 14.3092C2.11697 14.4883 1.89453 14.5778 1.63411 14.5778C1.45508 14.5778 1.29503 14.5344 1.15397 14.4476C1.00749 14.3662 0.890842 14.255 0.804036 14.1139C0.717231 13.9729 0.673828 13.8128 0.673828 13.6338C0.673828 13.3788 0.774197 13.1509 0.974935 12.9502L6.68783 7.37565L0.974936 1.80111C0.774198 1.60037 0.673829 1.36979 0.673829 1.10937C0.673829 0.935763 0.717232 0.778428 0.804038 0.637369C0.890843 0.490885 1.00749 0.376952 1.15397 0.295572C1.29503 0.208767 1.45508 0.165364 1.63412 0.165364C1.89453 0.165364 2.11697 0.257595 2.30143 0.442057L8.64095 6.64323C8.74946 6.75174 8.83084 6.86567 8.88509 6.98503C8.93392 7.10438 8.95833 7.23459 8.95833 7.37565Z"
+                          fill="#7F7F7F"
+                        />
+                      </svg>
+                    </ChangeFolderBtn>
+                  </FolderIndicator>
+                </FolderSection>
+                <RemindSection>
+                  <SubTitle>리마인드 설정</SubTitle>
+                  <RemindSetter>
+                    <span>인사이트 다시 읽기</span>
+                    <RemindIndicator>
+                      {insightInput.enable === true && remindTerm}
+                      <ToggleSlider
+                        $isSelected={insightInput.enable}
+                        onClick={handleRemindToggle}
                       />
-                    </svg>
-                  </ChangeFolderBtn>
-                </FolderIndicator>
-              </FolderSection>
-              <RemindSection>
-                <SubTitle>리마인드 설정</SubTitle>
-                <RemindSetter>
-                  <span>인사이트 다시 읽기</span>
-                  <RemindIndicator>
-                    {insightInput.enable === true && remindTerm}
-                    <ToggleSlider
-                      $isSelected={insightInput.enable}
-                      onClick={handleRemindToggle}
-                    />
-                  </RemindIndicator>
-                </RemindSetter>
-              </RemindSection>
-              {isModal === 'remind' && (
-                <SelectRemindModal
-                  remindType={insightInput.remindType}
-                  onClose={() => setIsModal('')}
-                  onSelect={setInsightInput}
-                  insightInput={insightInput}
-                  setRemindTerm={setRemindTerm}
+                    </RemindIndicator>
+                  </RemindSetter>
+                </RemindSection>
+                {isModal === 'remind' && (
+                  <SelectRemindModal
+                    remindType={insightInput.remindType}
+                    onClose={() => setIsModal('')}
+                    onSelect={setInsightInput}
+                    insightInput={insightInput}
+                    setRemindTerm={setRemindTerm}
+                  />
+                )}
+                {isModal === 'folder' && (
+                  <SelectFolderModal
+                    onClose={() => setIsModal('')}
+                    selectedFolder={insightInput.folderName}
+                    insightInput={insightInput}
+                    onSelect={setInsightInput}
+                  />
+                )}
+              </PageContainer>
+              <div className="bottom-btn">
+                <BottomBtn
+                  text="완료"
+                  state="activated"
+                  onClick={() => handleSubmit()}
                 />
-              )}
-              {isModal === 'folder' && (
-                <SelectFolderModal
-                  onClose={() => setIsModal('')}
-                  selectedFolder={insightInput.folderName}
-                  insightInput={insightInput}
-                  onSelect={setInsightInput}
-                />
-              )}
-            </PageContainer>
-            <div className="bottom-btn">
-              <BottomBtn
-                text="완료"
-                state="activated"
-                onClick={() => handleSubmit()}
-              />
-            </div>
-          </>
-        ))}
+              </div>
+            </>
+          )
+        )}
         {isSaving && (
           <LoadingWrapper>
             <Image
