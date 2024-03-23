@@ -16,6 +16,7 @@ const LinkInput: NextPage = ({}) => {
   const [imageList, setImageList] = useState<string[]>([]);
   const [cdnImageList, setCdnImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
+  const [source, setSource] = useState('');
   const accessToken = LocalStorage.getItem('accessToken')
   const { data } = useGetFolder(String(accessToken));
 
@@ -45,7 +46,8 @@ const LinkInput: NextPage = ({}) => {
           imageList: imageList,
           insightImageList: cdnImageList,
           memo: memo,
-          folderNameList: data?.map((folder) => folder.folderName)
+          folderNameList: data?.map((folder) => folder.folderName),
+          source: source,
         },
       },
       '/upload/input-text',
@@ -245,7 +247,7 @@ const LinkInput: NextPage = ({}) => {
           </MemoSection>
           <SourceSection>
             <SubTitle>출처</SubTitle>
-            <SourceInput placeholder="출처를 입력하세요." />
+            <SourceInput value={source} onChange={(e) => setSource(e.target.value)} placeholder="출처를 입력하세요." />
           </SourceSection>
         </PageContainer>
         <BottomBtn

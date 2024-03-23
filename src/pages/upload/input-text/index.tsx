@@ -50,7 +50,7 @@ const Upload: NextPage = ({}) => {
   const [tagInput, setTagInput] = useState('');
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { memo, imageList, insightImageList, link, folderNameList } =
+  const { source, memo, imageList, insightImageList, link, folderNameList } =
     router.query;
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
   const accessToken = LocalStorage.getItem('accessToken');
@@ -72,8 +72,11 @@ const Upload: NextPage = ({}) => {
     if (result.title) {
       setInsightInput({
         ...insightInput,
+        insightSource: String(source),
+        insightUrl: String(link),
         insightTitle: result.title,
         insightSummary: String(result.summary),
+        insightMainImage: String(imageList?.[0]),
         hashTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
