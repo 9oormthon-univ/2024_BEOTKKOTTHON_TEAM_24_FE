@@ -5,6 +5,7 @@ import {
   getInsight,
   getRecommendedInsight,
   getSharedFolder,
+  postImage,
   postInsight,
   postInsightOGImage,
   putInsight,
@@ -28,6 +29,13 @@ export function useGetFolderInsight(folderId: number) {
     queryKey: ['folder-insight'],
     queryFn: () => getFolderInsight(folderId),
   });
+}
+
+export function usePostImageLink(image: FormData, token: string) {
+  return useQuery({
+    queryKey: ['image-link'],
+    queryFn: () => postImage(image, token),
+  })
 }
 
 export function usePostInsight() {

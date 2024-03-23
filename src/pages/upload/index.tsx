@@ -6,12 +6,14 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useUserTokenStore } from '@/store/signup';
+import { postImage } from '@/api/insight';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
   const [link, setLink] = useState<string>('');
   const [memo, setMemo] = useState('');
   const [imageList, setImageList] = useState<string[]>([]);
+  const [cdnImageList, setCdnImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
   const { userToken } = useUserTokenStore();
 
@@ -38,6 +40,7 @@ const LinkInput: NextPage = ({}) => {
         query: {
           link: link,
           imageList: imageList,
+          insightImageList: cdnImageList,
           memo: memo,
         },
       },
@@ -62,14 +65,24 @@ const LinkInput: NextPage = ({}) => {
   const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e?.target.files) return;
     // 이미지 화면에 띄우기
-    const newImages = Array.from(e?.target.files, (file: Blob | MediaSource) =>
+    const newImagesURL = Array.from(e?.target.files, (file: Blob | MediaSource) =>
       URL.createObjectURL(file),
     );
-    const newList = imageList.concat(newImages);
+    const newList = imageList.concat(newImagesURL);
+    const finalList = imageList;
     if (newList.length > 10) {
       alert('이미지는 10장 이상 추가할 수 없습니다.');
       return;
     }
+    const newImages = Array.from(e?.target.files);
+    newImages.forEach(async (image: Blob) => {
+      const imageData = new FormData()
+      imageData.append('image', image)
+      const result = await postImage(imageData, userToken.accessToken);
+      finalList.push(result);
+      setImageList(newList);
+      setCdnImageList(finalList)
+    });
     setImageList(newList);
   };
 

@@ -1,12 +1,12 @@
-import { insightInput } from '@/pages/upload/input-text';
+import { InsightPostRequest } from '@/types/insight';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 type Props = {
   onClose: () => void;
-  onSelect: React.Dispatch<React.SetStateAction<insightInput>>;
-  selectedFolder: { name: string; mainColor: string; subColor: string };
-  insightInput: insightInput;
+  onSelect: React.Dispatch<React.SetStateAction<InsightPostRequest>>;
+  selectedFolder: string;
+  insightInput: InsightPostRequest;
 };
 
 type Folder = {
@@ -54,8 +54,8 @@ const SelectFolderModal = (props: Props) => {
     }
   };
 
-  const handleFolder = (folder: Folder) => {
-    props.onSelect({ ...props.insightInput, folder: folder });
+  const handleFolder = (folder: string) => {
+    props.onSelect({ ...props.insightInput, folderName: folder });
     setFolderList(folderList);
     props.onClose();
   };
@@ -141,9 +141,9 @@ const SelectFolderModal = (props: Props) => {
               {folderList.map((folder, idx) => (
                 <Folder
                   key={idx}
-                  onClick={() => setSelectedFolder(folder)}
+                  onClick={() => setSelectedFolder(folder.name)}
                   className={
-                    selectedFolder.mainColor === folder.mainColor
+                    selectedFolder === folder.name
                       ? 'selected'
                       : ''
                   }

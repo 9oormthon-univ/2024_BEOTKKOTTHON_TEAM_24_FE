@@ -83,6 +83,16 @@ export async function getFolderInsight(
   return response.data;
 }
 
+export async function postImage(image: FormData, token: string) {
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${token}`,}
+
+  }
+  const response = await api.post(`/insight/image`, image, config);
+  return response.data;
+}
+
 // 인사이트 저장
 export async function postInsight(
   insightData: InsightPostRequest,

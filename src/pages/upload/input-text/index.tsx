@@ -12,17 +12,8 @@ import { loadingBlurURL } from '@/constants/index';
 import Image from 'next/image';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
-export interface insightInput {
-  title: string | string[] | undefined;
-  summary: string | string[] | undefined;
-  keywords: string[];
-  memo: string | string[] | undefined;
-  imageList: string | string[] | undefined;
-  folder: { name: string; mainColor: string; subColor: string };
-  isRemind: boolean;
-  remindType: string;
-  remindDay?: number[];
-}
+import { InsightPostRequest } from '@/types/insight';
+import defaultImage from '@image/defaultImage.jpeg';
 
 const Upload: NextPage = ({}) => {
   const router = useRouter();
@@ -30,22 +21,27 @@ const Upload: NextPage = ({}) => {
     '',
   );
   const { isLoading, error, result } = useGetSummary(String(insightLink));
-  const [insightInput, setInsightInput] = useState<insightInput>({
-    title: '',
-    summary: '',
-    keywords: [],
-    memo: '',
-    imageList: [],
-    folder: { name: '미드저니', mainColor: '#A1D0FF', subColor: '#D7EBFF' },
-    isRemind: false,
-    remindType: '',
-    remindDay: [],
+  const [insightInput, setInsightInput] = useState<InsightPostRequest>({
+    insightUrl: '',
+    insightTitle: '',
+    insightSummary: '',
+    insightMainImage: '',
+    insightSource: '',
+    viewCount: 0,
+    hashTagList: [''],
+    insightMemo: '',
+    insightImageList: [''],
+    folderName: '미드저니',
+    enable: false,
+    remindType: 'DEFAULT',
+    remindDays: [1],
   });
   const [isAddingTag, setIsAddingTag] = useState(false);
   const [tagInput, setTagInput] = useState('');
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { memo, imageList, link } = router.query;
+  const { memo, imageList, insightImageList, link } = router.query;
+  const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
 
   useEffect(() => {
     setInsightLink(link);
@@ -55,20 +51,23 @@ const Upload: NextPage = ({}) => {
     if (result.title) {
       setInsightInput({
         ...insightInput,
-        title: result.title,
-        summary: result.summary,
-        keywords: result.keywords
+        insightTitle: result.title,
+        insightSummary: String(result.summary),
+        hashTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
             : [result.keywords]
           : [],
-        memo: memo,
-        imageList: imageList
-          ? Array.isArray(imageList)
-            ? imageList
-            : [imageList]
+        insightMemo: String(memo),
+        insightImageList: insightImageList
+          ? Array.isArray(insightImageList)
+            ? insightImageList
+            : [insightImageList]
           : [],
       });
+      setThumbnail(
+        imageList ? (Array.isArray(imageList) ? imageList : [imageList]) : [],
+      );
     }
     if (error) {
       console.error(error);
@@ -82,26 +81,22 @@ const Upload: NextPage = ({}) => {
     }
   }, [result.title]);
 
-  const handleImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e?.target.files) return;
-    // 이미지 화면에 띄우기
-  };
 
   const handleDeleteTag = (idx: number) => {
-    if (insightInput.keywords.length === 1) {
+    if (insightInput.hashTagList.length === 1) {
       alert('인사이트 저장에는 최소 태그 1개 이상이 필요해요!');
       return;
     }
-    const newKeywords = insightInput.keywords.filter(
-      (tag) => insightInput.keywords.indexOf(tag) !== idx,
+    const newKeywords = insightInput.hashTagList.filter(
+      (tag) => insightInput.hashTagList.indexOf(tag) !== idx,
     );
-    setInsightInput({ ...insightInput, keywords: newKeywords });
+    setInsightInput({ ...insightInput, hashTagList: newKeywords });
   };
 
   const checkEnter = (key: string) => {
     if (key === 'Enter') {
-      const newKeywords = [...insightInput.keywords, tagInput];
-      setInsightInput({ ...insightInput, keywords: newKeywords });
+      const newKeywords = [...insightInput.hashTagList, tagInput];
+      setInsightInput({ ...insightInput, hashTagList: newKeywords });
       setTagInput('');
       setIsAddingTag(false);
     }
@@ -110,17 +105,22 @@ const Upload: NextPage = ({}) => {
   const handleBlur = () => {
     setIsAddingTag(false);
     setTagInput('');
+    console.log(thumbnail);
   };
 
   const handleRemindToggle = () => {
-    insightInput.isRemind === true &&
-      setInsightInput({ ...insightInput, isRemind: false, remindType: '' });
-    if (insightInput.isRemind === false) {
+    insightInput.enable === true &&
+      setInsightInput({
+        ...insightInput,
+        enable: false,
+        remindType: 'DEFAULT',
+      });
+    if (insightInput.enable === false) {
       setIsModal('remind');
       setInsightInput({
         ...insightInput,
-        isRemind: true,
-        remindType: 'recommend',
+        enable: true,
+        remindType: 'DEFAULT',
       });
     }
   };
@@ -150,61 +150,51 @@ const Upload: NextPage = ({}) => {
               <PageIntro>리마인드 카드 설정</PageIntro>
               <ImageSection className="image-section">
                 <div className="image-wrapper">
-                  <CardCover src={insightInput.imageList?.[0]} alt="preview" />
-                  <label htmlFor="imgfile">
-                    <ChangeImgBtn>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="17"
-                        height="17"
-                        viewBox="0 0 17 17"
-                        fill="none"
-                      >
-                        <path
-                          d="M1.09977 17H1.31177L3.6438 16.5703C4.70382 16.3555 5.65783 15.8183 6.39984 15.0664L16.046 5.39811C16.682 4.86098 17 4.00158 17 3.14218C17 2.28278 16.682 1.53081 16.046 0.886256C14.88 -0.295419 12.8659 -0.295419 11.5939 0.886256L1.94778 10.4471C1.20577 11.1991 0.67576 12.1659 0.463757 13.2401L0.0397506 15.7109C-0.066251 16.0332 0.0397507 16.4629 0.357755 16.6777C0.569759 16.8926 0.781761 17 1.09977 17ZM13.0779 2.49763C13.2899 2.28278 13.608 2.17536 13.82 2.17536C14.138 2.17536 14.35 2.28278 14.562 2.49763C14.774 2.71248 14.88 2.92733 14.88 3.14218C14.88 3.24961 14.88 3.57188 14.562 3.89416L14.138 4.32386L12.6539 2.92733L13.0779 2.49763ZM2.58379 13.7773C2.68979 13.1327 3.00779 12.5956 3.5378 12.0585L11.1699 4.43128L12.6539 5.82781L5.02182 13.455C4.59782 13.8847 3.96181 14.207 3.3258 14.3144L2.47779 14.5292L2.58379 13.7773Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </ChangeImgBtn>
-                  </label>
-                  <FileInput
-                    type="file"
-                    onChange={handleImgChange}
-                    name="imgfile"
-                    id="imgfile"
-                    accept=".png, .jpeg, .jpg"
-                    multiple
-                  />
+                  {insightImageList !== undefined && (
+                    <CardCover src={thumbnail?.[0]} alt="preview" className='thumbnail'/>
+                  )}
+                  {insightImageList === undefined && (
+                    <Image
+                      src={defaultImage}
+                      alt="default"
+                      width={364}
+                      height={220}
+                      className='thumbnail'
+                    />
+                  )}
                 </div>
               </ImageSection>
               <TitleSection>
                 <SubTitle>제목</SubTitle>
                 <Input
                   type="text"
-                  value={insightInput.title}
+                  value={insightInput.insightTitle}
                   onChange={(e) =>
-                    setInsightInput({ ...insightInput, title: e.target.value })
+                    setInsightInput({
+                      ...insightInput,
+                      insightTitle: e.target.value,
+                    })
                   }
                 />
               </TitleSection>
               <SummarySection>
                 <SubTitle>인사이트 요약</SubTitle>
                 <SumamryInput
-                  value={insightInput.summary}
+                  value={insightInput.insightSummary}
                   className="no-scroll"
                   onChange={(e) =>
                     setInsightInput({
                       ...insightInput,
-                      summary: e.target.value,
+                      insightSummary: e.target.value,
                     })
                   }
                 />
               </SummarySection>
               <TagSection>
                 <SubTitle>태그</SubTitle>
-                <TagCounter>{insightInput.keywords.length}/3</TagCounter>
+                <TagCounter>{insightInput.hashTagList.length}/3</TagCounter>
                 <TagList>
-                  {insightInput.keywords.map((tag, idx) => (
+                  {insightInput.hashTagList.map((tag, idx) => (
                     <TagWrapper key={idx}>
                       <span>{tag}</span>
                       <svg
@@ -235,7 +225,7 @@ const Upload: NextPage = ({}) => {
                       </svg>
                     </TagWrapper>
                   ))}
-                  {insightInput.keywords.length < 3 && (
+                  {insightInput.hashTagList.length < 3 && (
                     <TagWrapper key="addTag">
                       {isAddingTag ? (
                         <AutosizeInput
@@ -287,7 +277,7 @@ const Upload: NextPage = ({}) => {
               <FolderSection>
                 <SubTitle>폴더 설정</SubTitle>
                 <FolderIndicator>
-                  {insightInput.folder.name}
+                  {insightInput.folderName}
                   <ChangeFolderBtn onClick={() => setIsModal('folder')}>
                     <span>폴더 설정</span>
                     <svg
@@ -310,9 +300,9 @@ const Upload: NextPage = ({}) => {
                 <RemindSetter>
                   <span>인사이트 다시 읽기</span>
                   <RemindIndicator>
-                    {insightInput.isRemind === true && remindTerm}
+                    {insightInput.enable === true && remindTerm}
                     <ToggleSlider
-                      $isSelected={insightInput.isRemind}
+                      $isSelected={insightInput.enable}
                       onClick={handleRemindToggle}
                     />
                   </RemindIndicator>
@@ -330,7 +320,7 @@ const Upload: NextPage = ({}) => {
               {isModal === 'folder' && (
                 <SelectFolderModal
                   onClose={() => setIsModal('')}
-                  selectedFolder={insightInput.folder}
+                  selectedFolder={insightInput.folderName}
                   insightInput={insightInput}
                   onSelect={setInsightInput}
                 />
@@ -446,29 +436,17 @@ const ImageSection = styled.div`
   .image-wrapper {
     min-height: 164px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .thumbnail {
+      object-fit: cover;
+    }
   }
 
   & .image-section {
     height: 220px;
   }
-`;
-
-const ChangeImgBtn = styled.div`
-  position: absolute;
-  top: 11px;
-  right: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 100%;
-  background: #2b2b2b;
-  cursor: pointer;
-`;
-
-const FileInput = styled.input`
-  display: none;
 `;
 
 const CardCover = styled.img`
