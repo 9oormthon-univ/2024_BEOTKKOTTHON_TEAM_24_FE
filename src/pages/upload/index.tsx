@@ -5,9 +5,9 @@ import Header from '@/components/common/Header';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useUserTokenStore } from '@/store/signup';
 import { postImage } from '@/api/insight';
 import { useGetFolder } from '@/hooks/api/useFolder';
+import LocalStorage from '@/hooks/LocalStorage';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -16,11 +16,11 @@ const LinkInput: NextPage = ({}) => {
   const [imageList, setImageList] = useState<string[]>([]);
   const [cdnImageList, setCdnImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
-  const { userToken } = useUserTokenStore();
-  const { data } = useGetFolder(userToken.accessToken);
+  const accessToken = LocalStorage.getItem('accessToken')
+  const { data } = useGetFolder(String(accessToken));
 
   useEffect(() => {
-    if (userToken.accessToken === '') {
+    if (!accessToken) {
       alert('로그인 후 이용하실 수 있어요!');
       router.push('/signin');
     }
@@ -35,6 +35,7 @@ const LinkInput: NextPage = ({}) => {
       alert('링크를 입력해주세요.');
       return;
     }
+    console.log(data?.map((folder) => folder.folderName))
     // 인사이트 제목, 요약, 키워드 요청
     router.push(
       {
@@ -81,7 +82,7 @@ const LinkInput: NextPage = ({}) => {
     newImages.forEach(async (image: Blob) => {
       const imageData = new FormData()
       imageData.append('image', image)
-      const result = await postImage(imageData, userToken.accessToken);
+      const result = await postImage(imageData, String(accessToken));
       finalList.push(result);
       setImageList(newList);
       setCdnImageList(finalList)

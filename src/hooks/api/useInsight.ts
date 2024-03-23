@@ -38,11 +38,11 @@ export function usePostImageLink(image: FormData, token: string) {
   })
 }
 
-export function usePostInsight() {
+export function usePostInsight(insightData: InsightPostRequest, token: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (insightData: InsightPostRequest) => postInsight(insightData),
+    mutationFn: () => postInsight(insightData, token),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['insight'] }),
   });
 }
