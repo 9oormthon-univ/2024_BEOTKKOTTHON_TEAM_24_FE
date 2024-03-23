@@ -18,7 +18,7 @@ interface SummarizeInsightResponse {
   choices: { message: { content: string } }[];
 }
 
-const fetchSummary = async (link: string) => {
+const fetchSummary = async (link: string, folderList: string[]) => {
   const apiKey = process.env.NEXT_PUBLIC_GPT_API_KEY;
   const config = {
     method: 'post',
@@ -34,11 +34,11 @@ const fetchSummary = async (link: string) => {
         {
           role: 'system',
           content:
-            'You are helpful assistant. Your job is Get title of article, and summarize the article accessible through the provided link in one sentence in Korean, and extract three keywords that can be used for classification purposes. Your response form is as follows: 제목:  , 요약: , 키워드: ',
+            'You are helpful assistant. Your job is Get title of article, summarize the article accessible through the provided link in one sentence in Korean, extract three keywords that can be used for classification purposes, and pick one name from the list of folder names I gave you that is the most appropriate for the article. Your response form is as follows: 제목:  , 요약: , 키워드: , 폴더명: ',
         },
-        { role: 'user', content: link },
+        { role: 'user', content: `link: ${link}, list: ${folderList}` },
       ],
-      max_tokens: 2000,
+      max_tokens: 4000,
     },
   };
   const response = await axios.request(config);
@@ -46,10 +46,10 @@ const fetchSummary = async (link: string) => {
   return response.data as SummarizeInsightResponse;
 };
 
-export const useGetSummary = (link: string) => {
+export const useGetSummary = (link: string, folderList: string[]) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['get-summary'],
-    queryFn: () => fetchSummary(link),
+    queryFn: () => fetchSummary(link, folderList),
     enabled: !!link,
   });
   console.log(data?.choices);
@@ -62,7 +62,8 @@ export const useGetSummary = (link: string) => {
       .split('키워드:')[0],
     keywords: data?.choices?.[0]?.message.content
       .split('키워드:')[1]
-      .split(','),
+      .split('폴더명:')[0],
+    folderName: data?.choices?.[0]?.message.content.split('폴더명:')[1].split(','),
   };
   return { isLoading, error, result };
 };
