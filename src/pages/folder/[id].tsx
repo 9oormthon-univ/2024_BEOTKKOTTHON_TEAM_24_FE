@@ -238,27 +238,3 @@ const LargeViewIcon = styled(LargeView)<IconProps>`
 
 const InsightSection = styled.div``;
 
-const FloatButton = styled.button`
-  position: fixed;
-  bottom: 43px;
-  display: flex;
-  width: 353px;
-  height: 56px;
-  outline: none;
-  border: none;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  background: var(--Primary-500, #3184ff);
-
-  color: #fff;
-  /* Body-16-SB */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
-`;
