@@ -1,3 +1,5 @@
+export type RemindType = 'DEFAULT' | 'WEEK' | 'MONTH';
+
 export type Insight = {
   insightId: number;
   insightTitle: string;
@@ -42,7 +44,21 @@ export type FolderPageInsightGetResponse = Insight[];
 export type FolderSearchTagGetResponse = Insight[];
 
 // POST /insight
-export type InsightPostRequest = InsightDetail;
+export type InsightPostRequest = {
+  insightUrl: string;
+  insightTitle: string;
+  insightSummary: string;
+  insightMainImage: string;
+  insightMemo: string;
+  insightSource: string;
+  viewCount: 0;
+  hashTagList: string[];
+  insightImageList: string[];
+  enable: boolean;
+  remindType: RemindType;
+  remindDays: number[];
+  folderName: string;
+};
 
 export type InsightPostResponse = Partial<InsightDetail>;
 

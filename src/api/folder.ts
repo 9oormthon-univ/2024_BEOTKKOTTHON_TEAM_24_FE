@@ -14,7 +14,6 @@ export async function getFolder(token: string): Promise<FolderGetResponse> {
   const config = {
     headers: {
       'Authorization': `Bearer ${token}`,}
-
   }
   const response = await api.get(`/folder`, config);
   return response.data;
