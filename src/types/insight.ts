@@ -22,6 +22,9 @@ export type InsightDetail = {
   insightImageList: string[];
 };
 
+// GET /insight/share/{folderId}
+export type FolderShareGetResponse = Insight[];
+
 // GET /insight/{folderId}
 export type FolderInsightGetRequest = {
   folderId: number;
@@ -40,6 +43,8 @@ export type FolderSearchTagGetResponse = Insight[];
 
 // POST /insight
 export type InsightPostRequest = InsightDetail;
+
+export type InsightPostResponse = Partial<InsightDetail>;
 
 // GET /insight
 export type InsightGetRequest = {
@@ -66,4 +71,13 @@ export type InsightPutRequest = {
   reminderType?: string;
   reminderDayList?: number[];
   reminderAnswer?: string;
+};
+
+// POST /insight/ogimage/{url}
+export type InsightOGImagePostRequest = {
+  url: string;
+};
+
+export type InsightOGImagePostResponse = {
+  insightMainImage: string;
 };

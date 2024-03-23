@@ -38,9 +38,6 @@ export type FolderUrlGetResponse = {
   url: string;
 };
 
-// GET /folder/share/{folderId}
-export type FolderShareGetResponse = Insight[];
-
 // GET /folder/copy/{folderId}
 
 // POST /share
