@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import AutosizeInput from 'react-input-autosize';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
-import { useGetSummary } from '@/api/Insight';
+import { useGetSummary } from '@/api/insight';
 import loadingGIF from '../../../../public/loading.gif';
 import { loadingBlurURL } from '@/constants/index';
 import Image from 'next/image';
