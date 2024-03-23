@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import AutosizeInput from 'react-input-autosize';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
-import { useGetSummary } from '@/api/insight';
+import { postInsight, useGetSummary } from '@/api/insight';
 import loadingGIF from '../../../../public/loading.gif';
 import { loadingBlurURL } from '@/constants/index';
 import Image from 'next/image';
@@ -49,8 +49,11 @@ const Upload: NextPage = ({}) => {
   const [tagInput, setTagInput] = useState('');
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { memo, imageList, insightImageList, link, folderNameList } = router.query;
+  const { memo, imageList, insightImageList, link, folderNameList } =
+    router.query;
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
+  const accessToken = localStorage.getItem('accessToken');
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const newLink = String(link);
@@ -73,7 +76,7 @@ const Upload: NextPage = ({}) => {
         hashTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
-            : [result.keywords]
+            : result.keywords.split(', ')
           : [],
         insightMemo: String(memo),
         insightImageList: insightImageList
@@ -142,6 +145,11 @@ const Upload: NextPage = ({}) => {
     }
   };
 
+  const handleSubmit = async () => {
+    setIsSaving(true);
+    await postInsight(insightInput, String(accessToken));
+  };
+
   return (
     <>
       <Wrapper>
@@ -160,7 +168,7 @@ const Upload: NextPage = ({}) => {
               쉽게 리마인드 할 수 있도록 인사이트를 정리하고 있어요!
             </LoadingContent>
           </LoadingWrapper>
-        ) : (
+        ) : ( !isSaving && (
           <>
             <Header title="인사이트 저장" />
             <PageContainer className="no-scroll">
@@ -348,9 +356,29 @@ const Upload: NextPage = ({}) => {
               )}
             </PageContainer>
             <div className="bottom-btn">
-              <BottomBtn text="완료" state="activated" nextUrl="/" />
+              <BottomBtn
+                text="완료"
+                state="activated"
+                onClick={() => handleSubmit()}
+              />
             </div>
           </>
+        ))}
+        {isSaving && (
+          <LoadingWrapper>
+            <Image
+              src={loadingGIF}
+              alt="loading"
+              placeholder="blur"
+              blurDataURL={loadingBlurURL}
+              width={192}
+              height={192}
+            />
+            <LoadingTitle>인사이트 저장중 ••</LoadingTitle>
+            <LoadingContent>
+              쉽게 리마인드 할 수 있도록 인사이트를 저장하고 있어요!
+            </LoadingContent>
+          </LoadingWrapper>
         )}
       </Wrapper>
     </>

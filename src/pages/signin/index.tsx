@@ -7,7 +7,6 @@ import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { useRouter } from 'next/router';
 import { login } from '@/api/auth';
-import { useUserTokenStore } from '@/store/signup';
 import { LoginPostRequest } from '@/types/user';
 
 interface Props {}
@@ -20,12 +19,10 @@ const SignIn: NextPage<Props> = ({}) => {
   });
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
-  const { setUserToken } = useUserTokenStore();
 
   const handleLogin = async () => {
     try {
       const res = await login(loginInput);
-      setUserToken(res);
       localStorage.setItem('accessToken', res.accessToken)
       localStorage.setItem('refreshItem', res.refreshToken)
     } catch (e) {

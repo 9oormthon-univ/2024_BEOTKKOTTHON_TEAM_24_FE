@@ -1,6 +1,9 @@
 import { InsightPostRequest } from '@/types/insight';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useGetFolder } from '@/hooks/api/useFolder';
+import { colorDecoder } from '@/utils/folder';
+import { FolderGetResponse } from '@/types/folder';
 
 type Props = {
   onClose: () => void;
@@ -9,39 +12,44 @@ type Props = {
   insightInput: InsightPostRequest;
 };
 
-type Folder = {
-  name: string;
-  mainColor: string;
-  subColor: string;
-};
-
 const SelectFolderModal = (props: Props) => {
   const [isMakingFolder, setIsMakingFolder] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
-  const [folderList, setFolderList] = useState([
+
+  const accessToken = localStorage.getItem('accessToken');
+  const { data } = useGetFolder(String(accessToken));
+
+  const [folderList, setFolderList] = useState<FolderGetResponse | undefined>([
     {
-      name: 'UX/UI',
-      mainColor: '#FEACBB',
-      subColor: '#FFD8DF',
+      folderId: 1,
+      folderName: 'UX/UI',
+      folderColor: 'PINK',
+      insightCount: 0,
     },
     {
-      name: '미드저니',
-      mainColor: '#A1D0FF',
-      subColor: '#D7EBFF',
+      folderId: 2,
+      folderName: '미드저니',
+      folderColor: 'BLUE',
+      insightCount: 0,
     },
     {
-      name: '책 요약',
-      mainColor: '#BFA9FF',
-      subColor: '#E2D8FF',
+      folderId: 3,
+      folderName: 'SEO',
+      folderColor: 'ORANGE',
+      insightCount: 0,
     },
     {
-      name: '미드저니',
-      mainColor: '#FFC19E',
-      subColor: '#FFE5D7',
+      folderId: 4,
+      folderName: '기획',
+      folderColor: 'GREEN',
+      insightCount: 0,
     },
   ]);
 
+  useEffect(() => {
+    setFolderList(data);
+  });
   const handleBlur = () => {
     setIsMakingFolder(false);
     setNewFolderName('');
@@ -138,158 +146,18 @@ const SelectFolderModal = (props: Props) => {
               )}
             </AddFolder>
             <FolderList>
-              {folderList.map((folder, idx) => (
+              {folderList?.map((folder, idx) => (
                 <Folder
                   key={idx}
-                  onClick={() => setSelectedFolder(folder.name)}
+                  onClick={() => setSelectedFolder(folder.folderName)}
                   className={
-                    selectedFolder === folder.name
-                      ? 'selected'
-                      : ''
+                    selectedFolder === folder.folderName ? 'selected' : ''
                   }
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="104"
-                    height="78"
-                    viewBox="0 0 104 78"
-                    fill="none"
-                  >
-                    <path
-                      d="M93.6874 8.3619H53.0199L46.7327 3.61569C44.9869 1.90515 42.6096 0.939453 40.1237 0.939453H6.7892C4.6975 0.939453 3 2.58504 3 4.6117V67.6072C3 72.6133 7.18743 76.6753 12.3483 76.6753H93.6874C98.8523 76.6753 103.036 72.6176 103.036 67.6072V17.4299C103.036 12.4239 98.8483 8.3619 93.6874 8.3619Z"
-                      fill={folder.subColor}
-                    />
-                    <g filter="url(#filter0_d_329_7776)">
-                      <path
-                        d="M40.8081 12.8783L10.3837 19.3103C8.51546 19.7052 7.29838 21.6558 7.66525 23.6671L15.2528 65.2637C15.6197 67.2749 17.4315 68.5852 19.2998 68.1902L49.7242 61.7583C51.5924 61.3633 52.8094 59.4127 52.4426 57.4015L44.855 15.8048C44.4882 13.7936 42.6763 12.4833 40.8081 12.8783Z"
-                        fill="white"
-                      />
-                    </g>
-                    <g filter="url(#filter1_d_329_7776)">
-                      <path
-                        d="M68.0114 19.8672H37.0059C35.102 19.8672 33.5586 21.5288 33.5586 23.5784V65.9695C33.5586 68.0192 35.102 69.6807 37.0059 69.6807H68.0114C69.9153 69.6807 71.4587 68.0192 71.4587 65.9695V23.5784C71.4587 21.5288 69.9153 19.8672 68.0114 19.8672Z"
-                        fill="white"
-                      />
-                    </g>
-                    <g filter="url(#filter2_d_329_7776)">
-                      <path
-                        d="M92.6774 14.1484H61.6719C59.768 14.1484 58.2246 15.81 58.2246 17.8597V60.2508C58.2246 62.3004 59.768 63.962 61.6719 63.962H92.6774C94.5813 63.962 96.1247 62.3004 96.1247 60.2508V17.8597C96.1247 15.81 94.5813 14.1484 92.6774 14.1484Z"
-                        fill="white"
-                      />
-                    </g>
-                    <path
-                      d="M3 38.8047H103.04V70.7074C103.04 74.6957 100.031 77.9393 96.3222 77.9393H9.71759C6.01286 77.9393 3 74.7001 3 70.7074V38.8047Z"
-                      fill={folder.mainColor}
-                    />
-                    <defs>
-                      <filter
-                        id="filter0_d_329_7776"
-                        x="0.599609"
-                        y="5.80859"
-                        width="52.9082"
-                        height="63.4512"
-                        filterUnits="userSpaceOnUse"
-                        colorInterpolationFilters="sRGB"
-                      >
-                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                        <feColorMatrix
-                          in="SourceAlpha"
-                          type="matrix"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                          result="hardAlpha"
-                        />
-                        <feOffset dx="-3" dy="-3" />
-                        <feGaussianBlur stdDeviation="2" />
-                        <feComposite in2="hardAlpha" operator="out" />
-                        <feColorMatrix
-                          type="matrix"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
-                        />
-                        <feBlend
-                          mode="normal"
-                          in2="BackgroundImageFix"
-                          result="effect1_dropShadow_329_7776"
-                        />
-                        <feBlend
-                          mode="normal"
-                          in="SourceGraphic"
-                          in2="effect1_dropShadow_329_7776"
-                          result="shape"
-                        />
-                      </filter>
-                      <filter
-                        id="filter1_d_329_7776"
-                        x="26.5586"
-                        y="12.8672"
-                        width="45.9004"
-                        height="57.8145"
-                        filterUnits="userSpaceOnUse"
-                        colorInterpolationFilters="sRGB"
-                      >
-                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                        <feColorMatrix
-                          in="SourceAlpha"
-                          type="matrix"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                          result="hardAlpha"
-                        />
-                        <feOffset dx="-3" dy="-3" />
-                        <feGaussianBlur stdDeviation="2" />
-                        <feComposite in2="hardAlpha" operator="out" />
-                        <feColorMatrix
-                          type="matrix"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
-                        />
-                        <feBlend
-                          mode="normal"
-                          in2="BackgroundImageFix"
-                          result="effect1_dropShadow_329_7776"
-                        />
-                        <feBlend
-                          mode="normal"
-                          in="SourceGraphic"
-                          in2="effect1_dropShadow_329_7776"
-                          result="shape"
-                        />
-                      </filter>
-                      <filter
-                        id="filter2_d_329_7776"
-                        x="51.2246"
-                        y="7.14844"
-                        width="45.9004"
-                        height="57.8145"
-                        filterUnits="userSpaceOnUse"
-                        colorInterpolationFilters="sRGB"
-                      >
-                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                        <feColorMatrix
-                          in="SourceAlpha"
-                          type="matrix"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                          result="hardAlpha"
-                        />
-                        <feOffset dx="-3" dy="-3" />
-                        <feGaussianBlur stdDeviation="2" />
-                        <feComposite in2="hardAlpha" operator="out" />
-                        <feColorMatrix
-                          type="matrix"
-                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
-                        />
-                        <feBlend
-                          mode="normal"
-                          in2="BackgroundImageFix"
-                          result="effect1_dropShadow_329_7776"
-                        />
-                        <feBlend
-                          mode="normal"
-                          in="SourceGraphic"
-                          in2="effect1_dropShadow_329_7776"
-                          result="shape"
-                        />
-                      </filter>
-                    </defs>
-                  </svg>
-                  {folder.name}
+                  {folder.folderColor === null
+                    ? colorDecoder('BLUE', 'small')
+                    : colorDecoder(folder.folderColor, 'small')}
+                  {folder.folderName}
                 </Folder>
               ))}
             </FolderList>

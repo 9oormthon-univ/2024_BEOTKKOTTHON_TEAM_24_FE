@@ -63,8 +63,11 @@ export const useGetSummary = (link: string, folderList: string[]) => {
     keywords: data?.choices?.[0]?.message.content
       .split('키워드:')[1]
       .split('폴더명:')[0],
-    folderName: data?.choices?.[0]?.message.content.split('폴더명:')[1].split(','),
+    folderName: data?.choices?.[0]?.message.content
+      .split('폴더명: ')[1]
+      .split(','),
   };
+  console.log(result.folderName);
   return { isLoading, error, result };
 };
 
@@ -87,9 +90,9 @@ export async function getFolderInsight(
 export async function postImage(image: FormData, token: string) {
   const config = {
     headers: {
-      'Authorization': `Bearer ${token}`,}
-
-  }
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const response = await api.post(`/insight/image`, image, config);
   return response.data;
 }
@@ -97,8 +100,14 @@ export async function postImage(image: FormData, token: string) {
 // 인사이트 저장
 export async function postInsight(
   insightData: InsightPostRequest,
+  token: string,
 ): Promise<InsightPostResponse> {
-  const response = await api.post(`/insight`, { insightData });
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await api.post(`/insight`, { insightData }, config);
   return response.data;
 }
 
