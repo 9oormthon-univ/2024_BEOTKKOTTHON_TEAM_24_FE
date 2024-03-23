@@ -37,6 +37,7 @@ export type CalenderPostResponse = {
 export type RemindInsight = {
   insightId: number;
   insightTitle: string;
+  insightSummary: string;
   insightMainImage: string;
   insightTagList: string[];
   todayRead: boolean;
