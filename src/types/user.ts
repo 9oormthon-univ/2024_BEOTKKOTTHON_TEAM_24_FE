@@ -8,15 +8,17 @@ export type SignupPostRequest = {
   topicList: string[];
 };
 
+export type SignupPostResponse = {
+  accessToken: string;
+  refreshToken: string;
+};
+
 export type LoginPostRequest = {
   userEmail: string;
   password: string;
 };
 
-export type LoginPostResponse = {
-  accessToken: string;
-  refreshToken: string;
-};
+export type LoginPostResponse = SignupPostResponse;
 
 export type RefreshPostRequest = {
   refreshToken: string;
