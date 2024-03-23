@@ -41,7 +41,7 @@ const Folder: NextPage<Props> = ({}) => {
             <div className="list-container">
               {FolderList.map((folder) => (
                 <>
-                  <IconContainer>
+                  <IconContainer onClick={()=>router.push(`/folder/${folder.folderId}`)}>
                     {colorDecoder(folder.folderColor, 'big')}
                     <span className="name">{folder.folderName}</span>
                     <span className="count">{folder.insightCount}</span>

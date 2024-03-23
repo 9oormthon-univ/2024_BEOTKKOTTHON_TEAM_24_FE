@@ -166,8 +166,9 @@ const FolderEdit: NextPage<Props> = ({}) => {
         </FolderSection>
         {isModalOn && (
           <EditModal
-            onColor={() => handleColorChange()}
-            onDelete={() => handleDelete()}
+            type="edit"
+            onClick1={() => handleColorChange()}
+            onClick2={() => handleDelete()}
             onClose={() => setIsModalOn(false)}
           />
         )}
