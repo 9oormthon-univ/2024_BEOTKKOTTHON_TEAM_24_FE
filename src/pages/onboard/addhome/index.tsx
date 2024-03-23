@@ -38,7 +38,7 @@ const AddHome: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
           promptAppInstall({ deferredPrompt, setDeferredPrompt, router })
         }
       />
-      <BottomBtn text="나중에 할게요" state="transparent" nextUrl="/home" />
+      <BottomBtn text="나중에 할게요" state="transparent" nextUrl="/signin" />
     </Wrapper>
   );
 };

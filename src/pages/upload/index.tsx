@@ -5,6 +5,7 @@ import Header from '@/components/common/Header';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useUserTokenStore } from '@/store/signup';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -12,8 +13,13 @@ const LinkInput: NextPage = ({}) => {
   const [memo, setMemo] = useState('');
   const [imageList, setImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
+  const { userToken } = useUserTokenStore();
 
   useEffect(() => {
+    if (userToken.accessToken === '') {
+      alert('로그인 후 이용하실 수 있어요!');
+      router.push('/signin');
+    }
     const parsedUrl = new URL(window.location.href);
     const url = String(parsedUrl.searchParams.get('text'));
     url !== 'null' && setLink(url);

@@ -6,19 +6,32 @@ import UnvisibleIcon from '@svg/unvisible-icon.svg';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { useRouter } from 'next/router';
+import { login } from '@/api/auth';
+import { useUserTokenStore } from '@/store/signup';
+import { LoginPostRequest } from '@/types/user';
 
 interface Props {}
 
 const SignIn: NextPage<Props> = ({}) => {
   const [isPWOpen, setIsPWOpen] = useState(false);
-  const [loginInput, setLoginInput] = useState({
+  const [loginInput, setLoginInput] = useState<LoginPostRequest>({
     userEmail: '',
-    password: '',
+    userPassword: '',
   });
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
+  const { setUserToken } = useUserTokenStore();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    try {
+      const res = await login(loginInput);
+      setUserToken(res);
+    } catch (e) {
+      console.log(e);
+      setIsValid(false);
+      return;
+    }
+    router.push('/home');
     return;
   };
 
@@ -48,9 +61,9 @@ const SignIn: NextPage<Props> = ({}) => {
           <SubTitle>비밀번호</SubTitle>
           <div className="input-container">
             <Input
-              value={loginInput.password}
+              value={loginInput.userPassword}
               onChange={(e) =>
-                setLoginInput({ ...loginInput, password: e.target.value })
+                setLoginInput({ ...loginInput, userPassword: e.target.value })
               }
               type={isPWOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요"
@@ -67,13 +80,15 @@ const SignIn: NextPage<Props> = ({}) => {
               />
             )}
           </div>
-          <ErrorText>{!isValid && '*잘못된 이메일 혹은 비밀번호입니다.'}</ErrorText>
+          <ErrorText>
+            {!isValid && '*잘못된 이메일 혹은 비밀번호입니다.'}
+          </ErrorText>
         </PWSection>
       </InputContainer>
       <BottomBtn
         text="로그인"
         state={
-          loginInput.userEmail === '' || loginInput.password === ''
+          loginInput.userEmail === '' || loginInput.userPassword === ''
             ? 'disabled'
             : 'activated'
         }
