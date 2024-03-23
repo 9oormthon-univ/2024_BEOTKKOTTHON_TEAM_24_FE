@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { postImage } from '@/api/insight';
 import { useGetFolder } from '@/hooks/api/useFolder';
+import LocalStorage from '@/hooks/LocalStorage';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const LinkInput: NextPage = ({}) => {
   const [imageList, setImageList] = useState<string[]>([]);
   const [cdnImageList, setCdnImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
-  const accessToken = localStorage.getItem('accessToken')
+  const accessToken = LocalStorage.getItem('accessToken')
   const { data } = useGetFolder(String(accessToken));
 
   useEffect(() => {

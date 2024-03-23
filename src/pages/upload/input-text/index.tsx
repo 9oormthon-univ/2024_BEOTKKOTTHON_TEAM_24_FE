@@ -14,6 +14,7 @@ import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
+import LocalStorage from '@/hooks/LocalStorage';
 
 type aiInput = {
   link: string;
@@ -52,7 +53,7 @@ const Upload: NextPage = ({}) => {
   const { memo, imageList, insightImageList, link, folderNameList } =
     router.query;
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = LocalStorage.getItem('accessToken');
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
