@@ -313,6 +313,7 @@ const ModalBg = styled.div`
   top: 0;
   width: 100%;
   height: 100vh;
+  max-width: 480px;
   flex-shrink: 0;
   background: rgba(0, 0, 0, 0.63);
   backdrop-filter: blur(1.5px);
@@ -326,6 +327,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
+  max-width: 480px;
   height: 100vh;
   flex-shrink: 0;
   z-index: 20;
@@ -387,9 +389,8 @@ const CompleteBtn = styled.div`
 
 const SearchSection = styled.div`
   display: flex;
-  width: 100%;
   padding: 10px 16px;
-  margin-left: 20px;
+  margin: 0 20px;
   justify-content: center;
   align-items: center;
   gap: 10px;

@@ -102,8 +102,9 @@ const LinkInput: NextPage = ({}) => {
             </svg>
           </LinkSection>
           <ImageSection>
-            <SubTitle>이미지</SubTitle>
-            <ImageCounter>{imageList.length}/10</ImageCounter>
+            <SubTitle>
+              이미지 <ImageCounter>{imageList.length}/10</ImageCounter>
+            </SubTitle>
             {imageList.length < 1 ? ( // 이미지가 없는 초기 상태
               <div>
                 <label htmlFor="imgfile">
@@ -387,10 +388,13 @@ const SubTitle = styled.div`
   line-height: 21px; /* 131.25% */
   letter-spacing: -0.32px;
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const ImageCounter = styled.div`
-  position: absolute;
+  /* position: absolute; */
   left: 324px;
   color: #595959;
 

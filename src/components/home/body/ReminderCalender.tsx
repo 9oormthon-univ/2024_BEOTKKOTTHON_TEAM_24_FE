@@ -17,6 +17,7 @@ export const calenderData: CalenderPostResponse = {
       insightId: 1,
       insightTitle: '스프링 어노테이션',
       insightMainImage: '/image/개발2.jpg',
+      insightSummary: 'bla bla',
       insightTagList: ['Spring'],
       todayRead: true,
     },
@@ -24,6 +25,7 @@ export const calenderData: CalenderPostResponse = {
       insightId: 2,
       insightTitle: '스프링 어노테이션',
       insightMainImage: '/image/디자인1.jpg',
+      insightSummary: 'bla bla',
       insightTagList: ['Spring'],
       todayRead: false,
     },
@@ -77,7 +79,15 @@ const ReminderCalender = () => {
           <p>추천 인사이트는 당일에만 확인할 수 있어요!</p>
         </EmptyInsight>
       )}
-      {modalOpen ? <CalenderModal /> : <></>}
+      {modalOpen ? (
+        <CalenderModal
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          onClickModal={onClickModal}
+        />
+      ) : (
+        <></>
+      )}
     </Wrapper>
   );
 };
