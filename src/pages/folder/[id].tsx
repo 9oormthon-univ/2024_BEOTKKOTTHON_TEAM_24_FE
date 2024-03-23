@@ -78,11 +78,18 @@ const FolderDetail: NextPage<Props> = ({}) => {
             isSmall ? (
               <InsightCard key={idx} insightData={insight} />
             ) : (
-              <SummaryInsightCard
-                key={idx}
-                favicon="/svg/insight-favicon.svg"
-                insightData={insight}
-              />
+          <SummaryInsightCard
+            key={idx}
+            favicon="/svg/insight-favicon.svg"
+            insightData={{
+              insightId: 2,
+              insightMainImage: '/image/디자인3.jpg',
+              insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
+              insightSummary:
+                '오이오랩은 최고 품질의 유기농 냉간 압착 오일과 혁신적인 방법을 사용하여 얻은 식물 추출물로 구성된 천연 성분을 기반으로 스킨케어 제품을 만듭니다.',
+              insightTagList: ['브랜딩', '패키지'],
+              todayRead: false,
+            }} />
             ),
           )}
         </InsightSection>
@@ -95,7 +102,6 @@ const FolderDetail: NextPage<Props> = ({}) => {
           onClick2={() => handleShare('copy')}
         />
       )}
-      <FloatButton>URL 복사가 완료되었습니다.</FloatButton>
     </>
   );
 };

@@ -150,29 +150,30 @@ const Upload: NextPage = ({}) => {
 
   const handleSubmit = async () => {
     setIsSaving(true);
-    setTimeout(() => {}, 2000);
-    router.push(
-      {
-        pathname: '/upload/saved',
-        query: {
-          id: 0,
-          insightUrl: insightInput.insightUrl,
-          title: insightInput.insightTitle,
-          summary: insightInput.insightSummary,
-          image: thumbnail,
-          insightSource: insightInput.insightSource,
-          viewCount: 0,
-          tagList: insightInput.hashTagList,
-          insightMemo: insightInput.insightMemo,
-          insightImageList: insightInput.insightImageList,
-          folderName: insightInput.folderName,
-          enable: insightInput.enable,
-          remindType: insightInput.remindType,
-          remindDays: insightInput.remindDays,
+    setTimeout(() => {
+      router.push(
+        {
+          pathname: '/upload/saved',
+          query: {
+            id: 0,
+            insightUrl: insightInput.insightUrl,
+            title: insightInput.insightTitle,
+            summary: insightInput.insightSummary,
+            image: thumbnail,
+            insightSource: insightInput.insightSource,
+            viewCount: 0,
+            tagList: insightInput.hashTagList,
+            insightMemo: insightInput.insightMemo,
+            insightImageList: insightInput.insightImageList,
+            folderName: insightInput.folderName,
+            enable: insightInput.enable,
+            remindType: insightInput.remindType,
+            remindDays: insightInput.remindDays,
+          },
         },
-      },
-      '/upload/saved',
-    );
+        '/upload/saved',
+      );
+    }, 3000);
   };
 
   return (
