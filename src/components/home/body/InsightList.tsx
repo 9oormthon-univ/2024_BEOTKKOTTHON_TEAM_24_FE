@@ -14,22 +14,17 @@ const InsightList = ({ $isSmall, calenderData }: Props) => {
       <div>
         <div className="view-title">
           <span>리마인드 인사이트</span>
-          <span>
-            {calenderData.remindRead}/{calenderData.remindTotal}
-          </span>
+          <span>1/1</span>
         </div>
         {$isSmall ? (
-          <InsightCard
-            favicon="/svg/insight-favicon.svg"
-            insightData={calenderData.remindInsightList[0]}
-          />
+          <InsightCard insightData={calenderData.remindInsightList[0]} />
         ) : (
           <SummaryInsightCard
-            favicon="/svg/insight-favicon.svg"
+            favicon="/svg/insight-favicon2.svg"
             insightData={{
               insightId: 2,
-              insightMainImage: '/image/디자인3.jpg',
-              insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
+              insightMainImage: '/image/디자인1.jpg',
+              insightTitle: '알아두면 쓸모있는 시멘틱 마크업 개념',
               insightSummary:
                 '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',
               insightTagList: ['UI/UX', '사용자 경험'],
@@ -41,19 +36,16 @@ const InsightList = ({ $isSmall, calenderData }: Props) => {
       <div>
         <div className="view-title">
           <span>추천 인사이트</span>
-          <span>1/3</span>
+          <span>1/1</span>
         </div>
         {$isSmall ? (
-          <InsightCard
-            favicon="/svg/insight-favicon.svg"
-            insightData={calenderData.remindInsightList[0]}
-          />
+          <InsightCard insightData={calenderData.remindInsightList[1]} />
         ) : (
           <SummaryInsightCard
             favicon="/svg/insight-favicon.svg"
             insightData={{
               insightId: 2,
-              insightMainImage: '/image/디자인3.jpg',
+              insightMainImage: '/image/개발1.jpg',
               insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
               insightSummary:
                 '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',

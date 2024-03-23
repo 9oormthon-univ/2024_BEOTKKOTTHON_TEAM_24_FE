@@ -14,20 +14,22 @@ export const calenderData: CalenderPostResponse = {
   remindTotal: 2,
   remindInsightList: [
     {
-      insightId: 1,
-      insightTitle: '스프링 어노테이션',
-      insightMainImage: '/image/개발2.jpg',
-      insightSummary: 'bla bla',
-      insightTagList: ['Spring'],
-      todayRead: true,
+      insightId: 2,
+      insightMainImage: '/image/디자인1.jpg',
+      insightTitle: '알아두면 쓸모있는 시멘틱 마크업 개념',
+      insightSummary:
+        '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',
+      insightTagList: ['UI/UX', '사용자 경험'],
+      todayRead: false,
     },
     {
       insightId: 2,
-      insightTitle: '스프링 어노테이션',
-      insightMainImage: '/image/디자인1.jpg',
-      insightSummary: 'bla bla',
-      insightTagList: ['Spring'],
-      todayRead: false,
+      insightMainImage: '/image/개발1.jpg',
+      insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
+      insightSummary:
+        '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',
+      insightTagList: ['UI/UX', '사용자 경험'],
+      todayRead: true,
     },
   ],
 };
@@ -35,7 +37,7 @@ export const calenderData: CalenderPostResponse = {
 // TODO [2] - 날짜 클릭 시 해당 날짜에 리마인드 해야 하는 인사이트 호출
 const ReminderCalender = () => {
   const [infoText, setInfoText] = useState<string>('');
-  const [$isSmall, set$isSmall] = useState<boolean>(true);
+  const [$isSmall, set$isSmall] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState(dayjs().format('MM/DD/YY'));
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
