@@ -5,9 +5,16 @@ import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import Pencil from '@svg/pencil-icon.svg';
 import BottomBtn from '@/components/common/BottomBtn';
 import { useState } from 'react';
+import { useRemind } from '@/store/remind';
+import { useRouter } from 'next/router';
 
 const Reminder: NextPage = () => {
   const [wordCount, setWordCount] = useState<number>(0);
+  const { setAnswer } = useRemind();
+  const router = useRouter();
+  const handleClickNext = () => {
+    router.push('/reminder/remind-saved');
+  };
 
   return (
     <Wrapper>
@@ -31,17 +38,18 @@ const Reminder: NextPage = () => {
         <Pencil className="pencil" />
         <textarea
           placeholder="답변을 입력해보세요."
+          maxLength={500}
           onChange={(e) => {
             setWordCount(e.target.value.length);
+            setAnswer(e.target.value);
           }}
-          maxLength={500}
         ></textarea>
         <p>{wordCount}/500자</p>
       </div>
       <BottomBtn
         text="완료"
-        nextUrl={'/reminder/remind-saved'}
         state={wordCount > 0 ? 'activated' : 'disabled'}
+        onClick={handleClickNext}
       />
     </Wrapper>
   );

@@ -56,8 +56,8 @@ const SelectRemindModal = (props: Props) => {
     const selectedDay =
       remindType === 'WEEK' ? selectedWeekDay : selectedMonthDay;
     if (selectedDay.length === 0) {
-      console.log("emptuy")
-      setRemindType("DEFAULT")
+      console.log('emptuy');
+      setRemindType('DEFAULT');
       props.onSelect({
         ...props.insightInput,
         enable: true,
@@ -595,7 +595,8 @@ const SubTitle = styled.div`
 
 const TermList = styled.div`
   display: flex;
-  width: calc(100% - 40px);
+  justify-content: space-between;
+  width: 100%;
   height: 48px;
   border-radius: 8px;
   background: var(--Neutral-100, #f4f5f7);

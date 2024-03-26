@@ -1,6 +1,5 @@
 import Header from '@/components/common/Header';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import SearchIcon from '@svg/search-icon.svg';
 import { useState } from 'react';
@@ -9,15 +8,12 @@ import LargeView from '@svg/large-view-icon.svg';
 import { RemindInsight } from '@/types/reminder';
 import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import { calenderData } from '@/components/home/body/ReminderCalender';
-import InsightCard from '@/components/home/InsightCard';
 import ShareIcon from '@svg/share-icon-blue.svg';
 import EditModal from '@components/folder/EditModal';
 
 interface Props {}
 
 const FolderDetail: NextPage<Props> = ({}) => {
-  const router = useRouter();
-  const { folderId } = router.query;
   const devKeywordList = ['전체', 'AI', '컴포넌트', '피그마', '사용성'];
   const [selectedTag, setSelectedTag] = useState('전체');
   const [searchInput, setSearchInput] = useState('');
@@ -41,7 +37,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
   return (
     <>
       <Wrapper>
-        <Header title={String(folderId)} />
+        <Header title={'UI/UX'} />
         <span className="link edit">편집</span>
         <ShareIcon className="share" onClick={() => handleModalOn()} />
         <SearchSection>
@@ -74,17 +70,31 @@ const FolderDetail: NextPage<Props> = ({}) => {
           </div>
         </InfoSection>
         <InsightSection>
-          {insightList?.map((insight, idx) =>
-            isSmall ? (
-              <InsightCard key={idx} insightData={insight} />
-            ) : (
-              <SummaryInsightCard
-                key={idx}
-                favicon="/svg/insight-favicon.svg"
-                insightData={insight}
-              />
-            ),
-          )}
+          <SummaryInsightCard
+            key={1}
+            favicon="/svg/insight-favicon.svg"
+            insightData={{
+              insightId: 2,
+              insightMainImage: '/image/reinput.jpeg',
+              insightTitle: '디지털 시대에 요구되는 디자인의 변화,',
+              insightSummary:
+                '디지털 시대에는 UI/UX, 개발 친화적 디자인, 브랜드 디자인이 중요하며, 이를 위해 DB, Java, SpringBoot, PHP, Python, React 등의 기술과 도구를 활용한다.',
+              insightTagList: ['UI/UX', '개발 친화적 디자인', '브랜드 디자인'],
+              todayRead: false,
+            }}
+          />
+          <SummaryInsightCard
+            favicon="/svg/insight-favicon.svg"
+            insightData={{
+              insightId: 2,
+              insightMainImage: '/image/디자인3.jpg',
+              insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
+              insightSummary:
+                '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',
+              insightTagList: ['UI/UX', '사용자 경험'],
+              todayRead: false,
+            }}
+          />
         </InsightSection>
       </Wrapper>
       {isModalOn && (
@@ -95,7 +105,6 @@ const FolderDetail: NextPage<Props> = ({}) => {
           onClick2={() => handleShare('copy')}
         />
       )}
-      <FloatButton>URL 복사가 완료되었습니다.</FloatButton>
     </>
   );
 };
@@ -232,27 +241,3 @@ const LargeViewIcon = styled(LargeView)<IconProps>`
 
 const InsightSection = styled.div``;
 
-const FloatButton = styled.button`
-  position: fixed;
-  bottom: 43px;
-  display: flex;
-  width: 353px;
-  height: 56px;
-  outline: none;
-  border: none;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  background: var(--Primary-500, #3184ff);
-
-  color: #fff;
-  /* Body-16-SB */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
-`;
