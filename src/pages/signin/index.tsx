@@ -17,25 +17,9 @@ const SignIn: NextPage<Props> = ({}) => {
     userEmail: '',
     userPassword: '',
   });
-  const [isValid, setIsValid] = useState(true);
   const router = useRouter();
-  const { mutate } = useLogin();
+  const { isError, mutate } = useLogin();
 
-  const handleLogin = async () => {
-    try {
-      mutate(loginInput);
-    } catch (e) {
-      console.log(e);
-      setIsValid(false);
-      return;
-    }
-    return;
-  };
-
-  const handleKakao = () => {
-    setIsValid(false);
-    return;
-  };
   return (
     <Wrapper>
       <Header onClick={() => router.back()} />
@@ -78,7 +62,7 @@ const SignIn: NextPage<Props> = ({}) => {
             )}
           </div>
           <ErrorText>
-            {!isValid && '*잘못된 이메일 혹은 비밀번호입니다.'}
+            {isError && '*잘못된 이메일 혹은 비밀번호입니다.'}
           </ErrorText>
         </PWSection>
       </InputContainer>
@@ -89,13 +73,9 @@ const SignIn: NextPage<Props> = ({}) => {
             ? 'disabled'
             : 'activated'
         }
-        onClick={handleLogin}
+        onClick={() => mutate(loginInput)}
       />
-      <BottomBtn
-        text="카카오톡으로 로그인하기"
-        state="transparent"
-        onClick={handleKakao}
-      />
+      <BottomBtn text="카카오톡으로 로그인하기" state="transparent" />
     </Wrapper>
   );
 };

@@ -7,7 +7,6 @@ import {
   RefreshPostResponse,
 } from '@/types/user';
 import { api, apiWithoutAuth } from '@/api';
-import { useQuery } from '@tanstack/react-query';
 
 export async function signup(
   signupData: SignupPostRequest,
@@ -22,15 +21,6 @@ export async function login(
   const response = await apiWithoutAuth.post('/user/login', loginData);
   return response.data;
 }
-
-export const useLogin = (loginData: LoginPostRequest) => {
-  const { error, data, isSuccess } = useQuery({
-    queryKey: ['login'],
-    queryFn: () => login(loginData),
-    enabled: !!loginData,
-  });
-  return { error, data, isSuccess };
-};
 
 export async function refresh(
   refreshData: RefreshPostRequest,
