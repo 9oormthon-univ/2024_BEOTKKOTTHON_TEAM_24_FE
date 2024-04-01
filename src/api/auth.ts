@@ -15,14 +15,6 @@ export async function signup(
   const response = await apiWithoutAuth.post('/user/signup', signupData);
   return response.data;
 }
-export const useSignup = (signupData: SignupPostRequest) => {
-  const { error, isSuccess } = useQuery({
-    queryKey: ['login'],
-    queryFn: () => signup(signupData),
-    enabled: !!signupData,
-  });
-  return { error, isSuccess };
-};
 
 export async function login(
   loginData: LoginPostRequest,

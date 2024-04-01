@@ -9,9 +9,13 @@ export function useSignup() {
   return useMutation({
     mutationFn: signup,
     onSuccess: () => {
-      router.replace(`/home`);
+      router.replace(`/onboard/addhome`);
     },
-    onError: () => {
+    onError: (e) => {
+      console.log(e);
+      alert(
+        '회원가입에 실패했습니다. 올바르게 정보를 입력했는지 확인해주세요!',
+      );
       router.replace('/signup');
     },
   });

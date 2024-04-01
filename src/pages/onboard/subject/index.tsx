@@ -7,19 +7,18 @@ import { useEffect, useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import styled from 'styled-components';
 import AddButton from '@svg/addBtn.svg';
-import { signup } from '@/api/auth';
-import { useRouter } from 'next/router';
+import { useSignup } from '@/hooks/api/useAuth';
 
 interface Props {}
 
 const OnboardSubject: NextPage<Props> = ({}) => {
-  const router = useRouter();
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [topicList, setTopicList] = useState<string[]>(
     SubjectList[signupInput.job].sort(),
   );
   const [isAdding, setIsAdding] = useState(false);
   const [addingTopic, setAddingTopic] = useState('');
+  const { mutate } = useSignup();
 
   useEffect(() => {
     setSignupInput({ ...signupInput, topicList: [] });
@@ -55,19 +54,8 @@ const OnboardSubject: NextPage<Props> = ({}) => {
         });
   };
 
-  const handleSignup = async() => {
-    try {
-      console.log(signupInput)
-      const result = await signup(signupInput);
-      console.log(result);
-      router.push('/onboard/addhome');
-    } catch (e) {
-      console.log(e);
-      alert(
-        '회원가입에 실패했습니다. 올바르게 정보를 입력했는지 확인해주세요!',
-      );
-      router.push('/signup');
-    }
+  const handleSignup = async () => {
+    mutate(signupInput);
   };
 
   return (
