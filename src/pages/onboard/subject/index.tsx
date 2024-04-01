@@ -54,10 +54,6 @@ const OnboardSubject: NextPage<Props> = ({}) => {
         });
   };
 
-  const handleSignup = async () => {
-    mutate(signupInput);
-  };
-
   return (
     <Wrapper>
       <Header rightText="3/3" />
@@ -121,7 +117,7 @@ const OnboardSubject: NextPage<Props> = ({}) => {
         <BottomBtn
           text="완료"
           state="activated"
-          onClick={() => handleSignup()}
+          onClick={() => mutate(signupInput)}
         />
       ) : (
         <BottomBtn text="완료" state="disabled" />
