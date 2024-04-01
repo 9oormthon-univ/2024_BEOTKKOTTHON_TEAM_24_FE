@@ -6,8 +6,8 @@ import UnvisibleIcon from '@svg/unvisible-icon.svg';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { useRouter } from 'next/router';
-import { login } from '@/api/auth';
 import { LoginPostRequest } from '@/types/user';
+import { useLogin } from '@/hooks/api/useAuth';
 
 interface Props {}
 
@@ -19,18 +19,16 @@ const SignIn: NextPage<Props> = ({}) => {
   });
   const [isValid, setIsValid] = useState(true);
   const router = useRouter();
+  const { mutate } = useLogin();
 
   const handleLogin = async () => {
     try {
-      const res = await login(loginInput);
-      localStorage.setItem('accessToken', res.accessToken)
-      localStorage.setItem('refreshItem', res.refreshToken)
+      mutate(loginInput);
     } catch (e) {
       console.log(e);
       setIsValid(false);
       return;
     }
-    router.push('/home');
     return;
   };
 

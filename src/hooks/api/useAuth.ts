@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
-
+import { setAccessToken } from '@/utils/auth';
 import { login, signup } from '@api/auth';
 
 export function useSignup() {
@@ -22,7 +22,8 @@ export function useLogin() {
 
   return useMutation({
     mutationFn: login,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setAccessToken(data.accessToken);
       router.replace(`/home`);
     },
     onError: () => {

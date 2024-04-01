@@ -17,8 +17,7 @@ const SelectFolderModal = (props: Props) => {
   const [newFolderName, setNewFolderName] = useState('');
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
 
-  const accessToken = localStorage.getItem('accessToken');
-  const { data } = useGetFolder(String(accessToken));
+  const { data } = useGetFolder();
 
   const [folderList, setFolderList] = useState<FolderGetResponse | undefined>([
     {

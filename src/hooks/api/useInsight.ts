@@ -31,18 +31,18 @@ export function useGetFolderInsight(folderId: number) {
   });
 }
 
-export function usePostImageLink(image: FormData, token: string) {
+export function usePostImageLink(image: FormData) {
   return useQuery({
     queryKey: ['image-link'],
-    queryFn: () => postImage(image, token),
-  })
+    queryFn: () => postImage(image),
+  });
 }
 
-export function usePostInsight(insightData: InsightPostRequest, token: string) {
+export function usePostInsight(insightData: InsightPostRequest) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => postInsight(insightData, token),
+    mutationFn: () => postInsight(insightData),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['insight'] }),
   });
 }

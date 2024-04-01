@@ -6,13 +6,13 @@ import {
   RefreshPostRequest,
   RefreshPostResponse,
 } from '@/types/user';
-import { api } from '@/api';
+import { api, apiWithoutAuth } from '@/api';
 import { useQuery } from '@tanstack/react-query';
 
 export async function signup(
   signupData: SignupPostRequest,
 ): Promise<SignupPostResponse> {
-  const response = await api.post('/user/signup', signupData);
+  const response = await apiWithoutAuth.post('/user/signup', signupData);
   return response.data;
 }
 export const useSignup = (signupData: SignupPostRequest) => {
@@ -27,7 +27,7 @@ export const useSignup = (signupData: SignupPostRequest) => {
 export async function login(
   loginData: LoginPostRequest,
 ): Promise<LoginPostResponse> {
-  const response = await api.post('/user/login', loginData);
+  const response = await apiWithoutAuth.post('/user/login', loginData);
   return response.data;
 }
 

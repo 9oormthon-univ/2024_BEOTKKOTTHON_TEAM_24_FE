@@ -10,7 +10,7 @@ interface CardProps {
 const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
   return (
     <Wrapper opacity={insightData.todayRead ? 0.6 : 1}>
-      {favicon ? (
+      {favicon && (
         <Image
           src={favicon}
           width={52}
@@ -18,8 +18,6 @@ const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
           alt="Insight Card image"
           className="favicon"
         />
-      ) : (
-        <></>
       )}
       <Image
         src={insightData.insightMainImage}

@@ -21,7 +21,7 @@ useQuery:
 const { data, isLoading(선택), error(선택) } = useGet~~()
 
 useMutation:
-const { mutate } = usePost~~()
+const { mutate } = usePost~~() 
 mutate(data)
 
 한 곳에서 여러 mutate 사용할 경우 alias 지정:
@@ -31,8 +31,8 @@ postSomething(data)
 deleteSomething(id)
 */
 
-export function useGetFolder(token: string) {
-  return useQuery({ queryKey: ['folder'], queryFn: () => getFolder(token) });
+export function useGetFolder() {
+  return useQuery({ queryKey: ['folder'], queryFn: getFolder });
 }
 
 export function usePostFolder() {

@@ -1,12 +1,11 @@
-
-import { cookies } from 'next/headers';
-
-export const getAccessToken = async () => {
-  const cookieStore = await cookies();
-  return cookieStore.get('accessToken');
+export const setAccessToken = (token: string | null) => {
+  localStorage.setItem('authorization', token || '');
 };
 
-export const getRefreshToken = () => {
-  const cookieStore = cookies();
-  return cookieStore.get('refreshToken');
+export const getAccessToken = () => {
+  return localStorage.getItem('authorization');
+};
+
+export const deleteAccessToken = () => {
+  localStorage.removeItem('authorization');
 };
