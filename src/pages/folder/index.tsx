@@ -21,9 +21,9 @@ const Folder: NextPage<Props> = ({}) => {
           >
             편집
           </span>
-          <SearchSection>
+          <SearchSection onClick={() => router.push('/folder/search')}>
             <SearchIcon />
-            <SearchInput placeholder="인사이트 검색" />
+            <SearchInput>인사이트 검색</SearchInput>
           </SearchSection>
           <FolderSection>
             <div className="header">
@@ -41,7 +41,9 @@ const Folder: NextPage<Props> = ({}) => {
             <div className="list-container">
               {FolderList.map((folder) => (
                 <>
-                  <IconContainer onClick={()=>router.push(`/folder/${folder.folderId}`)}>
+                  <IconContainer
+                    onClick={() => router.push(`/folder/${folder.folderId}`)}
+                  >
                     {colorDecoder(folder.folderColor, 'big')}
                     <span className="name">{folder.folderName}</span>
                     <span className="count">{folder.insightCount}</span>
@@ -103,7 +105,7 @@ const SearchSection = styled.div`
   background: #f4f5f7;
 `;
 
-const SearchInput = styled.input`
+const SearchInput = styled.button`
   width: 100%;
   border: none;
   outline: none;
@@ -114,6 +116,9 @@ const SearchInput = styled.input`
   line-height: 21px; /* 131.25% */
   letter-spacing: -0.32px;
   background: #f4f5f7;
+  color: #848484;
+  display: flex;
+  justify-content: left;
 `;
 
 const FolderSection = styled.div`
