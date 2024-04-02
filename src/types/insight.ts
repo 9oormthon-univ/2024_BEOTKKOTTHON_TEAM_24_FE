@@ -3,9 +3,9 @@ export type RemindType = 'DEFAULT' | 'WEEK' | 'MONTH';
 export type Insight = {
   insightId: number;
   insightTitle: string;
-  insightMainImg: string;
+  insightMainImage: string;
   insightSummary: string;
-  insighthashTagList: string[];
+  hashTagList: string[];
 };
 
 export type InsightDetail = {

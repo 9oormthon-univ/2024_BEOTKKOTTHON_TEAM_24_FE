@@ -7,7 +7,7 @@ export type QuestionGetResponse = {
     reminderId: number;
     insightTitle: string;
     insightMainImage: string;
-    insightTagList: string[];
+    hashTagList: string[];
   }[];
 };
 

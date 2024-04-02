@@ -7,7 +7,10 @@ import {
   FolderUrlGetRequest,
   FolderUrlGetResponse,
 } from '@/types/folder';
-import { FolderSearchGetResponse } from '@/types/insight';
+import {
+  FolderSearchPostRequest,
+  FolderSearchPostResponse,
+} from '@/types/folder';
 
 // 폴더
 export async function getFolder(): Promise<FolderGetResponse> {
@@ -36,8 +39,10 @@ export async function deleteFolder(folderId: number) {
 }
 
 // 인사이트 전체 검색
-export async function searchFolder(): Promise<FolderSearchGetResponse> {
-  const response = await api.get(`/folder/search`);
+export async function searchFolder(
+  searchData: FolderSearchPostRequest,
+): Promise<FolderSearchPostResponse> {
+  const response = await api.post(`/folder/search`, searchData);
   return response.data;
 }
 

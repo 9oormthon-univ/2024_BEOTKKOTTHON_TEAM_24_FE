@@ -5,13 +5,32 @@ import NavigationLayout from '@/components/common/NavigationLayout';
 import Header from '@/components/common/Header';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchFolder } from '@/hooks/api/useFolder';
+import { FolderSearchGetResponse } from '@/types/insight';
+import SummaryInsightCard from '@/components/folder/SummaryInsightCard';
+import InsightCard from '@/components/folder/InsightCard';
 
 const FolderSearch: NextPage = ({}) => {
   const [$isSmall, set$isSmall] = useState<boolean>(false);
+  const [searchData, setSearchData] = useState<FolderSearchGetResponse>([]);
+  const [result, setResult] = useState<FolderSearchGetResponse>([]);
+  const [keyword, setKeyword] = useState<string>('');
+  const { data, isSuccess, mutate } = useSearchFolder();
   const onClickView = () => {
     set$isSmall(!$isSmall);
   };
+
+  useEffect(() => {
+    mutate('');
+  }, []);
+
+  useEffect(() => {
+    isSuccess && setSearchData(data);
+  }, [isSuccess, data]);
+
+  useEffect(() => {}, [keyword]);
+
   return (
     <>
       <NavigationLayout>
@@ -19,7 +38,11 @@ const FolderSearch: NextPage = ({}) => {
         <Wrapper>
           <SearchSection>
             <SearchIcon />
-            <SearchInput placeholder="인사이트 검색" />
+            <SearchInput
+              placeholder="인사이트 검색"
+              autoFocus
+              onChange={(e) => setKeyword(e.target.value)}
+            />
           </SearchSection>
           <ViewSetting>
             <div>
@@ -31,7 +54,19 @@ const FolderSearch: NextPage = ({}) => {
               <SmallViewIcon $isSmall={$isSmall} onClick={onClickView} />
             </div>
           </ViewSetting>
-          <ResultSection></ResultSection>
+          <ResultSection>
+            {searchData.map((value, i) =>
+              $isSmall ? (
+                <InsightCard key={i} insightData={value} />
+              ) : (
+                <SummaryInsightCard
+                  key={i}
+                  favicon="/svg/insight-favicon.svg"
+                  insightData={value}
+                />
+              ),
+            )}
+          </ResultSection>
         </Wrapper>
       </NavigationLayout>
     </>
@@ -99,9 +134,6 @@ const SearchInput = styled.input`
 `;
 
 const ResultSection = styled.div`
-  width: calc(100% - 40px);
-  height: calc(100% - 240px);
-  margin: auto;
   padding-top: 3px;
   .header {
     display: flex;
