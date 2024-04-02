@@ -29,7 +29,16 @@ const FolderSearch: NextPage = ({}) => {
     isSuccess && setSearchData(data);
   }, [isSuccess, data]);
 
-  useEffect(() => {}, [keyword]);
+  useEffect(() => {
+    setResult(
+      searchData.filter(
+        (value) =>
+          value.insightTitle.toLowerCase().includes(keyword) ||
+          value.insightSummary.toLowerCase().includes(keyword) ||
+          value.hashTagList.some((v) => v.toLowerCase().includes(keyword)),
+      ),
+    );
+  }, [keyword]);
 
   return (
     <>
@@ -47,7 +56,7 @@ const FolderSearch: NextPage = ({}) => {
           <ViewSetting>
             <div>
               <span>전체 </span>
-              <span className="title-m">146</span>
+              <span className="title-m">{result.length}</span>
             </div>
             <div className="icons-box">
               <LargeViewIcon $isSmall={$isSmall} onClick={onClickView} />
@@ -55,7 +64,7 @@ const FolderSearch: NextPage = ({}) => {
             </div>
           </ViewSetting>
           <ResultSection>
-            {searchData.map((value, i) =>
+            {result.map((value, i) =>
               $isSmall ? (
                 <InsightCard key={i} insightData={value} />
               ) : (
