@@ -5,7 +5,7 @@ import NavigationLayout from '@/components/common/NavigationLayout';
 import Header from '@/components/common/Header';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useEffect, useState } from 'react';
 import { useSearchFolder } from '@/hooks/api/useFolder';
 import { FolderSearchGetResponse } from '@/types/insight';
 import SummaryInsightCard from '@/components/folder/SummaryInsightCard';
@@ -21,12 +21,31 @@ const FolderSearch: NextPage = ({}) => {
     set$isSmall(!$isSmall);
   };
 
-  useEffect(() => {
-    mutate('');
+  useLayoutEffect(() => {
+    mutate(' ');
   }, []);
 
   useEffect(() => {
-    isSuccess && setSearchData(data);
+    isSuccess &&
+      setSearchData(
+        Array.from(
+          { length: 500 },
+          (_, index) => index,
+        ).reduce<FolderSearchGetResponse>((acc) => {
+          acc.push(...data);
+          return acc;
+        }, []),
+      );
+    isSuccess &&
+      setResult(
+        Array.from(
+          { length: 500 },
+          (_, index) => index,
+        ).reduce<FolderSearchGetResponse>((acc) => {
+          acc.push(...data);
+          return acc;
+        }, []),
+      );
   }, [isSuccess, data]);
 
   useEffect(() => {
