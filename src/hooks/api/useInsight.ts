@@ -16,6 +16,7 @@ import {
   InsightPutRequest,
 } from '@/types/insight';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 
 export function useGetSharedFolder(folderId: number) {
   return useQuery({
@@ -38,12 +39,16 @@ export function usePostImageLink(image: FormData) {
   });
 }
 
-export function usePostInsight(insightData: InsightPostRequest) {
+export function usePostInsight() {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   return useMutation({
-    mutationFn: () => postInsight(insightData),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['insight'] }),
+    mutationFn: (data: InsightPostRequest) => postInsight(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['insight'] });
+      router.replace('/upload/saved');
+    },
   });
 }
 
