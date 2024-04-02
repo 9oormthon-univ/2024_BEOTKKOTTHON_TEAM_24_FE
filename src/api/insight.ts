@@ -96,7 +96,7 @@ export async function postImage(image: FormData) {
 export async function postInsight(
   insightData: InsightPostRequest,
 ): Promise<InsightPostResponse> {
-  const response = await api.post(`/insight`, { insightData });
+  const response = await api.post(`/insight`, insightData);
   return response.data;
 }
 
