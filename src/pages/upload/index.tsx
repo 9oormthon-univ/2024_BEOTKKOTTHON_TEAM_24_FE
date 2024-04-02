@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useGetFolder } from '@/hooks/api/useFolder';
-import LocalStorage from '@/hooks/LocalStorage';
+import { getAccessToken } from '@/utils/auth';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -15,11 +15,10 @@ const LinkInput: NextPage = ({}) => {
   const [imageList, setImageList] = useState<string[]>([]);
   const [errorText, setErrorText] = useState('');
   const [source, setSource] = useState('');
-  const accessToken = LocalStorage.getItem('accessToken')
-  const { data } = useGetFolder(String(accessToken));
+  const { data } = useGetFolder();
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!getAccessToken()) {
       alert('로그인 후 이용하실 수 있어요!');
       router.push('/signin');
     }
@@ -34,7 +33,7 @@ const LinkInput: NextPage = ({}) => {
       alert('링크를 입력해주세요.');
       return;
     }
-    console.log(data?.map((folder) => folder.folderName))
+    console.log(data?.map((folder) => folder.folderName));
     // 인사이트 제목, 요약, 키워드 요청
     router.push(
       {
@@ -69,8 +68,9 @@ const LinkInput: NextPage = ({}) => {
   const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e?.target.files) return;
     // 이미지 화면에 띄우기
-    const newImagesURL = Array.from(e?.target.files, (file: Blob | MediaSource) =>
-      URL.createObjectURL(file),
+    const newImagesURL = Array.from(
+      e?.target.files,
+      (file: Blob | MediaSource) => URL.createObjectURL(file),
     );
     const newList = imageList.concat(newImagesURL);
     if (newList.length > 10) {
@@ -236,7 +236,11 @@ const LinkInput: NextPage = ({}) => {
           </MemoSection>
           <SourceSection>
             <SubTitle>출처</SubTitle>
-            <SourceInput value={source} onChange={(e) => setSource(e.target.value)} placeholder="출처를 입력하세요." />
+            <SourceInput
+              value={source}
+              onChange={(e) => setSource(e.target.value)}
+              placeholder="출처를 입력하세요."
+            />
           </SourceSection>
         </PageContainer>
         <BottomBtn

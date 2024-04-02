@@ -6,8 +6,8 @@ import UnvisibleIcon from '@svg/unvisible-icon.svg';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { useRouter } from 'next/router';
-import { login } from '@/api/auth';
 import { LoginPostRequest } from '@/types/user';
+import { useLogin } from '@/hooks/api/useAuth';
 
 interface Props {}
 
@@ -17,27 +17,9 @@ const SignIn: NextPage<Props> = ({}) => {
     userEmail: '',
     userPassword: '',
   });
-  const [isValid, setIsValid] = useState(true);
   const router = useRouter();
+  const { isError, mutate } = useLogin();
 
-  const handleLogin = async () => {
-    try {
-      const res = await login(loginInput);
-      localStorage.setItem('accessToken', res.accessToken)
-      localStorage.setItem('refreshItem', res.refreshToken)
-    } catch (e) {
-      console.log(e);
-      setIsValid(false);
-      return;
-    }
-    router.push('/home');
-    return;
-  };
-
-  const handleKakao = () => {
-    setIsValid(false);
-    return;
-  };
   return (
     <Wrapper>
       <Header onClick={() => router.back()} />
@@ -80,7 +62,7 @@ const SignIn: NextPage<Props> = ({}) => {
             )}
           </div>
           <ErrorText>
-            {!isValid && '*잘못된 이메일 혹은 비밀번호입니다.'}
+            {isError && '*잘못된 이메일 혹은 비밀번호입니다.'}
           </ErrorText>
         </PWSection>
       </InputContainer>
@@ -91,13 +73,9 @@ const SignIn: NextPage<Props> = ({}) => {
             ? 'disabled'
             : 'activated'
         }
-        onClick={handleLogin}
+        onClick={() => mutate(loginInput)}
       />
-      <BottomBtn
-        text="카카오톡으로 로그인하기"
-        state="transparent"
-        onClick={handleKakao}
-      />
+      <BottomBtn text="카카오톡으로 로그인하기" state="transparent" />
     </Wrapper>
   );
 };

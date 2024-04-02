@@ -1,10 +1,8 @@
 import Header from '@/components/common/Header';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import SummaryInsightCard from '@/components/common/SummaryInsightCard';
-import { RemindInsight } from '@/types/reminder';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {}
@@ -12,35 +10,29 @@ interface Props {}
 const Saved: NextPage<Props> = ({}) => {
   const router = useRouter();
   const { id, title, summary, image, tagList } = router.query;
-  const [cardData, setCardData] = useState<RemindInsight>({
-    insightId: 0,
-    insightTitle: '',
-    insightSummary: '',
-    insightMainImage: '',
-    insightTagList: [],
+  const cardData = {
+    insightId: Number(id),
+    insightTitle: String(title),
+    insightSummary: String(summary),
+    insightMainImage: image ? String(image) : '/image/defaultImage.jpeg',
+    insightTagList: tagList
+      ? Array.isArray(tagList)
+        ? tagList
+        : [tagList]
+      : [],
     todayRead: false,
-  });
-  useEffect(() => {
-    setCardData({
-      insightId: Number(id),
-      insightTitle: String(title),
-      insightSummary: String(summary),
-      insightMainImage: String(image),
-      insightTagList: tagList
-        ? Array.isArray(tagList)
-          ? tagList
-          : [tagList]
-        : [],
-      todayRead: false,
-    });
-  }, []);
+  };
+
   return (
     <>
       <NavigationLayout>
         <Wrapper>
           <Header title="저장 완료" />
           <CardSection>
-            <SummaryInsightCard favicon={"/svg/insight-favicon.svg"} insightData={cardData} />
+            <SummaryInsightCard
+              favicon="/svg/insight-favicon.svg"
+              insightData={cardData}
+            />
           </CardSection>
           <div className="blue">확인하러 가기</div>
           <HrLine />
@@ -96,16 +88,16 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-width: 100%;
-margin-left: 20px;
-margin-top: 20px;
-color: var(--Neutral-500, #1F1F1F);
-/* Body-18-B */
-font-family: Pretendard;
-font-size: 18px;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 25.2px */
+  width: 100%;
+  margin-left: 20px;
+  margin-top: 20px;
+  color: var(--Neutral-500, #1f1f1f);
+  /* Body-18-B */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 25.2px */
 `;
 const CardSection = styled.div``;
 

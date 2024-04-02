@@ -1,10 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
+import { getAccessToken } from '@/utils/auth';
 
 function setInterceptors(instance: AxiosInstance) {
   instance.interceptors.request.use(
     (config) => {
       if (typeof window !== 'undefined' && config.headers) {
-        config.headers.Authorization = `Bearer `;
+        config.headers.Authorization = `Bearer ${getAccessToken()}`;
       }
       return config;
     },
@@ -30,5 +31,5 @@ function createInstanceWithoutAuth() {
   return instance;
 }
 
-export const apifixing = createInstance();
-export const api= createInstanceWithoutAuth();
+export const api = createInstance();
+export const apiWithoutAuth = createInstanceWithoutAuth();
