@@ -1,63 +1,42 @@
 import { NextPage } from 'next';
+import Image from 'next/image';
 import styled from 'styled-components';
 import SearchIcon from '@svg/search-icon.svg';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import Header from '@/components/common/Header';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
-import { useLayoutEffect, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchFolder } from '@/hooks/api/useFolder';
 import { FolderSearchGetResponse } from '@/types/insight';
 import SummaryInsightCard from '@/components/folder/SummaryInsightCard';
 import InsightCard from '@/components/folder/InsightCard';
+import { useTransition } from 'react';
+import defaultImage from '@image/defaultImage.jpeg';
 
 const FolderSearch: NextPage = ({}) => {
   const [$isSmall, set$isSmall] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<FolderSearchGetResponse>([]);
-  const [result, setResult] = useState<FolderSearchGetResponse>([]);
   const [keyword, setKeyword] = useState<string>('');
   const { data, isSuccess, mutate } = useSearchFolder();
+  const [isPending, startTransition] = useTransition();
   const onClickView = () => {
     set$isSmall(!$isSmall);
   };
 
-  useLayoutEffect(() => {
-    mutate(' ');
-  }, []);
-
   useEffect(() => {
-    isSuccess &&
-      setSearchData(
-        Array.from(
-          { length: 500 },
-          (_, index) => index,
-        ).reduce<FolderSearchGetResponse>((acc) => {
-          acc.push(...data);
-          return acc;
-        }, []),
-      );
-    isSuccess &&
-      setResult(
-        Array.from(
-          { length: 500 },
-          (_, index) => index,
-        ).reduce<FolderSearchGetResponse>((acc) => {
-          acc.push(...data);
-          return acc;
-        }, []),
-      );
+    isSuccess && setSearchData(data);
   }, [isSuccess, data]);
 
   useEffect(() => {
-    setResult(
-      searchData.filter(
-        (value) =>
-          value.insightTitle.toLowerCase().includes(keyword) ||
-          value.insightSummary.toLowerCase().includes(keyword) ||
-          value.hashTagList.some((v) => v.toLowerCase().includes(keyword)),
-      ),
-    );
+    mutate(keyword);
   }, [keyword]);
+
+  const typingKeyword = (inputValue: string) => {
+    startTransition(() => {
+      setKeyword(inputValue);
+    });
+  };
 
   return (
     <>
@@ -69,13 +48,13 @@ const FolderSearch: NextPage = ({}) => {
             <SearchInput
               placeholder="인사이트 검색"
               autoFocus
-              onChange={(e) => setKeyword(e.target.value)}
+              onChange={(e) => typingKeyword(e.target.value)}
             />
           </SearchSection>
           <ViewSetting>
             <div>
               <span>전체 </span>
-              <span className="title-m">{result.length}</span>
+              <span className="title-m">{searchData.length}</span>
             </div>
             <div className="icons-box">
               <LargeViewIcon $isSmall={$isSmall} onClick={onClickView} />
@@ -83,16 +62,26 @@ const FolderSearch: NextPage = ({}) => {
             </div>
           </ViewSetting>
           <ResultSection>
-            {result.map((value, i) =>
-              $isSmall ? (
-                <InsightCard key={i} insightData={value} />
-              ) : (
-                <SummaryInsightCard
-                  key={i}
-                  favicon="/svg/insight-favicon.svg"
-                  insightData={value}
-                />
-              ),
+            {isSuccess && !isPending ? (
+              searchData.map((value, i) =>
+                $isSmall ? (
+                  <InsightCard key={i} insightData={value} />
+                ) : (
+                  <SummaryInsightCard
+                    key={i}
+                    favicon="/svg/insight-favicon.svg"
+                    insightData={value}
+                  />
+                ),
+              )
+            ) : (
+              <Image
+                src={defaultImage}
+                alt="default"
+                width={400}
+                height={400}
+                className="thumbnail"
+              />
             )}
           </ResultSection>
         </Wrapper>
