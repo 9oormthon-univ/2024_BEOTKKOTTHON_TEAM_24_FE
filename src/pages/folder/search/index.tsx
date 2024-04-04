@@ -8,7 +8,6 @@ import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
 import { useEffect, useState } from 'react';
 import { useSearchFolder } from '@/hooks/api/useFolder';
-import { FolderSearchGetResponse } from '@/types/insight';
 import SummaryInsightCard from '@/components/folder/SummaryInsightCard';
 import InsightCard from '@/components/folder/InsightCard';
 import { useTransition } from 'react';
@@ -16,17 +15,12 @@ import defaultImage from '@image/defaultImage.jpeg';
 
 const FolderSearch: NextPage = ({}) => {
   const [$isSmall, set$isSmall] = useState<boolean>(false);
-  const [searchData, setSearchData] = useState<FolderSearchGetResponse>([]);
   const [keyword, setKeyword] = useState<string>('');
-  const { data, isSuccess, mutate } = useSearchFolder();
+  const { data, mutate } = useSearchFolder();
   const [isPending, startTransition] = useTransition();
   const onClickView = () => {
     set$isSmall(!$isSmall);
   };
-
-  useEffect(() => {
-    isSuccess && setSearchData(data);
-  }, [isSuccess, data]);
 
   useEffect(() => {
     mutate(keyword);
@@ -54,7 +48,7 @@ const FolderSearch: NextPage = ({}) => {
           <ViewSetting>
             <div>
               <span>전체 </span>
-              <span className="title-m">{searchData.length}</span>
+              <span className="title-m">{data?.length}</span>
             </div>
             <div className="icons-box">
               <LargeViewIcon $isSmall={$isSmall} onClick={onClickView} />
@@ -62,8 +56,8 @@ const FolderSearch: NextPage = ({}) => {
             </div>
           </ViewSetting>
           <ResultSection>
-            {isSuccess && !isPending ? (
-              searchData.map((value, i) =>
+            {!isPending ? (
+              data?.map((value, i) =>
                 $isSmall ? (
                   <InsightCard key={i} insightData={value} />
                 ) : (
