@@ -1,22 +1,28 @@
 import { NextPage } from 'next';
-import Image from 'next/image';
 import styled from 'styled-components';
 import SearchIcon from '@svg/search-icon.svg';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import Header from '@/components/common/Header';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchFolder } from '@/hooks/api/useFolder';
 import SummaryInsightCard from '@/components/folder/SummaryInsightCard';
 import InsightCard from '@/components/folder/InsightCard';
 import { useTransition } from 'react';
-import defaultImage from '@image/defaultImage.jpeg';
+import { FolderSearchPostResponse } from '@/types/folder';
+
+let count = 0;
+let memoCount = 0;
 
 const FolderSearch: NextPage = ({}) => {
+  count++;
+  console.log('rerender: ', count);
   const [$isSmall, set$isSmall] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
-  const { data, mutate } = useSearchFolder();
+  const { data, mutate, isSuccess } = useSearchFolder();
+  const [result, setResult] = useState<FolderSearchPostResponse>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = useTransition();
   const onClickView = () => {
     set$isSmall(!$isSmall);
@@ -26,11 +32,35 @@ const FolderSearch: NextPage = ({}) => {
     mutate(keyword);
   }, [keyword]);
 
+  useEffect(() => {
+    isSuccess && setResult(data);
+  }, [data, isSuccess]);
+
   const typingKeyword = (inputValue: string) => {
     startTransition(() => {
       setKeyword(inputValue);
     });
   };
+
+  const resultSection = useMemo(() => {
+    memoCount++;
+    console.log('memo rerendered: ', memoCount);
+    return (
+      <ResultSection>
+        {result?.map((value, i) =>
+          $isSmall ? (
+            <InsightCard key={i} insightData={value} />
+          ) : (
+            <SummaryInsightCard
+              key={i}
+              favicon="/svg/insight-favicon.svg"
+              insightData={value}
+            />
+          ),
+        )}
+      </ResultSection>
+    );
+  }, [result]);
 
   return (
     <>
@@ -48,36 +78,14 @@ const FolderSearch: NextPage = ({}) => {
           <ViewSetting>
             <div>
               <span>전체 </span>
-              <span className="title-m">{data?.length}</span>
+              <span className="title-m">{result?.length}</span>
             </div>
             <div className="icons-box">
               <LargeViewIcon $isSmall={$isSmall} onClick={onClickView} />
               <SmallViewIcon $isSmall={$isSmall} onClick={onClickView} />
             </div>
           </ViewSetting>
-          <ResultSection>
-            {!isPending ? (
-              data?.map((value, i) =>
-                $isSmall ? (
-                  <InsightCard key={i} insightData={value} />
-                ) : (
-                  <SummaryInsightCard
-                    key={i}
-                    favicon="/svg/insight-favicon.svg"
-                    insightData={value}
-                  />
-                ),
-              )
-            ) : (
-              <Image
-                src={defaultImage}
-                alt="default"
-                width={400}
-                height={400}
-                className="thumbnail"
-              />
-            )}
-          </ResultSection>
+          {resultSection}
         </Wrapper>
       </NavigationLayout>
     </>
@@ -129,6 +137,7 @@ const SearchSection = styled.div`
   gap: 10px;
   border-radius: 8px;
   background: #f4f5f7;
+  min-height: 50px;
 `;
 
 const SearchInput = styled.input`
