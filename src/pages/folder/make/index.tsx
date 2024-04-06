@@ -111,7 +111,7 @@ const SubTitle = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%
+  width: 100%;
   margin: auto;
   height: 51px;
   font-family: Pretendard;

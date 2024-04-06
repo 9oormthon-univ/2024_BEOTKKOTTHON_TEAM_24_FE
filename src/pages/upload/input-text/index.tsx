@@ -14,6 +14,7 @@ import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
+import { usePostInsight } from '@/hooks/api/useInsight';
 
 type aiInput = {
   link: string;
@@ -53,6 +54,7 @@ const Upload: NextPage = ({}) => {
     router.query;
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
   const [isSaving, setIsSaving] = useState(false);
+  const { mutate } = usePostInsight();
 
   useEffect(() => {
     const newLink = String(link);
@@ -150,30 +152,7 @@ const Upload: NextPage = ({}) => {
 
   const handleSubmit = async () => {
     setIsSaving(true);
-    setTimeout(() => {
-      router.push(
-        {
-          pathname: '/upload/saved',
-          query: {
-            id: 0,
-            insightUrl: insightInput.insightUrl,
-            title: insightInput.insightTitle,
-            summary: insightInput.insightSummary,
-            image: thumbnail,
-            insightSource: insightInput.insightSource,
-            viewCount: 0,
-            tagList: insightInput.hashTagList,
-            insightMemo: insightInput.insightMemo,
-            insightImageList: insightInput.insightImageList,
-            folderName: insightInput.folderName,
-            enable: insightInput.enable,
-            remindType: insightInput.remindType,
-            remindDays: insightInput.remindDays,
-          },
-        },
-        '/upload/saved',
-      );
-    }, 3000);
+    mutate(insightInput);
   };
 
   return (

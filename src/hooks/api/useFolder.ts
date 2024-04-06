@@ -63,7 +63,16 @@ export function useDeleteFolder() {
 }
 
 export function useSearchFolder() {
-  return useQuery({ queryKey: ['search-folder'], queryFn: searchFolder });
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (searchData: string) =>
+      searchFolder({
+        search: searchData,
+      }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['search-folder'] }),
+  });
 }
 
 export function useShareFolder(shareData: FolderUrlGetRequest) {

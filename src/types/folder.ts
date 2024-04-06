@@ -25,8 +25,12 @@ export type FolderPatchRequest = {
   foldeName?: string;
 };
 
-// GET /folder/search
-export type SearchGetResponse = Insight[];
+// POST /folder/search
+export type FolderSearchPostRequest = {
+  search: string;
+};
+
+export type FolderSearchPostResponse = Insight[];
 
 // GET /folder/share
 export type FolderUrlGetRequest = {
