@@ -4,6 +4,7 @@ import RenderCalenderBoard from './RenderCalenderBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 import Down from '@svg/down-icon.svg';
+import { useState } from 'react';
 
 interface Props {
   onClickModal: () => void;
@@ -14,6 +15,7 @@ interface Props {
 const Calender2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
+  const [direction, setDirection] = useState<string>('');
 
   const handleSelectDate = (v: string | null) => {
     v ? setSelectedDate(v) : setSelectedDate(today);
@@ -40,6 +42,7 @@ const Calender2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
         <div className="arrows">
           <Left
             onClick={() => {
+              setDirection('left');
               document.startViewTransition(() => {
                 handlePrevWeek();
               });
@@ -47,6 +50,7 @@ const Calender2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
           />
           <Right
             onClick={() => {
+              setDirection('right');
               document.startViewTransition(() => {
                 handleNextWeek();
               });
@@ -54,7 +58,15 @@ const Calender2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
           />
         </div>
       </Head>
-      <Board>{board}</Board>
+      <div className={direction}>{board}</div>
+      <style jsx>{`
+        .left {
+          view-transition-name: left-board;
+        }
+        .right {
+          view-transition-name: right-board;
+        }
+      `}</style>
     </Wrapper>
   );
 };
@@ -75,10 +87,6 @@ const Wrapper = styled.div`
     justify-content: space-between;
     align-items: center;
   }
-`;
-
-const Board = styled.div`
-  width: 100%;
 `;
 
 const Head = styled.div`
