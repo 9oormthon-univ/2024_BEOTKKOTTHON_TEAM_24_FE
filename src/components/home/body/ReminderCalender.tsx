@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
 import { useEffect, useState } from 'react';
-import Calender from './Calender';
+// import Calender from './Calender';
 import { CalenderPostResponse } from '@/types/reminder';
 import InsightList from './InsightList';
 import dayjs from 'dayjs';
 import CalenderModal from './CalenderModal';
+import Calender2 from './Calender2';
 
 export const calenderData: CalenderPostResponse = {
   date: '2024-03-18',
@@ -61,7 +62,12 @@ const ReminderCalender = () => {
 
   return (
     <Wrapper>
-      <Calender
+      {/* <Calender
+        onClickModal={onClickModal}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      /> */}
+      <Calender2
         onClickModal={onClickModal}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
