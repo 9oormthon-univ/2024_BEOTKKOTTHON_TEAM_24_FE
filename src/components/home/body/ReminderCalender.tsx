@@ -50,7 +50,9 @@ const ReminderCalender = () => {
   }, []);
 
   const onClickView = () => {
-    set$isSmall(!$isSmall);
+    document.startViewTransition(() => {
+      set$isSmall(!$isSmall);
+    });
   };
 
   const onClickModal = () => {
