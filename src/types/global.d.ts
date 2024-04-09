@@ -2,8 +2,11 @@ declare global {
   export interface WindowEventMap {
     beforeinstallprompt: BeforeInstallPromptEvent;
   }
+  export interface ViewTransition {
+    finished: Promise;
+  }
   export interface Document {
-    startViewTransition(callback: () => void): void;
+    startViewTransition(callback: () => void): ViewTransition;
   }
 }
 

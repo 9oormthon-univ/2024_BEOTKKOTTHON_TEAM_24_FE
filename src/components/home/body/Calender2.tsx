@@ -43,17 +43,25 @@ const Calender2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
           <Left
             onClick={() => {
               setDirection('left');
-              document.startViewTransition(() => {
-                handlePrevWeek();
-              });
+              document
+                .startViewTransition(() => {
+                  handlePrevWeek();
+                })
+                .finished.finally(() => {
+                  setDirection('');
+                });
             }}
           />
           <Right
             onClick={() => {
               setDirection('right');
-              document.startViewTransition(() => {
-                handleNextWeek();
-              });
+              document
+                .startViewTransition(() => {
+                  handleNextWeek();
+                })
+                .finished.finally(() => {
+                  setDirection('');
+                });
             }}
           />
         </div>
