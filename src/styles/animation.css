@@ -13,18 +13,18 @@
 
 ::view-transition-old(left-board) {
   animation-name: slideTo;
-  --slide-distance: -150px;
+  --slide-distance: 150px;
 }
 ::view-transition-new(right-board) {
   animation-name: slideFrom;
-  --slide-distance: -150px;
+  --slide-distance: 150px;
 }
 
 ::view-transition-new(left-board) {
   animation-name: slideFrom;
-  --slide-distance: 150px;
+  --slide-distance: -150px;
 }
 ::view-transition-old(right-board) {
   animation-name: slideTo;
-  --slide-distance: 150px;
+  --slide-distance: -150px;
 }
