@@ -5,7 +5,7 @@ export type Insight = {
   insightTitle: string;
   insightMainImage: string;
   insightSummary: string;
-  hashTagList: string[];
+  insightTagList: string[];
 };
 
 export type InsightDetail = {
@@ -52,7 +52,7 @@ export type InsightPostRequest = {
   insightMemo: string;
   insightSource: string;
   viewCount: 0;
-  hashTagList: string[];
+  insightTagList: string[];
   insightImageList: string[];
   enable: boolean;
   remindType: RemindType;
