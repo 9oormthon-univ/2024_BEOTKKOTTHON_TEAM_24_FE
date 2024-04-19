@@ -380,7 +380,7 @@ const Upload: NextPage = ({}) => {
               alt="loading"
               placeholder="blur"
               priority={true}
-              // blurDataURL={loadingBlurURL}
+              blurDataURL={loadingBlurURL}
               width={192}
               height={192}
             />
