@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useGetFolder } from '@/hooks/api/useFolder';
 import { getAccessToken } from '@/utils/auth';
+import InputWithTitle from '@/components/common/InputWithTitle';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -234,14 +235,13 @@ const LinkInput: NextPage = ({}) => {
               <LetterCounter>{memo.length}/500자</LetterCounter>
             </MemoWrapper>
           </MemoSection>
-          <SourceSection>
-            <SubTitle>출처</SubTitle>
-            <SourceInput
-              value={source}
-              onChange={(e) => setSource(e.target.value)}
-              placeholder="출처를 입력하세요."
-            />
-          </SourceSection>
+          <InputWithTitle
+            biggerTypo="title"
+            title="출처"
+            value={source}
+            onChnage={setSource}
+            placeholder="출처를 입력하세요."
+          />
         </PageContainer>
         <BottomBtn
           text="다음"
@@ -280,6 +280,7 @@ const PageContainer = styled.div`
   width: 100%;
   height: 100vh;
   padding: 0 20px;
+  margin: 37.5px 0px;
 `;
 
 const Input = styled.input`
@@ -466,13 +467,4 @@ const LetterCounter = styled.div`
   letter-spacing: -0.274px;
   margin-top: 0;
   padding: 16px;
-`;
-
-const SourceSection = styled(LinkSection)`
-  margin: 24px 0 38px;
-`;
-
-const SourceInput = styled(Input)`
-  height: 48px;
-  padding: 14px 16px;
 `;
