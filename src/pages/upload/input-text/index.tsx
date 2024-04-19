@@ -38,7 +38,7 @@ const Upload: NextPage = ({}) => {
     insightMainImage: '',
     insightSource: '',
     viewCount: 0,
-    hashTagList: [''],
+    insightTagList: [''],
     insightMemo: '',
     insightImageList: [''],
     folderName: '미드저니',
@@ -77,7 +77,7 @@ const Upload: NextPage = ({}) => {
         insightTitle: result.title,
         insightSummary: String(result.summary),
         insightMainImage: String(imageList?.[0]),
-        hashTagList: result.keywords
+        insightTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
             : result.keywords.split(', ')
@@ -107,20 +107,20 @@ const Upload: NextPage = ({}) => {
   }, [result.title]);
 
   const handleDeleteTag = (idx: number) => {
-    if (insightInput.hashTagList.length === 1) {
+    if (insightInput.insightTagList.length === 1) {
       alert('인사이트 저장에는 최소 태그 1개 이상이 필요해요!');
       return;
     }
-    const newKeywords = insightInput.hashTagList.filter(
-      (tag) => insightInput.hashTagList.indexOf(tag) !== idx,
+    const newKeywords = insightInput.insightTagList.filter(
+      (tag) => insightInput.insightTagList.indexOf(tag) !== idx,
     );
-    setInsightInput({ ...insightInput, hashTagList: newKeywords });
+    setInsightInput({ ...insightInput, insightTagList: newKeywords });
   };
 
   const checkEnter = (key: string) => {
     if (key === 'Enter') {
-      const newKeywords = [...insightInput.hashTagList, tagInput];
-      setInsightInput({ ...insightInput, hashTagList: newKeywords });
+      const newKeywords = [...insightInput.insightTagList, tagInput];
+      setInsightInput({ ...insightInput, insightTagList: newKeywords });
       setTagInput('');
       setIsAddingTag(false);
     }
@@ -227,9 +227,11 @@ const Upload: NextPage = ({}) => {
                 </SummarySection>
                 <TagSection>
                   <SubTitle>태그</SubTitle>
-                  <TagCounter>{insightInput.hashTagList.length}/3</TagCounter>
+                  <TagCounter>
+                    {insightInput.insightTagList.length}/3
+                  </TagCounter>
                   <TagList>
-                    {insightInput.hashTagList.map((tag, idx) => (
+                    {insightInput.insightTagList.map((tag, idx) => (
                       <TagWrapper key={idx}>
                         <span>{tag}</span>
                         <svg
@@ -260,7 +262,7 @@ const Upload: NextPage = ({}) => {
                         </svg>
                       </TagWrapper>
                     ))}
-                    {insightInput.hashTagList.length < 3 && (
+                    {insightInput.insightTagList.length < 3 && (
                       <TagWrapper key="addTag">
                         {isAddingTag ? (
                           <AutosizeInput
@@ -377,7 +379,8 @@ const Upload: NextPage = ({}) => {
               src={loadingGIF}
               alt="loading"
               placeholder="blur"
-              blurDataURL={loadingBlurURL}
+              priority={true}
+              // blurDataURL={loadingBlurURL}
               width={192}
               height={192}
             />

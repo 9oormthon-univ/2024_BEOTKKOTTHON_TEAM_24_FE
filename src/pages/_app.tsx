@@ -4,6 +4,7 @@ import { BeforeInstallPromptEvent } from '@/types/global';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
+import '@styles/animation.css';
 
 const queryClient = new QueryClient();
 

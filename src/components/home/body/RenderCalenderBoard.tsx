@@ -92,16 +92,6 @@ const Item = styled.div<ItemProps>`
     font-weight: 600;
     margin: 0;
     color: ${(props) => (props.$istoday ? '#3184FF' : '#1F1F1F')};
-    /* ${(props) =>
-      props.$istoday
-        ? css`
-            color: #3184ff;
-            opacity: 1;
-          `
-        : css`
-            color: #1f1f1f;
-            opacity: 0.6;
-          `} */
   }
 
   .date-container {
@@ -120,16 +110,6 @@ const Item = styled.div<ItemProps>`
     font-size: 17px;
     font-weight: 500;
     color: ${(props) => (props.$istoday ? '#3184FF' : '#1F1F1F')};
-    /* ${(props) =>
-      props.$istoday
-        ? css`
-            color: #3184ff;
-            font-size: 17px;
-          `
-        : css`
-            color: #1f1f1f;
-            font-size: 17px;
-          `} */
   }
 
   .stamp {

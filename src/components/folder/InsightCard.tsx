@@ -42,7 +42,7 @@ const InsightCard = ({ favicon, insightData }: Props) => {
       <div className="card-title-tag">
         <div className="card-title">{insightData.insightTitle}</div>
         <div className="card-tag">
-          {insightData.hashTagList.map((value) => value)}
+          {insightData.insightTagList.map((value) => value)}
         </div>
       </div>
     </Wrapper>

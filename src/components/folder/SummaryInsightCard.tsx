@@ -41,7 +41,7 @@ const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
         <div className="card-title">{insightData.insightTitle}</div>
         <div className="card-summary">{insightData.insightSummary}</div>
         <div className="card-tags">
-          {insightData.hashTagList.map((v: string, i: number) => (
+          {insightData.insightTagList.map((v: string, i: number) => (
             <div key={v ? v.toString() : `${v}${i}`} className="card-tag">
               {v}
             </div>
