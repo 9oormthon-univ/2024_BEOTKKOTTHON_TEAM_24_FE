@@ -1,6 +1,6 @@
 import BottomBtn from '@/components/common/BottomBtn';
 import Carousel from '@/components/landing/Carousel';
-import { CarouselSlides } from '@/constants/landing';
+import { CarouselSlides } from '@/components/landing/CarouselSlides';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 

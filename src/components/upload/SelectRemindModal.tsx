@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { InsightPostRequest, RemindType } from '@/types/insight';
 import GrabberIcon from '@svg/upload/grabber-icon.svg';
 import ForgettingCurve from '@svg/upload/forgetting-curve.svg';
+import { REMIND_TYPE, WEEKDAYS } from '@/constants/remind';
 
 type Props = {
   remindType: string | undefined;
@@ -12,13 +13,18 @@ type Props = {
   insightInput: InsightPostRequest;
 };
 
+const periodSelection = [
+  { remindType: REMIND_TYPE.DEFAULT, text: '추천 주기' },
+  { remindType: REMIND_TYPE.WEEK, text: '매주 반복' },
+  { remindType: REMIND_TYPE.MONTH, text: '매월 반복' },
+];
+
 const SelectRemindModal = (props: Props) => {
   const [remindType, setRemindType] = useState(props.insightInput.remindType);
   const [selectedWeekDay, setSelectedWeekDay] = useState<number[]>([]);
   const [selectedMonthDay, setSelectedMonthDay] = useState<number[]>([]);
 
   const renderRemindTerm = () => {
-    const weekData = ['월', '화', '수', '목', '금', '토', '일'];
     switch (remindType) {
       case 'DEFAULT':
         props.setRemindTerm('추천 주기');
@@ -28,8 +34,8 @@ const SelectRemindModal = (props: Props) => {
           props.setRemindTerm('매일 마다 ');
           break;
         }
-        const resultWeek = weekData.filter((day) =>
-          selectedWeekDay.includes(weekData.indexOf(day) + 1),
+        const resultWeek = WEEKDAYS.filter((day) =>
+          selectedWeekDay.includes(WEEKDAYS.indexOf(day) + 1),
         );
         const printContentWeek = resultWeek?.join('/');
         props.setRemindTerm(printContentWeek + '마다 ');
@@ -152,24 +158,15 @@ const SelectRemindModal = (props: Props) => {
           <RemindTermSection>
             <SubTitle>리마인드 주기 선택</SubTitle>
             <TermList>
-              <Term
-                onClick={() => handleType('DEFAULT')}
-                className={remindType === 'DEFAULT' ? 'selected' : ''}
-              >
-                추천 주기
-              </Term>
-              <Term
-                onClick={() => handleType('WEEK')}
-                className={remindType === 'WEEK' ? 'selected' : ''}
-              >
-                매주 반복
-              </Term>
-              <Term
-                onClick={() => handleType('MONTH')}
-                className={remindType === 'MONTH' ? 'selected' : ''}
-              >
-                매월 반복
-              </Term>
+              {periodSelection.map((value, i) => (
+                <Term
+                  key={i}
+                  onClick={() => handleType(value.remindType as RemindType)}
+                  className={remindType === value.remindType ? 'selected' : ''}
+                >
+                  value.text
+                </Term>
+              ))}
             </TermList>
           </RemindTermSection>
           {remindType === 'DEFAULT' && (
@@ -189,48 +186,17 @@ const SelectRemindModal = (props: Props) => {
             <div>
               <SubTitle>반복 요일 선택</SubTitle>
               <WeekDayList>
-                <WeekDay
-                  className={selectedWeekDay.includes(1) ? 'selected' : ''}
-                  onClick={() => handleDay(1)}
-                >
-                  월
-                </WeekDay>
-                <WeekDay
-                  className={selectedWeekDay.includes(2) ? 'selected' : ''}
-                  onClick={() => handleDay(2)}
-                >
-                  화
-                </WeekDay>
-                <WeekDay
-                  className={selectedWeekDay.includes(3) ? 'selected' : ''}
-                  onClick={() => handleDay(3)}
-                >
-                  수
-                </WeekDay>
-                <WeekDay
-                  className={selectedWeekDay.includes(4) ? 'selected' : ''}
-                  onClick={() => handleDay(4)}
-                >
-                  목
-                </WeekDay>
-                <WeekDay
-                  className={selectedWeekDay.includes(5) ? 'selected' : ''}
-                  onClick={() => handleDay(5)}
-                >
-                  금
-                </WeekDay>
-                <WeekDay
-                  className={selectedWeekDay.includes(6) ? 'selected' : ''}
-                  onClick={() => handleDay(6)}
-                >
-                  토
-                </WeekDay>
-                <WeekDay
-                  className={selectedWeekDay.includes(7) ? 'selected' : ''}
-                  onClick={() => handleDay(7)}
-                >
-                  일
-                </WeekDay>
+                {WEEKDAYS.map((day, i) => (
+                  <WeekDay
+                    key={i}
+                    className={
+                      selectedWeekDay.includes(i + 1) ? 'selected' : ''
+                    }
+                    onClick={() => handleDay(i + 1)}
+                  >
+                    {day}
+                  </WeekDay>
+                ))}
               </WeekDayList>
             </div>
           )}
@@ -307,12 +273,9 @@ const ModalTitle = styled.div`
 `;
 
 const Title = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
+  color: #1f1f1f;
   text-align: center;
-  /* Body-18-B */
-  font-family: Pretendard;
   font-size: 18px;
-  font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 25.2px */
   margin-top: 18px;
@@ -322,12 +285,12 @@ const CompleteBtn = styled.div`
   position: absolute;
   top: 18px;
   right: 0px;
-  color: var(--Primary-500, #3184ff);
+  color: #3184ff;
   font-family: Pretendard;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 140%; /* 25.2px */
+  line-height: 140%;
   cursor: pointer;
 `;
 
@@ -336,12 +299,11 @@ const RemindTermSection = styled.div``;
 const SubTitle = styled.div`
   margin-bottom: 16px;
   color: var(--Neutral-500, #1f1f1f);
-  /* Body-16-SB */
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 140%; /* 22.4px */
+  line-height: 140%;
 `;
 
 const TermList = styled.div`
@@ -350,11 +312,11 @@ const TermList = styled.div`
   width: 100%;
   height: 48px;
   border-radius: 8px;
-  background: var(--Neutral-100, #f4f5f7);
+  background: #f4f5f7;
   cursor: pointer;
   .selected {
     border-radius: 8px;
-    background: var(--Primary-500, #3184ff);
+    background: #3184ff;
     color: white;
   }
 `;
@@ -369,8 +331,8 @@ const Term = styled.div`
   gap: 10px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: var(--Neutral-100, #f4f5f7);
-  color: var(--Neutral-300, #848484);
+  background: #f4f5f7;
+  color: #848484;
 `;
 
 const RecommendBg = styled.div`
@@ -384,7 +346,7 @@ const RecommendBg = styled.div`
 `;
 
 const RecommendText = styled.p`
-  color: var(--Neutral-500, #1f1f1f);
+  color: #1f1f1f;
   width: 170px;
   word-break: keep-all;
   text-align: left;
@@ -396,7 +358,7 @@ const RecommendText = styled.p`
   font-weight: 600;
   line-height: 140%;
   .colored {
-    color: var(--Primary-500, #3184ff);
+    color: #3184ff;
   }
 `;
 
@@ -425,14 +387,13 @@ const WeekDayList = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 9.136px;
-    background: var(--Primary-100, #e9efff);
-    color: var(--Primary-500, #3184ff);
-    /* Head-20-B */
+    background: #e9efff;
+    color: #3184ff;
     font-family: Pretendard;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 140%; /* 28px */
+    line-height: 140%;
   }
 `;
 
@@ -445,13 +406,13 @@ const WeekDay = styled.div`
   align-items: center;
   gap: 11.419px;
   border-radius: 9.136px;
-  background: var(--Neutral-100, #f4f5f7);
-  color: var(--Neutral-500, #1f1f1f);
+  background: #f4f5f7;
+  color: #1f1f1f;
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 23.981px; /* 149.88% */
+  line-height: 23.981px;
   letter-spacing: -0.365px;
   cursor: pointer;
 `;
@@ -464,7 +425,7 @@ const MonthDayBg = styled.div`
   align-items: flex-start;
   gap: 12px;
   border-radius: 8px;
-  background: var(--Neutral-100, #f4f5f7);
+  background: #f4f5f7;
   tr {
     display: flex;
     display: flex;
@@ -481,26 +442,19 @@ const MonthDayBg = styled.div`
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
-
-    color: var(--Neutral-500, #1f1f1f);
+    color: #1f1f1f;
     text-align: center;
-    /* Body-18-R */
-    font-family: Pretendard;
     font-size: 18px;
-    font-style: normal;
     font-weight: 400;
-    line-height: 140%; /* 25.2px */
+    line-height: 140%;
   }
   .selected {
     border-radius: 30px;
-    background: var(--Primary-100, #e9efff);
-    color: var(--Primary-500, #3184ff);
+    background: #e9efff;
+    color: #3184ff;
     text-align: center;
-    /* Head-20-B */
-    font-family: Pretendard;
     font-size: 20px;
-    font-style: normal;
     font-weight: 700;
-    line-height: 140%; /* 28px */
+    line-height: 140%;
   }
 `;

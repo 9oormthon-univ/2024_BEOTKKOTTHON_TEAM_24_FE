@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 import loadingGIF from '../../../public/loading.gif';
-import { loadingBlurURL } from '@/constants/index';
+import { loadingBlurURL } from '@/constants/loadingBlurURL';
 
 const Loading = () => {
   return (
