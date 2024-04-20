@@ -9,7 +9,7 @@ interface Props {
   biggerTypo?: 'title' | 'input';
   title: string;
   value: string;
-  onChnage: (value: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }
 
@@ -29,7 +29,7 @@ const InputWithTitle = (props: Props) => {
           className={typo === 'input' ? 'Body-16-SB' : 'Body-14-M'}
           linkIcon={props.linkIcon || false}
           value={props.value}
-          onChange={(e) => props.onChnage(e.target.value)}
+          onChange={props.onChange}
           placeholder={props.placeholder}
         />
         {props.linkIcon && <LinkIcon className="link-icon" />}
@@ -49,8 +49,8 @@ const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: ${(props) => props.top || 0};
-  margin-bottom: ${(props) => props.bottom || 0};
+  margin-top: ${(props) => props.top || 0}px;
+  margin-bottom: ${(props) => props.bottom || 0}px;
 
   .header {
     display: flex;

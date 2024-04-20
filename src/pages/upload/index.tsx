@@ -77,7 +77,7 @@ const LinkInput: NextPage = ({}) => {
             linkIcon={true}
             title="인사이트 링크"
             value={link}
-            onChnage={handleInputLink}
+            onChange={(e) => handleInputLink(e.target.value)}
           />
           <UploadImage imageList={imageList} setImageList={setImageList} />
           <OptionalTextarea
@@ -92,7 +92,7 @@ const LinkInput: NextPage = ({}) => {
           <InputWithTitle
             title="출처"
             value={source}
-            onChnage={setSource}
+            onChange={(e) => setSource(e.target.value)}
             placeholder="출처를 입력하세요."
           />
         </PageContainer>

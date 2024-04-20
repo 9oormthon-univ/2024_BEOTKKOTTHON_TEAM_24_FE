@@ -14,6 +14,7 @@ import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
 import { usePostInsight } from '@/hooks/api/useInsight';
 import Loading from '@/components/upload/Loading';
+import InputWithTitle from '@/components/common/InputWithTitle';
 
 type aiInput = {
   link: string;
@@ -40,7 +41,7 @@ const Upload: NextPage = ({}) => {
     insightTagList: [''],
     insightMemo: '',
     insightImageList: [''],
-    folderName: '미드저니',
+    folderName: '',
     enable: false,
     remindType: 'DEFAULT',
     remindDays: [1],
@@ -185,32 +186,30 @@ const Upload: NextPage = ({}) => {
                     )}
                   </div>
                 </ImageSection>
-                <TitleSection>
-                  <SubTitle>제목</SubTitle>
-                  <Input
-                    type="text"
-                    value={insightInput.insightTitle}
-                    onChange={(e) =>
-                      setInsightInput({
-                        ...insightInput,
-                        insightTitle: e.target.value,
-                      })
-                    }
-                  />
-                </TitleSection>
-                <SummarySection>
-                  <SubTitle>인사이트 요약</SubTitle>
-                  <SumamryInput
-                    value={insightInput.insightSummary}
-                    className="no-scroll"
-                    onChange={(e) =>
-                      setInsightInput({
-                        ...insightInput,
-                        insightSummary: e.target.value,
-                      })
-                    }
-                  />
-                </SummarySection>
+                <InputWithTitle
+                  top={18}
+                  biggerTypo="input"
+                  title="제목"
+                  value={insightInput.insightTitle}
+                  onChange={(e) =>
+                    setInsightInput({
+                      ...insightInput,
+                      insightTitle: e.target.value,
+                    })
+                  }
+                />
+                <InputWithTitle
+                  top={20}
+                  biggerTypo="input"
+                  title="인사이트 요약"
+                  value={insightInput.insightSummary}
+                  onChange={(e) =>
+                    setInsightInput({
+                      ...insightInput,
+                      insightSummary: e.target.value,
+                    })
+                  }
+                />
                 <TagSection>
                   <SubTitle>태그</SubTitle>
                   <TagCounter>
@@ -392,19 +391,7 @@ const PageContainer = styled.div`
   padding: 0px 20px;
   height: 100vh;
   overflow-y: scroll;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 51px;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  outline: none;
-  padding: 10px;
-  border-radius: 8.235px;
-  background: #f4f5f7;
-  color: black;
+  padding-bottom: 36px;
 `;
 
 const PageIntro = styled.div`
@@ -449,36 +436,9 @@ const CardCover = styled.img`
   border-radius: 12px;
 `;
 
-const TitleSection = styled(ImageSection)``;
-
 const SubTitle = styled.div`
   margin-bottom: 8px;
   color: var(--Neutral-500, #1f1f1f);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
-`;
-
-const SummarySection = styled(ImageSection)``;
-
-const SumamryInput = styled.textarea`
-  display: flex;
-  width: 100%;
-  padding: 14px 16px;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
-
-  border: none;
-  border-radius: 8px;
-  background: var(--Neutral-100, #f4f5f7);
-  outline: none;
-  resize: none;
-
-  color: var(--Neutral-500, #1f1f1f);
-  /* Body-14-M */
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
