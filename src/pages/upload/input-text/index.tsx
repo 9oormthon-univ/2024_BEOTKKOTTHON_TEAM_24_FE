@@ -1,4 +1,3 @@
-import ToggleSlider from '@/components/upload/ToggleSlider';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -17,6 +16,7 @@ import InputWithTitle from '@/components/common/InputWithTitle';
 import TagSection from '@/components/upload/TagSection';
 import OptionalTextarea from '@/components/common/OptionalTextarea';
 import FolderSetting from '@/components/upload/FolderSetting';
+import RemindSetting from '@/components/upload/RemindSetting';
 
 type aiInput = {
   link: string;
@@ -106,23 +106,6 @@ const Upload: NextPage = ({}) => {
     }
   }, [result.title]);
 
-  const handleRemindToggle = () => {
-    insightInput.enable === true &&
-      setInsightInput({
-        ...insightInput,
-        enable: false,
-        remindType: 'DEFAULT',
-      });
-    if (insightInput.enable === false) {
-      setIsModal('remind');
-      setInsightInput({
-        ...insightInput,
-        enable: true,
-        remindType: 'DEFAULT',
-      });
-    }
-  };
-
   const handleSubmit = async () => {
     setIsSaving(true);
     mutate(insightInput);
@@ -190,19 +173,12 @@ const Upload: NextPage = ({}) => {
                   folderName={insightInput.folderName}
                   setIsModal={setIsModal}
                 />
-                <RemindSection>
-                  <SubTitle>리마인드 설정</SubTitle>
-                  <RemindSetter>
-                    <span>인사이트 다시 읽기</span>
-                    <RemindIndicator>
-                      {insightInput.enable === true && remindTerm}
-                      <ToggleSlider
-                        $isSelected={insightInput.enable}
-                        onClick={handleRemindToggle}
-                      />
-                    </RemindIndicator>
-                  </RemindSetter>
-                </RemindSection>
+                <RemindSetting
+                  insightInput={insightInput}
+                  remindTerm={remindTerm}
+                  setIsModal={setIsModal}
+                  setInsightInput={setInsightInput}
+                />
                 {isModal === 'remind' && (
                   <SelectRemindModal
                     remindType={insightInput.remindType}
@@ -307,50 +283,4 @@ const CardCover = styled.img`
   width: 364px;
   height: 220px;
   border-radius: 12px;
-`;
-
-const SubTitle = styled.div`
-  margin-bottom: 8px;
-  color: var(--Neutral-500, #1f1f1f);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%;
-`;
-
-const FolderIndicator = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 14px 16px;
-  align-items: flex-end;
-  gap: 14px;
-
-  border: none;
-  border-radius: 8px;
-  background: var(--Neutral-100, #f4f5f7);
-`;
-
-const RemindSection = styled(ImageSection)``;
-
-const RemindIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  max-width: 200px;
-  color: #3184ff;
-  text-align: right;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%;
-  gap: 14px;
-`;
-
-const RemindSetter = styled(FolderIndicator)`
-  display: flex;
-  align-items: center;
-  padding: 14px 16px;
 `;

@@ -26,7 +26,7 @@ export default FolderSetting;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 17px;
+  margin-top: 20px;
   position: relative;
   width: 100%;
 

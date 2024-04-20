@@ -52,7 +52,7 @@ type WrapperProps = {
 
 const Wrapper = styled.div<WrapperProps>`
   width: 100%;
-  flex: 1;
+  flex: ${(props) => (props.counter ? 1 : 0)};
   margin: ${(props) => props.top || 0}px 0 ${(props) => props.bottom || 0}px;
   box-sizing: content-box;
   display: flex;
@@ -62,6 +62,11 @@ const Wrapper = styled.div<WrapperProps>`
     width: 100%;
     height: 100%;
     position: relative;
+  }
+
+  textarea {
+    font-size: 14px;
+    font-weight: 500;
   }
 
   .reminder {
@@ -81,7 +86,6 @@ const Wrapper = styled.div<WrapperProps>`
     min-height: 50px;
     border: none;
     outline: none;
-    margin-bottom: 0;
     padding: 14px 16px ${(props) => (props.counter ? '30px' : '14px')};
     background: #f4f5f7;
     color: #161616;
@@ -91,7 +95,6 @@ const Wrapper = styled.div<WrapperProps>`
     &::-webkit-scrollbar {
       display: none;
     }
-    box-sizing: border-box;
   }
 `;
 
