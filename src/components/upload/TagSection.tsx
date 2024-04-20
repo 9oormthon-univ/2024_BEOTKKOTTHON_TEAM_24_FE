@@ -41,9 +41,11 @@ const TagSection = (props: Props) => {
   };
 
   return (
-    <ImageSection>
-      <div>태그</div>
-      <TagCounter>{insightInput.insightTagList.length}/3</TagCounter>
+    <Wrapper>
+      <TitleBox>
+        <p className="title">태그</p>
+        <p className="counter">{insightInput.insightTagList.length}/3</p>
+      </TitleBox>
       <TagList>
         {insightInput.insightTagList.map((tag, idx) => (
           <TagWrapper key={idx}>
@@ -79,47 +81,32 @@ const TagSection = (props: Props) => {
           </TagWrapper>
         )}
       </TagList>
-    </ImageSection>
+    </Wrapper>
   );
 };
 
 export default TagSection;
 
-const ImageSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 17px;
-  position: relative;
+const Wrapper = styled.div`
   width: 100%;
-
-  border-radius: 13px;
-  .image-wrapper {
-    min-height: 164px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .thumbnail {
-      object-fit: cover;
-    }
-  }
-
-  & .image-section {
-    height: 220px;
-  }
+  margin-top: 20px;
 `;
 
-const TagCounter = styled.div`
-  position: absolute;
-  top: 0;
-  left: 34px;
-  color: var(--Primary-500, #3184ff);
-  /* Body-14-M */
-  font-family: Pretendard;
+const TitleBox = styled.div`
+  width: 100%;
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 140%; /* 19.6px */
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+
+  .title {
+    margin-right: 9px;
+  }
+
+  .counter {
+    color: #3184ff;
+  }
 `;
 
 const TagList = styled.div`
@@ -140,14 +127,11 @@ const TagWrapper = styled.div`
   align-items: center;
   gap: 6px;
   border-radius: 8px;
-  background: var(--Neutral-100, #f4f5f7);
-
-  color: var(--Neutral-500, #1f1f1f);
+  background: #f4f5f7;
+  color: #1f1f1f;
   text-align: center;
-  /* Body-14-M */
-  font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 140%; /* 19.6px */
+  line-height: 140%;
 `;
