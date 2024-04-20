@@ -6,6 +6,7 @@ import { colorDecoder } from '@/utils/folder';
 import { FolderGetResponse } from '@/types/folder';
 import GrabberIcon from '@svg/upload/grabber-icon.svg';
 import SearchSection from '../common/SearchSection';
+import AddFolderIcon from '@svg/upload/add-folder-icon.svg';
 
 type Props = {
   onClose: () => void;
@@ -18,39 +19,13 @@ const SelectFolderModal = (props: Props) => {
   const [isMakingFolder, setIsMakingFolder] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
-
   const { data } = useGetFolder();
-
-  const [folderList, setFolderList] = useState<FolderGetResponse | undefined>([
-    {
-      folderId: 1,
-      folderName: 'UX/UI',
-      folderColor: 'PINK',
-      insightCount: 0,
-    },
-    {
-      folderId: 2,
-      folderName: '미드저니',
-      folderColor: 'BLUE',
-      insightCount: 0,
-    },
-    {
-      folderId: 3,
-      folderName: 'SEO',
-      folderColor: 'ORANGE',
-      insightCount: 0,
-    },
-    {
-      folderId: 4,
-      folderName: '기획',
-      folderColor: 'GREEN',
-      insightCount: 0,
-    },
-  ]);
+  const [folderList, setFolderList] = useState<FolderGetResponse>();
 
   useEffect(() => {
     setFolderList(data);
   });
+
   const handleBlur = () => {
     setIsMakingFolder(false);
     setNewFolderName('');
@@ -85,27 +60,7 @@ const SelectFolderModal = (props: Props) => {
           <SearchSection placeholder="폴더 검색" />
           <FolderSection>
             <AddFolder onClick={() => setIsMakingFolder(true)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100"
-                height="75"
-                viewBox="0 0 100 75"
-                fill="none"
-              >
-                <rect width="100" height="75" rx="5" fill="#B6B5B5" />
-                <path
-                  d="M50.875 30V45.75"
-                  stroke="white"
-                  stroke-width="2.3"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M58.75 37.875L43 37.875"
-                  stroke="white"
-                  stroke-width="2.3"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <AddFolderIcon />
               {isMakingFolder ? (
                 <FolderInput
                   value={newFolderName}
@@ -206,12 +161,11 @@ const ModalTitle = styled.div`
 const Title = styled.div`
   color: var(--Neutral-500, #1f1f1f);
   text-align: center;
-  /* Body-18-B */
   font-family: Pretendard;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 140%; /* 25.2px */
+  line-height: 140%;
   margin-top: 18px;
 `;
 
@@ -224,7 +178,7 @@ const CompleteBtn = styled.div`
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 140%; /* 25.2px */
+  line-height: 140%;
   cursor: pointer;
 `;
 
@@ -240,16 +194,18 @@ const AddFolder = styled.div`
   gap: 28px;
   cursor: pointer;
   padding: 0px 21px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #161616;
 `;
 
 const FolderTitle = styled.div`
   color: var(--Neutral-500, #1f1f1f);
-  /* Body-18-B */
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 17px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 25.2px */
+  font-weight: 600;
+  line-height: 140%;
 `;
 
 const FolderInput = styled.input`
