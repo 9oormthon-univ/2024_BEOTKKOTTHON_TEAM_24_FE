@@ -18,20 +18,24 @@ interface Props {
 const OptionalTextarea = (props: Props) => {
   const reminder = props.reminder || false;
   const counter = props.counter || false;
+  const textareaProps = {
+    className: reminder ? 'reminder' : 'upload',
+    placeholder: props.placeholder,
+    maxLength: 500,
+    onChange: props.onChange,
+    value: props.value,
+  };
 
   return (
     <Wrapper top={props.top} bottom={props.bottom} counter={counter}>
       {!reminder && <Title className={props.titleTypo}>{props.title}</Title>}
       <div className="textarea-box">
         {reminder && <Pencil />}
-        <TextareaAutosize
-          cacheMeasurements
-          className={reminder ? 'reminder' : 'upload'}
-          placeholder={props.placeholder}
-          maxLength={500}
-          onChange={props.onChange}
-          value={props.value}
-        ></TextareaAutosize>
+        {counter ? (
+          <textarea {...textareaProps} />
+        ) : (
+          <TextareaAutosize cacheMeasurements {...textareaProps} />
+        )}
         {counter && <Counter>{props.value.length}/500자</Counter>}
       </div>
     </Wrapper>
@@ -72,7 +76,7 @@ const Wrapper = styled.div<WrapperProps>`
   }
 
   .upload {
-    height: auto;
+    height: 100%;
     width: 100%;
     min-height: 50px;
     border: none;
