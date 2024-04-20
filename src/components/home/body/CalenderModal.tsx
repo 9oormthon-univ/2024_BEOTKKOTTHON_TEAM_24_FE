@@ -34,14 +34,6 @@ const CalenderModal = ({
           </svg>
         </ModalHeader>
         <ModalBody>
-          {/* <ModalTitle>
-            <Title>
-              <Left />
-              20{splited[2]}년 {splited[0]}월
-              <Right />
-            </Title>
-            <CompleteBtn>완료</CompleteBtn>
-          </ModalTitle> */}
           <FullCalender
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
@@ -61,7 +53,6 @@ const ModalBg = styled.div`
   top: 0;
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-end; */
   position: fixed;
   top: 0;
   width: 100%;
@@ -109,35 +100,3 @@ const ModalBody = styled.div`
   padding: 0px 40px;
   gap: 34px;
 `;
-
-// const ModalTitle = styled.div`
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const Title = styled.div`
-//   color: var(--Neutral-500, #1f1f1f);
-//   text-align: center;
-//   /* Body-18-B */
-//   font-family: Pretendard;
-//   font-size: 18px;
-//   font-style: normal;
-//   font-weight: 700;
-//   line-height: 140%; /* 25.2px */
-//   margin-top: 18px;
-// `;
-
-// const CompleteBtn = styled.div`
-//   position: absolute;
-//   top: 18px;
-//   right: 0px;
-//   color: var(--Primary-500, #3184ff);
-//   font-family: Pretendard;
-//   font-size: 18px;
-//   font-style: normal;
-//   font-weight: 700;
-//   line-height: 140%; /* 25.2px */
-//   cursor: pointer;
-// `;

@@ -3,34 +3,11 @@ import styled from 'styled-components';
 import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
 import ReminderCalender from '@/components/home/body/ReminderCalender';
-// import BottomNavigation from '@/components/common/BottomNavigation';
-import { QuestionGetResponse } from '@/types/reminder';
 import Carousel from '@/components/landing/Carousel';
 import { useRouter } from 'next/router';
 import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
 import NavigationLayout from '@/components/common/NavigationLayout';
-
-export const questionData: QuestionGetResponse = {
-  todayClear: false,
-  ReminderQuestionList: [
-    {
-      reminderQuestion: '이 인사이트를 어떤 사람에게 추천해주고 싶나요?',
-      insightId: 25,
-      reminderId: 20,
-      insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
-      insightMainImage: '/image/디자인3.jpg',
-      insightTagList: ['디자인', '퍼블리싱'],
-    },
-    {
-      reminderQuestion: '해당 인사이트를 어떻게 활용할 수 있을까요?',
-      insightId: 23,
-      reminderId: 18,
-      insightTitle: 'UX/UI 디자인에 미드저니 58,000% 활용하기',
-      insightMainImage: '/image/디자인2.jpg',
-      insightTagList: ['AI', '미드저니'],
-    },
-  ],
-};
+import { questionData } from '@/constants/data';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -75,7 +52,6 @@ const Home: NextPage = () => {
         <div onClick={onClick}>{renderInnerComponent()}</div>
         <HrLine />
         <ReminderCalender />
-        {/* <BottomNavigation /> */}
       </Wrapper>
     </NavigationLayout>
   );
