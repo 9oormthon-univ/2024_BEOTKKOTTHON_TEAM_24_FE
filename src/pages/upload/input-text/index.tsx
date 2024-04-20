@@ -7,14 +7,13 @@ import AutosizeInput from 'react-input-autosize';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
 import { useGetSummary } from '@/api/insight';
-import loadingGIF from '../../../../public/loading.gif';
-import { loadingBlurURL } from '@/constants/index';
 import Image from 'next/image';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
 import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
 import { usePostInsight } from '@/hooks/api/useInsight';
+import Loading from '@/components/upload/Loading';
 
 type aiInput = {
   link: string;
@@ -159,20 +158,7 @@ const Upload: NextPage = ({}) => {
     <>
       <Wrapper>
         {isLoading ? (
-          <LoadingWrapper>
-            <Image
-              src={loadingGIF}
-              alt="loading"
-              placeholder="blur"
-              blurDataURL={loadingBlurURL}
-              width={192}
-              height={192}
-            />
-            <LoadingTitle>인사이트 정리중 ••</LoadingTitle>
-            <LoadingContent>
-              쉽게 리마인드 할 수 있도록 인사이트를 정리하고 있어요!
-            </LoadingContent>
-          </LoadingWrapper>
+          <Loading />
         ) : (
           !isSaving && (
             <>
@@ -373,23 +359,7 @@ const Upload: NextPage = ({}) => {
             </>
           )
         )}
-        {isSaving && (
-          <LoadingWrapper>
-            <Image
-              src={loadingGIF}
-              alt="loading"
-              placeholder="blur"
-              priority={true}
-              blurDataURL={loadingBlurURL}
-              width={192}
-              height={192}
-            />
-            <LoadingTitle>인사이트 저장중 ••</LoadingTitle>
-            <LoadingContent>
-              쉽게 리마인드 할 수 있도록 인사이트를 저장하고 있어요!
-            </LoadingContent>
-          </LoadingWrapper>
-        )}
+        {isSaving && <Loading />}
       </Wrapper>
     </>
   );
@@ -411,41 +381,6 @@ const Wrapper = styled.div`
     display: fixed;
     margin-bottom: 36px;
   }
-`;
-
-const LoadingWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const LoadingTitle = styled.div`
-  color: #3184ff;
-
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 28px */
-  margin-top: 22px;
-`;
-
-const LoadingContent = styled.div`
-  color: #1f1f1f;
-  width: 179px;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
-  white-space: wrap;
-  word-break: keep-all;
-  margin-top: 14px;
 `;
 
 const PageContainer = styled.div`

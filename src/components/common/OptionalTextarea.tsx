@@ -13,6 +13,7 @@ interface Props {
   placeholder: string;
 }
 
+// TODO: reminder 페이지 적용 및 컴포넌트 수정
 const OptionalTextarea = (props: Props) => {
   const reminder = props.reminder || false;
   const counter = props.counter || false;
