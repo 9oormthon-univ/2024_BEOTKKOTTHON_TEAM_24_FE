@@ -1,27 +1,17 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Insight } from '@/types/insight';
+import { RemindInsight } from '@/types/reminder';
 
 interface Props {
   favicon?: string;
-  insightData: Insight;
+  insightData: RemindInsight | Insight;
 }
 
 const InsightCard = ({ favicon, insightData }: Props) => {
-  const imageList = [
-    '/image/개발1.jpg',
-    '/image/개발2.jpg',
-    '/image/개발3.jpg',
-    '/image/디자인1.jpg',
-    '/image/디자인2.jpg',
-    '/image/디자인3.jpg',
-    '/image/기획1.jpg',
-    '/image/기획2.jpg',
-    '/image/기획3.jpg',
-  ];
   return (
     <Wrapper>
-      {favicon ? (
+      {favicon && (
         <Image
           src={favicon}
           width={52}
@@ -29,11 +19,9 @@ const InsightCard = ({ favicon, insightData }: Props) => {
           alt="Insight Card image"
           className="favicon"
         />
-      ) : (
-        <></>
       )}
       <Image
-        src={imageList[insightData.insightId % 9]}
+        src={insightData.insightMainImage}
         width={109}
         height={78}
         alt="Insight Card image"

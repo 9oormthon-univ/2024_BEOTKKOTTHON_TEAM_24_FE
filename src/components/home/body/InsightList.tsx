@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import InsightCard from '../InsightCard';
+import InsightCard from '../../common/InsightCard';
 import SummaryInsightCard from '@components/common/SummaryInsightCard';
 import { CalenderPostResponse } from '@/types/reminder';
 import { insightData1, insightData2 } from '@/constants/data';

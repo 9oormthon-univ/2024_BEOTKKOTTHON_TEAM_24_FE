@@ -164,7 +164,7 @@ const SelectRemindModal = (props: Props) => {
                   onClick={() => handleType(value.remindType as RemindType)}
                   className={remindType === value.remindType ? 'selected' : ''}
                 >
-                  value.text
+                  {value.text}
                 </Term>
               ))}
             </TermList>
