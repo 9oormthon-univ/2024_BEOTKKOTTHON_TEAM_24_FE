@@ -1,7 +1,7 @@
 import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
 import ColorSelect from '@/components/folder/ColorSelect';
-import { colorList } from '@/constants/colors';
+import { COLORLIST } from '@/constants/colors';
 import { Folder } from '@/types/folder';
 import { colorDecoder } from '@/utils/folder';
 import { NextPage } from 'next';
@@ -30,7 +30,7 @@ const EditColor: NextPage<Props> = ({}) => {
             {colorDecoder(newFolder.folderColor, 'large')}
           </div>
           <div className="list">
-            {colorList.map((color: { color: string; code: string }) => (
+            {COLORLIST.map((color: { color: string; code: string }) => (
               <ColorSelect
                 key={color.color}
                 color={color.color}

@@ -1,5 +1,5 @@
 import Header from '@/components/common/Header';
-import { colorList } from '@/constants/colors';
+import { COLORLIST } from '@/constants/colors';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -43,7 +43,7 @@ const FolderMake: NextPage<Props> = ({}) => {
           <ColorSection>
             <SubTitle>폴더 색상</SubTitle>
             <div className="list">
-              {colorList.map((color: { color: string; code: string }) => (
+              {COLORLIST.map((color: { color: string; code: string }) => (
                 <ColorSelect
                   key={color.color}
                   color={color.color}

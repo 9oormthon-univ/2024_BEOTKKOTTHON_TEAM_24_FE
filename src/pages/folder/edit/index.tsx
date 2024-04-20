@@ -1,7 +1,7 @@
 import Header from '@/components/common/Header';
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import { FolderList } from '@/constants/FolderList';
+import { FOLDERLIST } from '@/constants/folderList';
 import { colorDecoder } from '@/utils/folder';
 import { useState } from 'react';
 import { Folder } from '@/types/folder';
@@ -14,7 +14,7 @@ interface Props {}
 const FolderEdit: NextPage<Props> = ({}) => {
   const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
-  const [newFolderList, setNewFolderList] = useState<Folder[]>(FolderList);
+  const [newFolderList, setNewFolderList] = useState<Folder[]>(FOLDERLIST);
   const [searchedFolderList, setSearchedFolderList] = useState<Folder[]>([]);
   const folderNameList = newFolderList.map((folder) => folder.folderName);
   const [isEditingFolder, setIsEditingFolder] = useState('');
