@@ -1,3 +1,5 @@
+import { Insight } from './insight';
+
 // GET /reminder/question
 export type QuestionGetResponse = {
   todayClear: boolean;
@@ -31,14 +33,5 @@ export type CalenderPostResponse = {
   date: string;
   remindRead: number;
   remindTotal: number;
-  remindInsightList: RemindInsight[];
-};
-
-export type RemindInsight = {
-  insightId: number;
-  insightTitle: string;
-  insightSummary: string;
-  insightMainImage: string;
-  insightTagList: string[];
-  todayRead: boolean;
+  remindInsightList: Insight[];
 };

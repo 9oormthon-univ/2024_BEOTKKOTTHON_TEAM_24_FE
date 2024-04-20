@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Insight } from '@/types/insight';
-import { RemindInsight } from '@/types/reminder';
 
 interface Props {
   favicon?: string;
-  insightData: RemindInsight | Insight;
+  insightData: Insight;
 }
 
 const InsightCard = ({ favicon, insightData }: Props) => {
   return (
-    <Wrapper>
+    <Wrapper opacity={insightData.todayRead ? 0.6 : 1}>
       {favicon && (
         <Image
           src={favicon}
@@ -37,7 +36,11 @@ const InsightCard = ({ favicon, insightData }: Props) => {
   );
 };
 
-const Wrapper = styled.div`
+interface CSSProps {
+  opacity: number;
+}
+
+const Wrapper = styled.div<CSSProps>`
   height: 102px;
   display: flex;
   flex-direction: row;
@@ -47,6 +50,7 @@ const Wrapper = styled.div`
   margin: 22px 20px;
   box-shadow: 9px 9px 30px 0px #00000014;
   position: relative;
+  opacity: ${(props) => props.opacity};
 
   .favicon {
     border: 10px solid #f9f9f9;

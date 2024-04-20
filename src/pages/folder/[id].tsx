@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import SmallView from '@svg/small-view-icon.svg';
 import LargeView from '@svg/large-view-icon.svg';
-import { RemindInsight } from '@/types/reminder';
+import { Insight } from '@/types/insight';
 import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import { calenderData } from '@/constants/data';
 import ShareIcon from '@svg/share-icon-blue.svg';
@@ -18,7 +18,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
   const [selectedTag, setSelectedTag] = useState('전체');
   const [searchInput, setSearchInput] = useState('');
   const [isSmall, setIsSmall] = useState(false);
-  const [insightList, setInsightList] = useState<RemindInsight[]>(
+  const [insightList, setInsightList] = useState<Insight[]>(
     calenderData.remindInsightList,
   );
   const [isModalOn, setIsModalOn] = useState(false);

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import { RemindInsight } from '@/types/reminder';
+import { Insight } from '@/types/insight';
 
 interface CardProps {
   favicon: string;
-  insightData: RemindInsight;
+  insightData: Insight;
 }
 
 const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
