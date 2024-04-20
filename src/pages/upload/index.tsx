@@ -8,6 +8,7 @@ import { useGetFolder } from '@/hooks/api/useFolder';
 import { getAccessToken } from '@/utils/auth';
 import InputWithTitle from '@/components/common/InputWithTitle';
 import UploadImage from '@/components/folder/UploadImage';
+import OptionalTextarea from '@/components/common/OptionalTextarea';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -79,17 +80,15 @@ const LinkInput: NextPage = ({}) => {
             onChnage={handleInputLink}
           />
           <UploadImage imageList={imageList} setImageList={setImageList} />
-          <MemoSection>
-            <SubTitle>메모</SubTitle>
-            <MemoWrapper>
-              <MemoInput
-                value={memo}
-                onChange={(e) => handleMemo(e.target.value)}
-                placeholder="메모를 입력하세요."
-              />
-              <LetterCounter>{memo.length}/500자</LetterCounter>
-            </MemoWrapper>
-          </MemoSection>
+          <OptionalTextarea
+            bottom={30}
+            titleTypo="big"
+            title="메모"
+            counter={true}
+            value={memo}
+            onChange={handleMemo}
+            placeholder="메모를 입력하세요."
+          />
           <InputWithTitle
             title="출처"
             value={source}
@@ -117,12 +116,9 @@ const Wrapper = styled.div`
   position: relative;
   flex-direction: column;
   height: 100vh;
+  padding-bottom: 36px;
   .no-scroll::-webkit-scrollbar {
     display: none;
-  }
-
-  :nth-child(3) {
-    margin-bottom: 36px;
   }
 `;
 
@@ -134,86 +130,5 @@ const PageContainer = styled.div`
   width: 100%;
   height: 100vh;
   padding: 0 20px;
-  margin: 26px 0 37.5px;
-`;
-
-const LinkSection = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  margin-top: 28px;
-  width: 100%;
-
-  .link-icon {
-    position: absolute;
-    top: 41px;
-    left: 12px;
-  }
-`;
-
-const MemoSection = styled(LinkSection)`
-  margin-top: 24px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-const SubTitle = styled.div`
-  color: #000;
-  text-align: left;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 21px; /* 131.25% */
-  letter-spacing: -0.32px;
-  padding-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const MemoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  textarea::-webkit-scrollbar {
-    display: none;
-  }
-  flex: 1;
-  height: 100%;
-`;
-
-const MemoInput = styled.textarea`
-  width: 100%;
-  min-height: 51px;
-  border: none;
-  outline: none;
-  margin-bottom: 0;
-  padding: 12px 16px 30px 12px;
-  background: #f4f5f7;
-  color: #161616;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 19px;
-  border-radius: 8px 8px 0px 0px;
-  resize: none;
-  flex: 1;
-`;
-
-const LetterCounter = styled.div`
-  background: #f4f5f7;
-  border-radius: 0px 0px 8px 8px;
-  color: #a4a4a4;
-  text-align: left;
-  font-family: Pretendard;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.274px;
-  margin-top: 0;
-  padding: 16px;
+  margin: 26px 0 38px;
 `;
