@@ -1,5 +1,6 @@
 import Pencil from '@svg/pencil-icon.svg';
 import styled from 'styled-components';
+import TextareaAutosize from 'react-textarea-autosize';
 
 interface Props {
   top?: number;
@@ -9,8 +10,8 @@ interface Props {
   reminder?: boolean;
   counter?: boolean;
   value: string;
-  onChange: (value: string) => void;
-  placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
 }
 
 // TODO: reminder 페이지 적용 및 컴포넌트 수정
@@ -23,14 +24,14 @@ const OptionalTextarea = (props: Props) => {
       {!reminder && <Title className={props.titleTypo}>{props.title}</Title>}
       <div className="textarea-box">
         {reminder && <Pencil />}
-        <textarea
+        <TextareaAutosize
+          cacheMeasurements
           className={reminder ? 'reminder' : 'upload'}
           placeholder={props.placeholder}
           maxLength={500}
-          onChange={(e) => {
-            props.onChange(e.target.value);
-          }}
-        ></textarea>
+          onChange={props.onChange}
+          value={props.value}
+        ></TextareaAutosize>
         {counter && <Counter>{props.value.length}/500자</Counter>}
       </div>
     </Wrapper>
@@ -71,9 +72,9 @@ const Wrapper = styled.div<WrapperProps>`
   }
 
   .upload {
-    height: 100%;
+    height: auto;
     width: 100%;
-    min-height: 130px;
+    min-height: 50px;
     border: none;
     outline: none;
     margin-bottom: 0;
@@ -86,6 +87,7 @@ const Wrapper = styled.div<WrapperProps>`
     &::-webkit-scrollbar {
       display: none;
     }
+    box-sizing: border-box;
   }
 `;
 

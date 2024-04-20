@@ -86,7 +86,7 @@ const LinkInput: NextPage = ({}) => {
             title="메모"
             counter={true}
             value={memo}
-            onChange={handleMemo}
+            onChange={(e) => handleMemo(e.target.value)}
             placeholder="메모를 입력하세요."
           />
           <InputWithTitle

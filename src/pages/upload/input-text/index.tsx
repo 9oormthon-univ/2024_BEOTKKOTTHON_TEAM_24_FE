@@ -15,6 +15,7 @@ import { usePostInsight } from '@/hooks/api/useInsight';
 import Loading from '@/components/upload/Loading';
 import InputWithTitle from '@/components/common/InputWithTitle';
 import TagSection from '@/components/upload/TagSection';
+import OptionalTextarea from '@/components/common/OptionalTextarea';
 
 type aiInput = {
   link: string;
@@ -169,9 +170,9 @@ const Upload: NextPage = ({}) => {
                     })
                   }
                 />
-                <InputWithTitle
+                <OptionalTextarea
+                  titleTypo="small"
                   top={20}
-                  biggerTypo="input"
                   title="인사이트 요약"
                   value={insightInput.insightSummary}
                   onChange={(e) =>
