@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import SearchIcon from '@svg/search-icon.svg';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import Header from '@/components/common/Header';
 import LargeView from '@svg/large-view-icon.svg';
@@ -11,6 +10,7 @@ import SummaryInsightCard from '@/components/folder/SummaryInsightCard';
 import InsightCard from '@/components/folder/InsightCard';
 import { useTransition } from 'react';
 import { FolderSearchPostResponse } from '@/types/folder';
+import SearchSection from '@/components/common/SearchSection';
 
 let count = 0;
 let memoCount = 0;
@@ -67,14 +67,13 @@ const FolderSearch: NextPage = ({}) => {
       <NavigationLayout>
         <Header title="검색" />
         <Wrapper>
-          <SearchSection>
-            <SearchIcon />
-            <SearchInput
-              placeholder="인사이트 검색"
-              autoFocus
-              onChange={(e) => typingKeyword(e.target.value)}
-            />
-          </SearchSection>
+          <SearchSection
+            autoFocus={true}
+            placeholder="인사이트 검색"
+            onChange={(e) => typingKeyword(e.target.value)}
+            top={20}
+            bottom={20}
+          />
           <ViewSetting>
             <div>
               <span>전체 </span>
@@ -125,32 +124,6 @@ const Wrapper = styled.div`
     top: 20px;
     right: 20px;
   }
-`;
-
-const SearchSection = styled.div`
-  display: flex;
-  width: calc(100% - 40px);
-  margin: 20px auto;
-  padding: 10px 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: #f4f5f7;
-  min-height: 50px;
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  border: none;
-  outline: none;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 21px; /* 131.25% */
-  letter-spacing: -0.32px;
-  background: #f4f5f7;
 `;
 
 const ResultSection = styled.div`

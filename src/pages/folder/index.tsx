@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import SearchIcon from '@svg/search-icon.svg';
 import { FolderList } from '@/constants/FolderList';
 import { colorDecoder } from '@/utils/folder';
 import NavigationLayout from '@/components/common/NavigationLayout';
+import SearchSection from '@/components/common/SearchSection';
 
 interface Props {}
 
@@ -21,10 +21,12 @@ const Folder: NextPage<Props> = ({}) => {
           >
             편집
           </span>
-          <SearchSection onClick={() => router.push('/folder/search')}>
-            <SearchIcon />
-            <SearchInput>인사이트 검색</SearchInput>
-          </SearchSection>
+          <SearchSection
+            onClick={() => router.push('/folder/search')}
+            placeholder="인사이트 검색"
+            top={20}
+            bottom={20}
+          />
           <FolderSection>
             <div className="header">
               <div>
@@ -91,34 +93,6 @@ const Wrapper = styled.div`
     top: 20px;
     right: 20px;
   }
-`;
-
-const SearchSection = styled.div`
-  display: flex;
-  width: calc(100% - 40px);
-  margin: 20px auto;
-  padding: 10px 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: #f4f5f7;
-`;
-
-const SearchInput = styled.button`
-  width: 100%;
-  border: none;
-  outline: none;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 21px; /* 131.25% */
-  letter-spacing: -0.32px;
-  background: #f4f5f7;
-  color: #848484;
-  display: flex;
-  justify-content: left;
 `;
 
 const FolderSection = styled.div`

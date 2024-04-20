@@ -1,7 +1,6 @@
 import Header from '@/components/common/Header';
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import SearchIcon from '@svg/search-icon.svg';
 import { useState } from 'react';
 import SmallView from '@svg/small-view-icon.svg';
 import LargeView from '@svg/large-view-icon.svg';
@@ -10,6 +9,7 @@ import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import { calenderData } from '@/components/home/body/ReminderCalender';
 import ShareIcon from '@svg/share-icon-blue.svg';
 import EditModal from '@components/folder/EditModal';
+import SearchSection from '@/components/common/SearchSection';
 
 interface Props {}
 
@@ -40,14 +40,14 @@ const FolderDetail: NextPage<Props> = ({}) => {
         <Header title={'UI/UX'} />
         <span className="link edit">편집</span>
         <ShareIcon className="share" onClick={() => handleModalOn()} />
-        <SearchSection>
-          <SearchIcon />
-          <SearchInput
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="인사이트 검색"
-          />
-        </SearchSection>
+        <SearchSection
+          value={searchInput}
+          placeholder="인사이트 검색"
+          autoFocus={true}
+          top={20}
+          bottom={20}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
         <div className="tag-list">
           {devKeywordList.map((keyword) => (
             <Tag
@@ -152,31 +152,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const SearchSection = styled.div`
-  display: flex;
-  width: calc(100% - 40px);
-  margin: 20px auto;
-  padding: 10px 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: #f4f5f7;
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  border: none;
-  outline: none;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 21px; /* 131.25% */
-  letter-spacing: -0.32px;
-  background: #f4f5f7;
-`;
-
 const Tag = styled.div`
   display: flex;
   height: 32px;
@@ -240,4 +215,3 @@ const LargeViewIcon = styled(LargeView)<IconProps>`
 `;
 
 const InsightSection = styled.div``;
-

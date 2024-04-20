@@ -122,7 +122,7 @@ const Upload: NextPage = ({}) => {
               <Header title="인사이트 저장" />
               <PageContainer className="no-scroll">
                 <PageIntro>리마인드 카드 설정</PageIntro>
-                <ImageSection className="image-section">
+                <ImageSection>
                   <div className="image-wrapper">
                     {insightImageList ? (
                       <CardCover
@@ -243,12 +243,10 @@ const PageContainer = styled.div`
   padding-bottom: 36px;
 `;
 
-const PageIntro = styled.div`
+const PageIntro = styled.p`
   width: 100%;
   text-align: left;
-  font-family: Pretendard;
   font-size: 18px;
-  font-style: normal;
   font-weight: 700;
   line-height: 25px;
   word-break: keep-all;
@@ -262,6 +260,7 @@ const ImageSection = styled.div`
   position: relative;
   width: 100%;
   border-radius: 13px;
+  height: 220px;
 
   .image-wrapper {
     min-height: 164px;
@@ -272,10 +271,6 @@ const ImageSection = styled.div`
     .thumbnail {
       object-fit: cover;
     }
-  }
-
-  & .image-section {
-    height: 220px;
   }
 `;
 
