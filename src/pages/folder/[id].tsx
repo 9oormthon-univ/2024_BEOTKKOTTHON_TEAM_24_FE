@@ -7,7 +7,7 @@ import SmallView from '@svg/small-view-icon.svg';
 import LargeView from '@svg/large-view-icon.svg';
 import { RemindInsight } from '@/types/reminder';
 import SummaryInsightCard from '@/components/common/SummaryInsightCard';
-import { calenderData } from '@/components/home/body/ReminderCalender';
+import { calenderData } from '@/constants/data';
 import ShareIcon from '@svg/share-icon-blue.svg';
 import EditModal from '@components/folder/EditModal';
 
@@ -240,4 +240,3 @@ const LargeViewIcon = styled(LargeView)<IconProps>`
 `;
 
 const InsightSection = styled.div``;
-
