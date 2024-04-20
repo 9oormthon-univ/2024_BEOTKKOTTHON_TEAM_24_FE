@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import AutosizeInput from 'react-input-autosize';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
 import { useGetSummary } from '@/api/insight';
@@ -15,6 +14,7 @@ import defaultImage from '@image/defaultImage.jpeg';
 import { usePostInsight } from '@/hooks/api/useInsight';
 import Loading from '@/components/upload/Loading';
 import InputWithTitle from '@/components/common/InputWithTitle';
+import TagSection from '@/components/upload/TagSection';
 
 type aiInput = {
   link: string;
@@ -46,8 +46,6 @@ const Upload: NextPage = ({}) => {
     remindType: 'DEFAULT',
     remindDays: [1],
   });
-  const [isAddingTag, setIsAddingTag] = useState(false);
-  const [tagInput, setTagInput] = useState('');
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
   const { source, memo, imageList, insightImageList, link, folderNameList } =
@@ -105,33 +103,6 @@ const Upload: NextPage = ({}) => {
       );
     }
   }, [result.title]);
-
-  const handleDeleteTag = (idx: number) => {
-    if (insightInput.insightTagList.length === 1) {
-      alert('인사이트 저장에는 최소 태그 1개 이상이 필요해요!');
-      return;
-    }
-    const newKeywords = insightInput.insightTagList.filter(
-      (tag) => insightInput.insightTagList.indexOf(tag) !== idx,
-    );
-    setInsightInput({ ...insightInput, insightTagList: newKeywords });
-  };
-
-  const checkEnter = (key: string) => {
-    if (key === 'Enter') {
-      const newKeywords = [...insightInput.insightTagList, tagInput];
-      setInsightInput({ ...insightInput, insightTagList: newKeywords });
-      setTagInput('');
-      setIsAddingTag(false);
-    }
-  };
-
-  const handleBlur = () => {
-    setIsAddingTag(false);
-    setTagInput('');
-    console.log(imageList);
-    console.log(thumbnail);
-  };
 
   const handleRemindToggle = () => {
     insightInput.enable === true &&
@@ -210,92 +181,10 @@ const Upload: NextPage = ({}) => {
                     })
                   }
                 />
-                <TagSection>
-                  <SubTitle>태그</SubTitle>
-                  <TagCounter>
-                    {insightInput.insightTagList.length}/3
-                  </TagCounter>
-                  <TagList>
-                    {insightInput.insightTagList.map((tag, idx) => (
-                      <TagWrapper key={idx}>
-                        <span>{tag}</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          onClick={() => handleDeleteTag(idx)}
-                          className="delete-btn"
-                          width="19"
-                          height="20"
-                          viewBox="0 0 19 20"
-                          fill="none"
-                        >
-                          <path
-                            d="M13.5265 14.5091C11.0363 16.9992 6.99888 16.9992 4.5087 14.5091C2.01851 12.0189 2.01851 7.98149 4.5087 5.4913C6.99888 3.00112 11.0363 3.00112 13.5265 5.4913C16.0166 7.98149 16.0166 12.0189 13.5265 14.5091Z"
-                            fill="#848484"
-                          />
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M11.3432 7.6752C11.5068 7.83884 11.5068 8.10416 11.3432 8.2678L7.28518 12.3258C7.12154 12.4894 6.85623 12.4894 6.69258 12.3258C6.52894 12.1622 6.52894 11.8968 6.69258 11.7332L10.7506 7.6752C10.9142 7.51156 11.1795 7.51156 11.3432 7.6752Z"
-                            fill="white"
-                          />
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M11.3434 12.3256C11.1797 12.4892 10.9144 12.4892 10.7508 12.3256L6.69276 8.2676C6.52912 8.10396 6.52912 7.83865 6.69276 7.67501C6.8564 7.51137 7.12172 7.51137 7.28536 7.67501L11.3434 11.733C11.507 11.8966 11.507 12.162 11.3434 12.3256Z"
-                            fill="white"
-                          />
-                        </svg>
-                      </TagWrapper>
-                    ))}
-                    {insightInput.insightTagList.length < 3 && (
-                      <TagWrapper key="addTag">
-                        {isAddingTag ? (
-                          <AutosizeInput
-                            name="add-tag"
-                            value={tagInput}
-                            onKeyDownCapture={(e) => checkEnter(e.key)}
-                            onChange={(e) => setTagInput(e.target.value)}
-                            onBlur={handleBlur}
-                            inputStyle={{
-                              background: '#F4F5F7',
-                              border: 'none',
-                              outline: 'none',
-                              fontSize: '14px',
-                              color: '#1F1F1F',
-                              textAlign: 'center',
-                              fontFamily: 'Pretendard',
-                              fontStyle: 'normal',
-                              fontWeight: '500',
-                              lineHeight: '140%',
-                            }}
-                          />
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            onClick={() => setIsAddingTag(true)}
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                          >
-                            <path
-                              d="M7.84473 1.42969V14.5703"
-                              stroke="#565656"
-                              stroke-width="1.8125"
-                              stroke-linecap="round"
-                            />
-                            <path
-                              d="M14.6416 7.77344L1.50098 7.77344"
-                              stroke="#565656"
-                              stroke-width="1.8125"
-                              stroke-linecap="round"
-                            />
-                          </svg>
-                        )}
-                      </TagWrapper>
-                    )}
-                  </TagList>
-                </TagSection>
+                <TagSection
+                  insightInput={insightInput}
+                  setInsightInput={setInsightInput}
+                />
                 <FolderSection>
                   <SubTitle>폴더 설정</SubTitle>
                   <FolderIndicator>
@@ -439,51 +328,6 @@ const CardCover = styled.img`
 const SubTitle = styled.div`
   margin-bottom: 8px;
   color: var(--Neutral-500, #1f1f1f);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
-`;
-
-const TagSection = styled(ImageSection)``;
-
-const TagCounter = styled.div`
-  position: absolute;
-  top: 0;
-  left: 34px;
-  color: var(--Primary-500, #3184ff);
-  /* Body-14-M */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
-`;
-
-const TagList = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-flow: row wrap;
-`;
-
-const TagWrapper = styled.div`
-  position: relative;
-  display: flex;
-  width: auto;
-  height: 32px;
-  padding: 6px 10px 6px 10px;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  border-radius: 8px;
-  background: var(--Neutral-100, #f4f5f7);
-
-  color: var(--Neutral-500, #1f1f1f);
-  text-align: center;
-  /* Body-14-M */
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
