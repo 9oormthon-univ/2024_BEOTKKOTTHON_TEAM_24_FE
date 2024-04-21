@@ -1,6 +1,6 @@
 import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
-import { SubjectList } from '@/constants/SubjectList';
+import { SUBJECTLIST } from '@/constants/subjectList';
 import { useSignupInputStore } from '@/store/signup';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ interface Props {}
 const OnboardSubject: NextPage<Props> = ({}) => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [topicList, setTopicList] = useState<string[]>(
-    SubjectList[signupInput.job].sort(),
+    SUBJECTLIST[signupInput.job].sort(),
   );
   const [isAdding, setIsAdding] = useState(false);
   const [addingTopic, setAddingTopic] = useState('');

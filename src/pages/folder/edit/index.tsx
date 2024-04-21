@@ -1,20 +1,20 @@
 import Header from '@/components/common/Header';
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import SearchIcon from '@svg/search-icon.svg';
-import { FolderList } from '@/constants/FolderList';
+import { FOLDERLIST } from '@/constants/folderList';
 import { colorDecoder } from '@/utils/folder';
 import { useState } from 'react';
 import { Folder } from '@/types/folder';
 import EditModal from '@/components/folder/EditModal';
 import { useRouter } from 'next/router';
+import SearchSection from '@/components/common/SearchSection';
 
 interface Props {}
 
 const FolderEdit: NextPage<Props> = ({}) => {
   const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
-  const [newFolderList, setNewFolderList] = useState<Folder[]>(FolderList);
+  const [newFolderList, setNewFolderList] = useState<Folder[]>(FOLDERLIST);
   const [searchedFolderList, setSearchedFolderList] = useState<Folder[]>([]);
   const folderNameList = newFolderList.map((folder) => folder.folderName);
   const [isEditingFolder, setIsEditingFolder] = useState('');
@@ -92,14 +92,13 @@ const FolderEdit: NextPage<Props> = ({}) => {
         <span className="link save" onClick={() => saveFolder()}>
           저장
         </span>
-        <SearchSection>
-          <SearchIcon />
-          <SearchInput
-            value={searchInput}
-            onChange={(e) => handleSearch(e.target.value)}
-            placeholder="폴더 검색"
-          />
-        </SearchSection>
+        <SearchSection
+          value={searchInput}
+          onChange={(e) => handleSearch(e.target.value)}
+          placeholder="폴더 검색"
+          top={20}
+          bottom={20}
+        />
         <FolderSection>
           {searchInput === '' &&
             newFolderList.map((folder, idx) => (
@@ -209,31 +208,6 @@ const Wrapper = styled.div`
     top: 20px;
     right: 20px;
   }
-`;
-
-const SearchSection = styled.div`
-  display: flex;
-  width: calc(100% - 40px);
-  margin: 20px auto;
-  padding: 10px 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: #f4f5f7;
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  border: none;
-  outline: none;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 21px; /* 131.25% */
-  letter-spacing: -0.32px;
-  background: #f4f5f7;
 `;
 
 const FolderSection = styled.div`

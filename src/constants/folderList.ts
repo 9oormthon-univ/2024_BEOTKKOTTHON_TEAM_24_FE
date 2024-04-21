@@ -1,4 +1,4 @@
-export const FolderList = [
+export const FOLDERLIST = [
   {
     folderId: 1,
     folderName: 'UX/UI',

@@ -8,20 +8,9 @@ interface Props {
 }
 
 const InsightCard = ({ favicon, insightData }: Props) => {
-  const imageList = [
-    '/image/개발1.jpg',
-    '/image/개발2.jpg',
-    '/image/개발3.jpg',
-    '/image/디자인1.jpg',
-    '/image/디자인2.jpg',
-    '/image/디자인3.jpg',
-    '/image/기획1.jpg',
-    '/image/기획2.jpg',
-    '/image/기획3.jpg',
-  ];
   return (
-    <Wrapper>
-      {favicon ? (
+    <Wrapper opacity={insightData.todayRead ? 0.6 : 1}>
+      {favicon && (
         <Image
           src={favicon}
           width={52}
@@ -29,11 +18,9 @@ const InsightCard = ({ favicon, insightData }: Props) => {
           alt="Insight Card image"
           className="favicon"
         />
-      ) : (
-        <></>
       )}
       <Image
-        src={imageList[insightData.insightId % 9]}
+        src={insightData.insightMainImage}
         width={109}
         height={78}
         alt="Insight Card image"
@@ -49,7 +36,11 @@ const InsightCard = ({ favicon, insightData }: Props) => {
   );
 };
 
-const Wrapper = styled.div`
+interface CSSProps {
+  opacity: number;
+}
+
+const Wrapper = styled.div<CSSProps>`
   height: 102px;
   display: flex;
   flex-direction: row;
@@ -59,6 +50,7 @@ const Wrapper = styled.div`
   margin: 22px 20px;
   box-shadow: 9px 9px 30px 0px #00000014;
   position: relative;
+  opacity: ${(props) => props.opacity};
 
   .favicon {
     border: 10px solid #f9f9f9;

@@ -1,4 +1,4 @@
-export const SubjectList = {
+export const SUBJECTLIST = {
   PLANNER: [
     'QA',
     'GPT',

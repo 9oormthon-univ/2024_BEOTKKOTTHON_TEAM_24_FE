@@ -69,3 +69,15 @@ export const insightData2 = {
   insightTagList: ['UI/UX', '사용자 경험'],
   todayRead: true,
 };
+
+export const imageList = [
+  '/image/개발1.jpg',
+  '/image/개발2.jpg',
+  '/image/개발3.jpg',
+  '/image/디자인1.jpg',
+  '/image/디자인2.jpg',
+  '/image/디자인3.jpg',
+  '/image/기획1.jpg',
+  '/image/기획2.jpg',
+  '/image/기획3.jpg',
+];

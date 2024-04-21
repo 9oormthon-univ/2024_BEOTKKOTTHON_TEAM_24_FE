@@ -1,4 +1,4 @@
-export const colorList: { color: string; code: string }[] = [
+export const COLORLIST: { color: string; code: string }[] = [
   { color: 'BLUE', code: '#D7EBFF' },
   { color: 'PINK', code: '#FFE4E9' },
   { color: 'PURPLE', code: '#E2D8FF' },

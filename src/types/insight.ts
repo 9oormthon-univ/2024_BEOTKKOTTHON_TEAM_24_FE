@@ -6,6 +6,7 @@ export type Insight = {
   insightMainImage: string;
   insightSummary: string;
   insightTagList: string[];
+  todayRead?: boolean;
 };
 
 export type InsightDetail = {
