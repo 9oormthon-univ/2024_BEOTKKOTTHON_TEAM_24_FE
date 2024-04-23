@@ -76,7 +76,7 @@ const Upload: NextPage = ({}) => {
         insightUrl: String(link),
         insightTitle: result.title,
         insightSummary: String(result.summary),
-        insightMainImage: String(imageList?.[0]),
+        insightMainImage: String(imageList),
         insightTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords

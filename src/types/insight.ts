@@ -20,7 +20,7 @@ export type InsightDetail = {
     reminderType: string;
     reminderDay: number[];
   };
-  insightHashTagList: string[];
+  insightTagList: string[];
   insightMainImage: string;
   insightImageList: string[];
 };
@@ -61,7 +61,7 @@ export type InsightPostRequest = {
   folderName: string;
 };
 
-export type InsightPostResponse = Partial<InsightDetail>;
+export type InsightPostResponse = number;
 
 // GET /insight
 export type InsightGetRequest = {

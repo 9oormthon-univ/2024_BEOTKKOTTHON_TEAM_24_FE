@@ -13,6 +13,7 @@ import {
 import {
   InsightOGImagePostRequest,
   InsightPostRequest,
+  InsightPostResponse,
   InsightPutRequest,
 } from '@/types/insight';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -48,9 +49,12 @@ export function usePostInsight() {
 
   return useMutation({
     mutationFn: (data: InsightPostRequest) => postInsight(data),
-    onSuccess: () => {
+    onSuccess: (data: InsightPostResponse) => {
       queryClient.invalidateQueries({ queryKey: ['insight'] });
-      router.replace('/upload/saved');
+      router.replace({
+        pathname: '/upload/saved',
+        query: { insightId: data },
+      });
     },
   });
 }
