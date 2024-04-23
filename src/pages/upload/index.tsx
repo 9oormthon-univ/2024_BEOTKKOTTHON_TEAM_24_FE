@@ -41,11 +41,11 @@ const LinkInput: NextPage = ({}) => {
     // console.log(data?.map((folder) => folder.folderName));
 
     if (imageFiles) {
-      const formData = new FormData();
       imageFiles.forEach((image) => {
+        const formData = new FormData();
         formData.append('image', image);
+        mutate(formData);
       });
-      mutate(formData);
     }
 
     // 인사이트 제목, 요약, 키워드 요청
