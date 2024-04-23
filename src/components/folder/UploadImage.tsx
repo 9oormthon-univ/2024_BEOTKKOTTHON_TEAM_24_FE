@@ -3,10 +3,13 @@ import Image from 'next/image';
 import NoImage from '@svg/no-image-icon.svg';
 import DeleteImageIcon from '@svg/DeleteImageIcon';
 import AddImageIcon from '@svg/add-image-icon.svg';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   imageList: string[];
   setImageList: (imageList: string[]) => void;
+  imageFiles: File[];
+  setImageFiles: Dispatch<SetStateAction<File[]>>;
 }
 
 const UploadImage = (props: Props) => {
@@ -17,19 +20,21 @@ const UploadImage = (props: Props) => {
     props.setImageList(newList);
   };
 
-  const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e?.target.files) return;
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
     // 이미지 화면에 띄우기
     const newImagesURL = Array.from(
-      e?.target.files,
+      e.target.files,
       (file: Blob | MediaSource) => URL.createObjectURL(file),
     );
     const newList = props.imageList.concat(newImagesURL);
     if (newList.length > 10) {
-      alert('이미지는 10장 이상 추가할 수 없습니다.');
+      alert('이미지는 최대 10장까지 업로드 가능합니다.');
       return;
     }
+    const files = Array.from(e.target.files);
     props.setImageList(newList);
+    props.setImageFiles((prev) => [...prev, ...files]);
   };
 
   return (

@@ -32,10 +32,13 @@ export function useGetFolderInsight(folderId: number) {
   });
 }
 
-export function usePostImageLink(image: FormData) {
-  return useQuery({
-    queryKey: ['image-link'],
-    queryFn: () => postImage(image),
+export function usePostInsightImage() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: FormData) => postImage(data),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['insight-image'] }),
   });
 }
 
