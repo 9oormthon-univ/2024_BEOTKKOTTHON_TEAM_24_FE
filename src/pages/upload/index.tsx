@@ -41,12 +41,14 @@ const LinkInput: NextPage = ({}) => {
       {
         pathname: '/upload/input-text',
         query: {
-          link: link,
-          imageList: imageList,
-          insightImageList: imageList,
-          memo: memo,
-          folderNameList: data?.map((folder) => folder.folderName),
-          source: source,
+          inputData: JSON.stringify({
+            link: link,
+            imageList: imageList,
+            insightImageList: imageList,
+            memo: memo,
+            folderNameList: data?.map((folder) => folder.folderName),
+            source: source,
+          }),
         },
       },
       '/upload/input-text',

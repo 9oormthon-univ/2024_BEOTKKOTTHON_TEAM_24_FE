@@ -25,6 +25,8 @@ type aiInput = {
 
 const Upload: NextPage = ({}) => {
   const router = useRouter();
+  const { inputData } = router.query;
+  const inputDataObj = JSON.parse(String(inputData));
   const [insightLink, setInsightLink] = useState<aiInput>({
     link: '',
     folderList: [],
@@ -34,15 +36,15 @@ const Upload: NextPage = ({}) => {
     insightLink.folderList,
   );
   const [insightInput, setInsightInput] = useState<InsightPostRequest>({
-    insightUrl: '',
+    insightUrl: inputDataObj.url,
     insightTitle: '',
     insightSummary: '',
-    insightMainImage: '',
-    insightSource: '',
+    insightMainImage: inputDataObj.imageList[0],
+    insightSource: inputDataObj.source,
     viewCount: 0,
     insightTagList: [''],
-    insightMemo: '',
-    insightImageList: [''],
+    insightMemo: inputDataObj.memo,
+    insightImageList: inputDataObj.insightImageList,
     folderName: '폴더',
     enable: false,
     remindType: 'DEFAULT',
@@ -50,20 +52,18 @@ const Upload: NextPage = ({}) => {
   });
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { source, memo, imageList, insightImageList, link, folderNameList } =
-    router.query;
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
   const [isSaving, setIsSaving] = useState(false);
   const { mutate } = usePostInsight();
 
   useEffect(() => {
-    const newLink = String(link);
+    const newLink = String(inputDataObj.link);
     setInsightLink({
       link: newLink,
-      folderList: folderNameList
-        ? Array.isArray(folderNameList)
-          ? folderNameList
-          : [folderNameList]
+      folderList: inputDataObj.folderNameList
+        ? Array.isArray(inputDataObj.folderNameList)
+          ? inputDataObj.folderNameList
+          : [inputDataObj.folderNameList]
         : [],
     });
   }, []);
@@ -72,26 +72,21 @@ const Upload: NextPage = ({}) => {
     if (result.title) {
       setInsightInput({
         ...insightInput,
-        insightSource: String(source),
-        insightUrl: String(link),
         insightTitle: result.title,
         insightSummary: String(result.summary),
-        insightMainImage: String(imageList?.[0]),
         insightTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
             : result.keywords.split(', ')
           : [],
-        insightMemo: String(memo),
-        insightImageList: insightImageList
-          ? Array.isArray(insightImageList)
-            ? insightImageList
-            : [insightImageList]
-          : [],
         folderName: String(result.folderName),
       });
       setThumbnail(
-        imageList ? (Array.isArray(imageList) ? imageList[0] : imageList) : [],
+        inputDataObj.insightImageList
+          ? Array.isArray(inputDataObj.insightImageList)
+            ? inputDataObj.insightImageList[0]
+            : inputDataObj.insightImageList
+          : [],
       );
     }
     if (error) {
@@ -124,7 +119,7 @@ const Upload: NextPage = ({}) => {
                 <PageIntro>리마인드 카드 설정</PageIntro>
                 <ImageSection>
                   <div className="image-wrapper">
-                    {insightImageList ? (
+                    {insightInput.insightImageList ? (
                       <CardCover
                         src={String(thumbnail)}
                         alt="preview"
