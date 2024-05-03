@@ -16,6 +16,8 @@ const ReminderCalender = () => {
   const [$isSmall, set$isSmall] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState(dayjs().format('MM/DD/YY'));
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isUnsupportedBrowser, setIsUnsupportedBrowser] =
+    useState<boolean>(false);
 
   useEffect(() => {
     const infoList = [
@@ -23,6 +25,7 @@ const ReminderCalender = () => {
       `${30 - calenderData.remindTotal}개 더 저장하면 맞춤 콘텐츠를 추천해드려요!`,
     ];
     setInfoText(infoList[Math.floor(Math.random() * 2)]);
+    setIsUnsupportedBrowser(checkUnsupportedBrowser());
   }, []);
 
   const onClickView = () => {
@@ -37,7 +40,7 @@ const ReminderCalender = () => {
 
   return (
     <Wrapper>
-      {checkUnsupportedBrowser() ? (
+      {isUnsupportedBrowser ? (
         <Calender
           onClickModal={onClickModal}
           selectedDate={selectedDate}
