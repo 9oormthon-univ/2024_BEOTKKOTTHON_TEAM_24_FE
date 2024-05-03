@@ -101,7 +101,7 @@ const Upload: NextPage = ({}) => {
     }
   }, [result.title]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsSaving(true);
     mutate(insightInput);
   };
