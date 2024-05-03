@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
-import { useGetSummary } from '@/api/insight';
+import { useGetSummary } from '@/hooks/api/useInsight';
 import Image from 'next/image';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
