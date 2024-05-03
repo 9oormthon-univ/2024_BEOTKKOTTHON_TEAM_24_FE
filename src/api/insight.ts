@@ -52,7 +52,6 @@ export const useGetSummary = (link: string, folderList: string[]) => {
     queryFn: () => fetchSummary(link, folderList),
     enabled: !!link,
   });
-  console.log(data?.choices);
   const result = {
     title: data?.choices?.[0]?.message.content
       .split('요약:')[0]
@@ -67,7 +66,6 @@ export const useGetSummary = (link: string, folderList: string[]) => {
       .split('폴더명: ')[1]
       .split(','),
   };
-  console.log(result.folderName);
   return { isLoading, error, result };
 };
 

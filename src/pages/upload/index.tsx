@@ -35,7 +35,6 @@ const LinkInput: NextPage = ({}) => {
       alert('링크를 입력해주세요.');
       return;
     }
-    console.log(data?.map((folder) => folder.folderName));
     // 인사이트 제목, 요약, 키워드 요청
     router.push(
       {
@@ -66,7 +65,6 @@ const LinkInput: NextPage = ({}) => {
 
   const handleMemo = (newMemo: string) => {
     memo.length < 500 && setMemo(newMemo);
-    // console.log(imageList);
   };
 
   return (
