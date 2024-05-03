@@ -26,7 +26,7 @@ type aiInput = {
 const Upload: NextPage = ({}) => {
   const router = useRouter();
   const { inputData } = router.query;
-  const inputDataObj = JSON.parse(String(inputData));
+  const inputDataObj = inputData && JSON.parse(String(inputData));
   const [insightLink, setInsightLink] = useState<aiInput>({
     link: '',
     folderList: [],
@@ -36,15 +36,15 @@ const Upload: NextPage = ({}) => {
     insightLink.folderList,
   );
   const [insightInput, setInsightInput] = useState<InsightPostRequest>({
-    insightUrl: inputDataObj.url,
+    insightUrl: '',
     insightTitle: '',
     insightSummary: '',
-    insightMainImage: inputDataObj.imageList[0],
-    insightSource: inputDataObj.source,
+    insightMainImage: inputDataObj?.imageList[0],
+    insightSource: inputDataObj?.source,
     viewCount: 0,
     insightTagList: [''],
-    insightMemo: inputDataObj.memo,
-    insightImageList: inputDataObj.insightImageList,
+    insightMemo: inputDataObj?.memo,
+    insightImageList: inputDataObj?.insightImageList,
     folderName: '폴더',
     enable: false,
     remindType: 'DEFAULT',
