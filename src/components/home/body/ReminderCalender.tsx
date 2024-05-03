@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
 import { useEffect, useState } from 'react';
-// import Calender from './Calender';
+import Calender from './Calender';
 import InsightList from './InsightList';
 import dayjs from 'dayjs';
 import CalenderModal from './CalenderModal';
 import Calender2 from './Calender2';
 import { calenderData } from '@/constants/data';
+import { checkUnsupportedBrowser } from '@/utils';
 
 // TODO [2] - 날짜 클릭 시 해당 날짜에 리마인드 해야 하는 인사이트 호출
 const ReminderCalender = () => {
@@ -36,16 +37,19 @@ const ReminderCalender = () => {
 
   return (
     <Wrapper>
-      {/* <Calender
-        onClickModal={onClickModal}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-      /> */}
-      <Calender2
-        onClickModal={onClickModal}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-      />
+      {checkUnsupportedBrowser() ? (
+        <Calender
+          onClickModal={onClickModal}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
+      ) : (
+        <Calender2
+          onClickModal={onClickModal}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
+      )}
       <ViewSetting>
         <div className="instruction">
           <p>{infoText}</p>
