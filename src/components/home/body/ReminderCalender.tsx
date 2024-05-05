@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
 import { useEffect, useState } from 'react';
-import Calender from './SafariCalender';
+import SafariCalender from './SafariCalender';
 import InsightList from './InsightList';
 import dayjs from 'dayjs';
 import CalenderModal from './CalenderModal';
-import Calender2 from './ChromeCalender';
+import ChromeCalender from './ChromeCalender';
 import { calenderData } from '@/constants/data';
 import { checkUnsupportedBrowser } from '@/utils';
 
@@ -45,13 +45,13 @@ const ReminderCalender = () => {
   return (
     <Wrapper>
       {isUnsupportedBrowser ? (
-        <Calender
+        <SafariCalender
           onClickModal={onClickModal}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
       ) : (
-        <Calender2
+        <ChromeCalender
           onClickModal={onClickModal}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
