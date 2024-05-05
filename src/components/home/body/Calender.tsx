@@ -76,13 +76,13 @@ const Calender = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
           <Left
             onClick={() => {
               handlePrevWeek();
-              paginate(-1);
+              // paginate(-1);
             }}
           />
           <Right
             onClick={() => {
               handleNextWeek();
-              paginate(1);
+              // paginate(1);
             }}
           />
         </div>

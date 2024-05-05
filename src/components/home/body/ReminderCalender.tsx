@@ -17,7 +17,7 @@ const ReminderCalender = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs().format('MM/DD/YY'));
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isUnsupportedBrowser, setIsUnsupportedBrowser] =
-    useState<boolean>(false);
+    useState<boolean>(true);
 
   useEffect(() => {
     const infoList = [
@@ -29,6 +29,10 @@ const ReminderCalender = () => {
   }, []);
 
   const onClickView = () => {
+    set$isSmall(!$isSmall);
+  };
+
+  const onClickAnimationView = () => {
     document.startViewTransition(() => {
       set$isSmall(!$isSmall);
     });
@@ -58,8 +62,14 @@ const ReminderCalender = () => {
           <p>{infoText}</p>
         </div>
         <div className="icons-box">
-          <LargeViewIcon $isSmall={$isSmall} onClick={onClickView} />
-          <SmallViewIcon $isSmall={$isSmall} onClick={onClickView} />
+          <LargeViewIcon
+            $isSmall={$isSmall}
+            onClick={isUnsupportedBrowser ? onClickView : onClickAnimationView}
+          />
+          <SmallViewIcon
+            $isSmall={$isSmall}
+            onClick={isUnsupportedBrowser ? onClickView : onClickAnimationView}
+          />
         </div>
       </ViewSetting>
       {dayjs().isSame(selectedDate, 'day') ? (
