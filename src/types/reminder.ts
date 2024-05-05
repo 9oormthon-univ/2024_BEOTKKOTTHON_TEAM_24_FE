@@ -24,12 +24,12 @@ export type AnswerPostResponse = {
   insightId: number;
 };
 
-// POST /reminder/calender
-export type CalenderPostRequest = {
+// POST /reminder/calendar
+export type CalendarPostRequest = {
   requestDate: string;
 };
 
-export type CalenderPostResponse = {
+export type CalendarPostResponse = {
   date: string;
   remindRead: number;
   remindTotal: number;

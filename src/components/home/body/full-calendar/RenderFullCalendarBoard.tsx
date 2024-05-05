@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { ButtonHTMLAttributes, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-const RenderFullCalenderBoard = (
+const RenderFullCalendarBoard = (
   selectedDay: string,
   //   selectedProfile: string,
   handleSelectDate: (v: string) => void,
@@ -45,7 +45,7 @@ const RenderFullCalenderBoard = (
       }}
     >
       {v && (
-        <CalenderItem
+        <CalendarItem
           date={v}
           isSelected={selectedFullDate === v}
           onClick={() => {
@@ -60,14 +60,14 @@ const RenderFullCalenderBoard = (
   return content;
 };
 
-export default RenderFullCalenderBoard;
+export default RenderFullCalendarBoard;
 
-interface CalenderItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface CalendarItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   date: string;
   isSelected: boolean;
 }
 
-const CalenderItem = ({ date }: CalenderItemProps) => {
+const CalendarItem = ({ date }: CalendarItemProps) => {
   return <span className="date">{dayjs(date).date()}</span>;
 };
 

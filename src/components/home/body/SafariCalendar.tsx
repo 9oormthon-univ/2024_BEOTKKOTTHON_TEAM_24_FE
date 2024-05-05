@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import styled from 'styled-components';
-import RenderCalenderBoard from './RenderCalenderBoard';
+import RenderCalendarBoard from './RenderCalendarBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 import Down from '@svg/down-icon.svg';
@@ -11,7 +11,7 @@ interface Props {
   setSelectedDate: (date: string) => void;
 }
 
-const Calender = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
+const Calendar = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
 
@@ -29,7 +29,7 @@ const Calender = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
     setSelectedDate(newDate);
   };
 
-  const board = RenderCalenderBoard(today, selectedDate, handleSelectDate);
+  const board = RenderCalendarBoard(today, selectedDate, handleSelectDate);
 
   return (
     <Wrapper>
@@ -89,4 +89,4 @@ const Head = styled.div`
   }
 `;
 
-export default Calender;
+export default Calendar;

@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import Stamp from '@svg/calender-stamp.svg';
+import Stamp from '@svg/calendar-stamp.svg';
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const RenderCalenderBoard = (
+const RenderCalendarBoard = (
   today: string,
   selectedDay: string,
   handleSelectDate: (v: string | null) => void,
@@ -33,14 +33,14 @@ const RenderCalenderBoard = (
       $isSelected={selectedDay === v}
       onClick={() => handleSelectDate(v)}
     >
-      {v && <CalenderItem date={v} stamp={today === v} />}
+      {v && <CalendarItem date={v} stamp={today === v} />}
     </Item>
   ));
 
   return <Board>{content}</Board>;
 };
 
-export default RenderCalenderBoard;
+export default RenderCalendarBoard;
 
 const Board = styled.div`
   display: grid;
@@ -48,12 +48,12 @@ const Board = styled.div`
   min-height: 65px;
 `;
 
-interface CalenderItemProps {
+interface CalendarItemProps {
   date: string;
   stamp: boolean;
 }
 
-const CalenderItem = ({ date, stamp }: CalenderItemProps) => {
+const CalendarItem = ({ date, stamp }: CalendarItemProps) => {
   return (
     <>
       <span className="day">{days[dayjs(date).day()]}</span>

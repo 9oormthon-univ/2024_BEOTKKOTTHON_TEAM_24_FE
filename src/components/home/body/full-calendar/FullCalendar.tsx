@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import styled from 'styled-components';
-import RenderFullCalenderBoard from './RenderFullCalenderBoard';
+import RenderFullCalendarBoard from './RenderFullCalendarBoard';
 import Right from '@svg/next-icon.svg';
 import Left from '@svg/prev-icon.svg';
 // import { useRecoilState, useRecoilValue } from 'recoil';s
@@ -14,7 +14,7 @@ interface Props {
   onClickModal: () => void;
 }
 
-const FullCalender = ({
+const FullCalendar = ({
   selectedDate,
   setSelectedDate,
   onClickModal,
@@ -43,7 +43,7 @@ const FullCalender = ({
     setSelectedDate(newDate);
   };
 
-  const board = RenderFullCalenderBoard(
+  const board = RenderFullCalendarBoard(
     selectedDate,
     // selectedProfile,
     handleSelectDate,
@@ -73,7 +73,7 @@ const FullCalender = ({
   );
 };
 
-export default FullCalender;
+export default FullCalendar;
 
 const Wrapper = styled.div`
   margin-top: 20px;

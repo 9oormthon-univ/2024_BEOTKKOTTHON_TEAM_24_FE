@@ -6,7 +6,7 @@ import SmallView from '@svg/small-view-icon.svg';
 import LargeView from '@svg/large-view-icon.svg';
 import { Insight } from '@/types/insight';
 import SummaryInsightCard from '@/components/common/SummaryInsightCard';
-import { calenderData } from '@/constants/data';
+import { calendarData } from '@/constants/data';
 import ShareIcon from '@svg/share-icon-blue.svg';
 import EditModal from '@components/folder/EditModal';
 import SearchSection from '@/components/common/SearchSection';
@@ -19,7 +19,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
   const [searchInput, setSearchInput] = useState('');
   const [isSmall, setIsSmall] = useState(false);
   const [insightList, setInsightList] = useState<Insight[]>(
-    calenderData.remindInsightList,
+    calendarData.remindInsightList,
   );
   const [isModalOn, setIsModalOn] = useState(false);
   const onClick = () => {
