@@ -6,31 +6,39 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { insightData1, insightData2 } from '@/constants/data';
+import { useGetInsight } from '@/hooks/api/useInsight';
+import { Insight } from '@/types/insight';
+import { useEffect, useState } from 'react';
 
 const Saved: NextPage = ({}) => {
   const router = useRouter();
-  const { id, title, summary, image, tagList } = router.query;
-  const cardData = {
-    insightId: Number(id),
-    insightTitle: String(title),
-    insightSummary: String(summary),
-    insightMainImage: image ? String(image) : '/image/defaultImage.jpeg',
-    insightTagList: tagList
-      ? Array.isArray(tagList)
-        ? tagList
-        : [tagList]
-      : [],
-    todayRead: false,
-  };
+  const { insightId } = router.query;
+  const { data, isSuccess } = useGetInsight(Number(insightId));
+  const [insight, setInsight] = useState<Insight>();
+
+  useEffect(() => {
+    if (!isSuccess || !data) return;
+    const { insightTitle, insightMainImage, insightSummary, insightTagList } =
+      data;
+    setInsight({
+      insightId: Number(insightId),
+      insightTitle,
+      insightMainImage,
+      insightSummary,
+      insightTagList,
+    });
+  }, [isSuccess, data, insightId]);
 
   return (
     <NavigationLayout>
       <Wrapper>
         <Header title="저장 완료" />
-        <SummaryInsightCard
-          favicon="/svg/insight-favicon.svg"
-          insightData={cardData}
-        />
+        {insight && (
+          <SummaryInsightCard
+            favicon="/svg/insight-favicon.svg"
+            insightData={insight}
+          />
+        )}
         <div className="blue-text">확인하러 가기</div>
         <HrLine />
         <Title>관련 인사이트 둘러보기</Title>

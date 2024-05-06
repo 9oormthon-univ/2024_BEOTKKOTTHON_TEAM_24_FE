@@ -9,6 +9,7 @@ import { getAccessToken } from '@/utils/auth';
 import InputWithTitle from '@/components/common/InputWithTitle';
 import UploadImage from '@/components/folder/UploadImage';
 import OptionalTextarea from '@/components/common/OptionalTextarea';
+import { usePostInsightImage } from '@/hooks/api/useInsight';
 
 const LinkInput: NextPage = ({}) => {
   const router = useRouter();
@@ -18,6 +19,8 @@ const LinkInput: NextPage = ({}) => {
   const [errorText, setErrorText] = useState('');
   const [source, setSource] = useState('');
   const { data } = useGetFolder();
+  const { mutate } = usePostInsightImage();
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
 
   useEffect(() => {
     if (!getAccessToken()) {
@@ -35,7 +38,16 @@ const LinkInput: NextPage = ({}) => {
       alert('링크를 입력해주세요.');
       return;
     }
-    console.log(data?.map((folder) => folder.folderName));
+    // console.log(data?.map((folder) => folder.folderName));
+
+    if (imageFiles) {
+      imageFiles.forEach((image) => {
+        const formData = new FormData();
+        formData.append('image', image);
+        mutate(formData);
+      });
+    }
+
     // 인사이트 제목, 요약, 키워드 요청
     router.push(
       {
@@ -79,7 +91,12 @@ const LinkInput: NextPage = ({}) => {
             value={link}
             onChange={(e) => handleInputLink(e.target.value)}
           />
-          <UploadImage imageList={imageList} setImageList={setImageList} />
+          <UploadImage
+            imageList={imageList}
+            setImageList={setImageList}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+          />
           <OptionalTextarea
             bottom={30}
             titleTypo="big"
