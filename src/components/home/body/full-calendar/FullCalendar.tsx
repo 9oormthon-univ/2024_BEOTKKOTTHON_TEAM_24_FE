@@ -23,8 +23,8 @@ const FullCalendar = ({
   //   const selectedProfile = useRecoilValue(selectedProfileState);
   const splited = selectedDate.split('/');
 
-  const handleSelectDate = (v: string) => {
-    setSelectedDate(v);
+  const handleSelectDate = (date: string) => {
+    setSelectedDate(date);
   };
 
   const handlePrevMonth = () => {

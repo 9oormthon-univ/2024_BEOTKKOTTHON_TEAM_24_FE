@@ -15,8 +15,8 @@ const Calendar = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
 
-  const handleSelectDate = (v: string | null) => {
-    v ? setSelectedDate(v) : setSelectedDate(today);
+  const handleSelectDate = (date: string | null) => {
+    date ? setSelectedDate(date) : setSelectedDate(today);
   };
 
   const handlePrevWeek = () => {

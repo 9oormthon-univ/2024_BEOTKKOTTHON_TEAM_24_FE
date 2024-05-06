@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 const RenderFullCalendarBoard = (
   selectedDay: string,
   //   selectedProfile: string,
-  handleSelectDate: (v: string) => void,
+  handleSelectDate: (date: string) => void,
 ) => {
   const initArr = (firstDay: number, daysInMonth: number) => {
     return Array.from({ length: firstDay + daysInMonth }, (v, i) =>
@@ -35,22 +35,22 @@ const RenderFullCalendarBoard = (
     setArr(initArr(firstDay, daysInMonth));
   }, [selectedDay]);
 
-  const content = arr.map((v, i) => (
+  const content = arr.map((value, i) => (
     <Item
-      key={v ? v.toString() : `${v}${i}`}
-      isSelected={selectedFullDate === v}
+      key={value ? value.toString() : `${value}${i}`}
+      isSelected={selectedFullDate === value}
       onClick={() => {
-        handleFullSelectDate(v);
-        if (v) handleSelectDate(v);
+        handleFullSelectDate(value);
+        if (value) handleSelectDate(value);
       }}
     >
-      {v && (
+      {value && (
         <CalendarItem
-          date={v}
-          isSelected={selectedFullDate === v}
+          date={value}
+          isSelected={selectedFullDate === value}
           onClick={() => {
-            console.log(v);
-            handleSelectDate(v);
+            console.log(value);
+            handleSelectDate(value);
           }}
         />
       )}

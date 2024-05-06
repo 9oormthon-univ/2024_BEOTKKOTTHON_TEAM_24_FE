@@ -8,7 +8,7 @@ const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const RenderCalendarBoard = (
   today: string,
   selectedDay: string,
-  handleSelectDate: (v: string | null) => void,
+  handleSelectDate: (date: string | null) => void,
 ) => {
   const initArr = (firstDay: number) => {
     return Array.from({ length: 7 }, (v, i) =>

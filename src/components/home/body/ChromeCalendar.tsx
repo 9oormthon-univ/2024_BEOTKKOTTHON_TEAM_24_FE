@@ -17,8 +17,8 @@ const Calendar2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
   const splited = selectedDate.split('/');
   const [direction, setDirection] = useState<string>('');
 
-  const handleSelectDate = (v: string | null) => {
-    v ? setSelectedDate(v) : setSelectedDate(today);
+  const handleSelectDate = (date: string | null) => {
+    date ? setSelectedDate(date) : setSelectedDate(today);
   };
 
   const handlePrevWeek = () => {
