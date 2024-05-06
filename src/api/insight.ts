@@ -4,8 +4,8 @@ import {
   FolderSearchTagGetResponse,
   FolderShareGetResponse,
   InsightGetResponse,
-  InsightOGImagePostRequest,
-  InsightOGImagePostResponse,
+  InsightOGImageGetRequest,
+  InsightOGImageGetResponse,
   InsightPostRequest,
   InsightPostResponse,
   InsightPutRequest,
@@ -43,6 +43,31 @@ export const fetchSummary = async (link: string, folderList: string[]) => {
   const response = await axios.request(config);
 
   return response.data as SummarizeInsightResponse;
+};
+
+export const useGetSummary = (link: string, folderList: string[]) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['get-summary'],
+    queryFn: () => fetchSummary(link, folderList),
+    enabled: !!link,
+  });
+  // console.log(data?.choices);
+  const result = {
+    title: data?.choices?.[0]?.message.content
+      .split('요약:')[0]
+      .split('제목:')[1],
+    summary: data?.choices?.[0]?.message.content
+      .split('요약:')[1]
+      .split('키워드:')[0],
+    keywords: data?.choices?.[0]?.message.content
+      .split('키워드:')[1]
+      .split('폴더명:')[0],
+    folderName: data?.choices?.[0]?.message.content
+      .split('폴더명: ')[1]
+      .split(','),
+  };
+  // console.log(result.folderName);
+  return { isLoading, error, result };
 };
 
 // 공유 폴더 url 보기
@@ -92,10 +117,10 @@ export async function getFolderInsightByTag(
 }
 
 // 인사이트 링크 대표 이미지 제공
-export async function postInsightOGImage(
-  imageData: InsightOGImagePostRequest,
-): Promise<InsightOGImagePostResponse> {
-  const response = await api.post(`/insight/ogimage/${imageData.url}`);
+export async function getInsightOGImage(
+  url: InsightOGImageGetRequest,
+): Promise<InsightOGImageGetResponse> {
+  const response = await api.get(`/insight/ogimage?url=${url}`);
   return response.data;
 }
 

@@ -2,29 +2,37 @@ import styled from 'styled-components';
 import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
 import { useEffect, useState } from 'react';
-// import Calender from './Calender';
+import SafariCalendar from './SafariCalendar';
 import InsightList from './InsightList';
 import dayjs from 'dayjs';
-import CalenderModal from './CalenderModal';
-import Calender2 from './Calender2';
-import { calenderData } from '@/constants/data';
+import CalendarModal from './CalendarModal';
+import ChromeCalendar from './ChromeCalendar';
+import { calendarData } from '@/constants/data';
+import { checkUnsupportedBrowser } from '@/utils';
 
 // TODO [2] - 날짜 클릭 시 해당 날짜에 리마인드 해야 하는 인사이트 호출
-const ReminderCalender = () => {
+const ReminderCalendar = () => {
   const [infoText, setInfoText] = useState<string>('');
   const [$isSmall, set$isSmall] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState(dayjs().format('MM/DD/YY'));
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isUnsupportedBrowser, setIsUnsupportedBrowser] =
+    useState<boolean>(true);
 
   useEffect(() => {
     const infoList = [
       '리마인드를 설정하면 캘린더에서 확인할 수 있어요!',
-      `${30 - calenderData.remindTotal}개 더 저장하면 맞춤 콘텐츠를 추천해드려요!`,
+      `${30 - calendarData.remindTotal}개 더 저장하면 맞춤 콘텐츠를 추천해드려요!`,
     ];
     setInfoText(infoList[Math.floor(Math.random() * 2)]);
+    setIsUnsupportedBrowser(checkUnsupportedBrowser());
   }, []);
 
   const onClickView = () => {
+    set$isSmall(!$isSmall);
+  };
+
+  const onClickAnimationView = () => {
     document.startViewTransition(() => {
       set$isSmall(!$isSmall);
     });
@@ -36,27 +44,36 @@ const ReminderCalender = () => {
 
   return (
     <Wrapper>
-      {/* <Calender
-        onClickModal={onClickModal}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-      /> */}
-      <Calender2
-        onClickModal={onClickModal}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-      />
+      {isUnsupportedBrowser ? (
+        <SafariCalendar
+          onClickModal={onClickModal}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
+      ) : (
+        <ChromeCalendar
+          onClickModal={onClickModal}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
+      )}
       <ViewSetting>
         <div className="instruction">
           <p>{infoText}</p>
         </div>
         <div className="icons-box">
-          <LargeViewIcon $isSmall={$isSmall} onClick={onClickView} />
-          <SmallViewIcon $isSmall={$isSmall} onClick={onClickView} />
+          <LargeViewIcon
+            $isSmall={$isSmall}
+            onClick={isUnsupportedBrowser ? onClickView : onClickAnimationView}
+          />
+          <SmallViewIcon
+            $isSmall={$isSmall}
+            onClick={isUnsupportedBrowser ? onClickView : onClickAnimationView}
+          />
         </div>
       </ViewSetting>
       {dayjs().isSame(selectedDate, 'day') ? (
-        <InsightList $isSmall={$isSmall} calenderData={calenderData} />
+        <InsightList $isSmall={$isSmall} calendarData={calendarData} />
       ) : (
         <EmptyInsight>
           <p>확인 할 인사이트가 없습니다.</p>
@@ -64,7 +81,7 @@ const ReminderCalender = () => {
         </EmptyInsight>
       )}
       {modalOpen ? (
-        <CalenderModal
+        <CalendarModal
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
           onClickModal={onClickModal}
@@ -141,4 +158,4 @@ const EmptyInsight = styled.div`
   }
 `;
 
-export default ReminderCalender;
+export default ReminderCalendar;

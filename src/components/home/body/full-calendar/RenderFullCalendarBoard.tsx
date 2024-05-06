@@ -2,10 +2,10 @@ import dayjs from 'dayjs';
 import { ButtonHTMLAttributes, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-const RenderFullCalenderBoard = (
+const RenderFullCalendarBoard = (
   selectedDay: string,
   //   selectedProfile: string,
-  handleSelectDate: (v: string) => void,
+  handleSelectDate: (date: string) => void,
 ) => {
   const initArr = (firstDay: number, daysInMonth: number) => {
     return Array.from({ length: firstDay + daysInMonth }, (v, i) =>
@@ -35,22 +35,22 @@ const RenderFullCalenderBoard = (
     setArr(initArr(firstDay, daysInMonth));
   }, [selectedDay]);
 
-  const content = arr.map((v, i) => (
+  const content = arr.map((value, i) => (
     <Item
-      key={v ? v.toString() : `${v}${i}`}
-      isSelected={selectedFullDate === v}
+      key={value ? value.toString() : `${value}${i}`}
+      isSelected={selectedFullDate === value}
       onClick={() => {
-        handleFullSelectDate(v);
-        if (v) handleSelectDate(v);
+        handleFullSelectDate(value);
+        if (value) handleSelectDate(value);
       }}
     >
-      {v && (
-        <CalenderItem
-          date={v}
-          isSelected={selectedFullDate === v}
+      {value && (
+        <CalendarItem
+          date={value}
+          isSelected={selectedFullDate === value}
           onClick={() => {
-            console.log(v);
-            handleSelectDate(v);
+            console.log(value);
+            handleSelectDate(value);
           }}
         />
       )}
@@ -60,14 +60,14 @@ const RenderFullCalenderBoard = (
   return content;
 };
 
-export default RenderFullCalenderBoard;
+export default RenderFullCalendarBoard;
 
-interface CalenderItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface CalendarItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   date: string;
   isSelected: boolean;
 }
 
-const CalenderItem = ({ date }: CalenderItemProps) => {
+const CalendarItem = ({ date }: CalendarItemProps) => {
   return <span className="date">{dayjs(date).date()}</span>;
 };
 

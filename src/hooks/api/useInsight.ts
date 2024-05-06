@@ -8,12 +8,13 @@ import {
   getSharedFolder,
   postImage,
   postInsight,
-  postInsightOGImage,
+  getInsightOGImage,
   putInsight,
 } from '@/api/insight';
 import {
-  InsightOGImagePostRequest,
+  InsightOGImageGetRequest,
   InsightPostRequest,
+  InsightPostResponse,
   InsightPutRequest,
 } from '@/types/insight';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -33,10 +34,13 @@ export function useGetFolderInsight(folderId: number) {
   });
 }
 
-export function usePostImageLink(image: FormData) {
-  return useQuery({
-    queryKey: ['image-link'],
-    queryFn: () => postImage(image),
+export function usePostInsightImage() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: FormData) => postImage(data),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['insight-image'] }),
   });
 }
 
@@ -69,9 +73,12 @@ export function usePostInsight() {
 
   return useMutation({
     mutationFn: (data: InsightPostRequest) => postInsight(data),
-    onSuccess: () => {
+    onSuccess: (data: InsightPostResponse) => {
       queryClient.invalidateQueries({ queryKey: ['insight'] });
-      router.replace('/upload/saved');
+      router.replace({
+        pathname: '/upload/saved',
+        query: { insightId: data },
+      });
     },
   });
 }
@@ -90,10 +97,10 @@ export function useGetFolderInsightByTag(folderId: number, tag: string) {
   });
 }
 
-export function usePostInsightOGImage() {
-  return useMutation({
-    mutationFn: (imageData: InsightOGImagePostRequest) =>
-      postInsightOGImage(imageData),
+export function useGetInsightOGImage(url: InsightOGImageGetRequest) {
+  return useQuery({
+    queryKey: ['ogimage'],
+    queryFn: () => getInsightOGImage(url),
   });
 }
 

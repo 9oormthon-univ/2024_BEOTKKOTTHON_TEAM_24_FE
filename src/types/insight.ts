@@ -20,7 +20,7 @@ export type InsightDetail = {
     reminderType: string;
     reminderDay: number[];
   };
-  insightHashTagList: string[];
+  insightTagList: string[];
   insightMainImage: string;
   insightImageList: string[];
 };
@@ -61,7 +61,7 @@ export type InsightPostRequest = {
   folderName: string;
 };
 
-export type InsightPostResponse = Partial<InsightDetail>;
+export type InsightPostResponse = number;
 
 // GET /insight
 export type InsightGetRequest = {
@@ -90,11 +90,7 @@ export type InsightPutRequest = {
   reminderAnswer?: string;
 };
 
-// POST /insight/ogimage/{url}
-export type InsightOGImagePostRequest = {
-  url: string;
-};
+// GET /insight/ogimage
+export type InsightOGImageGetRequest = string;
 
-export type InsightOGImagePostResponse = {
-  insightMainImage: string;
-};
+export type InsightOGImageGetResponse = string;

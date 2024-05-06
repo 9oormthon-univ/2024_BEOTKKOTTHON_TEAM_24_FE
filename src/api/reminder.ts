@@ -2,8 +2,8 @@ import { api } from '@/api';
 import {
   AnswerPostRequest,
   AnswerPostResponse,
-  CalenderPostRequest,
-  CalenderPostResponse,
+  CalendarPostRequest,
+  CalendarPostResponse,
   QuestionGetResponse,
 } from '@/types/reminder';
 
@@ -22,9 +22,9 @@ export async function postReminderAnswer(
 }
 
 // 리마인드 캘린더
-export async function postReminderCalender(
-  calenderData: CalenderPostRequest,
-): Promise<CalenderPostResponse> {
-  const response = await api.post(`/reminder/calender`, calenderData);
+export async function postReminderCalendar(
+  calendarData: CalendarPostRequest,
+): Promise<CalendarPostResponse> {
+  const response = await api.post(`/reminder/calendar`, calendarData);
   return response.data;
 }

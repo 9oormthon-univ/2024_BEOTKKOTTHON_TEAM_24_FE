@@ -17,6 +17,7 @@ import TagSection from '@/components/upload/TagSection';
 import OptionalTextarea from '@/components/common/OptionalTextarea';
 import FolderSetting from '@/components/upload/FolderSetting';
 import RemindSetting from '@/components/upload/RemindSetting';
+import { useCheckMainImage } from '@/utils/upload';
 
 type aiInput = {
   link: string;
@@ -52,9 +53,11 @@ const Upload: NextPage = ({}) => {
   });
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
+  const { source, memo, imageList, insightImageList, link, folderNameList } =
+    router.query;
   const [isSaving, setIsSaving] = useState(false);
   const { mutate } = usePostInsight();
+  const image = useCheckMainImage(imageList, String(link));
 
   useEffect(() => {
     const newLink = String(inputDataObj.link);
@@ -74,6 +77,7 @@ const Upload: NextPage = ({}) => {
         ...insightInput,
         insightTitle: result.title,
         insightSummary: String(result.summary),
+        insightMainImage: image ? String(image) : defaultImage.src,
         insightTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
@@ -81,13 +85,6 @@ const Upload: NextPage = ({}) => {
           : [],
         folderName: String(result.folderName),
       });
-      setThumbnail(
-        inputDataObj.insightImageList
-          ? Array.isArray(inputDataObj.insightImageList)
-            ? inputDataObj.insightImageList[0]
-            : inputDataObj.insightImageList
-          : [],
-      );
     }
     if (error) {
       console.error(error);
@@ -119,9 +116,9 @@ const Upload: NextPage = ({}) => {
                 <PageIntro>리마인드 카드 설정</PageIntro>
                 <ImageSection>
                   <div className="image-wrapper">
-                    {insightInput.insightImageList ? (
+                    {image ? (
                       <CardCover
-                        src={String(thumbnail)}
+                        src={image}
                         alt="preview"
                         className="thumbnail"
                       />

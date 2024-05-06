@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
-import ReminderCalender from '@/components/home/body/ReminderCalender';
+import ReminderCalendar from '@/components/home/body/ReminderCalendar';
 import Carousel from '@/components/landing/Carousel';
 import { useRouter } from 'next/router';
 import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         <TitleSettingsPanel questionData={questionData} />
         <div onClick={onClick}>{renderInnerComponent()}</div>
         <HrLine />
-        <ReminderCalender />
+        <ReminderCalendar />
       </Wrapper>
     </NavigationLayout>
   );
