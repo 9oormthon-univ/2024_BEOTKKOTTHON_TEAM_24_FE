@@ -1,9 +1,9 @@
 import {
   getReminderQuestion,
   postReminderAnswer,
-  postReminderCalender,
+  postReminderCalendar,
 } from '@/api/reminder';
-import { AnswerPostRequest, CalenderPostRequest } from '@/types/reminder';
+import { AnswerPostRequest, CalendarPostRequest } from '@/types/reminder';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export function useGetReminderQuestion() {
@@ -24,9 +24,9 @@ export function usePostReminderAnswer() {
   });
 }
 
-export function usePostReminderCalender() {
+export function usePostReminderCalendar() {
   return useMutation({
-    mutationFn: (calenderData: CalenderPostRequest) =>
-      postReminderCalender(calenderData),
+    mutationFn: (calendarData: CalendarPostRequest) =>
+      postReminderCalendar(calendarData),
   });
 }

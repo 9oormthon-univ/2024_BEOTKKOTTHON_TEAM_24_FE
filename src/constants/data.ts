@@ -1,5 +1,5 @@
 import { QuestionGetResponse } from '@/types/reminder';
-import { CalenderPostResponse } from '@/types/reminder';
+import { CalendarPostResponse } from '@/types/reminder';
 
 //home
 export const questionData: QuestionGetResponse = {
@@ -24,7 +24,7 @@ export const questionData: QuestionGetResponse = {
   ],
 };
 
-export const calenderData: CalenderPostResponse = {
+export const calendarData: CalendarPostResponse = {
   date: '2024-03-18',
   remindRead: 1,
   remindTotal: 2,

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 // import Left from '@svg/next-icon.svg';
 // import Right from '@svg/prev-icon.svg';
-import FullCalender from './full-calender/FullCalender';
+import FullCalendar from './full-calendar/FullCalendar';
 
 interface Props {
   // onClickModal: () => void;
@@ -10,7 +10,7 @@ interface Props {
   onClickModal: () => void;
 }
 
-const CalenderModal = ({
+const CalendarModal = ({
   selectedDate,
   setSelectedDate,
   onClickModal,
@@ -34,7 +34,7 @@ const CalenderModal = ({
           </svg>
         </ModalHeader>
         <ModalBody>
-          <FullCalender
+          <FullCalendar
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
             onClickModal={onClickModal}
@@ -46,7 +46,7 @@ const CalenderModal = ({
   );
 };
 
-export default CalenderModal;
+export default CalendarModal;
 
 const ModalBg = styled.div`
   position: fixed;
