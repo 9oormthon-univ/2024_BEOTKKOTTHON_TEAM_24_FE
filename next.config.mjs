@@ -17,6 +17,15 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+        pathname: '**',
+      },
+    ],
+  },
 };
 
 export default PWA(nextConfig);

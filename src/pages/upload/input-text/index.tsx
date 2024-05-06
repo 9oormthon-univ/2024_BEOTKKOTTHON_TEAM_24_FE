@@ -17,6 +17,7 @@ import TagSection from '@/components/upload/TagSection';
 import OptionalTextarea from '@/components/common/OptionalTextarea';
 import FolderSetting from '@/components/upload/FolderSetting';
 import RemindSetting from '@/components/upload/RemindSetting';
+import { useCheckMainImage } from '@/utils/upload';
 
 type aiInput = {
   link: string;
@@ -55,6 +56,7 @@ const Upload: NextPage = ({}) => {
   const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
   const [isSaving, setIsSaving] = useState(false);
   const { mutate } = usePostInsight();
+  const image = useCheckMainImage(imageList, String(link));
 
   useEffect(() => {
     const newLink = String(link);
@@ -76,9 +78,7 @@ const Upload: NextPage = ({}) => {
         insightUrl: String(link),
         insightTitle: result.title,
         insightSummary: String(result.summary),
-        insightMainImage: String(
-          Array.isArray(imageList) ? imageList[0] : imageList,
-        ),
+        insightMainImage: String(image),
         insightTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords

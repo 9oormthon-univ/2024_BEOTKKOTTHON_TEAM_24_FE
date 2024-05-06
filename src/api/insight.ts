@@ -4,8 +4,8 @@ import {
   FolderSearchTagGetResponse,
   FolderShareGetResponse,
   InsightGetResponse,
-  InsightOGImagePostRequest,
-  InsightOGImagePostResponse,
+  InsightOGImageGetRequest,
+  InsightOGImageGetResponse,
   InsightPostRequest,
   InsightPostResponse,
   InsightPutRequest,
@@ -118,10 +118,10 @@ export async function getFolderInsightByTag(
 }
 
 // 인사이트 링크 대표 이미지 제공
-export async function postInsightOGImage(
-  imageData: InsightOGImagePostRequest,
-): Promise<InsightOGImagePostResponse> {
-  const response = await api.post(`/insight/ogimage/${imageData.url}`);
+export async function getInsightOGImage(
+  url: InsightOGImageGetRequest,
+): Promise<InsightOGImageGetResponse> {
+  const response = await api.get(`/insight/ogimage?url=${url}`);
   return response.data;
 }
 

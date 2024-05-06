@@ -7,11 +7,11 @@ import {
   getSharedFolder,
   postImage,
   postInsight,
-  postInsightOGImage,
+  getInsightOGImage,
   putInsight,
 } from '@/api/insight';
 import {
-  InsightOGImagePostRequest,
+  InsightOGImageGetRequest,
   InsightPostRequest,
   InsightPostResponse,
   InsightPutRequest,
@@ -73,10 +73,10 @@ export function useGetFolderInsightByTag(folderId: number, tag: string) {
   });
 }
 
-export function usePostInsightOGImage() {
-  return useMutation({
-    mutationFn: (imageData: InsightOGImagePostRequest) =>
-      postInsightOGImage(imageData),
+export function useGetInsightOGImage(url: InsightOGImageGetRequest) {
+  return useQuery({
+    queryKey: ['ogimage'],
+    queryFn: () => getInsightOGImage(url),
   });
 }
 

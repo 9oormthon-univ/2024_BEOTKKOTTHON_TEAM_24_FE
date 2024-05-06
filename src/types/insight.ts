@@ -90,11 +90,7 @@ export type InsightPutRequest = {
   reminderAnswer?: string;
 };
 
-// POST /insight/ogimage/{url}
-export type InsightOGImagePostRequest = {
-  url: string;
-};
+// GET /insight/ogimage
+export type InsightOGImageGetRequest = string;
 
-export type InsightOGImagePostResponse = {
-  insightMainImage: string;
-};
+export type InsightOGImageGetResponse = string;
