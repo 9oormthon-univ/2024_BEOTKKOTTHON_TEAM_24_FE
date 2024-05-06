@@ -53,7 +53,6 @@ const Upload: NextPage = ({}) => {
   const [remindTerm, setRemindTerm] = useState('');
   const { source, memo, imageList, insightImageList, link, folderNameList } =
     router.query;
-  const [thumbnail, setThumbnail] = useState<string | string[] | undefined>();
   const [isSaving, setIsSaving] = useState(false);
   const { mutate } = usePostInsight();
   const image = useCheckMainImage(imageList, String(link));
@@ -78,7 +77,7 @@ const Upload: NextPage = ({}) => {
         insightUrl: String(link),
         insightTitle: result.title,
         insightSummary: String(result.summary),
-        insightMainImage: String(image),
+        insightMainImage: image ? String(image) : defaultImage.src,
         insightTagList: result.keywords
           ? Array.isArray(result.keywords)
             ? result.keywords
@@ -92,9 +91,6 @@ const Upload: NextPage = ({}) => {
           : [],
         folderName: String(result.folderName),
       });
-      setThumbnail(
-        imageList ? (Array.isArray(imageList) ? imageList[0] : imageList) : [],
-      );
     }
     if (error) {
       console.error(error);
@@ -126,9 +122,9 @@ const Upload: NextPage = ({}) => {
                 <PageIntro>리마인드 카드 설정</PageIntro>
                 <ImageSection>
                   <div className="image-wrapper">
-                    {insightImageList ? (
+                    {image ? (
                       <CardCover
-                        src={String(thumbnail)}
+                        src={image}
                         alt="preview"
                         className="thumbnail"
                       />
