@@ -11,6 +11,7 @@ import {
   InsightPutRequest,
   RecommendGetResponse,
 } from '@/types/insight';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 interface SummarizeInsightResponse {

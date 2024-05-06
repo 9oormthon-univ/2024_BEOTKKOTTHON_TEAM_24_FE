@@ -53,11 +53,9 @@ const Upload: NextPage = ({}) => {
   });
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { source, memo, imageList, insightImageList, link, folderNameList } =
-    router.query;
   const [isSaving, setIsSaving] = useState(false);
   const { mutate } = usePostInsight();
-  const image = useCheckMainImage(imageList, String(link));
+  const image = useCheckMainImage(inputDataObj?.imageList, String(inputDataObj?.link));
 
   useEffect(() => {
     const newLink = String(inputDataObj.link);
