@@ -8,7 +8,6 @@ import { useGetSummary } from '@/hooks/api/useInsight';
 import Image from 'next/image';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
-import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
 import { usePostInsight } from '@/hooks/api/useInsight';
 import Loading from '@/components/upload/Loading';
@@ -17,72 +16,32 @@ import TagSection from '@/components/upload/TagSection';
 import OptionalTextarea from '@/components/common/OptionalTextarea';
 import FolderSetting from '@/components/upload/FolderSetting';
 import RemindSetting from '@/components/upload/RemindSetting';
-import { useCheckMainImage } from '@/utils/upload';
-
-type aiInput = {
-  link: string;
-  folderList: string[];
-};
+import useInsightInput from '@/hooks/custom/useInsightInput';
+import useLinkInput from '@/hooks/custom/useLinkInput';
 
 const Upload: NextPage = ({}) => {
   const router = useRouter();
-  const { inputData } = router.query;
-  const inputDataObj = inputData && JSON.parse(String(inputData));
-  const [insightLink, setInsightLink] = useState<aiInput>({
-    link: '',
-    folderList: [],
-  });
+  const queryObj = router.query.inputData && JSON.parse(String(router.query.inputData));
+
+  const { insightLink, updateInsightLink } = useLinkInput();
   const { isLoading, error, result } = useGetSummary(
     String(insightLink.link),
     insightLink.folderList,
   );
-  const [insightInput, setInsightInput] = useState<InsightPostRequest>({
-    insightUrl: '',
-    insightTitle: '',
-    insightSummary: '',
-    insightMainImage: inputDataObj?.imageList[0],
-    insightSource: inputDataObj?.source,
-    viewCount: 0,
-    insightTagList: [''],
-    insightMemo: inputDataObj?.memo,
-    insightImageList: inputDataObj?.insightImageList,
-    folderName: '폴더',
-    enable: false,
-    remindType: 'DEFAULT',
-    remindDays: [1],
-  });
+  const { insightInput, setInsightInput, updateInsightInput } = useInsightInput(queryObj)
+  const { mutate } = usePostInsight();
+
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
   const [isSaving, setIsSaving] = useState(false);
-  const { mutate } = usePostInsight();
-  const image = useCheckMainImage(inputDataObj?.imageList, String(inputDataObj?.link));
 
   useEffect(() => {
-    const newLink = String(inputDataObj.link);
-    setInsightLink({
-      link: newLink,
-      folderList: inputDataObj.folderNameList
-        ? Array.isArray(inputDataObj.folderNameList)
-          ? inputDataObj.folderNameList
-          : [inputDataObj.folderNameList]
-        : [],
-    });
+    updateInsightLink(queryObj)
   }, []);
 
   useEffect(() => {
     if (result.title) {
-      setInsightInput({
-        ...insightInput,
-        insightTitle: result.title,
-        insightSummary: String(result.summary),
-        insightMainImage: image ? String(image) : defaultImage.src,
-        insightTagList: result.keywords
-          ? Array.isArray(result.keywords)
-            ? result.keywords
-            : result.keywords.split(', ')
-          : [],
-        folderName: String(result.folderName),
-      });
+      updateInsightInput(result);
     }
     if (error) {
       console.error(error);
@@ -114,9 +73,9 @@ const Upload: NextPage = ({}) => {
                 <PageIntro>리마인드 카드 설정</PageIntro>
                 <ImageSection>
                   <div className="image-wrapper">
-                    {image ? (
+                    {insightInput.insightMainImage ? (
                       <CardCover
-                        src={image}
+                        src={insightInput.insightMainImage}
                         alt="preview"
                         className="thumbnail"
                       />
