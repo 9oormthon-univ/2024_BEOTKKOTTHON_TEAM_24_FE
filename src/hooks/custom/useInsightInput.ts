@@ -1,5 +1,5 @@
 import { InsightPostRequest } from '@/types/insight';
-import { useCheckMainImage } from '@/utils/upload';
+import { ToArray, useCheckMainImage } from '@/utils/upload';
 import { useState } from 'react';
 import defaultImage from '@image/defaultImage.jpeg';
 import { ParsedUrlQuery } from 'querystring';
@@ -23,11 +23,7 @@ export default function useInsightInput(query: ParsedUrlQuery) {
     viewCount: 0,
     insightTagList: [''],
     insightMemo: String(query?.memo),
-    insightImageList: query?.insightImageList
-      ? Array.isArray(query.insightImageList)
-        ? query.insightImageList
-        : [query.insightImageList]
-      : [],
+    insightImageList: ToArray(query?.insightImageList),
     folderName: '폴더',
     enable: false,
     remindType: 'DEFAULT',
@@ -41,11 +37,7 @@ export default function useInsightInput(query: ParsedUrlQuery) {
         insightTitle: result.title,
         insightSummary: String(result.summary),
         insightMainImage: image ? String(image) : defaultImage.src,
-        insightTagList: result.keywords
-          ? Array.isArray(result.keywords)
-            ? result.keywords
-            : result.keywords.split(', ')
-          : [],
+        insightTagList: ToArray(result.keywords, 'keyword'),
         folderName: String(result.folderName),
       });
     }
