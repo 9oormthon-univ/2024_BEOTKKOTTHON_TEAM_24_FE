@@ -52,7 +52,7 @@ export type InsightPostRequest = {
   insightMainImage: string;
   insightMemo: string;
   insightSource: string;
-  viewCount: 0;
+  viewCount: number;
   insightTagList: string[];
   insightImageList: string[];
   enable: boolean;

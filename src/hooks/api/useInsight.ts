@@ -1,5 +1,6 @@
 import {
   deleteInsight,
+  fetchSummary,
   getFolderInsight,
   getFolderInsightByTag,
   getInsight,
@@ -42,6 +43,29 @@ export function usePostInsightImage() {
       queryClient.invalidateQueries({ queryKey: ['insight-image'] }),
   });
 }
+
+export const useGetSummary = (link: string, folderList: string[]) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['get-summary'],
+    queryFn: () => fetchSummary(link, folderList),
+    enabled: !!link,
+  });
+  const result = {
+    title: data?.choices?.[0]?.message.content
+      .split('요약:')[0]
+      .split('제목:')[1],
+    summary: data?.choices?.[0]?.message.content
+      .split('요약:')[1]
+      .split('키워드:')[0],
+    keywords: data?.choices?.[0]?.message.content
+      .split('키워드:')[1]
+      .split('폴더명:')[0],
+    folderName: data?.choices?.[0]?.message.content
+      .split('폴더명: ')[1]
+      .split(','),
+  };
+  return { isLoading, error, result };
+};
 
 export function usePostInsight() {
   const queryClient = useQueryClient();

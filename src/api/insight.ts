@@ -18,7 +18,7 @@ interface SummarizeInsightResponse {
   choices: { message: { content: string } }[];
 }
 
-const fetchSummary = async (link: string, folderList: string[]) => {
+export const fetchSummary = async (link: string, folderList: string[]) => {
   const apiKey = process.env.NEXT_PUBLIC_GPT_API_KEY;
   const config = {
     method: 'post',

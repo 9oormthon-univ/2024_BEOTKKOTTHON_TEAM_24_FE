@@ -10,3 +10,9 @@ export const useCheckMainImage = (
   if (typeof imageList === 'string') return imageList;
   if (isSuccess && data !== 'notExist') return data;
 };
+
+export const toArray = (input: string | string[] | undefined) => {
+  if (!input) return [];
+  if (Array.isArray(input)) return input;
+  return [input];
+}

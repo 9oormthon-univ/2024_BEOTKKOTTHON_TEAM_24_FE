@@ -47,20 +47,20 @@ const LinkInput: NextPage = ({}) => {
         mutate(formData);
       });
     }
-
     // 인사이트 제목, 요약, 키워드 요청
     router.push(
       {
         pathname: '/upload/input-text',
-        query: {
-          link: link,
-          imageList: imageList,
-          insightImageList: imageList,
-          memo: memo,
-          folderNameList: data?.map((folder) => folder.folderName),
-          source: source,
+        query:
+          {
+            link: link,
+            imageList: imageList,
+            insightImageList: imageList,
+            memo: memo,
+            folderNameList: data?.map((folder) => folder.folderName),
+            source: source,
+          },
         },
-      },
       '/upload/input-text',
     );
   };
@@ -76,7 +76,6 @@ const LinkInput: NextPage = ({}) => {
 
   const handleMemo = (newMemo: string) => {
     memo.length < 500 && setMemo(newMemo);
-    // console.log(imageList);
   };
 
   return (

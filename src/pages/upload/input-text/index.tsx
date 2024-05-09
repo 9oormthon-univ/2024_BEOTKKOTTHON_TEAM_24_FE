@@ -4,11 +4,10 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
-import { useGetSummary } from '@/api/insight';
+import { useGetSummary } from '@/hooks/api/useInsight';
 import Image from 'next/image';
 import Header from '@/components/common/Header';
 import BottomBtn from '@/components/common/BottomBtn';
-import { InsightPostRequest } from '@/types/insight';
 import defaultImage from '@image/defaultImage.jpeg';
 import { usePostInsight } from '@/hooks/api/useInsight';
 import Loading from '@/components/upload/Loading';
@@ -17,80 +16,30 @@ import TagSection from '@/components/upload/TagSection';
 import OptionalTextarea from '@/components/common/OptionalTextarea';
 import FolderSetting from '@/components/upload/FolderSetting';
 import RemindSetting from '@/components/upload/RemindSetting';
-import { useCheckMainImage } from '@/utils/upload';
-
-type aiInput = {
-  link: string;
-  folderList: string[];
-};
+import useInsightInput from '@/hooks/custom/useInsightInput';
+import useLinkInput from '@/hooks/custom/useLinkInput';
 
 const Upload: NextPage = ({}) => {
   const router = useRouter();
-  const [insightLink, setInsightLink] = useState<aiInput>({
-    link: '',
-    folderList: [],
-  });
+  const { insightLink, updateInsightLink } = useLinkInput();
   const { isLoading, error, result } = useGetSummary(
     String(insightLink.link),
     insightLink.folderList,
   );
-  const [insightInput, setInsightInput] = useState<InsightPostRequest>({
-    insightUrl: '',
-    insightTitle: '',
-    insightSummary: '',
-    insightMainImage: '',
-    insightSource: '',
-    viewCount: 0,
-    insightTagList: [''],
-    insightMemo: '',
-    insightImageList: [''],
-    folderName: '폴더',
-    enable: false,
-    remindType: 'DEFAULT',
-    remindDays: [1],
-  });
+  const { insightInput, setInsightInput, updateInsightInput } = useInsightInput(router.query)
+  const { mutate } = usePostInsight();
+
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
-  const { source, memo, imageList, insightImageList, link, folderNameList } =
-    router.query;
   const [isSaving, setIsSaving] = useState(false);
-  const { mutate } = usePostInsight();
-  const image = useCheckMainImage(imageList, String(link));
 
   useEffect(() => {
-    const newLink = String(link);
-    setInsightLink({
-      link: newLink,
-      folderList: folderNameList
-        ? Array.isArray(folderNameList)
-          ? folderNameList
-          : [folderNameList]
-        : [],
-    });
+    updateInsightLink(router.query)
   }, []);
 
   useEffect(() => {
     if (result.title) {
-      setInsightInput({
-        ...insightInput,
-        insightSource: String(source),
-        insightUrl: String(link),
-        insightTitle: result.title,
-        insightSummary: String(result.summary),
-        insightMainImage: image ? String(image) : defaultImage.src,
-        insightTagList: result.keywords
-          ? Array.isArray(result.keywords)
-            ? result.keywords
-            : result.keywords.split(', ')
-          : [],
-        insightMemo: String(memo),
-        insightImageList: insightImageList
-          ? Array.isArray(insightImageList)
-            ? insightImageList
-            : [insightImageList]
-          : [],
-        folderName: String(result.folderName),
-      });
+      updateInsightInput(result);
     }
     if (error) {
       console.error(error);
@@ -104,7 +53,7 @@ const Upload: NextPage = ({}) => {
     }
   }, [result.title]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsSaving(true);
     mutate(insightInput);
   };
@@ -122,9 +71,9 @@ const Upload: NextPage = ({}) => {
                 <PageIntro>리마인드 카드 설정</PageIntro>
                 <ImageSection>
                   <div className="image-wrapper">
-                    {image ? (
+                    {insightInput.insightMainImage ? (
                       <CardCover
-                        src={image}
+                        src={insightInput.insightMainImage}
                         alt="preview"
                         className="thumbnail"
                       />
