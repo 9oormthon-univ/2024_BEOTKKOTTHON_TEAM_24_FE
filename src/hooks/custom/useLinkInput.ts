@@ -1,4 +1,4 @@
-import { ToArray } from '@/utils/upload';
+import { toArray } from '@/utils/upload';
 import { ParsedUrlQuery } from 'querystring';
 import { useState } from 'react';
 
@@ -14,10 +14,11 @@ export default function useLinkInput() {
   });
 
   const updateInsightLink = (query:ParsedUrlQuery) => {
-    const newLink = String(query.link);
+    const newLink = String(query?.link);
+    console.log(newLink)
     setInsightLink({
       link: newLink,
-      folderList: ToArray(query.folderNameList)
+      folderList: toArray(query.folderNameList)
     });
   }
   return { insightLink, updateInsightLink }

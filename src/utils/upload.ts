@@ -11,8 +11,8 @@ export const useCheckMainImage = (
   if (isSuccess && data !== 'notExist') return data;
 };
 
-export const ToArray = (input: string | string[] | undefined, type?: string) => {
-  if (type === 'keyword')
-    return input ? Array.isArray(input) ? input : input.split(', ') : []
-  return input ? Array.isArray(input) ? input : [input] : []
+export const toArray = (input: string | string[] | undefined) => {
+  if (!input) return [];
+  if (Array.isArray(input)) return input;
+  return [input];
 }
