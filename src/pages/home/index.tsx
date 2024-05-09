@@ -7,48 +7,49 @@ import Carousel from '@/components/landing/Carousel';
 import { useRouter } from 'next/router';
 import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
 import NavigationLayout from '@/components/common/NavigationLayout';
-import { questionData } from '@/constants/data';
+import { useGetReminderQuestion } from '@/hooks/api/useReminder';
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const { data, isSuccess } = useGetReminderQuestion();
 
   const onClick = () => {
     router.push('/reminder');
   };
 
   const renderInnerComponent = () => {
-    const dataLength = questionData.ReminderQuestionList.length;
-    if (dataLength === 0) {
+    const dataLength = data?.reminderQuestionList.length;
+    if (dataLength === 0 || !isSuccess) {
       return <EmptyQuestionBox />;
-    } else if (dataLength === 1) {
+    }
+    if (dataLength === 1) {
       return (
         <ReminderQuestionBox
-          totalLength={questionData.ReminderQuestionList.length}
-          reminderInfo={questionData.ReminderQuestionList[0]}
+          totalLength={data.reminderQuestionList.length}
+          reminderInfo={data.reminderQuestionList[0]}
         />
       );
-    } else {
-      return (
-        <div className="carousel">
-          <Carousel
-            Slides={questionData.ReminderQuestionList.map((value, index) => (
-              <ReminderQuestionBox
-                key={index}
-                totalLength={questionData.ReminderQuestionList.length}
-                reminderInfo={value}
-              />
-            ))}
-            indicatorMargin={16}
-          />
-        </div>
-      );
     }
+    return (
+      <div className="carousel">
+        <Carousel
+          Slides={data.reminderQuestionList.map((value, index) => (
+            <ReminderQuestionBox
+              key={index}
+              totalLength={data.reminderQuestionList.length}
+              reminderInfo={value}
+            />
+          ))}
+          indicatorMargin={16}
+        />
+      </div>
+    );
   };
 
   return (
     <NavigationLayout>
       <Wrapper>
-        <TitleSettingsPanel questionData={questionData} />
+        {data && <TitleSettingsPanel questionData={data} />}
         <div onClick={onClick}>{renderInnerComponent()}</div>
         <HrLine />
         <ReminderCalendar />

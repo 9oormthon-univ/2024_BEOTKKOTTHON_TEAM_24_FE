@@ -11,7 +11,7 @@ const TitleSettingsPanel = ({ questionData }: Props) => {
   const router = useRouter();
   const reminderTitle = questionData.todayClear
     ? 'OO님, 오늘 모든 질문에 답하셨어요!'
-    : questionData.ReminderQuestionList.length === 0
+    : questionData.reminderQuestionList.length === 0
       ? '인사이트를 저장하면 매일 리마인드 질문을 드려요!'
       : '다음 질문에 답하여 인사이트를 리마인드 해보세요!';
 
