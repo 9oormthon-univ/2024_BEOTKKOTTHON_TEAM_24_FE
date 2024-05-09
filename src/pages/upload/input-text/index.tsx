@@ -21,14 +21,12 @@ import useLinkInput from '@/hooks/custom/useLinkInput';
 
 const Upload: NextPage = ({}) => {
   const router = useRouter();
-  const queryObj = router.query.inputData && JSON.parse(String(router.query.inputData));
-
   const { insightLink, updateInsightLink } = useLinkInput();
   const { isLoading, error, result } = useGetSummary(
     String(insightLink.link),
     insightLink.folderList,
   );
-  const { insightInput, setInsightInput, updateInsightInput } = useInsightInput(queryObj)
+  const { insightInput, setInsightInput, updateInsightInput } = useInsightInput(router.query)
   const { mutate } = usePostInsight();
 
   const [isModal, setIsModal] = useState('');
@@ -36,7 +34,7 @@ const Upload: NextPage = ({}) => {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    updateInsightLink(queryObj)
+    updateInsightLink(router.query)
   }, []);
 
   useEffect(() => {

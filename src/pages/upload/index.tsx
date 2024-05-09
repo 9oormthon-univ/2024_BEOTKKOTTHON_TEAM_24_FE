@@ -51,17 +51,16 @@ const LinkInput: NextPage = ({}) => {
     router.push(
       {
         pathname: '/upload/input-text',
-        query: {
-          inputData: JSON.stringify({
+        query:
+          {
             link: link,
             imageList: imageList,
             insightImageList: imageList,
             memo: memo,
             folderNameList: data?.map((folder) => folder.folderName),
             source: source,
-          }),
+          },
         },
-      },
       '/upload/input-text',
     );
   };
