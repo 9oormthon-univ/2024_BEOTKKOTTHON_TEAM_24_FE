@@ -1,14 +1,15 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { FOLDERLIST } from '@/constants/folderList';
 import { colorDecoder } from '@/utils/folder';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import SearchSection from '@/components/common/SearchSection';
+import { useGetFolder } from '@/hooks/api/useFolder';
 
 interface Props {}
 
 const Folder: NextPage<Props> = ({}) => {
+  const { data } = useGetFolder();
   const router = useRouter();
   return (
     <>
@@ -31,7 +32,7 @@ const Folder: NextPage<Props> = ({}) => {
             <div className="header">
               <div>
                 <span className="title-m">전체 폴더</span>
-                <span>{FOLDERLIST.length}</span>
+                <span>{data?.length}</span>
               </div>
               <span
                 className="link"
@@ -41,7 +42,7 @@ const Folder: NextPage<Props> = ({}) => {
               </span>
             </div>
             <div className="list-container">
-              {FOLDERLIST.map((folder) => (
+              {data?.map((folder) => (
                 <>
                   <IconContainer
                     onClick={() => router.push(`/folder/${folder.folderId}`)}
