@@ -33,9 +33,9 @@ const Home: NextPage = () => {
     return (
       <div className="carousel">
         <Carousel
-          Slides={data.reminderQuestionList.map((value, index) => (
+          Slides={data.reminderQuestionList.map((value) => (
             <ReminderQuestionBox
-              key={index}
+              key={value.insightId}
               totalLength={data.reminderQuestionList.length}
               reminderInfo={value}
             />

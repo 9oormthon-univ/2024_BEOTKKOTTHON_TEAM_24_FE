@@ -24,13 +24,15 @@ const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
       </div>
       <button className="reminder-input">답변을 입력해보세요.</button>
       <Insight>
-        <Image
-          src={reminderInfo.insightMainImage}
-          width={96}
-          height={68}
-          alt="Insight Card image"
-          className="img"
-        />
+        <div className="img">
+          <Image
+            src={reminderInfo.insightMainImage}
+            alt="Insight Card image"
+            style={{ objectFit: 'cover' }}
+            height={68}
+            width={100}
+          />
+        </div>
         <div className="card-title-tag">
           <div className="card-title">{reminderInfo.insightTitle}</div>
           {reminderInfo.insightTagList.map((value, i) => (
@@ -83,21 +85,26 @@ const Wrapper = styled.div<CSSProps>`
 
 const Insight = styled.div`
   width: 100%;
-  height: 90px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   border-radius: 12px;
   background-color: #ffffff;
+  flex: 1;
 
   .img {
+    /* width: 100%;
+    height: 100%; */
     border-radius: 12px;
     margin: 8px 20px 8px 12px;
+    flex-grow: 2;
+    position: relative;
   }
 
   .card-title-tag {
     margin: 0 20px 0 0;
+    flex-grow: 1;
   }
 
   .title-tag {
