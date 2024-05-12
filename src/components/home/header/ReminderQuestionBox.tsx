@@ -24,23 +24,24 @@ const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
       </div>
       <button className="reminder-input">답변을 입력해보세요.</button>
       <Insight>
-        <div className="img">
-          <Image
-            src={reminderInfo.insightMainImage}
-            alt="Insight Card image"
-            style={{ objectFit: 'cover' }}
-            height={68}
-            width={100}
-          />
-        </div>
-        <div className="card-title-tag">
-          <div className="card-title">{reminderInfo.insightTitle}</div>
-          {reminderInfo.insightTagList.map((value, i) => (
-            <div className="card-tag" key={i}>
-              {value}
-            </div>
-          ))}
-        </div>
+        <Image
+          src={reminderInfo.insightMainImage}
+          alt="Insight Card image"
+          style={{ objectFit: 'cover' }}
+          height={68}
+          width={96}
+          className="reminder-img"
+        />
+        <TitleTagBox>
+          <div className="title">{reminderInfo.insightTitle}</div>
+          <div className="tag-box">
+            {reminderInfo.insightTagList.map((value, i) => (
+              <div className="tag" key={i}>
+                {value}
+              </div>
+            ))}
+          </div>
+        </TitleTagBox>
       </Insight>
     </Wrapper>
   );
@@ -52,7 +53,7 @@ interface CSSProps {
 
 const Wrapper = styled.div<CSSProps>`
   width: calc(100% - 40px);
-  height: 197px;
+  display: inline-block;
   border-radius: 12px;
   margin: 0 20px ${(props) => props.margin}px;
   padding: 16px;
@@ -67,6 +68,11 @@ const Wrapper = styled.div<CSSProps>`
     font-weight: 600;
     display: flex;
     justify-content: left;
+
+    strong {
+      word-break: keep-all;
+      line-height: 140%;
+    }
   }
 
   .reminder-input {
@@ -92,40 +98,34 @@ const Insight = styled.div`
   border-radius: 12px;
   background-color: #ffffff;
   flex: 1;
+  padding: 8px 12px;
 
-  .img {
-    /* width: 100%;
-    height: 100%; */
+  .reminder-img {
     border-radius: 12px;
-    margin: 8px 20px 8px 12px;
-    flex-grow: 2;
-    position: relative;
+    margin-right: 20px;
   }
+`;
 
-  .card-title-tag {
-    margin: 0 20px 0 0;
-    flex-grow: 1;
-  }
+const TitleTagBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 68px;
 
-  .title-tag {
-    margin: 0;
-    justify-content: space-between;
-  }
-
-  .card-title {
-    margin: 0 10px 12px 0;
+  .title {
     font-size: 12px;
     font-weight: 700;
     word-break: keep-all;
     line-height: 18px;
   }
 
-  .card-tag {
+  .tag {
     font-size: 10px;
     font-weight: 600;
     display: inline-block;
     padding: 4px 10px;
-    margin: 0 6px 0 0;
+    margin: 0 6px 6px 0;
     border-radius: 6px;
     background-color: #ffe4e9;
   }
