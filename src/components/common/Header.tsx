@@ -5,6 +5,7 @@ import BackIcon from '@svg/backspace-icon.svg';
 interface Props {
   title?: string;
   rightText?: string;
+  isNotGoingBack?: boolean;
   onClick?: () => void;
 }
 
@@ -13,7 +14,12 @@ const Header = (props: Props) => {
 
   return (
     <Wrapper>
-      <BackIcon onClick={() => router.back()} />
+      <div>
+        <BackIcon
+          className={props.isNotGoingBack && 'invisible'}
+          onClick={() => router.back()}
+        />
+      </div>
       <div className="title">{props.title}</div>
       <div className="right-text" onClick={props.onClick}>
         {props.rightText}
@@ -39,6 +45,10 @@ const Wrapper = styled.div`
     font-size: 20px;
     font-weight: 500;
     color: #3184ff;
+  }
+
+  .invisible {
+    display: none;
   }
 `;
 
