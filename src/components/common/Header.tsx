@@ -29,8 +29,9 @@ const Header = (props: Props) => {
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
   width: 100%;
   padding: 18px 20px 16px;
   height: 52px;
@@ -39,12 +40,15 @@ const Wrapper = styled.div`
     font-size: 20px;
     font-weight: 700;
     color: #1f1f1f;
+    text-align: center;
   }
 
   .right-text {
     font-size: 20px;
     font-weight: 500;
     color: #3184ff;
+    text-align: right;
+    margin-bottom: 0 !important;
   }
 
   .invisible {
