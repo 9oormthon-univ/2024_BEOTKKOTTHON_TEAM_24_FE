@@ -5,6 +5,7 @@ import { colorDecoder } from '@/utils/folder';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import SearchSection from '@/components/common/SearchSection';
 import { useGetFolder } from '@/hooks/api/useFolder';
+import Header from '@/components/common/Header';
 
 interface Props {}
 
@@ -15,13 +16,7 @@ const Folder: NextPage<Props> = ({}) => {
     <>
       <NavigationLayout>
         <Wrapper>
-          <div className="title">폴더</div>
-          <span
-            className="link edit"
-            onClick={() => router.push('/folder/edit')}
-          >
-            편집
-          </span>
+          <Header title="폴더" isNotGoingBack={true} rightText="편집" />
           <SearchSection
             onClick={() => router.push('/folder/search')}
             placeholder="인사이트 검색"
@@ -67,33 +62,6 @@ const Wrapper = styled.div`
   height: 100vh;
   position: relative;
   justify-content: center;
-  .title {
-    color: #1f1f1f;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 27.146px; /* 135.732% */
-    height: 28px;
-    padding: 18px 20px 16px;
-    height: 52px;
-  }
-  .link {
-    color: var(--Primary-500, #3184ff);
-    text-align: right;
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
-  }
-  .edit {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
 `;
 
 const FolderSection = styled.div`
