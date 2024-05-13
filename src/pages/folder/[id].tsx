@@ -10,6 +10,8 @@ import { calendarData } from '@/constants/data';
 import ShareIcon from '@svg/share-icon-blue.svg';
 import EditModal from '@components/folder/EditModal';
 import SearchSection from '@/components/common/SearchSection';
+//import { useGetFolderInsight } from '@/hooks/api/useInsight';
+//import { useRouter } from 'next/router';
 
 interface Props {}
 
@@ -21,6 +23,8 @@ const FolderDetail: NextPage<Props> = ({}) => {
   const [insightList, setInsightList] = useState<Insight[]>(
     calendarData.remindInsightList,
   );
+  //const router = useRouter();
+  //const { data } = useGetFolderInsight(Number(router.query.id))
   const [isModalOn, setIsModalOn] = useState(false);
   const onClick = () => {
     setIsSmall(!isSmall);
@@ -29,11 +33,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
     setIsModalOn(true);
     setInsightList(insightList); // 추후 삭제
   };
-  const handleShare = (type: string) => {
-    if (type === 'readonly') return;
-    setIsModalOn(false);
-    return;
-  };
+
   return (
     <>
       <Wrapper>
@@ -70,7 +70,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
           </div>
         </InfoSection>
         <InsightSection>
-          <SummaryInsightCard
+        <SummaryInsightCard
             key={1}
             favicon="/svg/insight-favicon.svg"
             insightData={{
@@ -101,8 +101,6 @@ const FolderDetail: NextPage<Props> = ({}) => {
         <EditModal
           type="share"
           onClose={() => setIsModalOn(false)}
-          onClick1={() => handleShare('readonly')}
-          onClick2={() => handleShare('copy')}
         />
       )}
     </>
