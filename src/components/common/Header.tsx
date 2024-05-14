@@ -30,7 +30,7 @@ const Header = (props: Props) => {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
   align-items: center;
   width: 100%;
   padding: 18px 20px 16px;
