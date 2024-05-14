@@ -10,25 +10,39 @@ import { calendarData } from '@/constants/data';
 import ShareIcon from '@svg/share-icon-blue.svg';
 import EditModal from '@components/folder/EditModal';
 import SearchSection from '@/components/common/SearchSection';
-//import { useGetFolderInsight } from '@/hooks/api/useInsight';
-//import { useRouter } from 'next/router';
+import { useGetFolderInsight } from '@/hooks/api/useInsight';
+import { useRouter } from 'next/router';
+import RenderTagList from '@/components/folder/RenderTagList';
+import InsightCard from '@/components/common/InsightCard';
 
 interface Props {}
 
 const FolderDetail: NextPage<Props> = ({}) => {
-  const devKeywordList = ['전체', 'AI', '컴포넌트', '피그마', '사용성'];
   const [selectedTag, setSelectedTag] = useState('전체');
   const [searchInput, setSearchInput] = useState('');
   const [isSmall, setIsSmall] = useState(false);
   const [insightList, setInsightList] = useState<Insight[]>(
     calendarData.remindInsightList,
   );
-  //const router = useRouter();
-  //const { data } = useGetFolderInsight(Number(router.query.id))
   const [isModalOn, setIsModalOn] = useState(false);
+
+  const router = useRouter();
+  const { data } = useGetFolderInsight(Number(router.query.id));
+  const tagList = data?.map((insight) => insight.insightTagList).flat();
+  const insightListFilteredByTag =
+    selectedTag == '전체'
+      ? data
+      : data?.filter((insight) => insight.insightTagList.includes(selectedTag));
+  const searchedInsightList =
+    searchInput === ''
+      ? insightListFilteredByTag
+      : insightListFilteredByTag?.filter((insight) =>
+          insight.insightTitle.toLowerCase().includes(searchInput),
+        );
   const onClick = () => {
     setIsSmall(!isSmall);
   };
+
   const handleModalOn = () => {
     setIsModalOn(true);
     setInsightList(insightList); // 추후 삭제
@@ -37,7 +51,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
   return (
     <>
       <Wrapper>
-        <Header title={'UI/UX'} />
+        <Header title={String(router.query.name)} />
         <span className="link edit">편집</span>
         <ShareIcon className="share" onClick={() => handleModalOn()} />
         <SearchSection
@@ -48,21 +62,18 @@ const FolderDetail: NextPage<Props> = ({}) => {
           bottom={20}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <div className="tag-list">
-          {devKeywordList.map((keyword) => (
-            <Tag
-              key={keyword}
-              className={selectedTag === keyword ? 'selected' : ''}
-              onClick={() => setSelectedTag(keyword)}
-            >
-              {keyword}
-            </Tag>
-          ))}
-        </div>
+        <RenderTagList
+          tagList={tagList}
+          selectedTag={selectedTag}
+          setSelectedTag={setSelectedTag}
+        />
         <InfoSection>
           <div>
             <span className="count-text">전체 </span>
-            <span className="count-text insight"> {insightList.length}</span>
+            <span className="count-text insight">
+              {' '}
+              {searchedInsightList?.length}
+            </span>
           </div>
           <div className="icons-box">
             <LargeViewIcon isSmall={isSmall} onClick={onClick} />
@@ -70,38 +81,39 @@ const FolderDetail: NextPage<Props> = ({}) => {
           </div>
         </InfoSection>
         <InsightSection>
-        <SummaryInsightCard
-            key={1}
-            favicon="/svg/insight-favicon.svg"
-            insightData={{
-              insightId: 2,
-              insightMainImage: '/image/reinput.jpeg',
-              insightTitle: '디지털 시대에 요구되는 디자인의 변화,',
-              insightSummary:
-                '디지털 시대에는 UI/UX, 개발 친화적 디자인, 브랜드 디자인이 중요하며, 이를 위해 DB, Java, SpringBoot, PHP, Python, React 등의 기술과 도구를 활용한다.',
-              insightTagList: ['UI/UX', '개발 친화적 디자인', '브랜드 디자인'],
-              todayRead: false,
-            }}
-          />
-          <SummaryInsightCard
-            favicon="/svg/insight-favicon.svg"
-            insightData={{
-              insightId: 2,
-              insightMainImage: '/image/디자인3.jpg',
-              insightTitle: '디자인시스템에 모션 가이드 추가하는 방법',
-              insightSummary:
-                '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',
-              insightTagList: ['UI/UX', '사용자 경험'],
-              todayRead: false,
-            }}
-          />
+          {searchedInsightList?.map((insight) =>
+            isSmall ? (
+              <InsightCard
+                key={insight.insightId}
+                favicon="/svg/insight-favicon.svg"
+                insightData={{
+                  insightId: insight.insightId,
+                  insightMainImage: '/image/reinput.jpeg',
+                  insightTitle: insight.insightTitle,
+                  insightSummary: insight.insightSummary,
+                  insightTagList: insight.insightTagList,
+                  todayRead: false,
+                }}
+              />
+            ) : (
+              <SummaryInsightCard
+                key={insight.insightId}
+                favicon="/svg/insight-favicon.svg"
+                insightData={{
+                  insightId: insight.insightId,
+                  insightMainImage: '/image/reinput.jpeg',
+                  insightTitle: insight.insightTitle,
+                  insightSummary: insight.insightSummary,
+                  insightTagList: insight.insightTagList,
+                  todayRead: false,
+                }}
+              />
+            ),
+          )}
         </InsightSection>
       </Wrapper>
       {isModalOn && (
-        <EditModal
-          type="share"
-          onClose={() => setIsModalOn(false)}
-        />
+        <EditModal type="share" onClose={() => setIsModalOn(false)} />
       )}
     </>
   );
@@ -117,9 +129,15 @@ const Wrapper = styled.div`
   .tag-list {
     display: flex;
     flex-direction: row;
-    overflow: scroll;
+    overflow-x: scroll;
     gap: 8px;
     margin-left: 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+  .tag-list::-webkit-scrollbar {
+    display: none;
   }
   .selected {
     border-radius: 5.268px;
@@ -148,26 +166,6 @@ const Wrapper = styled.div`
     top: 17px;
     right: 21px;
   }
-`;
-
-const Tag = styled.div`
-  display: flex;
-  height: 32px;
-  padding: 0px 14px;
-  justify-content: center;
-  align-items: center;
-  color: var(--Neutral-300, #848484);
-
-  text-align: center;
-  /* Body-14-B */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
-  border-radius: 5.268px;
-  border: 1px solid var(--Neutral-150, #e1e1e1);
-  background: #fff;
 `;
 
 const InfoSection = styled.div`
