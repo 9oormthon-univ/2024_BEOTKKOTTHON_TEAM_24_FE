@@ -13,7 +13,7 @@ interface Props {}
 const FolderEdit: NextPage<Props> = ({}) => {
   const [searchInput, setSearchInput] = useState('');
   const { data } = useGetFolder();
-  const [newFolderList, setNewFolderList] = useState<Folder[]>(data as Folder[]);
+  const [newFolderList, setNewFolderList] = useState<Folder[]>(data ? data : []);
   const [searchedFolderList, setSearchedFolderList] = useState<Folder[]>([]);
   const [targetFolder, setTargetFolder] = useState<Folder>(newFolderList[0]);
   const [isModalOn, setIsModalOn] = useState(false);
