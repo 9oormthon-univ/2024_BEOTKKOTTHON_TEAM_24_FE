@@ -28,8 +28,12 @@ const InsightCard = ({ favicon, insightData }: Props) => {
       />
       <div className="card-title-tag">
         <div className="card-title">{insightData.insightTitle}</div>
-        <div className="card-tag">
-          {insightData.insightTagList.map((value) => value)}
+        <div className="card-tags">
+          {insightData.insightTagList.map((v: string, i: number) => (
+            <div key={v ? v.toString() : `${v}${i}`} className="card-tag">
+              {v}
+            </div>
+          ))}
         </div>
       </div>
     </Wrapper>
