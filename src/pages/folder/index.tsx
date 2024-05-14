@@ -40,7 +40,18 @@ const Folder: NextPage<Props> = ({}) => {
               {data?.map((folder) => (
                 <>
                   <IconContainer
-                    onClick={() => router.push(`/folder/${folder.folderId}`)}
+                    onClick={() =>
+                      router.push(
+                        {
+                          pathname: `/folder/${folder.folderId}`,
+                          query: {
+                            name: folder.folderName,
+                            id: folder.folderId,
+                          },
+                        },
+                        `/folder/${folder.folderId}`,
+                      )
+                    }
                   >
                     {colorDecoder(folder.folderColor, 'big')}
                     <span className="name">{folder.folderName}</span>
