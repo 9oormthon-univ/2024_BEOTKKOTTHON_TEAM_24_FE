@@ -16,7 +16,7 @@ const Header = (props: Props) => {
     <Wrapper>
       <div>
         <BackIcon
-          className={props.isNotGoingBack && 'invisible'}
+          className={props.isNotGoingBack ? 'invisible icon' : 'icon'}
           onClick={() => router.back()}
         />
       </div>
