@@ -14,6 +14,8 @@ import { useGetFolderInsight } from '@/hooks/api/useInsight';
 import { useRouter } from 'next/router';
 import RenderTagList from '@/components/folder/RenderTagList';
 import InsightCard from '@/components/common/InsightCard';
+import useCopyClipboard from '@/hooks/custom/useCopyClipboard';
+import BottomBtn from '@/components/common/BottomBtn';
 
 interface Props {}
 
@@ -25,6 +27,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
     calendarData.remindInsightList,
   );
   const [isModalOn, setIsModalOn] = useState(false);
+  const [isCopy, onCopy] = useCopyClipboard();
 
   const router = useRouter();
   const { data } = useGetFolderInsight(Number(router.query.id));
@@ -39,9 +42,6 @@ const FolderDetail: NextPage<Props> = ({}) => {
       : insightListFilteredByTag?.filter((insight) =>
           insight.insightTitle.toLowerCase().includes(searchInput),
         );
-  const onClick = () => {
-    setIsSmall(!isSmall);
-  };
 
   const handleModalOn = () => {
     setIsModalOn(true);
@@ -76,8 +76,11 @@ const FolderDetail: NextPage<Props> = ({}) => {
             </span>
           </div>
           <div className="icons-box">
-            <LargeViewIcon isSmall={isSmall} onClick={onClick} />
-            <SmallViewIcon isSmall={isSmall} onClick={onClick} />
+            <LargeViewIcon
+              isSmall={isSmall}
+              onClick={() => setIsSmall(false)}
+            />
+            <SmallViewIcon isSmall={isSmall} onClick={() => setIsSmall(true)} />
           </div>
         </InfoSection>
         <InsightSection>
@@ -111,9 +114,19 @@ const FolderDetail: NextPage<Props> = ({}) => {
             ),
           )}
         </InsightSection>
+        <div className="notification">
+          {isCopy && (
+            <BottomBtn text="URL 복사가 완료되었습니다." state="activated" />
+          )}
+        </div>
       </Wrapper>
       {isModalOn && (
-        <EditModal type="share" onClose={() => setIsModalOn(false)} />
+        <EditModal
+          type="share"
+          shareTargetId={Number(router.query.id)}
+          onClose={() => setIsModalOn(false)}
+          onCopy={onCopy}
+        />
       )}
     </>
   );
@@ -166,6 +179,14 @@ const Wrapper = styled.div`
     top: 17px;
     right: 21px;
   }
+  .notification {
+    display: inline-block;
+    width: 100%;
+    max-width: 480px;
+    position: fixed;
+    bottom: 20px;
+  }
+}
 `;
 
 const InfoSection = styled.div`

@@ -3,19 +3,28 @@ import EditPencilIcon from '@svg/folder/edit-pencil-icon.svg';
 import TrashIcon from '@svg/folder/trash-icon.svg';
 import GlassIcon from '@svg/glass-icon.svg';
 import CopyIcon from '@svg/copy-icon.svg';
-import ModalHandleBarIcon from '@svg/modal-handle-bar.svg'
+import ModalHandleBarIcon from '@svg/modal-handle-bar.svg';
 import { useRouter } from 'next/router';
-import { Folder } from '@/types/folder';
+import { Folder, FolderUrlGetRequest } from '@/types/folder';
+import { useShareFolder } from '@/hooks/api/useFolder';
+import { useState } from 'react';
 
 interface Props {
   type: string;
   targetFolder?: Folder;
+  shareTargetId?: number;
   onClose: () => void;
+  onCopy?: (text: string) => Promise<boolean>;
 }
 
 const EditModal = (props: Props) => {
   const router = useRouter();
-  const { type, targetFolder, onClose } = props;
+  const { type, targetFolder, shareTargetId, onClose, onCopy } = props;
+  const [queryInput, setQueryInput] = useState<FolderUrlGetRequest>({
+    folderId: Number(shareTargetId),
+    copyable: false,
+  });
+  const { refetch } = useShareFolder(queryInput, false);
 
   const handleColorChange = () => {
     router.push(
@@ -44,11 +53,18 @@ const EditModal = (props: Props) => {
     );
   };
 
-  const handleShare = (type: string) => {
-    if (type === 'readonly') return;
+  const handleShare = async (type: string) => {
+    setQueryInput({
+      ...queryInput,
+      copyable: type === 'readonly' ? false : true,
+    });
+    const response = await refetch();
+    if (typeof response?.data?.url === 'string' && onCopy) {
+      onCopy(response.data.url);
+    }
     onClose();
-    return;
   };
+
   return (
     <Wrapper>
       <ModalBg onClick={() => props.onClose()} />
@@ -63,7 +79,9 @@ const EditModal = (props: Props) => {
           <div
             className="modal-btn edit-btn"
             onClick={
-              type === 'share' ? () => handleShare('readonly') : () => handleColorChange
+              type === 'share'
+                ? () => handleShare('readonly')
+                : () => handleColorChange
             }
           >
             {type === 'share' ? '보기 전용으로 공유하기' : '폴더 색상 수정'}
