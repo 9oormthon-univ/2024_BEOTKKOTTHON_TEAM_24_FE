@@ -103,6 +103,9 @@ const FolderSection = styled.div`
     gap: 52px 23px;
     flex-flow: wrap;
   }
+  .link{
+    color: ${({ theme }) => theme.palette.primary[500]};
+  }
 `;
 
 const IconContainer = styled.div`
