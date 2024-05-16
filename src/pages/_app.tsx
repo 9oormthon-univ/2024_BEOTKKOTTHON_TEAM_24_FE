@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 import '@styles/animation.css';
+import { theme } from '@/styles/theme';
+import { ThemeProvider } from 'styled-components';
 
 const queryClient = new QueryClient();
 
@@ -37,14 +39,16 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStyles />
-      <MainLayout>
-        <Component
-          {...pageProps}
-          deferredPrompt={deferredPrompt}
-          setDeferredPrompt={setDeferredPrompt}
-        />
-      </MainLayout>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <MainLayout>
+          <Component
+            {...pageProps}
+            deferredPrompt={deferredPrompt}
+            setDeferredPrompt={setDeferredPrompt}
+          />
+        </MainLayout>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
