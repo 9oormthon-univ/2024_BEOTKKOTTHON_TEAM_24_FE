@@ -24,7 +24,7 @@ const EditModal = (props: Props) => {
     folderId: Number(shareTargetId),
     copyable: false,
   });
-  const { refetch } = useShareFolder(queryInput, false);
+  const { refetch, error } = useShareFolder(queryInput, false);
 
   const handleColorChange = () => {
     router.push(
@@ -60,6 +60,9 @@ const EditModal = (props: Props) => {
     const response = await refetch();
     if (typeof response?.data?.url === 'string' && onCopy) {
       onCopy(response.data.url);
+    }
+    if (error) {
+      alert("폴더 공유에 실패했어요. 다시 시도해주세요.")
     }
     onClose();
   };

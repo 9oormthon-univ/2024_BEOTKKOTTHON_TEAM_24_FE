@@ -9,11 +9,10 @@ const EditModal = () => {
 
   const handleDelete = (folderId: number) => {
     mutate(folderId)
-    router.push('/folder')
     if (error) {
       alert("폴더 삭제에 실패했습니다. 다시 시도해주세요.")
-      router.push('/folder')
     }
+    router.push('/folder')
   };
   return (
     <Wrapper>

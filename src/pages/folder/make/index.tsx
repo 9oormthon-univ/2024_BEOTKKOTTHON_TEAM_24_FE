@@ -28,10 +28,10 @@ const FolderMake: NextPage<Props> = ({}) => {
 
   const handlePostFolder = () => {
     mutate(newFolder);
-    router.push('/folder')
     if (error) {
-      console.error(error);
+      alert("폴더 생성에 실패했습니다. 다시 시도해주세요.")
     }
+    router.push('/folder')
   }
   return (
     <>

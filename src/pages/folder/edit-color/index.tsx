@@ -20,10 +20,13 @@ const EditColor: NextPage<Props> = ({}) => {
     folderColor: String(folderColor),
     folderName: String(folderName),
   });
-  const { mutate, isSuccess } = usePatchFolder();
+  const { mutate, error } = usePatchFolder();
   const handleChangeColor = () => {
     mutate(newFolder);
-    isSuccess && router.push('/folder');
+    if (error) {
+      alert("폴더 수정에 실패했어요. 다시 시도해주세요.")
+    }
+    router.push('/folder');
   };
 
   return (
