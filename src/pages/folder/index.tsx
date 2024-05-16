@@ -16,7 +16,7 @@ const Folder: NextPage<Props> = ({}) => {
     <>
       <NavigationLayout>
         <Wrapper>
-          <Header title="폴더" isNotGoingBack={true} rightText="편집" />
+          <Header title="폴더" isNotGoingBack={true} rightText="편집" onClick={()=>router.push('/folder/edit')} />
           <SearchSection
             onClick={() => router.push('/folder/search')}
             placeholder="인사이트 검색"

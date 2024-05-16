@@ -34,7 +34,6 @@ const EditModal = (props: Props) => {
           folderId: targetFolder?.folderId,
           folderName: targetFolder?.folderName,
           folderColor: targetFolder?.folderColor,
-          insightCount: targetFolder?.insightCount,
         },
       },
       '/folder/edit-color',
@@ -81,7 +80,7 @@ const EditModal = (props: Props) => {
             onClick={
               type === 'share'
                 ? () => handleShare('readonly')
-                : () => handleColorChange
+                : () => handleColorChange()
             }
           >
             {type === 'share' ? '보기 전용으로 공유하기' : '폴더 색상 수정'}
@@ -90,7 +89,7 @@ const EditModal = (props: Props) => {
           <div
             className="modal-btn delete-btn"
             onClick={
-              type === 'share' ? () => handleShare('copy') : () => handleDelete
+              type === 'share' ? () => handleShare('copy') : () => handleDelete()
             }
           >
             {type === 'share' ? '복제 허용으로 공유하기' : '삭제하기'}

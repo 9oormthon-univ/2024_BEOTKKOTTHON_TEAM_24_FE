@@ -2,7 +2,8 @@ import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
 import ColorSelect from '@/components/folder/ColorSelect';
 import { COLORLIST } from '@/constants/colors';
-import { Folder } from '@/types/folder';
+import { usePatchFolder } from '@/hooks/api/useFolder';
+import { FolderPatchRequest } from '@/types/folder';
 import { colorDecoder } from '@/utils/folder';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -13,13 +14,17 @@ interface Props {}
 
 const EditColor: NextPage<Props> = ({}) => {
   const router = useRouter();
-  const { folderId, folderColor, folderName, insightCount } = router.query;
-  const [newFolder, setNewFolder] = useState<Folder>({
+  const { folderId, folderColor, folderName } = router.query;
+  const [newFolder, setNewFolder] = useState<FolderPatchRequest>({
     folderId: Number(folderId),
     folderColor: String(folderColor),
     folderName: String(folderName),
-    insightCount: Number(insightCount),
   });
+  const { mutate, isSuccess } = usePatchFolder();
+  const handleChangeColor = () => {
+    mutate(newFolder);
+    isSuccess && router.push('/folder');
+  };
 
   return (
     <>
@@ -27,7 +32,7 @@ const EditColor: NextPage<Props> = ({}) => {
         <Header title="폴더 색상 수정" />
         <PageInner>
           <div className="icon">
-            {colorDecoder(newFolder.folderColor, 'large')}
+            {colorDecoder(String(newFolder.folderColor), 'large')}
           </div>
           <div className="list">
             {COLORLIST.map((color: { color: string; code: string }) => (
@@ -35,7 +40,7 @@ const EditColor: NextPage<Props> = ({}) => {
                 key={color.color}
                 color={color.color}
                 code={color.code}
-                newFolder={newFolder}
+                currentColor={String(newFolder.folderColor)}
                 onClick={() =>
                   setNewFolder({ ...newFolder, folderColor: color.color })
                 }
@@ -43,7 +48,9 @@ const EditColor: NextPage<Props> = ({}) => {
             ))}
           </div>
         </PageInner>
-        <BottomBtn text="수정 완료" state="activated" />
+        <div onClick={() => handleChangeColor()}>
+          <BottomBtn text="수정 완료" state="activated" />
+        </div>
       </Wrapper>
     </>
   );
@@ -54,12 +61,16 @@ export default EditColor;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100vh;
   background-color: #fbfbfb;
   position: relative;
   justify-content: space-evenly;
   :last-child {
     margin-bottom: 36px;
+  }
+  .icon {
+    margin-bottom: 0 !important;
   }
 `;
 
