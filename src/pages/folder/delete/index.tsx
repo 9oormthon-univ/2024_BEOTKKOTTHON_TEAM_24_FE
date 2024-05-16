@@ -1,13 +1,19 @@
+import { useDeleteFolder } from '@/hooks/api/useFolder';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 const EditModal = () => {
   const router = useRouter();
   const { folderId } = router.query;
+  const { mutate, error } = useDeleteFolder();
 
   const handleDelete = (folderId: number) => {
-    // 서버 연결시 수정 필요
-    return folderId;
+    mutate(folderId)
+    router.push('/folder')
+    if (error) {
+      alert("폴더 삭제에 실패했습니다. 다시 시도해주세요.")
+      router.push('/folder')
+    }
   };
   return (
     <Wrapper>
