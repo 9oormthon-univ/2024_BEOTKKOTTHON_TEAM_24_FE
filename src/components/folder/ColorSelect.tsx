@@ -1,27 +1,27 @@
 import styled from 'styled-components';
 import CheckIcon from '@svg/folder/circle-with-check-icon.svg';
-import { Folder } from '@/types/folder';
 
 interface Props {
   color: string;
   code?: string;
-  newFolder: Folder;
+  currentColor: string;
   onClick: () => void;
 }
 
 const ColorSelect = (props: Props) => {
+  const {color, code, currentColor, onClick} = props;
   return (
     <Wrapper>
-      <div className="container" key={props.color} onClick={props.onClick}>
+      <div className="container" key={color} onClick={onClick}>
         <Color
           className={
-            props.newFolder.folderColor === props.color ? 'selected' : ''
+            currentColor === color ? 'selected' : ''
           }
-          color={props.code}
+          color={code}
         />
         <CheckIcon
           className={
-            props.newFolder.folderColor !== props.color
+            currentColor !== color
               ? 'unvisible'
               : 'check-icon'
           }

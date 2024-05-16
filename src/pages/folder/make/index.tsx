@@ -5,22 +5,34 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ColorSelect from '@/components/folder/ColorSelect';
 import BottomBtn from '@/components/common/BottomBtn';
+import { usePostFolder } from '@/hooks/api/useFolder';
+import { FolderPostRequest } from '@/types/folder';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
 const FolderMake: NextPage<Props> = ({}) => {
-  const [newFolder, setNewFolder] = useState({
-    folderId: 0,
+  const router = useRouter();
+  const [newFolder, setNewFolder] = useState<FolderPostRequest>({
     folderName: '',
     folderColor: 'BLUE',
-    insightCount: 0,
   });
   const [isValidName, setIsValidName] = useState(true);
+  const { mutate, error } = usePostFolder();
+
   const handleInput = (value: string) => {
     const regex = /^[가-힣a-zA-Z]{2,15}$/;
     setNewFolder({ ...newFolder, folderName: value });
     setIsValidName(regex.test(value));
   };
+
+  const handlePostFolder = () => {
+    mutate(newFolder);
+    router.push('/folder')
+    if (error) {
+      console.error(error);
+    }
+  }
   return (
     <>
       <Wrapper>
@@ -48,7 +60,7 @@ const FolderMake: NextPage<Props> = ({}) => {
                   key={color.color}
                   color={color.color}
                   code={color.code}
-                  newFolder={newFolder}
+                  currentColor={newFolder.folderColor}
                   onClick={() =>
                     setNewFolder({ ...newFolder, folderColor: color.color })
                   }
@@ -57,12 +69,13 @@ const FolderMake: NextPage<Props> = ({}) => {
             </div>
           </ColorSection>
         </PageInner>
-
+        <div onClick={handlePostFolder}>
         {newFolder.folderName !== '' && isValidName ? (
-          <BottomBtn text="완료" state="activated" nextUrl="/folder" />
+          <BottomBtn text="완료" state="activated" />
         ) : (
           <BottomBtn text="완료" state="disabled" />
         )}
+        </div>
       </Wrapper>
     </>
   );

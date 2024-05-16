@@ -75,7 +75,10 @@ export function useSearchFolder() {
   });
 }
 
-export function useShareFolder(shareData: FolderUrlGetRequest, enabled: boolean) {
+export function useShareFolder(
+  shareData: FolderUrlGetRequest,
+  enabled: boolean,
+) {
   return useQuery({
     queryKey: ['share-folder'],
     queryFn: () => shareFolder(shareData),
