@@ -1,4 +1,4 @@
-import { Folder } from '@/types/folder';
+import { Folder, FolderPatchRequest } from '@/types/folder';
 import { colorDecoder } from '@/utils/folder';
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
@@ -8,15 +8,16 @@ interface Props {
   newFolderList: Folder[];
   setNewFolderList: Dispatch<SetStateAction<Folder[]>>;
   handleModalOn: (folder: Folder) => void;
+  editedFolderList: FolderPatchRequest[];
+  setEditedFolderList: Dispatch<SetStateAction<FolderPatchRequest[]>>;
 }
 
 const RenderFolderList = (props: Props) => {
-  const { folderList, handleModalOn, newFolderList, setNewFolderList } = props;
+  const { folderList, handleModalOn, newFolderList, setNewFolderList, editedFolderList, setEditedFolderList } = props;
   const folderNameList = newFolderList.map((folder) => folder.folderName);
 
   const [editingFolder, setEditingFolder] = useState('');
   const [newFolderName, setNewFolderName] = useState('');
-
   const handleBlur = () => {
     setNewFolderName('');
     setEditingFolder('');
@@ -26,20 +27,37 @@ const RenderFolderList = (props: Props) => {
     if (key === 'Enter') handlePressEnter(folder);
   };
 
-  const handlePressEnter = (folder: Folder) => {
-    if (folderNameList.includes(newFolderName)) {
-      alert('이미 같은 이름의 폴더가 존재합니다!');
-      handleBlur();
-      return;
+  const checkInputValid = (input: string) => {
+    const regex = /^[가-힣a-zA-Z]{2,15}$/;
+    if (!regex.test(input)) {
+      alert('폴더 명은 2글자 이상의 영문, 한글로 작성해주세요.');
+      return false;
     }
-    const newList = newFolderList;
-    newList[newFolderList.indexOf(folder)] = {
-      ...folder,
-      folderName: newFolderName,
-    };
-    setNewFolderList(newList);
-    setNewFolderName('');
-    setEditingFolder('');
+    if (folderNameList.includes(input)) {
+      alert('이미 같은 이름의 폴더가 존재합니다!');
+      return false;
+    }
+    return true;
+  };
+
+  const handlePressEnter = (folder: Folder) => {
+    if (checkInputValid(newFolderName)) {
+      const newList = newFolderList;
+      newList[newFolderList.indexOf(folder)] = {
+        ...folder,
+        folderName: newFolderName,
+      };
+      setNewFolderList(newList);
+      setEditedFolderList([
+        ...editedFolderList,
+        {
+          folderId: folder.folderId,
+          folderName: newFolderName,
+          folderColor: folder.folderColor,
+        },
+      ]);
+    }
+    handleBlur();
   };
 
   return (
@@ -104,6 +122,9 @@ const FolderRow = styled.div`
     color: var(--Neutral-300, #848484);
     font-size: 16px;
     font-weight: 600;
+  }
+  span {
+    min-width: 28px;
   }
 `;
 

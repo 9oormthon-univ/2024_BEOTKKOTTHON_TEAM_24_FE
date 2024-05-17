@@ -2,20 +2,29 @@ import Header from '@/components/common/Header';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Folder } from '@/types/folder';
+import { Folder, FolderPatchRequest } from '@/types/folder';
 import EditModal from '@/components/folder/EditModal';
 import SearchSection from '@/components/common/SearchSection';
-import { useGetFolder } from '@/hooks/api/useFolder';
+import { useGetFolder, usePatchFolder } from '@/hooks/api/useFolder';
 import RenderFolderList from '@/components/folder/RenderFolderList';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
 const FolderEdit: NextPage<Props> = ({}) => {
+  const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
   const { data } = useGetFolder();
-  const [newFolderList, setNewFolderList] = useState<Folder[]>(data ? data : []);
+  const { mutate, error } = usePatchFolder();
+
+  const [newFolderList, setNewFolderList] = useState<Folder[]>(
+    data ? data : [],
+  );
   const [searchedFolderList, setSearchedFolderList] = useState<Folder[]>([]);
   const [targetFolder, setTargetFolder] = useState<Folder>(newFolderList[0]);
+  const [editedFolderList, setEditedFolderList] = useState<
+    FolderPatchRequest[]
+  >([]);
   const [isModalOn, setIsModalOn] = useState(false);
 
   const handleSearch = (value: string) => {
@@ -30,12 +39,22 @@ const FolderEdit: NextPage<Props> = ({}) => {
     setIsModalOn(true);
   };
 
-  const saveFolder = () => {};
+  const handleSaveFolders = () => {
+    editedFolderList.forEach((folder) => {
+      mutate(folder);
+    });
+    if (error) {
+      alert('폴더 저장에 실패하였습니다. 다시 시도해주세요');
+      console.error(error);
+    }
+    alert("저장 완료되었습니다.")
+    router.push('/folder')
+  };
   return (
     <>
       <Wrapper>
         <Header title="폴더 편집하기" />
-        <span className="link save" onClick={() => saveFolder()}>
+        <span className="link save" onClick={() => handleSaveFolders()}>
           저장
         </span>
         <SearchSection
@@ -51,6 +70,8 @@ const FolderEdit: NextPage<Props> = ({}) => {
             handleModalOn={handleModalOn}
             newFolderList={newFolderList}
             setNewFolderList={setNewFolderList}
+            editedFolderList={editedFolderList}
+            setEditedFolderList={setEditedFolderList}
           />
         </FolderSection>
         {isModalOn && (
@@ -104,4 +125,3 @@ const FolderSection = styled.div`
   flex-direction: column;
   gap: 17px;
 `;
-
