@@ -100,6 +100,7 @@ const FolderSection = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 36px;
+    padding-bottom: 100px;
     gap: 52px 23px;
     flex-flow: wrap;
   }
