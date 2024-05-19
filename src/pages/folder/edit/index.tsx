@@ -40,15 +40,15 @@ const FolderEdit: NextPage<Props> = ({}) => {
   };
 
   const handleSaveFolders = () => {
-    editedFolderList.forEach((folder) => {
-      mutate(folder);
+    const saveRequests = editedFolderList.map((folder) => mutate(folder));
+    Promise.all(saveRequests).then(() => {
+      alert('변경된 폴더 리스트가 저장되었습니다.');
+      router.push('/folder');
     });
     if (error) {
       alert('폴더 저장에 실패하였습니다. 다시 시도해주세요');
       console.error(error);
     }
-    alert("저장 완료되었습니다.")
-    router.push('/folder')
   };
   return (
     <>
