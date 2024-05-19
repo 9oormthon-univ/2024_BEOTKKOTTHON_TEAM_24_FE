@@ -6,7 +6,7 @@ import { Folder, FolderPatchRequest } from '@/types/folder';
 import EditModal from '@/components/folder/EditModal';
 import SearchSection from '@/components/common/SearchSection';
 import { useGetFolder, usePatchFolder } from '@/hooks/api/useFolder';
-import RenderFolderList from '@/components/folder/RenderFolderList';
+import RenderFolderList from '@/components/folder/edit/RenderFolderList';
 import { useRouter } from 'next/router';
 
 interface Props {}
