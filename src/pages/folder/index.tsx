@@ -12,11 +12,44 @@ interface Props {}
 const Folder: NextPage<Props> = ({}) => {
   const { data } = useGetFolder();
   const router = useRouter();
+  const renderFolderList = () => {
+    return (
+      <div className="list-container">
+        {data?.map((folder) => (
+          <>
+            <IconContainer
+              onClick={() =>
+                router.push(
+                  {
+                    pathname: `/folder/${folder.folderId}`,
+                    query: {
+                      name: folder.folderName,
+                      id: folder.folderId,
+                    },
+                  },
+                  `/folder/${folder.folderId}`,
+                )
+              }
+            >
+              {colorDecoder(folder.folderColor, 'big')}
+              <span className="name">{folder.folderName}</span>
+              <span className="count">{folder.insightCount}</span>
+            </IconContainer>
+          </>
+        ))}
+      </div>
+    );
+  };
   return (
     <>
       <NavigationLayout>
         <Wrapper>
-          <Header title="폴더" isNotGoingBack={true} rightText="편집" onClick={()=>router.push('/folder/edit')} />
+          <Header
+            title="폴더"
+            isNotGoingBack={true}
+            rightText="편집"
+            onClick={() => router.push('/folder/edit')}
+          />
           <SearchSection
             onClick={() => router.push('/folder/search')}
             placeholder="인사이트 검색"
@@ -36,30 +69,7 @@ const Folder: NextPage<Props> = ({}) => {
                 폴더 생성
               </span>
             </div>
-            <div className="list-container">
-              {data?.map((folder) => (
-                <>
-                  <IconContainer
-                    onClick={() =>
-                      router.push(
-                        {
-                          pathname: `/folder/${folder.folderId}`,
-                          query: {
-                            name: folder.folderName,
-                            id: folder.folderId,
-                          },
-                        },
-                        `/folder/${folder.folderId}`,
-                      )
-                    }
-                  >
-                    {colorDecoder(folder.folderColor, 'big')}
-                    <span className="name">{folder.folderName}</span>
-                    <span className="count">{folder.insightCount}</span>
-                  </IconContainer>
-                </>
-              ))}
-            </div>
+            {renderFolderList()}
           </FolderSection>
         </Wrapper>
       </NavigationLayout>
@@ -104,7 +114,7 @@ const FolderSection = styled.div`
     gap: 52px 23px;
     flex-flow: wrap;
   }
-  .link{
+  .link {
     color: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
