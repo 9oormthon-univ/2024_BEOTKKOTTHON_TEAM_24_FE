@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 interface Props {}
 
-const Onboard: NextPage<Props> = ({}) => {
+const Name: NextPage<Props> = ({}) => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [isValidName, setIsValidName] = useState(false);
 
@@ -49,7 +49,7 @@ const Onboard: NextPage<Props> = ({}) => {
   );
 };
 
-export default Onboard;
+export default Name;
 
 const Wrapper = styled.div`
   width: 100%;

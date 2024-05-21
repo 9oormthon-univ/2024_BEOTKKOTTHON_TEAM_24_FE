@@ -11,7 +11,7 @@ import { useSignup } from '@/hooks/api/useAuth';
 
 interface Props {}
 
-const OnboardSubject: NextPage<Props> = ({}) => {
+const Subject: NextPage<Props> = ({}) => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [topicList, setTopicList] = useState<string[]>(
     SUBJECTLIST[signupInput.job].sort(),
@@ -126,7 +126,7 @@ const OnboardSubject: NextPage<Props> = ({}) => {
   );
 };
 
-export default OnboardSubject;
+export default Subject;
 
 const Wrapper = styled.div`
   width: 100%;

@@ -11,7 +11,7 @@ import DeveloperImage from '@svg/onboard/developer-image.svg';
 
 interface Props {}
 
-const OnboardJob: NextPage<Props> = ({}) => {
+const Job: NextPage<Props> = ({}) => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [selectedJob, setSelectedJob] = useState('');
 
@@ -80,7 +80,7 @@ const OnboardJob: NextPage<Props> = ({}) => {
   );
 };
 
-export default OnboardJob;
+export default Job;
 
 const Wrapper = styled.div`
   width: 100%;
