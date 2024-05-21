@@ -2,16 +2,13 @@ import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
 import { useSignupInputStore } from '@/store/signup';
 import { Job } from '@/types/user';
-import { NextPage } from 'next';
 import { useState } from 'react';
 import styled from 'styled-components';
 import DesignerImage from '@svg/onboard/design-image.svg';
 import PlannerImage from '@svg/onboard/planner-image.svg';
 import DeveloperImage from '@svg/onboard/developer-image.svg';
 
-interface Props {}
-
-const Job: NextPage<Props> = ({}) => {
+const Job = () => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [selectedJob, setSelectedJob] = useState('');
 

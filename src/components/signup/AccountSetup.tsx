@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -8,9 +7,7 @@ import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
 import { useSignupInputStore } from '@/store/signup';
 
-interface Props {}
-
-const SignUp: NextPage<Props> = ({}) => {
+const AccountSetup = () => {
   const router = useRouter();
   const [isPWOpen, setIsPWOpen] = useState(false);
   const { signupInput, setSignupInput } = useSignupInputStore();
@@ -144,7 +141,7 @@ const SignUp: NextPage<Props> = ({}) => {
   );
 };
 
-export default SignUp;
+export default AccountSetup;
 
 const Wrapper = styled.div`
   width: 100%;

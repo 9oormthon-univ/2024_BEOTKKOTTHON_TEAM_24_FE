@@ -2,16 +2,13 @@ import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
 import { SUBJECTLIST } from '@/constants/subjectList';
 import { useSignupInputStore } from '@/store/signup';
-import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import styled from 'styled-components';
 import AddButton from '@svg/addBtn.svg';
 import { useSignup } from '@/hooks/api/useAuth';
 
-interface Props {}
-
-const Subject: NextPage<Props> = ({}) => {
+const Subject = () => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [topicList, setTopicList] = useState<string[]>(
     SUBJECTLIST[signupInput.job].sort(),

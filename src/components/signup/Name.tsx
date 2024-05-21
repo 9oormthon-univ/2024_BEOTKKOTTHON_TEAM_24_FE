@@ -1,13 +1,10 @@
 import BottomBtn from '@/components/common/BottomBtn';
 import Header from '@/components/common/Header';
 import { useSignupInputStore } from '@/store/signup';
-import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-interface Props {}
-
-const Name: NextPage<Props> = ({}) => {
+const Name = () => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [isValidName, setIsValidName] = useState(false);
 

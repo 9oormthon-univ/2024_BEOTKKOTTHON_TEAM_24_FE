@@ -2,7 +2,6 @@ import BottomBtn from '@/components/common/BottomBtn';
 import { useSignupInputStore } from '@/store/signup';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { promptAppInstall } from '@/utils';
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
@@ -15,7 +14,7 @@ interface Props {
   >;
 }
 
-const AddHome: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
+const AddHome = ({ deferredPrompt, setDeferredPrompt }: Props) => {
   const router = useRouter();
   const { signupInput } = useSignupInputStore();
 
@@ -62,7 +61,7 @@ const Wrapper = styled.div`
   }
 
   .main-title {
-    color: var(--Neutral-500, #3184FF);
+    color: var(--Neutral-500, #3184ff);
     text-align: center;
     font-family: Pretendard;
     font-size: 26px;
