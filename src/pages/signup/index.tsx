@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import { useFunnel } from '@/hooks/custom/useFunnel';
 import AccountSetup from '@/components/signup/AccountSetup';
-import Name from '@/components/signup/Name';
-import Job from '@/components/signup/Job';
-import Subject from '@/components/signup/Subject';
+import NameSetup from '@/components/signup/NameSetup';
+import JobSetup from '@/components/signup/JobSetup';
+import SubjectSetup from '@/components/signup/SubjectSetup';
 import AddHome from '@/components/signup/AddHome';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { Dispatch, SetStateAction } from 'react';
@@ -30,13 +30,13 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
         <AccountSetup />
       </Funnel.Step>
       <Funnel.Step name="name">
-        <Name />
+        <NameSetup />
       </Funnel.Step>
       <Funnel.Step name="job">
-        <Job />
+        <JobSetup />
       </Funnel.Step>
       <Funnel.Step name="subject">
-        <Subject />
+        <SubjectSetup />
       </Funnel.Step>
       <Funnel.Step name="add-hoem">
         <AddHome

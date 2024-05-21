@@ -4,7 +4,7 @@ import { useSignupInputStore } from '@/store/signup';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Name = () => {
+const NameSetup = () => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [isValidName, setIsValidName] = useState(false);
 
@@ -46,7 +46,7 @@ const Name = () => {
   );
 };
 
-export default Name;
+export default NameSetup;
 
 const Wrapper = styled.div`
   width: 100%;

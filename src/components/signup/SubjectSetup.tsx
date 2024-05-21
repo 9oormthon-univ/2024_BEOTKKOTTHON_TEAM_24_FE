@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import AddButton from '@svg/addBtn.svg';
 import { useSignup } from '@/hooks/api/useAuth';
 
-const Subject = () => {
+const SubjectSetup = () => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [topicList, setTopicList] = useState<string[]>(
     SUBJECTLIST[signupInput.job].sort(),
@@ -123,7 +123,7 @@ const Subject = () => {
   );
 };
 
-export default Subject;
+export default SubjectSetup;
 
 const Wrapper = styled.div`
   width: 100%;

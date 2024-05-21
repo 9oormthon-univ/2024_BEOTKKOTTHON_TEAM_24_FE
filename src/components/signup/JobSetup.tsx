@@ -8,7 +8,7 @@ import DesignerImage from '@svg/onboard/design-image.svg';
 import PlannerImage from '@svg/onboard/planner-image.svg';
 import DeveloperImage from '@svg/onboard/developer-image.svg';
 
-const Job = () => {
+const JobSetup = () => {
   const { signupInput, setSignupInput } = useSignupInputStore();
   const [selectedJob, setSelectedJob] = useState('');
 
@@ -77,7 +77,7 @@ const Job = () => {
   );
 };
 
-export default Job;
+export default JobSetup;
 
 const Wrapper = styled.div`
   width: 100%;
