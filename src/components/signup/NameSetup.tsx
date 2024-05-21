@@ -1,5 +1,4 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import Header from '@/components/common/Header';
 import { useSignupInputStore } from '@/store/signup';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -18,7 +17,6 @@ const NameSetup = () => {
   };
   return (
     <Wrapper>
-      <Header rightText="1/3" />
       <Body>
         <div className="title">
           <p>회원님의</p>

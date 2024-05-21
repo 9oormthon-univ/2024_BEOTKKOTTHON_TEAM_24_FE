@@ -1,5 +1,4 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import Header from '@/components/common/Header';
 import { SUBJECTLIST } from '@/constants/subjectList';
 import { useSignupInputStore } from '@/store/signup';
 import { useEffect, useState } from 'react';
@@ -53,7 +52,6 @@ const SubjectSetup = () => {
 
   return (
     <Wrapper>
-      <Header rightText="3/3" />
       <Body>
         <div className="title">
           <p>주로 저장하는 인사이트의</p>

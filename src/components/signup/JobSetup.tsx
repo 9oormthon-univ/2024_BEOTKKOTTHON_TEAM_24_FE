@@ -1,5 +1,4 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import Header from '@/components/common/Header';
 import { useSignupInputStore } from '@/store/signup';
 import { Job } from '@/types/user';
 import { useState } from 'react';
@@ -19,7 +18,6 @@ const JobSetup = () => {
   };
   return (
     <Wrapper>
-      <Header rightText="2/3" />
       <Body>
         <div className="title">
           <p>{signupInput.userName}님의</p>

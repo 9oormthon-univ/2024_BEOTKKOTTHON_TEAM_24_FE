@@ -1,17 +1,20 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import VisibleIcon from '@svg/visible-icon.svg';
 import UnvisibleIcon from '@svg/unvisible-icon.svg';
 import BottomBtn from '@/components/common/BottomBtn';
-import Header from '@/components/common/Header';
 import { useSignupInputStore } from '@/store/signup';
+import { SignupPostRequest } from '@/types/user';
 
-const AccountSetup = () => {
-  const router = useRouter();
+interface Props {
+  setSignupInfo: (value: SignupPostRequest) => void;
+  toNextStep: () => void;
+}
+
+const AccountSetup = (props: Props) => {
+  const { setSignupInfo, toNextStep } = props;
   const [isPWOpen, setIsPWOpen] = useState(false);
   const { signupInput, setSignupInput } = useSignupInputStore();
-
   const [PWCheck, setPWCheck] = useState('');
   const [isValid, setIsValid] = useState({
     email: true,
@@ -40,16 +43,11 @@ const AccountSetup = () => {
     validate(type, value);
   };
 
-  const handleSignUp = () => {
-    router.push({ pathname: '/onboard', query: signupInput }, '/onboard');
-  };
-
   const handleKakao = () => {
     return;
   };
   return (
     <Wrapper>
-      <Header onClick={() => router.back()} />
       <InputContainer>
         <PageIntro>
           <p>회원가입하고</p>인사이트를 리마인드 해보세요 !
@@ -130,7 +128,7 @@ const AccountSetup = () => {
             ? 'disabled'
             : 'activated'
         }
-        onClick={handleSignUp}
+        onClick={toNextStep}
       />
       <BottomBtn
         text="카카오톡으로 로그인하기"
@@ -145,7 +143,7 @@ export default AccountSetup;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: start;
