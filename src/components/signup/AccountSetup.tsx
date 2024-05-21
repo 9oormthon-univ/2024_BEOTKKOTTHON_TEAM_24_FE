@@ -7,14 +7,14 @@ import { useSignupInputStore } from '@/store/signup';
 import { SignupPostRequest } from '@/types/user';
 
 interface Props {
+  signupInfo: SignupPostRequest;
   setSignupInfo: (value: SignupPostRequest) => void;
   toNextStep: () => void;
 }
 
 const AccountSetup = (props: Props) => {
-  const { setSignupInfo, toNextStep } = props;
+  const { signupInfo, setSignupInfo, toNextStep } = props;
   const [isPWOpen, setIsPWOpen] = useState(false);
-  const { signupInput, setSignupInput } = useSignupInputStore();
   const [PWCheck, setPWCheck] = useState('');
   const [isValid, setIsValid] = useState({
     email: true,
@@ -31,14 +31,14 @@ const AccountSetup = (props: Props) => {
     type === 'password' &&
       setIsValid({ ...isValid, password: regexPW.test(value) });
     type === 'check' &&
-      setIsValid({ ...isValid, check: signupInput.userPassword === value });
+      setIsValid({ ...isValid, check: signupInfo.userPassword === value });
   };
 
   const handleInput = (type: string, value: string) => {
     type === 'email'
-      ? setSignupInput({ ...signupInput, userEmail: value })
+      ? setSignupInfo({ ...signupInfo, userEmail: value })
       : type === 'password'
-        ? setSignupInput({ ...signupInput, userPassword: value })
+        ? setSignupInfo({ ...signupInfo, userPassword: value })
         : setPWCheck(value);
     validate(type, value);
   };
@@ -55,7 +55,7 @@ const AccountSetup = (props: Props) => {
         <EmailSection>
           <SubTitle className="email">이메일*</SubTitle>
           <Input
-            value={signupInput.userEmail}
+            value={signupInfo.userEmail}
             onChange={(e) => handleInput('email', e.target.value)}
             type="text"
             placeholder="이메일 주소를 입력해주세요."
@@ -68,7 +68,7 @@ const AccountSetup = (props: Props) => {
           <SubTitle>비밀번호*</SubTitle>
           <div className="input-container">
             <Input
-              value={signupInput.userPassword}
+              value={signupInfo.userPassword}
               onChange={(e) => handleInput('password', e.target.value)}
               type={isPWOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요"
@@ -118,8 +118,8 @@ const AccountSetup = (props: Props) => {
         text="회원가입"
         state={
           !(
-            signupInput.userEmail !== '' &&
-            signupInput.userPassword !== '' &&
+            signupInfo.userEmail !== '' &&
+            signupInfo.userPassword !== '' &&
             PWCheck !== '' &&
             isValid.email &&
             isValid.password &&

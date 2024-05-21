@@ -33,14 +33,18 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
     'job',
     'subject',
     'add-home',
-  ]);
+  ] as const);
 
   return (
     <>
       <Header />
       <Funnel>
         <Funnel.Step name="account-setup">
-          <AccountSetup setSignupInfo={setSignupInfo} toNextStep={toNextStep} />
+          <AccountSetup
+            signupInfo={signupInfo}
+            setSignupInfo={setSignupInfo}
+            toNextStep={toNextStep}
+          />
         </Funnel.Step>
         <Funnel.Step name="name">
           <NameSetup />
@@ -51,7 +55,7 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
         <Funnel.Step name="subject">
           <SubjectSetup />
         </Funnel.Step>
-        <Funnel.Step name="add-hoem">
+        <Funnel.Step name="add-home">
           <AddHome
             deferredPrompt={deferredPrompt}
             setDeferredPrompt={setDeferredPrompt}
