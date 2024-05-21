@@ -8,9 +8,9 @@ import {
   useState,
 } from 'react';
 
-export type NonEmptyArray<T> = readonly [T, ...T[]];
+type NonEmptyArray<T> = readonly [T, ...T[]];
 
-export interface FunnelProps<Steps extends NonEmptyArray<string>> {
+interface FunnelProps<Steps extends NonEmptyArray<string>> {
   steps: Steps;
   step: Steps[number];
   children:
@@ -18,7 +18,7 @@ export interface FunnelProps<Steps extends NonEmptyArray<string>> {
     | ReactElement<StepProps<Steps>>;
 }
 
-export const Funnel = <Steps extends NonEmptyArray<string>>({
+const Funnel = <Steps extends NonEmptyArray<string>>({
   steps,
   step,
   children,
@@ -34,13 +34,13 @@ export const Funnel = <Steps extends NonEmptyArray<string>>({
   return <>{targetStep}</>;
 };
 
-export interface StepProps<Steps extends NonEmptyArray<string>> {
+interface StepProps<Steps extends NonEmptyArray<string>> {
   name: Steps[number];
   onEnter?: () => void;
   children: ReactNode;
 }
 
-export const Step = <Steps extends NonEmptyArray<string>>({
+const Step = <Steps extends NonEmptyArray<string>>({
   onEnter,
   children,
 }: StepProps<Steps>) => {
