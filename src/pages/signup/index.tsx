@@ -36,7 +36,7 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
 
   return (
     <>
-      <Header />
+      <Header onClick={toPrevStep} />
       <Funnel>
         <Funnel.Step name="account-setup">
           <AccountSetup

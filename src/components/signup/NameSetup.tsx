@@ -1,6 +1,5 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import { useSignupInputStore } from '@/store/signup';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { SignupFunnel } from '@/types/Funnel';
 
@@ -8,9 +7,6 @@ const NameSetup = (props: SignupFunnel) => {
   const { signupInfo, setSignupInfo, toNextStep } = props;
   const [isValidName, setIsValidName] = useState(false);
 
-  useEffect(() => {
-    setSignupInfo({ ...signupInfo, userName: '' });
-  }, []);
   const handleInput = (value: string) => {
     const regex = /^[가-힣a-zA-Z]{2,}$/;
     setSignupInfo({ ...signupInfo, userName: value });
