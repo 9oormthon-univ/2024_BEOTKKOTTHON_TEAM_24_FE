@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
   useEffect,
   useMemo,
@@ -66,10 +67,14 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
   steps: Steps,
 ): readonly [FunnelComponent<Steps>, () => void, () => void] => {
   const [step, setStep] = useState(steps[0]);
+  const router = useRouter();
   const currentStepIdx = steps.indexOf(step);
 
   const toPrevStep = () => {
-    if (currentStepIdx <= 0) return;
+    if (currentStepIdx <= 0) {
+      router.back();
+      return;
+    }
     setStep(steps[currentStepIdx - 1]);
   };
   const toNextStep = () => {

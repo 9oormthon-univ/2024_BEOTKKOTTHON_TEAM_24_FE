@@ -106,10 +106,8 @@ const SubjectSetup = (props: SignupFunnel) => {
         text="완료"
         state={signupInfo.topicList.length > 2 ? 'activated' : 'disabled'}
         onClick={() => {
-          if (signupInfo.topicList.length > 2) {
-            mutate(signupInfo);
-            toNextStep();
-          }
+          mutate(signupInfo);
+          toNextStep();
         }}
       />
     </Wrapper>
