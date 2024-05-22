@@ -12,7 +12,6 @@ function useCopyClipboard(): [boolean, onCopyFn] {
 
       return true;
     } catch (error) {
-      console.error(error);
       setIsCopy(false);
 
       return false;

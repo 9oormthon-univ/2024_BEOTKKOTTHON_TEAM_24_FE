@@ -46,7 +46,7 @@ const Folder: NextPage<Props> = ({}) => {
         <Wrapper>
           <Header
             title="폴더"
-            isNotGoingBack={true}
+            isGoingBack={false}
             rightText="편집"
             onClick={() => router.push('/folder/edit')}
           />

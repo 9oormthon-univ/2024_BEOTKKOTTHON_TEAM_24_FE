@@ -9,22 +9,16 @@ interface Props {
 }
 
 const ColorSelect = (props: Props) => {
-  const {color, code, currentColor, onClick} = props;
+  const { color, code, currentColor, onClick } = props;
   return (
     <Wrapper>
       <div className="container" key={color} onClick={onClick}>
         <Color
-          className={
-            currentColor === color ? 'selected' : ''
-          }
+          className={`${currentColor === color && 'selected'}`}
           color={code}
         />
         <CheckIcon
-          className={
-            currentColor !== color
-              ? 'unvisible'
-              : 'check-icon'
-          }
+          className={currentColor !== color ? 'invisible' : 'check-icon'}
         />
       </div>
     </Wrapper>
@@ -38,9 +32,6 @@ const Wrapper = styled.div`
   .container {
     position: relative;
     max-height: 66px;
-  }
-  .selected {
-    border: 2px solid var(--Primary-500, #3184ff);
   }
   .unvisible {
     display: none;
@@ -58,4 +49,7 @@ const Color = styled.div`
   flex-shrink: 0;
   border-radius: 8px;
   background-color: ${(props) => props.color};
+  .selected {
+    border: 2px solid var(--Primary-500, #3184ff);
+  }
 `;

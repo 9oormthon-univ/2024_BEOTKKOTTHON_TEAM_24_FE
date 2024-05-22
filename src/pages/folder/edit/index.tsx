@@ -47,7 +47,6 @@ const FolderEdit: NextPage<Props> = ({}) => {
     });
     if (error) {
       alert('폴더 저장에 실패하였습니다. 다시 시도해주세요');
-      console.error(error);
     }
   };
   return (

@@ -2,34 +2,45 @@ import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  tagList?: string[],
-  selectedTag: string,
-  setSelectedTag: Dispatch<SetStateAction<string>>,
+  tagList?: string[];
+  selectedTag: string;
+  setSelectedTag: Dispatch<SetStateAction<string>>;
 }
 
 const RenderTagList = (props: Props) => {
-  const { tagList, selectedTag, setSelectedTag} = props;
-  const uniqueTagList = tagList?.filter((value, index) => tagList?.indexOf(value) === index)
-  uniqueTagList?.unshift('전체')
+  const { tagList, selectedTag, setSelectedTag } = props;
+  const uniqueTagList = tagList?.filter(
+    (value, index) => tagList?.indexOf(value) === index,
+  );
+  uniqueTagList?.unshift('전체');
 
   return (
     <>
-      <div className="tag-list">
+      <Wrapper className="tag-list">
         {uniqueTagList?.map((keyword) => (
           <Tag
             key={keyword}
-            className={selectedTag === keyword ? 'selected' : ''}
+            className={`${selectedTag === keyword && 'selected'}`}
             onClick={() => setSelectedTag(keyword)}
           >
             {keyword}
           </Tag>
         ))}
-      </div>
+      </Wrapper>
     </>
   );
 };
 
 export default RenderTagList;
+
+const Wrapper = styled.div`
+  .selected {
+    border-radius: 5.268px;
+    border: 1px solid var(--Neutral-150, #3184ff);
+    background: var(--Primary-500, #3184ff);
+    color: #fff;
+  }
+`;
 
 const Tag = styled.div`
   display: flex;

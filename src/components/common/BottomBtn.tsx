@@ -18,11 +18,7 @@ const BottomBtn = (props: Props) => {
   const renderInnerBtn = () => {
     switch (props.state) {
       case 'disabled':
-        return (
-          <Button className="disabled">
-            {props.text}
-          </Button>
-        );
+        return <Button className="disabled">{props.text}</Button>;
       case 'activated':
         return (
           <Button onClick={props.onClick ?? onClick} className="activated">

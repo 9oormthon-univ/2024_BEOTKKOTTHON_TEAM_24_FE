@@ -5,7 +5,7 @@ import BackIcon from '@svg/backspace-icon.svg';
 interface Props {
   title?: string;
   rightText?: string;
-  isNotGoingBack?: boolean;
+  isGoingBack?: boolean;
   onClick?: () => void;
 }
 
@@ -16,7 +16,7 @@ const Header = (props: Props) => {
     <Wrapper>
       <div>
         <BackIcon
-          className={props.isNotGoingBack ? 'invisible icon' : 'icon'}
+          className={props.isGoingBack === false && 'invisible'}
           onClick={() => router.back()}
         />
       </div>

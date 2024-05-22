@@ -5,7 +5,7 @@ import GlassIcon from '@svg/glass-icon.svg';
 import CopyIcon from '@svg/copy-icon.svg';
 import ModalHandleBarIcon from '@svg/modal-handle-bar.svg';
 import { useRouter } from 'next/router';
-import { Folder, FolderUrlGetRequest } from '@/types/folder';
+import { Folder } from '@/types/folder';
 import { useShareFolder } from '@/hooks/api/useFolder';
 import { useState } from 'react';
 
@@ -20,11 +20,11 @@ interface Props {
 const EditModal = (props: Props) => {
   const router = useRouter();
   const { type, targetFolder, shareTargetId, onClose, onCopy } = props;
-  const [queryInput, setQueryInput] = useState<FolderUrlGetRequest>({
+  const [copyable, setCopyable] = useState<boolean>(false);
+  const { refetch, error } = useShareFolder({
     folderId: Number(shareTargetId),
-    copyable: false,
+    copyable,
   });
-  const { refetch, error } = useShareFolder(queryInput, false);
 
   const handleColorChange = () => {
     router.push(
@@ -53,16 +53,13 @@ const EditModal = (props: Props) => {
   };
 
   const handleShare = async (type: string) => {
-    setQueryInput({
-      ...queryInput,
-      copyable: type === 'readonly' ? false : true,
-    });
+    setCopyable(type !== 'readonly');
     const response = await refetch();
     if (typeof response?.data?.url === 'string' && onCopy) {
       onCopy(response.data.url);
     }
     if (error) {
-      alert("폴더 공유에 실패했어요. 다시 시도해주세요.")
+      alert('폴더 공유에 실패했어요. 다시 시도해주세요.');
     }
     onClose();
   };
@@ -92,7 +89,9 @@ const EditModal = (props: Props) => {
           <div
             className="modal-btn delete-btn"
             onClick={
-              type === 'share' ? () => handleShare('copy') : () => handleDelete()
+              type === 'share'
+                ? () => handleShare('copy')
+                : () => handleDelete()
             }
           >
             {type === 'share' ? '복제 허용으로 공유하기' : '삭제하기'}

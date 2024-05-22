@@ -24,7 +24,7 @@ const EditColor: NextPage<Props> = ({}) => {
   const handleChangeColor = () => {
     mutate(newFolder);
     if (error) {
-      alert("폴더 수정에 실패했어요. 다시 시도해주세요.")
+      alert('폴더 수정에 실패했어요. 다시 시도해주세요.');
     }
     router.push('/folder');
   };
@@ -69,11 +69,8 @@ const Wrapper = styled.div`
   background-color: #fbfbfb;
   position: relative;
   justify-content: space-evenly;
-  :last-child {
+  > :last-child {
     margin-bottom: 36px;
-  }
-  .icon {
-    margin-bottom: 0 !important;
   }
 `;
 

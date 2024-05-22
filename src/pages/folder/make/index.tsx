@@ -29,10 +29,10 @@ const FolderMake: NextPage<Props> = ({}) => {
   const handlePostFolder = () => {
     mutate(newFolder);
     if (error) {
-      alert("폴더 생성에 실패했습니다. 다시 시도해주세요.")
+      alert('폴더 생성에 실패했습니다. 다시 시도해주세요.');
     }
-    router.push('/folder')
-  }
+    router.push('/folder');
+  };
   return (
     <>
       <Wrapper>
@@ -70,11 +70,12 @@ const FolderMake: NextPage<Props> = ({}) => {
           </ColorSection>
         </PageInner>
         <div onClick={handlePostFolder}>
-        {newFolder.folderName !== '' && isValidName ? (
-          <BottomBtn text="완료" state="activated" />
-        ) : (
-          <BottomBtn text="완료" state="disabled" />
-        )}
+          <BottomBtn
+            text="완료"
+            state={
+              newFolder.folderName && isValidName ? 'activated' : 'disabled'
+            }
+          />
         </div>
       </Wrapper>
     </>
@@ -90,7 +91,7 @@ const Wrapper = styled.div`
   background-color: #fbfbfb;
   position: relative;
   justify-content: center;
-  :last-child {
+  > :last-child {
     margin-bottom: 36px;
   }
 `;

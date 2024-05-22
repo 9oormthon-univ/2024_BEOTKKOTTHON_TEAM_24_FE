@@ -68,10 +68,9 @@ const FolderDetail: NextPage<Props> = ({}) => {
           setSelectedTag={setSelectedTag}
         />
         <InfoSection>
-          <div>
-            <span className="count-text">전체 </span>
+          <div className="count-box">
+            <span className="count-text">전체&nbsp;</span>
             <span className="count-text insight">
-              {' '}
               {searchedInsightList?.length}
             </span>
           </div>
@@ -152,12 +151,6 @@ const Wrapper = styled.div`
   .tag-list::-webkit-scrollbar {
     display: none;
   }
-  .selected {
-    border-radius: 5.268px;
-    border: 1px solid var(--Neutral-150, #3184ff);
-    background: var(--Primary-500, #3184ff);
-    color: #fff;
-  }
   .link {
     color: #3184ff;
 
@@ -186,7 +179,6 @@ const Wrapper = styled.div`
     position: fixed;
     bottom: 20px;
   }
-}
 `;
 
 const InfoSection = styled.div`
@@ -199,15 +191,20 @@ const InfoSection = styled.div`
     display: flex;
     justify-content: space-between;
   }
+  .count-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .count-text {
     color: var(--Neutral-500, #1f1f1f);
     text-align: center;
+
     /* Body-14-M */
     font-family: Pretendard;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 140%; /* 19.6px */
   }
   .insight {
     font-size: 16px;

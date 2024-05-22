@@ -13,18 +13,21 @@ interface Props {
 }
 
 const RenderFolderList = (props: Props) => {
-  const { folderList, handleModalOn, newFolderList, setNewFolderList, editedFolderList, setEditedFolderList } = props;
+  const {
+    folderList,
+    handleModalOn,
+    newFolderList,
+    setNewFolderList,
+    editedFolderList,
+    setEditedFolderList,
+  } = props;
   const folderNameList = newFolderList.map((folder) => folder.folderName);
 
-  const [editingFolder, setEditingFolder] = useState('');
+  const [editingFolder, setEditingFolder] = useState(-1);
   const [newFolderName, setNewFolderName] = useState('');
   const handleBlur = () => {
     setNewFolderName('');
-    setEditingFolder('');
-  };
-
-  const checkEnter = (key: string, folder: Folder) => {
-    if (key === 'Enter') handlePressEnter(folder);
+    setEditingFolder(-1);
   };
 
   const checkInputValid = (input: string) => {
@@ -40,14 +43,15 @@ const RenderFolderList = (props: Props) => {
     return true;
   };
 
-  const handlePressEnter = (folder: Folder) => {
+  const handlePressEnter = (key: string, folder: Folder) => {
+    if (key !== 'Enter') return;
     if (checkInputValid(newFolderName)) {
-      const newList = newFolderList;
-      newList[newFolderList.indexOf(folder)] = {
-        ...folder,
-        folderName: newFolderName,
-      };
-      setNewFolderList(newList);
+      setNewFolderList(
+        newFolderList.with(newFolderList.indexOf(folder), {
+          ...folder,
+          folderName: newFolderName,
+        }),
+      );
       setEditedFolderList([
         ...editedFolderList,
         {
@@ -66,19 +70,19 @@ const RenderFolderList = (props: Props) => {
         <FolderRow key={idx}>
           {colorDecoder(folder.folderColor, 'small')}
           <div className="text-container">
-            {editingFolder === folder.folderName ? (
+            {editingFolder === folder.folderId ? (
               <Input
                 type="text"
                 value={newFolderName}
                 onChange={(e) => setNewFolderName(e.target.value)}
-                onKeyDownCapture={(e) => checkEnter(e.key, folder)}
+                onKeyDownCapture={(e) => handlePressEnter(e.key, folder)}
                 onBlur={handleBlur}
                 placeholder={folder.folderName}
               />
             ) : (
               <span
                 className="name text"
-                onClick={() => setEditingFolder(folder.folderName)}
+                onClick={() => setEditingFolder(folder.folderId)}
               >
                 {folder.folderName}
               </span>
