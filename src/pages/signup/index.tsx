@@ -32,7 +32,7 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
     userEmail: '',
     userPassword: '',
     userName: '',
-    job: 'ETC',
+    job: 'PLANNER',
     topicList: [],
   });
   const [Funnel, toPrevStep, toNextStep] = useFunnel(STEP_NAMES);
@@ -49,20 +49,18 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
   };
 
   return (
-    <>
-      <Funnel>
-        {renderSteps()}
-        <Funnel.Step name="add-home">
-          <AddHome
-            {...{
-              signupInfo,
-              deferredPrompt,
-              setDeferredPrompt,
-            }}
-          />
-        </Funnel.Step>
-      </Funnel>
-    </>
+    <Funnel>
+      {renderSteps()}
+      <Funnel.Step name="add-home">
+        <AddHome
+          {...{
+            signupInfo,
+            deferredPrompt,
+            setDeferredPrompt,
+          }}
+        />
+      </Funnel.Step>
+    </Funnel>
   );
 };
 
@@ -72,9 +70,7 @@ const Header = (props: { toPrevStep: () => void; rightText: string }) => {
   const { toPrevStep, rightText } = props;
   return (
     <Wrapper>
-      <div>
-        <BackIcon onClick={toPrevStep} />
-      </div>
+      <BackIcon onClick={toPrevStep} />
       <div></div>
       <div className="right-text">{rightText}</div>
     </Wrapper>
@@ -84,16 +80,9 @@ const Header = (props: { toPrevStep: () => void; rightText: string }) => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
-  align-items: center;
   width: 100%;
   padding: 18px 20px 16px;
   height: 52px;
-
-  .title {
-    ${({ theme }) => theme.typo.Head_20_B}
-    color: ${({ theme }) => theme.palette.neutral[500]};
-    text-align: center;
-  }
 
   .right-text {
     ${({ theme }) => theme.typo.Head_20_M}
