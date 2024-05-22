@@ -2,7 +2,7 @@ import Header from '@/components/common/Header';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Folder, FolderPatchRequest } from '@/types/folder';
+import { FolderPatchRequest } from '@/types/folder';
 import EditModal from '@/components/folder/EditModal';
 import SearchSection from '@/components/common/SearchSection';
 import { useGetFolder, usePatchFolder } from '@/hooks/api/useFolder';
@@ -17,29 +17,30 @@ const FolderEdit: NextPage<Props> = ({}) => {
   const { data } = useGetFolder();
   const { mutate, error } = usePatchFolder();
 
-  const [newFolderList, setNewFolderList] = useState<Folder[]>(
-    data ? data : [],
+  const [newFolderList, setNewFolderList] = useState<FolderPatchRequest[]>(
+    data ? data.map(({folderId, folderColor, folderName}) => ({...{folderId, folderColor, folderName}})) : [],
   );
-  const [searchedFolderList, setSearchedFolderList] = useState<Folder[]>([]);
-  const [targetFolder, setTargetFolder] = useState<Folder>(newFolderList[0]);
-  const [editedFolderList, setEditedFolderList] = useState<
-    FolderPatchRequest[]
+  const [searchedFolderList, setSearchedFolderList] = useState<FolderPatchRequest[]>([]);
+  const [targetFolder, setTargetFolder] = useState<FolderPatchRequest>(newFolderList[0]);
+  const [editedFolderIdList, setEditedFolderIdList] = useState<
+    number[]
   >([]);
   const [isModalOn, setIsModalOn] = useState(false);
 
   const handleSearch = (value: string) => {
     setSearchInput(value);
     setSearchedFolderList(
-      newFolderList.filter((folder) => folder.folderName.includes(value)),
+      newFolderList.filter((folder) => folder.folderName?.includes(value)),
     );
   };
 
-  const handleModalOn = (folder: Folder) => {
+  const handleModalOn = (folder: FolderPatchRequest) => {
     setTargetFolder(folder);
     setIsModalOn(true);
   };
 
   const handleSaveFolders = () => {
+    const editedFolderList = newFolderList.filter((folder) => editedFolderIdList.includes(folder.folderId))
     const saveRequests = editedFolderList.map((folder) => mutate(folder));
     Promise.all(saveRequests).then(() => {
       alert('변경된 폴더 리스트가 저장되었습니다.');
@@ -69,8 +70,8 @@ const FolderEdit: NextPage<Props> = ({}) => {
             handleModalOn={handleModalOn}
             newFolderList={newFolderList}
             setNewFolderList={setNewFolderList}
-            editedFolderList={editedFolderList}
-            setEditedFolderList={setEditedFolderList}
+            editedFolderIdList={editedFolderIdList}
+            setEditedFolderIdList={setEditedFolderIdList}
           />
         </FolderSection>
         {isModalOn && (

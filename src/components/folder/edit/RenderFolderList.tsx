@@ -1,15 +1,15 @@
-import { Folder, FolderPatchRequest } from '@/types/folder';
+import { FolderPatchRequest } from '@/types/folder';
 import { colorDecoder } from '@/utils/folder';
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  folderList: Folder[];
-  newFolderList: Folder[];
-  setNewFolderList: Dispatch<SetStateAction<Folder[]>>;
-  handleModalOn: (folder: Folder) => void;
-  editedFolderList: FolderPatchRequest[];
-  setEditedFolderList: Dispatch<SetStateAction<FolderPatchRequest[]>>;
+  folderList: FolderPatchRequest[];
+  newFolderList: FolderPatchRequest[];
+  setNewFolderList: Dispatch<SetStateAction<FolderPatchRequest[]>>;
+  handleModalOn: (folder: FolderPatchRequest) => void;
+  editedFolderIdList: number[];
+  setEditedFolderIdList: Dispatch<SetStateAction<number[]>>;
 }
 
 const RenderFolderList = (props: Props) => {
@@ -18,8 +18,8 @@ const RenderFolderList = (props: Props) => {
     handleModalOn,
     newFolderList,
     setNewFolderList,
-    editedFolderList,
-    setEditedFolderList,
+    editedFolderIdList,
+    setEditedFolderIdList,
   } = props;
   const folderNameList = newFolderList.map((folder) => folder.folderName);
 
@@ -43,7 +43,7 @@ const RenderFolderList = (props: Props) => {
     return true;
   };
 
-  const handlePressEnter = (key: string, folder: Folder) => {
+  const handlePressEnter = (key: string, folder: FolderPatchRequest) => {
     if (key !== 'Enter') return;
     if (checkInputValid(newFolderName)) {
       setNewFolderList(
@@ -52,13 +52,9 @@ const RenderFolderList = (props: Props) => {
           folderName: newFolderName,
         }),
       );
-      setEditedFolderList([
-        ...editedFolderList,
-        {
-          folderId: folder.folderId,
-          folderName: newFolderName,
-          folderColor: folder.folderColor,
-        },
+      setEditedFolderIdList([
+        ...editedFolderIdList,
+        Number(folder.folderId),
       ]);
     }
     handleBlur();
@@ -68,7 +64,7 @@ const RenderFolderList = (props: Props) => {
     <>
       {folderList.map((folder, idx) => (
         <FolderRow key={idx}>
-          {colorDecoder(folder.folderColor, 'small')}
+          {colorDecoder(String(folder.folderColor), 'small')}
           <div className="text-container">
             {editingFolder === folder.folderId ? (
               <Input

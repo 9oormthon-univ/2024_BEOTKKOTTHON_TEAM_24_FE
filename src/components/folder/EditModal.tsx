@@ -5,13 +5,13 @@ import GlassIcon from '@svg/glass-icon.svg';
 import CopyIcon from '@svg/copy-icon.svg';
 import ModalHandleBarIcon from '@svg/modal-handle-bar.svg';
 import { useRouter } from 'next/router';
-import { Folder } from '@/types/folder';
+import { FolderPatchRequest } from '@/types/folder';
 import { useShareFolder } from '@/hooks/api/useFolder';
 import { useState } from 'react';
 
 interface Props {
   type: string;
-  targetFolder?: Folder;
+  targetFolder?: FolderPatchRequest;
   shareTargetId?: number;
   onClose: () => void;
   onCopy?: (text: string) => Promise<boolean>;
