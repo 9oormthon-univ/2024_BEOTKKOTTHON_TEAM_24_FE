@@ -1,6 +1,6 @@
 import BottomBtn from '@/components/common/BottomBtn';
 import { Job } from '@/types/user';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import DesignerImage from '@svg/onboard/design-image.svg';
 import PlannerImage from '@svg/onboard/planner-image.svg';
@@ -10,6 +10,10 @@ import { SignupFunnel } from '@/types/Funnel';
 const JobSetup = (props: SignupFunnel) => {
   const { signupInfo, setSignupInfo, toNextStep } = props;
   const [selectedJob, setSelectedJob] = useState('');
+
+  useEffect(() => {
+    handleJob(signupInfo.job);
+  }, [signupInfo.job]);
 
   const handleJob = (job: Job) => {
     const newInput = { ...signupInfo, job: job };

@@ -9,7 +9,8 @@ import { BeforeInstallPromptEvent } from '@/types/global';
 import { Dispatch, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
 import { SignupPostRequest } from '@/types/user';
-import Header from '@/components/common/Header';
+import styled from 'styled-components';
+import BackIcon from '@svg/backspace-icon.svg';
 
 interface Props {
   deferredPrompt: BeforeInstallPromptEvent;
@@ -41,7 +42,7 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
   const renderSteps: Function = (): ReactElement[] => {
     return steps.map((Step, i) => (
       <Funnel.Step key={STEP_NAMES[i]} name={STEP_NAMES[i]}>
-        <Header onClick={toPrevStep} />
+        <Header toPrevStep={toPrevStep} rightText={i > 0 ? `${i}/3` : ''} />
         <Step {...{ signupInfo, setSignupInfo, toNextStep }} />
       </Funnel.Step>
     ));
@@ -66,3 +67,37 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
 };
 
 export default SignUp;
+
+const Header = (props: { toPrevStep: () => void; rightText: string }) => {
+  const { toPrevStep, rightText } = props;
+  return (
+    <Wrapper>
+      <div>
+        <BackIcon onClick={toPrevStep} />
+      </div>
+      <div></div>
+      <div className="right-text">{rightText}</div>
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  align-items: center;
+  width: 100%;
+  padding: 18px 20px 16px;
+  height: 52px;
+
+  .title {
+    ${({ theme }) => theme.typo.Head_20_B}
+    color: ${({ theme }) => theme.palette.neutral[500]};
+    text-align: center;
+  }
+
+  .right-text {
+    ${({ theme }) => theme.typo.Head_20_M}
+    color: #3184ff;
+    text-align: right;
+  }
+`;
