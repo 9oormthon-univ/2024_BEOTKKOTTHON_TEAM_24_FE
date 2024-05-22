@@ -1,26 +1,27 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import { useSignupInputStore } from '@/store/signup';
 import { Job } from '@/types/user';
 import { useState } from 'react';
 import styled from 'styled-components';
 import DesignerImage from '@svg/onboard/design-image.svg';
 import PlannerImage from '@svg/onboard/planner-image.svg';
 import DeveloperImage from '@svg/onboard/developer-image.svg';
+import { SignupFunnel } from '@/types/Funnel';
 
-const JobSetup = () => {
-  const { signupInput, setSignupInput } = useSignupInputStore();
+const JobSetup = (props: SignupFunnel) => {
+  const { signupInfo, setSignupInfo, toNextStep } = props;
   const [selectedJob, setSelectedJob] = useState('');
 
   const handleJob = (job: Job) => {
-    const newInput = { ...signupInput, job: job };
-    setSignupInput(newInput);
+    const newInput = { ...signupInfo, job: job };
+    setSignupInfo(newInput);
     setSelectedJob(job);
   };
+
   return (
     <Wrapper>
       <Body>
         <div className="title">
-          <p>{signupInput.userName}님의</p>
+          <p>{signupInfo.userName}님의</p>
           직무를 알려주세요!
         </div>
         <div className="subtitle">
@@ -66,11 +67,11 @@ const JobSetup = () => {
           </Grid>
         </JobSection>
       </Body>
-      {selectedJob ? (
-        <BottomBtn text="다음" state="activated" nextUrl="/onboard/subject" />
-      ) : (
-        <BottomBtn text="다음" state="disabled" />
-      )}
+      <BottomBtn
+        text="다음"
+        state={selectedJob ? 'activated' : 'disabled'}
+        onClick={toNextStep}
+      />
     </Wrapper>
   );
 };
@@ -79,7 +80,7 @@ export default JobSetup;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
 
@@ -123,7 +124,7 @@ const Wrapper = styled.div`
     line-height: 140%; /* 19.6px */
   }
 
-  > :nth-child(3) {
+  > :nth-child(2) {
     margin-bottom: 36px;
   }
 `;
@@ -132,7 +133,7 @@ const Body = styled.div`
   padding: 0px 20px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
 `;
 
 const JobSection = styled.div`
