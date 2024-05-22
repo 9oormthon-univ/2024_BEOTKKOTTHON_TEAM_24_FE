@@ -6,10 +6,11 @@ import JobSetup from '@/components/signup/JobSetup';
 import SubjectSetup from '@/components/signup/SubjectSetup';
 import AddHome from '@/components/signup/AddHome';
 import { BeforeInstallPromptEvent } from '@/types/global';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
 import { SignupPostRequest } from '@/types/user';
 import Header from '@/components/common/Header';
+import { SignupFunnel } from '@/types/Funnel';
 
 interface Props {
   deferredPrompt: BeforeInstallPromptEvent;
@@ -17,6 +18,14 @@ interface Props {
     SetStateAction<BeforeInstallPromptEvent | undefined>
   >;
 }
+
+const STEP_NAMES = [
+  'account-setup',
+  'name',
+  'job',
+  'subject',
+  'add-home',
+] as const;
 
 const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
   const [signupInfo, setSignupInfo] = useState<SignupPostRequest>({
@@ -26,42 +35,22 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
     job: 'ETC',
     topicList: [],
   });
-  const [Funnel, toPrevStep, toNextStep] = useFunnel([
-    'account-setup',
-    'name',
-    'job',
-    'subject',
-    'add-home',
-  ] as const);
+  const [Funnel, toPrevStep, toNextStep] = useFunnel(STEP_NAMES);
+  const steps = [AccountSetup, NameSetup, JobSetup, SubjectSetup];
+
+  const renderSteps: Function = (): ReactElement[] => {
+    return steps.map((Step, i) => (
+      <Funnel.Step name={STEP_NAMES[i]}>
+        <Step {...{ signupInfo, setSignupInfo, toNextStep }} />
+      </Funnel.Step>
+    ));
+  };
 
   return (
     <>
       <Header onClick={toPrevStep} />
       <Funnel>
-        <Funnel.Step name="account-setup">
-          <AccountSetup
-            signupInfo={signupInfo}
-            setSignupInfo={setSignupInfo}
-            toNextStep={toNextStep}
-          />
-        </Funnel.Step>
-        <Funnel.Step name="name">
-          <NameSetup
-            signupInfo={signupInfo}
-            setSignupInfo={setSignupInfo}
-            toNextStep={toNextStep}
-          />
-        </Funnel.Step>
-        <Funnel.Step name="job">
-          <JobSetup
-            signupInfo={signupInfo}
-            setSignupInfo={setSignupInfo}
-            toNextStep={toNextStep}
-          />
-        </Funnel.Step>
-        <Funnel.Step name="subject">
-          <SubjectSetup />
-        </Funnel.Step>
+        {renderSteps()}
         <Funnel.Step name="add-home">
           <AddHome
             deferredPrompt={deferredPrompt}

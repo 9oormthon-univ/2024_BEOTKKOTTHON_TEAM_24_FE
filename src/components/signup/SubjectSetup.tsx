@@ -1,23 +1,23 @@
 import BottomBtn from '@/components/common/BottomBtn';
 import { SUBJECTLIST } from '@/constants/subjectList';
-import { useSignupInputStore } from '@/store/signup';
 import { useEffect, useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import styled from 'styled-components';
 import AddButton from '@svg/addBtn.svg';
 import { useSignup } from '@/hooks/api/useAuth';
+import { SignupFunnel } from '@/types/Funnel';
 
-const SubjectSetup = () => {
-  const { signupInput, setSignupInput } = useSignupInputStore();
+const SubjectSetup = (props: SignupFunnel) => {
+  const { signupInfo, setSignupInfo, toNextStep } = props;
   const [topicList, setTopicList] = useState<string[]>(
-    SUBJECTLIST[signupInput.job].sort(),
+    SUBJECTLIST[signupInfo.job].sort(),
   );
   const [isAdding, setIsAdding] = useState(false);
   const [addingTopic, setAddingTopic] = useState('');
   const { mutate } = useSignup();
 
   useEffect(() => {
-    setSignupInput({ ...signupInput, topicList: [] });
+    setSignupInfo({ ...signupInfo, topicList: [] });
   }, []);
 
   const handleBlur = () => {
@@ -37,16 +37,16 @@ const SubjectSetup = () => {
   };
 
   const selectTopic = (topic: string) => {
-    signupInput.topicList.includes(topic)
-      ? setSignupInput({
-          ...signupInput,
-          topicList: signupInput.topicList.filter(
+    signupInfo.topicList.includes(topic)
+      ? setSignupInfo({
+          ...signupInfo,
+          topicList: signupInfo.topicList.filter(
             (element) => element !== topic,
           ),
         })
-      : setSignupInput({
-          ...signupInput,
-          topicList: [...signupInput.topicList, topic].sort(),
+      : setSignupInfo({
+          ...signupInfo,
+          topicList: [...signupInfo.topicList, topic].sort(),
         });
   };
 
@@ -64,9 +64,7 @@ const SubjectSetup = () => {
           {topicList.map((topic, idx) => (
             <Topic
               key={idx}
-              className={
-                signupInput.topicList.includes(topic) ? 'selected' : ''
-              }
+              className={signupInfo.topicList.includes(topic) ? 'selected' : ''}
               onClick={() => selectTopic(topic)}
             >
               {topic}
@@ -108,15 +106,16 @@ const SubjectSetup = () => {
           )}
         </TopicSection>
       </Body>
-      {signupInput.topicList.length > 2 ? (
-        <BottomBtn
-          text="완료"
-          state="activated"
-          onClick={() => mutate(signupInput)}
-        />
-      ) : (
-        <BottomBtn text="완료" state="disabled" />
-      )}
+      <BottomBtn
+        text="완료"
+        state={signupInfo.topicList.length > 2 ? 'activated' : 'disabled'}
+        onClick={() => {
+          if (signupInfo.topicList.length > 2) {
+            mutate(signupInfo);
+            toNextStep();
+          }
+        }}
+      />
     </Wrapper>
   );
 };
