@@ -87,7 +87,7 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
           Step,
         },
       ),
-    [step],
+    [step, steps],
   );
 
   return Object.assign([FunnelComponent, toPrevStep, toNextStep] as const);

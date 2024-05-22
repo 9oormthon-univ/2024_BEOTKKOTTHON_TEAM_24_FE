@@ -10,7 +10,6 @@ import { Dispatch, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
 import { SignupPostRequest } from '@/types/user';
 import Header from '@/components/common/Header';
-import { SignupFunnel } from '@/types/Funnel';
 
 interface Props {
   deferredPrompt: BeforeInstallPromptEvent;
@@ -38,9 +37,11 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
   const [Funnel, toPrevStep, toNextStep] = useFunnel(STEP_NAMES);
   const steps = [AccountSetup, NameSetup, JobSetup, SubjectSetup];
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   const renderSteps: Function = (): ReactElement[] => {
     return steps.map((Step, i) => (
-      <Funnel.Step name={STEP_NAMES[i]}>
+      <Funnel.Step key={STEP_NAMES[i]} name={STEP_NAMES[i]}>
+        <Header onClick={toPrevStep} />
         <Step {...{ signupInfo, setSignupInfo, toNextStep }} />
       </Funnel.Step>
     ));
@@ -48,13 +49,15 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
 
   return (
     <>
-      <Header onClick={toPrevStep} />
       <Funnel>
         {renderSteps()}
         <Funnel.Step name="add-home">
           <AddHome
-            deferredPrompt={deferredPrompt}
-            setDeferredPrompt={setDeferredPrompt}
+            {...{
+              signupInfo,
+              deferredPrompt,
+              setDeferredPrompt,
+            }}
           />
         </Funnel.Step>
       </Funnel>

@@ -1,6 +1,6 @@
 import BottomBtn from '@/components/common/BottomBtn';
 import { SUBJECTLIST } from '@/constants/subjectList';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import styled from 'styled-components';
 import AddButton from '@svg/addBtn.svg';
@@ -15,10 +15,6 @@ const SubjectSetup = (props: SignupFunnel) => {
   const [isAdding, setIsAdding] = useState(false);
   const [addingTopic, setAddingTopic] = useState('');
   const { mutate } = useSignup();
-
-  useEffect(() => {
-    setSignupInfo({ ...signupInfo, topicList: [] });
-  }, []);
 
   const handleBlur = () => {
     setAddingTopic('');
@@ -124,7 +120,7 @@ export default SubjectSetup;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -177,7 +173,7 @@ const Wrapper = styled.div`
 const Body = styled.div`
   position: relative;
   padding: 0px 20px;
-  height: 100vh;
+  flex: 1;
 `;
 
 const TopicSection = styled.div`
