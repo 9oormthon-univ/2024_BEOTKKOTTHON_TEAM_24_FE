@@ -33,13 +33,13 @@ const Wrapper = styled.div`
     position: relative;
     max-height: 66px;
   }
-  .unvisible {
+  .invisible {
     display: none;
   }
   .check-icon {
     position: absolute;
     top: -20px;
-    right: -20px;
+    left: 44px;
   }
 `;
 

@@ -89,11 +89,10 @@ const PageInner = styled.div`
   }
   .list {
     width: 100%;
-    max-width: 390px;
-    display: flex;
-    flex-flow: wrap;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 29px;
     margin-top: 75px;
-    justify-content: space-evenly;
   }
 `;
