@@ -3,16 +3,9 @@ import styled from 'styled-components';
 import VisibleIcon from '@svg/visible-icon.svg';
 import UnvisibleIcon from '@svg/unvisible-icon.svg';
 import BottomBtn from '@/components/common/BottomBtn';
-import { useSignupInputStore } from '@/store/signup';
-import { SignupPostRequest } from '@/types/user';
+import { SignupFunnel } from '@/types/Funnel';
 
-interface Props {
-  signupInfo: SignupPostRequest;
-  setSignupInfo: (value: SignupPostRequest) => void;
-  toNextStep: () => void;
-}
-
-const AccountSetup = (props: Props) => {
+const AccountSetup = (props: SignupFunnel) => {
   const { signupInfo, setSignupInfo, toNextStep } = props;
   const [isPWOpen, setIsPWOpen] = useState(false);
   const [PWCheck, setPWCheck] = useState('');
@@ -148,11 +141,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: start;
 
-  > :nth-child(3) {
+  > :nth-child(2) {
     margin-bottom: 16px;
   }
 
-  > :nth-child(4) {
+  > :nth-child(3) {
     margin-bottom: 36px;
   }
 `;

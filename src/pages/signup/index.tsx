@@ -10,7 +10,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import { SignupPostRequest } from '@/types/user';
 import Header from '@/components/common/Header';
-import styled from 'styled-components';
 
 interface Props {
   deferredPrompt: BeforeInstallPromptEvent;
@@ -47,7 +46,11 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
           />
         </Funnel.Step>
         <Funnel.Step name="name">
-          <NameSetup />
+          <NameSetup
+            signupInfo={signupInfo}
+            setSignupInfo={setSignupInfo}
+            toNextStep={toNextStep}
+          />
         </Funnel.Step>
         <Funnel.Step name="job">
           <JobSetup />
@@ -67,10 +70,3 @@ const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
 };
 
 export default SignUp;
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
