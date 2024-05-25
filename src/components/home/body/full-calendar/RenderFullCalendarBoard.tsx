@@ -72,7 +72,7 @@ const CalendarItem = ({ date }: CalendarItemProps) => {
 };
 
 const Item = styled.div<{ isSelected: boolean }>`
-  width: 21px;
+  width: 28px;
   height: 35px;
   margin: 8px auto;
   display: flex;
@@ -92,9 +92,8 @@ const Item = styled.div<{ isSelected: boolean }>`
     .count {
       position: absolute;
       padding-top: 3px;
-      font-size: 13px;
+      ${({ theme }) => theme.typo.Body_14_B};
       text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-      font-weight: 700;
     }
 
     .check {
@@ -103,18 +102,23 @@ const Item = styled.div<{ isSelected: boolean }>`
   }
 
   .date {
-    font-weight: 700;
-    color: ${({ isSelected }) => (isSelected ? '#3184FF' : '#b6b6b6')};
     ${({ isSelected }) =>
       isSelected
         ? css`
-            color: '#3184FF';
-            font-size: 16px;
+            background-color: ${(props) => props.theme.palette.primary[500]};
+            color: #ffffff;
+            ${({ theme }) => theme.typo.Body_14_M};
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             /* text-decoration: underline; */
           `
         : css`
-            color: #b6b6b6;
-            font-size: 16px;
+            color: ${(props) => props.theme.palette.neutral[500]};
+            ${({ theme }) => theme.typo.Body_14_M};
           `}
   }
 `;
