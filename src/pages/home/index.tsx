@@ -4,18 +4,12 @@ import TitleSettingsPanel from '@/components/home/header/TitleSettingPanel';
 import ReminderQuestionBox from '@/components/home/header/ReminderQuestionBox';
 import ReminderCalendar from '@/components/home/body/ReminderCalendar';
 import Carousel from '@/components/landing/Carousel';
-import { useRouter } from 'next/router';
 import EmptyQuestionBox from '@/components/home/header/EmptyQuestionBox';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import { useGetReminderQuestion } from '@/hooks/api/useReminder';
 
 const Home: NextPage = () => {
-  const router = useRouter();
   const { data, isSuccess } = useGetReminderQuestion();
-
-  const onClick = () => {
-    router.push('/reminder');
-  };
 
   const renderInnerComponent = () => {
     const dataLength = data?.reminderQuestionList.length;
@@ -49,8 +43,8 @@ const Home: NextPage = () => {
   return (
     <NavigationLayout>
       <Wrapper>
-        {data && <TitleSettingsPanel questionData={data} />}
-        <div onClick={onClick}>{renderInnerComponent()}</div>
+        <TitleSettingsPanel questionData={data} />
+        {renderInnerComponent()}
         <HrLine />
         <ReminderCalendar />
       </Wrapper>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface Props {
   totalLength: number;
@@ -16,9 +17,13 @@ interface Props {
 
 const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
   const margin = totalLength === 1 ? 50 : 0;
+  const router = useRouter();
 
   return (
-    <Wrapper margin={margin}>
+    <Wrapper
+      margin={margin}
+      onClick={() => router.push(`/insight/${reminderInfo.insightId}/answer`)}
+    >
       <div className="reminder-title">
         <strong>Q. {reminderInfo.reminderQuestion}</strong>
       </div>

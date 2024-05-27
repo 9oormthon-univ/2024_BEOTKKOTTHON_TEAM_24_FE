@@ -8,13 +8,15 @@ import { useState } from 'react';
 import { useRemind } from '@/store/remind';
 import { useRouter } from 'next/router';
 
-const Reminder: NextPage = () => {
+const ReminderAnswer: NextPage = () => {
   const [wordCount, setWordCount] = useState<number>(0);
   const { setAnswer } = useRemind();
   const router = useRouter();
   const handleClickNext = () => {
     router.push('/reminder/remind-saved');
   };
+
+  console.log(router.query.insightId);
 
   return (
     <Wrapper>
@@ -55,7 +57,7 @@ const Reminder: NextPage = () => {
   );
 };
 
-export default Reminder;
+export default ReminderAnswer;
 
 const Wrapper = styled.div`
   height: 100vh;

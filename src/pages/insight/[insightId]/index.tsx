@@ -6,7 +6,7 @@ import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import Carousel from '@/components/landing/Carousel';
 import Image from 'next/image';
 
-const ReminderSaved: NextPage = () => {
+const InsightDetail: NextPage = () => {
   const { answer } = useRemind();
   return (
     <Wrapper>
@@ -95,7 +95,7 @@ const ReminderSaved: NextPage = () => {
     </Wrapper>
   );
 };
-export default ReminderSaved;
+export default InsightDetail;
 
 const Wrapper = styled.div`
   width: 100%;
