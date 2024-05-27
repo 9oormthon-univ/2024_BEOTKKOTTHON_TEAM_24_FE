@@ -15,7 +15,7 @@ export type QuestionGetResponse = {
 
 // POST /reminder/answer
 export type AnswerPostRequest = {
-  reminderId: number;
+  reminderQuestionId: number;
   reminderQuestion: string;
   reminderAnswer: string;
 };

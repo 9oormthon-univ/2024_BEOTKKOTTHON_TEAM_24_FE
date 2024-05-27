@@ -8,13 +8,15 @@ import { useState } from 'react';
 import { useRemind } from '@/store/remind';
 import { useRouter } from 'next/router';
 import { useGetInsight } from '@/hooks/api/useInsight';
+import { usePostReminderAnswer } from '@/hooks/api/useReminder';
 
 const ReminderAnswer: NextPage = () => {
   const [wordCount, setWordCount] = useState<number>(0);
-  const { setAnswer } = useRemind();
+  const { answer, setAnswer } = useRemind();
   const router = useRouter();
   const { insightId, reminderQuestionId, reminderQuestion } = router.query;
   const { data, isSuccess } = useGetInsight(Number(insightId));
+  const { mutate } = usePostReminderAnswer();
 
   return (
     <Wrapper>
@@ -48,7 +50,14 @@ const ReminderAnswer: NextPage = () => {
       <BottomBtn
         text="완료"
         state={wordCount > 0 ? 'activated' : 'disabled'}
-        onClick={() => router.replace(`/insight/${router.query.insightId}`)}
+        onClick={() => {
+          mutate({
+            reminderQuestionId: Number(reminderQuestionId),
+            reminderQuestion: String(reminderQuestion),
+            reminderAnswer: answer,
+          });
+          router.replace(`/insight/${router.query.insightId}`);
+        }}
       />
     </Wrapper>
   );
