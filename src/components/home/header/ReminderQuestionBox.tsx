@@ -8,6 +8,7 @@ interface Props {
     reminderQuestion: string;
     insightId: number;
     reminderId: number;
+    reminderQuestionId: number;
     insightTitle: string;
     insightMainImage: string;
     insightTagList: string[];
@@ -22,7 +23,18 @@ const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
   return (
     <Wrapper
       margin={margin}
-      onClick={() => router.push(`/insight/${reminderInfo.insightId}/answer`)}
+      onClick={() =>
+        router.push(
+          {
+            pathname: `/insight/${reminderInfo.insightId}/answer`,
+            query: {
+              reminderQuestionId: reminderInfo.reminderQuestionId,
+              reminderQuestion: reminderInfo.reminderQuestion,
+            },
+          },
+          `/insight/${reminderInfo.insightId}/answer`,
+        )
+      }
     >
       <div className="reminder-title">
         <strong>Q. {reminderInfo.reminderQuestion}</strong>
