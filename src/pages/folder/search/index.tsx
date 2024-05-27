@@ -6,7 +6,7 @@ import LargeView from '@svg/large-view-icon.svg';
 import SmallView from '@svg/small-view-icon.svg';
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchFolder } from '@/hooks/api/useFolder';
-import SummaryInsightCard from '@/components/folder/SummaryInsightCard';
+import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import InsightCard from '@/components/common/InsightCard';
 import { useTransition } from 'react';
 import { FolderSearchPostResponse } from '@/types/folder';
