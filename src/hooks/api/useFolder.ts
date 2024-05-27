@@ -79,6 +79,7 @@ export function useShareFolder(shareData: FolderUrlGetRequest) {
   return useQuery({
     queryKey: ['share-folder'],
     queryFn: () => shareFolder(shareData),
+    enabled: false,
   });
 }
 

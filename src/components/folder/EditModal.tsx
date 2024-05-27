@@ -3,75 +3,100 @@ import EditPencilIcon from '@svg/folder/edit-pencil-icon.svg';
 import TrashIcon from '@svg/folder/trash-icon.svg';
 import GlassIcon from '@svg/glass-icon.svg';
 import CopyIcon from '@svg/copy-icon.svg';
+import ModalHandleBarIcon from '@svg/modal-handle-bar.svg';
+import { useRouter } from 'next/router';
+import { FolderPatchRequest } from '@/types/folder';
+import { useShareFolder } from '@/hooks/api/useFolder';
+import { useState } from 'react';
 
 interface Props {
   type: string;
+  targetFolder?: FolderPatchRequest;
+  shareTargetId?: number;
   onClose: () => void;
-  onClick1: () => void;
-  onClick2: () => void;
+  onCopy?: (text: string) => Promise<boolean>;
 }
 
 const EditModal = (props: Props) => {
+  const router = useRouter();
+  const { type, targetFolder, shareTargetId, onClose, onCopy } = props;
+  const [copyable, setCopyable] = useState<boolean>(false);
+  const { refetch, error } = useShareFolder({
+    folderId: Number(shareTargetId),
+    copyable,
+  });
+
+  const handleColorChange = () => {
+    router.push(
+      {
+        pathname: '/folder/edit-color',
+        query: {
+          folderId: targetFolder?.folderId,
+          folderName: targetFolder?.folderName,
+          folderColor: targetFolder?.folderColor,
+        },
+      },
+      '/folder/edit-color',
+    );
+  };
+
+  const handleDelete = () => {
+    router.push(
+      {
+        pathname: '/folder/delete',
+        query: {
+          folderId: targetFolder?.folderId,
+        },
+      },
+      '/folder/delete',
+    );
+  };
+
+  const handleShare = async (type: string) => {
+    setCopyable(type !== 'readonly');
+    const response = await refetch();
+    if (typeof response?.data?.url === 'string' && onCopy) {
+      onCopy(response.data.url);
+    }
+    if (error) {
+      alert('폴더 공유에 실패했어요. 다시 시도해주세요.');
+    }
+    onClose();
+  };
+
   return (
     <Wrapper>
       <ModalBg onClick={() => props.onClose()} />
       <Modal>
         <ModalHeader>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="36"
-            height="5"
-            viewBox="0 0 36 5"
-            fill="none"
-          >
-            <path
-              d="M0 2.5C0 1.11929 1.11929 0 2.5 0H33.5C34.8807 0 36 1.11929 36 2.5C36 3.88071 34.8807 5 33.5 5H2.5C1.11929 5 0 3.88071 0 2.5Z"
-              fill="#3C3C43"
-              fill-opacity="0.3"
-            />
-          </svg>
+          <ModalHandleBarIcon />
         </ModalHeader>
         <ModalBody>
           <ModalTitle>
-            {props.type === 'share' ? (
-              <Title>공유하기</Title>
-            ) : (
-              <Title>편집하기</Title>
-            )}
+            <Title>{type === 'share' ? '공유하기' : '편집하기'}</Title>
           </ModalTitle>
-          {props.type === 'share' ? (
-            <div
-              className="modal-btn edit-btn"
-              onClick={() => props.onClick1()}
-            >
-              보기 전용으로 공유하기
-              <GlassIcon />
-            </div>
-          ) : (
-            <div
-              className="modal-btn edit-btn"
-              onClick={() => props.onClick1()}
-            >
-              폴더 색상 수정
-              <EditPencilIcon />
-            </div>
-          )}
-          {props.type === 'share' ? (
-            <div
-              className="modal-btn delete-btn"
-              onClick={() => props.onClick2()}
-            >
-              복제 허용으로 공유하기 <CopyIcon />
-            </div>
-          ) : (
-            <div
-              className="modal-btn delete-btn"
-              onClick={() => props.onClick2()}
-            >
-              삭제하기
-              <TrashIcon />
-            </div>
-          )}
+          <div
+            className="modal-btn edit-btn"
+            onClick={
+              type === 'share'
+                ? () => handleShare('readonly')
+                : () => handleColorChange()
+            }
+          >
+            {type === 'share' ? '보기 전용으로 공유하기' : '폴더 색상 수정'}
+            {type === 'share' ? <GlassIcon /> : <EditPencilIcon />}
+          </div>
+          <div
+            className="modal-btn delete-btn"
+            onClick={
+              type === 'share'
+                ? () => handleShare('copy')
+                : () => handleDelete()
+            }
+          >
+            {type === 'share' ? '복제 허용으로 공유하기' : '삭제하기'}
+            {type === 'share' ? <CopyIcon /> : <TrashIcon />}
+          </div>
         </ModalBody>
       </Modal>
     </Wrapper>
