@@ -1,26 +1,55 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { FOLDERLIST } from '@/constants/folderList';
 import { colorDecoder } from '@/utils/folder';
 import NavigationLayout from '@/components/common/NavigationLayout';
 import SearchSection from '@/components/common/SearchSection';
+import { useGetFolder } from '@/hooks/api/useFolder';
+import Header from '@/components/common/Header';
 
 interface Props {}
 
 const Folder: NextPage<Props> = ({}) => {
+  const { data } = useGetFolder();
   const router = useRouter();
+  const renderFolderList = () => {
+    return (
+      <div className="list-container">
+        {data?.map((folder) => (
+          <>
+            <IconContainer
+              onClick={() =>
+                router.push(
+                  {
+                    pathname: `/folder/${folder.folderId}`,
+                    query: {
+                      name: folder.folderName,
+                      id: folder.folderId,
+                    },
+                  },
+                  `/folder/${folder.folderId}`,
+                )
+              }
+            >
+              {colorDecoder(folder.folderColor, 'big')}
+              <span className="name">{folder.folderName}</span>
+              <span className="count">{folder.insightCount}</span>
+            </IconContainer>
+          </>
+        ))}
+      </div>
+    );
+  };
   return (
     <>
       <NavigationLayout>
         <Wrapper>
-          <div className="title">폴더</div>
-          <span
-            className="link edit"
+          <Header
+            title="폴더"
+            isGoingBack={false}
+            rightText="편집"
             onClick={() => router.push('/folder/edit')}
-          >
-            편집
-          </span>
+          />
           <SearchSection
             onClick={() => router.push('/folder/search')}
             placeholder="인사이트 검색"
@@ -31,7 +60,7 @@ const Folder: NextPage<Props> = ({}) => {
             <div className="header">
               <div>
                 <span className="title-m">전체 폴더</span>
-                <span>{FOLDERLIST.length}</span>
+                <span>{data?.length}</span>
               </div>
               <span
                 className="link"
@@ -40,19 +69,7 @@ const Folder: NextPage<Props> = ({}) => {
                 폴더 생성
               </span>
             </div>
-            <div className="list-container">
-              {FOLDERLIST.map((folder) => (
-                <>
-                  <IconContainer
-                    onClick={() => router.push(`/folder/${folder.folderId}`)}
-                  >
-                    {colorDecoder(folder.folderColor, 'big')}
-                    <span className="name">{folder.folderName}</span>
-                    <span className="count">{folder.insightCount}</span>
-                  </IconContainer>
-                </>
-              ))}
-            </div>
+            {renderFolderList()}
           </FolderSection>
         </Wrapper>
       </NavigationLayout>
@@ -66,33 +83,6 @@ const Wrapper = styled.div`
   height: 100vh;
   position: relative;
   justify-content: center;
-  .title {
-    color: #1f1f1f;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 27.146px; /* 135.732% */
-    height: 28px;
-    padding: 18px 20px 16px;
-    height: 52px;
-  }
-  .link {
-    color: var(--Primary-500, #3184ff);
-    text-align: right;
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
-  }
-  .edit {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
 `;
 
 const FolderSection = styled.div`
@@ -120,8 +110,12 @@ const FolderSection = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 36px;
+    padding-bottom: 100px;
     gap: 52px 23px;
     flex-flow: wrap;
+  }
+  .link {
+    color: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
 

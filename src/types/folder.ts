@@ -12,7 +12,7 @@ export type FolderGetResponse = Folder[];
 
 // POST /folder
 export type FolderPostRequest = {
-  foldeName: string;
+  folderName: string;
   folderColor: string;
 };
 
@@ -22,7 +22,7 @@ export type FolderPostResponse = Folder[];
 export type FolderPatchRequest = {
   folderId: number;
   folderColor?: string;
-  foldeName?: string;
+  folderName?: string;
 };
 
 // POST /folder/search

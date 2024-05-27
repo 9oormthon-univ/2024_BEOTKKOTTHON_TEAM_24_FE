@@ -38,8 +38,6 @@ const LinkInput: NextPage = ({}) => {
       alert('링크를 입력해주세요.');
       return;
     }
-    // console.log(data?.map((folder) => folder.folderName));
-
     if (imageFiles) {
       imageFiles.forEach((image) => {
         const formData = new FormData();
