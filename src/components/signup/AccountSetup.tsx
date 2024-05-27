@@ -12,7 +12,7 @@ const AccountSetup = (props: SignupFunnel) => {
   const [isValid, setIsValid] = useState({
     email: true,
     password: true,
-    check: true,
+    pwCheck: true,
   });
 
   const validate = (type: string, value: string) => {
@@ -23,16 +23,15 @@ const AccountSetup = (props: SignupFunnel) => {
       setIsValid({ ...isValid, email: regexEmail.test(value) });
     type === 'password' &&
       setIsValid({ ...isValid, password: regexPW.test(value) });
-    type === 'check' &&
-      setIsValid({ ...isValid, check: signupInfo.userPassword === value });
+    type === 'pwCheck' &&
+      setIsValid({ ...isValid, pwCheck: signupInfo.userPassword === value });
   };
 
   const handleInput = (type: string, value: string) => {
-    type === 'email'
-      ? setSignupInfo({ ...signupInfo, userEmail: value })
-      : type === 'password'
-        ? setSignupInfo({ ...signupInfo, userPassword: value })
-        : setPWCheck(value);
+    type === 'email' && setSignupInfo({ ...signupInfo, userEmail: value });
+    type === 'password' &&
+      setSignupInfo({ ...signupInfo, userPassword: value });
+    type === 'pwCheck' && setPWCheck(value);
     validate(type, value);
   };
 
@@ -88,7 +87,7 @@ const AccountSetup = (props: SignupFunnel) => {
           <div className="input-container">
             <Input
               value={PWCheck}
-              onChange={(e) => handleInput('check', e.target.value)}
+              onChange={(e) => handleInput('pwCheck', e.target.value)}
               type={isPWOpen ? 'text' : 'password'}
               placeholder="비밀번호를 한 번 더 입력해주세요"
             />
@@ -104,7 +103,7 @@ const AccountSetup = (props: SignupFunnel) => {
               />
             )}
           </div>
-          <ErrorText>{!isValid.check && '*비밀번호가 다릅니다.'}</ErrorText>
+          <ErrorText>{!isValid.pwCheck && '*비밀번호가 다릅니다.'}</ErrorText>
         </PWSection>
       </InputContainer>
       <BottomBtn
@@ -116,7 +115,7 @@ const AccountSetup = (props: SignupFunnel) => {
             PWCheck !== '' &&
             isValid.email &&
             isValid.password &&
-            isValid.check
+            isValid.pwCheck
           )
             ? 'disabled'
             : 'activated'

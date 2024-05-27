@@ -33,17 +33,12 @@ const SubjectSetup = (props: SignupFunnel) => {
   };
 
   const selectTopic = (topic: string) => {
-    signupInfo.topicList.includes(topic)
-      ? setSignupInfo({
-          ...signupInfo,
-          topicList: signupInfo.topicList.filter(
-            (element) => element !== topic,
-          ),
-        })
-      : setSignupInfo({
-          ...signupInfo,
-          topicList: [...signupInfo.topicList, topic].sort(),
-        });
+    setSignupInfo({
+      ...signupInfo,
+      topicList: signupInfo.topicList.includes(topic)
+        ? signupInfo.topicList.filter((element) => element !== topic)
+        : [...signupInfo.topicList, topic].sort(),
+    });
   };
 
   return (
@@ -60,7 +55,7 @@ const SubjectSetup = (props: SignupFunnel) => {
           {topicList.map((topic, idx) => (
             <Topic
               key={idx}
-              className={signupInfo.topicList.includes(topic) ? 'selected' : ''}
+              className={`${signupInfo.topicList.includes(topic) && 'selected'}`}
               onClick={() => selectTopic(topic)}
             >
               {topic}
