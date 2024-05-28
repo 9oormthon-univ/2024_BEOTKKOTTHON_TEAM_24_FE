@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Insight } from '@/types/insight';
+import { useRouter } from 'next/router';
 
 interface CardProps {
   favicon: string;
@@ -8,8 +9,13 @@ interface CardProps {
 }
 
 const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
+  const router = useRouter();
+
   return (
-    <Wrapper opacity={insightData.todayRead ? 0.6 : 1}>
+    <Wrapper
+      opacity={insightData.todayRead ? 0.6 : 1}
+      onClick={() => router.push(`/insight/${insightData.insightId}`)}
+    >
       {favicon && (
         <Image
           src={favicon}
