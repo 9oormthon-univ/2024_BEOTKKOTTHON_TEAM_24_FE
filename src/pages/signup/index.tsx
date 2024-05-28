@@ -1,246 +1,92 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { useFunnel } from '@/hooks/custom/useFunnel';
+import AccountSetup from '@/components/signup/AccountSetup';
+import NameSetup from '@/components/signup/NameSetup';
+import JobSetup from '@/components/signup/JobSetup';
+import SubjectSetup from '@/components/signup/SubjectSetup';
+import AddHome from '@/components/signup/AddHome';
+import { BeforeInstallPromptEvent } from '@/types/global';
+import { Dispatch, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
+import { SignupPostRequest } from '@/types/user';
 import styled from 'styled-components';
-import VisibleIcon from '@svg/visible-icon.svg';
-import UnvisibleIcon from '@svg/unvisible-icon.svg';
-import BottomBtn from '@/components/common/BottomBtn';
-import Header from '@/components/common/Header';
-import { useSignupInputStore } from '@/store/signup';
+import BackIcon from '@svg/backspace-icon.svg';
 
-interface Props {}
+interface Props {
+  deferredPrompt: BeforeInstallPromptEvent;
+  setDeferredPrompt: Dispatch<
+    SetStateAction<BeforeInstallPromptEvent | undefined>
+  >;
+}
 
-const SignUp: NextPage<Props> = ({}) => {
-  const router = useRouter();
-  const [isPWOpen, setIsPWOpen] = useState(false);
-  const { signupInput, setSignupInput } = useSignupInputStore();
+const STEP_NAMES = [
+  'account-setup',
+  'name',
+  'job',
+  'subject',
+  'add-home',
+] as const;
 
-  const [PWCheck, setPWCheck] = useState('');
-  const [isValid, setIsValid] = useState({
-    email: true,
-    password: true,
-    check: true,
+const SignUp: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
+  const [signupInfo, setSignupInfo] = useState<SignupPostRequest>({
+    userEmail: '',
+    userPassword: '',
+    userName: '',
+    job: 'PLANNER',
+    topicList: [],
   });
+  const [Funnel, toPrevStep, toNextStep] = useFunnel(STEP_NAMES);
+  const steps = [AccountSetup, NameSetup, JobSetup, SubjectSetup];
 
-  const validate = (type: string, value: string) => {
-    const regexEmail =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const regexPW = /^(?=.*[a-z])(?=.*[0-9]).{8,}$/;
-    type === 'email' &&
-      setIsValid({ ...isValid, email: regexEmail.test(value) });
-    type === 'password' &&
-      setIsValid({ ...isValid, password: regexPW.test(value) });
-    type === 'check' &&
-      setIsValid({ ...isValid, check: signupInput.userPassword === value });
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  const renderSteps: Function = (): ReactElement[] => {
+    return steps.map((Step, i) => (
+      <Funnel.Step key={STEP_NAMES[i]} name={STEP_NAMES[i]}>
+        <Header toPrevStep={toPrevStep} rightText={i > 0 ? `${i}/3` : ''} />
+        <Step {...{ signupInfo, setSignupInfo, toNextStep }} />
+      </Funnel.Step>
+    ));
   };
 
-  const handleInput = (type: string, value: string) => {
-    type === 'email'
-      ? setSignupInput({ ...signupInput, userEmail: value })
-      : type === 'password'
-        ? setSignupInput({ ...signupInput, userPassword: value })
-        : setPWCheck(value);
-    validate(type, value);
-  };
-
-  const handleSignUp = () => {
-    router.push({ pathname: '/onboard', query: signupInput }, '/onboard');
-  };
-
-  const handleKakao = () => {
-    return;
-  };
   return (
-    <Wrapper>
-      <Header onClick={() => router.back()} />
-      <InputContainer>
-        <PageIntro>
-          <p>회원가입하고</p>인사이트를 리마인드 해보세요 !
-        </PageIntro>
-        <EmailSection>
-          <SubTitle className="email">이메일*</SubTitle>
-          <Input
-            value={signupInput.userEmail}
-            onChange={(e) => handleInput('email', e.target.value)}
-            type="text"
-            placeholder="이메일 주소를 입력해주세요."
-          />
-          <ErrorText>
-            {!isValid.email && '*유효하지 않은 이메일 주소 양식입니다.'}
-          </ErrorText>
-        </EmailSection>
-        <PWSection>
-          <SubTitle>비밀번호*</SubTitle>
-          <div className="input-container">
-            <Input
-              value={signupInput.userPassword}
-              onChange={(e) => handleInput('password', e.target.value)}
-              type={isPWOpen ? 'text' : 'password'}
-              placeholder="비밀번호를 입력해주세요"
-            />
-            {isPWOpen ? (
-              <VisibleIcon
-                onClick={() => setIsPWOpen(false)}
-                className="icon"
-              />
-            ) : (
-              <UnvisibleIcon
-                onClick={() => setIsPWOpen(true)}
-                className="icon"
-              />
-            )}
-          </div>
-          <ErrorText>
-            {!isValid.password &&
-              '*8자리 이상의 영어 소문자와 숫자만 입력 가능해요.'}
-          </ErrorText>
-        </PWSection>
-        <PWSection>
-          <SubTitle>비밀번호 확인*</SubTitle>
-          <div className="input-container">
-            <Input
-              value={PWCheck}
-              onChange={(e) => handleInput('check', e.target.value)}
-              type={isPWOpen ? 'text' : 'password'}
-              placeholder="비밀번호를 한 번 더 입력해주세요"
-            />
-            {isPWOpen ? (
-              <VisibleIcon
-                onClick={() => setIsPWOpen(false)}
-                className="icon"
-              />
-            ) : (
-              <UnvisibleIcon
-                onClick={() => setIsPWOpen(true)}
-                className="icon"
-              />
-            )}
-          </div>
-          <ErrorText>{!isValid.check && '*비밀번호가 다릅니다.'}</ErrorText>
-        </PWSection>
-      </InputContainer>
-      <BottomBtn
-        text="회원가입"
-        state={
-          !(
-            signupInput.userEmail !== '' &&
-            signupInput.userPassword !== '' &&
-            PWCheck !== '' &&
-            isValid.email &&
-            isValid.password &&
-            isValid.check
-          )
-            ? 'disabled'
-            : 'activated'
-        }
-        onClick={handleSignUp}
-      />
-      <BottomBtn
-        text="카카오톡으로 로그인하기"
-        state="transparent"
-        onClick={() => handleKakao}
-      />
-    </Wrapper>
+    <Funnel>
+      {renderSteps()}
+      <Funnel.Step name="add-home">
+        <AddHome
+          {...{
+            signupInfo,
+            deferredPrompt,
+            setDeferredPrompt,
+          }}
+        />
+      </Funnel.Step>
+    </Funnel>
   );
 };
 
 export default SignUp;
 
+const Header = (props: { toPrevStep: () => void; rightText: string }) => {
+  const { toPrevStep, rightText } = props;
+  return (
+    <Wrapper>
+      <BackIcon onClick={toPrevStep} />
+      <div></div>
+      <div className="right-text">{rightText}</div>
+    </Wrapper>
+  );
+};
+
 const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
+  padding: 18px 20px 16px;
+  height: 52px;
 
-  > :nth-child(3) {
-    margin-bottom: 16px;
+  .right-text {
+    ${({ theme }) => theme.typo.Head_20_M}
+    color: #3184ff;
+    text-align: right;
   }
-
-  > :nth-child(4) {
-    margin-bottom: 36px;
-  }
-`;
-
-const InputContainer = styled.div`
-  width: 100%;
-  padding: 0px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  flex: 1;
-`;
-
-const PageIntro = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
-  /* Head-24-B */
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 33.6px */
-  margin-top: 20px;
-`;
-
-const EmailSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  /* width: 100%; */
-`;
-
-const SubTitle = styled(PageIntro)`
-  font-size: 20px;
-  font-weight: 500;
-  margin-top: 0;
-
-  &.email {
-    margin-top: 48px;
-  }
-`;
-
-const Input = styled.input`
-  display: flex;
-  padding: 18px;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;
-  border-radius: 8.235px;
-  border: 0.8px solid var(--Neutral-300, #848484);
-  outline: none;
-  color: var(--Neutral-500, #1f1f1f);
-  /* Body-18-R */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%; /* 25.2px */
-  margin-top: 10px;
-`;
-
-const PWSection = styled(EmailSection)`
-  position: relative;
-  .input-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-  }
-  .icon {
-    position: absolute;
-    top: 30px;
-    right: 18px;
-  }
-`;
-
-const ErrorText = styled.div`
-  height: 36px;
-  padding: 8px 0;
-  color: var(--System-Warning, #f1404b);
-  /* Body-14-M */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
 `;

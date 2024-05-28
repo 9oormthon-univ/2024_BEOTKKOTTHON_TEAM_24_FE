@@ -1,28 +1,20 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import Header from '@/components/common/Header';
 import { SUBJECTLIST } from '@/constants/subjectList';
-import { useSignupInputStore } from '@/store/signup';
-import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import styled from 'styled-components';
 import AddButton from '@svg/addBtn.svg';
 import { useSignup } from '@/hooks/api/useAuth';
+import { SignupFunnel } from '@/types/Funnel';
 
-interface Props {}
-
-const OnboardSubject: NextPage<Props> = ({}) => {
-  const { signupInput, setSignupInput } = useSignupInputStore();
+const SubjectSetup = (props: SignupFunnel) => {
+  const { signupInfo, setSignupInfo, toNextStep } = props;
   const [topicList, setTopicList] = useState<string[]>(
-    SUBJECTLIST[signupInput.job].sort(),
+    SUBJECTLIST[signupInfo.job].sort(),
   );
   const [isAdding, setIsAdding] = useState(false);
   const [addingTopic, setAddingTopic] = useState('');
   const { mutate } = useSignup();
-
-  useEffect(() => {
-    setSignupInput({ ...signupInput, topicList: [] });
-  }, []);
 
   const handleBlur = () => {
     setAddingTopic('');
@@ -41,22 +33,16 @@ const OnboardSubject: NextPage<Props> = ({}) => {
   };
 
   const selectTopic = (topic: string) => {
-    signupInput.topicList.includes(topic)
-      ? setSignupInput({
-          ...signupInput,
-          topicList: signupInput.topicList.filter(
-            (element) => element !== topic,
-          ),
-        })
-      : setSignupInput({
-          ...signupInput,
-          topicList: [...signupInput.topicList, topic].sort(),
-        });
+    setSignupInfo({
+      ...signupInfo,
+      topicList: signupInfo.topicList.includes(topic)
+        ? signupInfo.topicList.filter((element) => element !== topic)
+        : [...signupInfo.topicList, topic].sort(),
+    });
   };
 
   return (
     <Wrapper>
-      <Header rightText="3/3" />
       <Body>
         <div className="title">
           <p>주로 저장하는 인사이트의</p>
@@ -69,9 +55,7 @@ const OnboardSubject: NextPage<Props> = ({}) => {
           {topicList.map((topic, idx) => (
             <Topic
               key={idx}
-              className={
-                signupInput.topicList.includes(topic) ? 'selected' : ''
-              }
+              className={`${signupInfo.topicList.includes(topic) && 'selected'}`}
               onClick={() => selectTopic(topic)}
             >
               {topic}
@@ -113,24 +97,23 @@ const OnboardSubject: NextPage<Props> = ({}) => {
           )}
         </TopicSection>
       </Body>
-      {signupInput.topicList.length > 2 ? (
-        <BottomBtn
-          text="완료"
-          state="activated"
-          onClick={() => mutate(signupInput)}
-        />
-      ) : (
-        <BottomBtn text="완료" state="disabled" />
-      )}
+      <BottomBtn
+        text="완료"
+        state={signupInfo.topicList.length > 2 ? 'activated' : 'disabled'}
+        onClick={() => {
+          mutate(signupInfo);
+          toNextStep();
+        }}
+      />
     </Wrapper>
   );
 };
 
-export default OnboardSubject;
+export default SubjectSetup;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -183,7 +166,7 @@ const Wrapper = styled.div`
 const Body = styled.div`
   position: relative;
   padding: 0px 20px;
-  height: 100vh;
+  flex: 1;
 `;
 
 const TopicSection = styled.div`
