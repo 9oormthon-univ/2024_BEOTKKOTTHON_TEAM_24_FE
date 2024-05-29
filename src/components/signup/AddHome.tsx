@@ -1,28 +1,28 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import { useSignupInputStore } from '@/store/signup';
 import { BeforeInstallPromptEvent } from '@/types/global';
 import { promptAppInstall } from '@/utils';
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import PhoneImage from '@svg/onboard/phone-image.svg';
+import { SignupPostRequest } from '@/types/user';
 
 interface Props {
+  signupInfo: SignupPostRequest;
   deferredPrompt: BeforeInstallPromptEvent;
   setDeferredPrompt: Dispatch<
     SetStateAction<BeforeInstallPromptEvent | undefined>
   >;
 }
 
-const AddHome: NextPage<Props> = ({ deferredPrompt, setDeferredPrompt }) => {
+const AddHome = (props: Props) => {
+  const { signupInfo, deferredPrompt, setDeferredPrompt } = props;
   const router = useRouter();
-  const { signupInput } = useSignupInputStore();
 
   return (
     <Wrapper>
       <div className="text-section">
-        <div className="main-title">{signupInput.userName}님, 환영해요!</div>
+        <div className="main-title">{signupInfo.userName}님, 환영해요!</div>
         <div className="sub-title">
           <p>리인풋을 홈 화면에 추가하면</p>
           <p>다양한 기능을 사용하실 수 있어요 !</p>
@@ -47,7 +47,7 @@ export default AddHome;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -55,14 +55,12 @@ const Wrapper = styled.div`
   .text-section {
     display: flex;
     flex-direction: column;
-    margin-top: 73px;
+    margin-top: 65px;
     gap: 16px;
-    flex: 1;
-    height: 100%;
   }
 
   .main-title {
-    color: var(--Neutral-500, #3184FF);
+    color: var(--Neutral-500, #3184ff);
     text-align: center;
     font-family: Pretendard;
     font-size: 26px;
@@ -84,12 +82,11 @@ const Wrapper = styled.div`
     margin-top: 12px;
   }
 
-  :nth-child(2) {
-    height: calc(100% - 250px);
+  .image {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    flex: 1;
   }
 
   :nth-child(3) {

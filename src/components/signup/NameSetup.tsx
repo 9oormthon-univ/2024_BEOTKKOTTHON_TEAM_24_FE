@@ -1,27 +1,21 @@
 import BottomBtn from '@/components/common/BottomBtn';
-import Header from '@/components/common/Header';
-import { useSignupInputStore } from '@/store/signup';
-import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+import { SignupFunnel } from '@/types/Funnel';
 
-interface Props {}
+const NameSetup = (props: SignupFunnel) => {
+  const regex = /^[가-힣a-zA-Z]{2,}$/;
+  const { signupInfo, setSignupInfo, toNextStep } = props;
+  const [isValidName, setIsValidName] = useState(
+    regex.test(signupInfo.userName),
+  );
 
-const Onboard: NextPage<Props> = ({}) => {
-  const { signupInput, setSignupInput } = useSignupInputStore();
-  const [isValidName, setIsValidName] = useState(false);
-
-  useEffect(() => {
-    setSignupInput({ ...signupInput, userName: '' });
-  }, []);
   const handleInput = (value: string) => {
-    const regex = /^[가-힣a-zA-Z]{2,}$/;
-    setSignupInput({ ...signupInput, userName: value });
+    setSignupInfo({ ...signupInfo, userName: value });
     setIsValidName(regex.test(value));
   };
   return (
     <Wrapper>
-      <Header rightText="1/3" />
       <Body>
         <div className="title">
           <p>회원님의</p>
@@ -30,7 +24,7 @@ const Onboard: NextPage<Props> = ({}) => {
         <NameSection>
           <SubTitle>이름</SubTitle>
           <Input
-            value={signupInput.userName}
+            value={signupInfo.userName}
             onChange={(e) => handleInput(e.target.value)}
             type="text"
             placeholder="이름을 입력해주세요."
@@ -40,20 +34,20 @@ const Onboard: NextPage<Props> = ({}) => {
           </ValidateText>
         </NameSection>
       </Body>
-      {isValidName ? (
-        <BottomBtn text="다음" state="activated" nextUrl="/onboard/job" />
-      ) : (
-        <BottomBtn text="다음" state="disabled" />
-      )}
+      <BottomBtn
+        text="다음"
+        state={isValidName ? 'activated' : 'disabled'}
+        onClick={toNextStep}
+      />
     </Wrapper>
   );
 };
 
-export default Onboard;
+export default NameSetup;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -91,7 +85,7 @@ const Wrapper = styled.div`
     line-height: 140%; /* 19.6px */
   }
 
-  :nth-child(3) {
+  :nth-child(2) {
     margin-bottom: 36px;
   }
 `;
@@ -99,7 +93,7 @@ const Wrapper = styled.div`
 const Body = styled.div`
   position: relative;
   padding: 0px 20px;
-  height: 100vh;
+  flex: 1;
 `;
 
 const NameSection = styled.div`

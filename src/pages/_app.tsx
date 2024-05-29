@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import '@styles/animation.css';
 import { theme } from '@/styles/theme';
 import { ThemeProvider } from 'styled-components';
+import Head from 'next/head';
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <MainLayout>
