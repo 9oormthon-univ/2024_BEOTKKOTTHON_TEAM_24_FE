@@ -22,11 +22,11 @@ export default function useInsightInput(query: ParsedUrlQuery) {
   const {
     source: insightSource,
     memo: insightMemo,
-    imageList,
+    imgURLs,
     link: insightUrl,
   }: InsightInputQuery = query as InsightInputQuery;
 
-  const image = useCheckMainImage(imageList, insightUrl);
+  const image = useCheckMainImage(imgURLs, insightUrl);
 
   const [insightInput, setInsightInput] = useState<InsightPostRequest>({
     insightUrl: insightUrl,
@@ -37,7 +37,7 @@ export default function useInsightInput(query: ParsedUrlQuery) {
     viewCount: 0,
     insightTagList: [''],
     insightMemo: insightMemo,
-    insightImageList: toArray(imageList),
+    insightImageList: toArray(imgURLs),
     folderName: '폴더',
     enable: false,
     remindType: 'DEFAULT',
