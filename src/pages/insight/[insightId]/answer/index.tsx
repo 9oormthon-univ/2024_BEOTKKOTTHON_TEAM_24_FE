@@ -5,14 +5,13 @@ import SummaryInsightCard from '@/components/common/SummaryInsightCard';
 import Pencil from '@svg/pencil-icon.svg';
 import BottomBtn from '@/components/common/BottomBtn';
 import { useState } from 'react';
-import { useRemind } from '@/store/remind';
 import { useRouter } from 'next/router';
 import { useGetInsight } from '@/hooks/api/useInsight';
 import { usePostReminderAnswer } from '@/hooks/api/useReminder';
 
 const ReminderAnswer: NextPage = () => {
   const [wordCount, setWordCount] = useState<number>(0);
-  const { answer, setAnswer } = useRemind();
+  const [answer, setAnswer] = useState<string>('');
   const router = useRouter();
   const { insightId, reminderQuestionId, reminderQuestion } = router.query;
   const { data, isSuccess } = useGetInsight(Number(insightId));
@@ -21,7 +20,7 @@ const ReminderAnswer: NextPage = () => {
   return (
     <Wrapper>
       <Header title="리마인드" />
-      <div className="question">{reminderQuestion}</div>
+      <div className="question">Q. {reminderQuestion}</div>
       {isSuccess && (
         <SummaryInsightCard
           favicon="/svg/insight-favicon.svg"
@@ -66,6 +65,7 @@ const ReminderAnswer: NextPage = () => {
 export default ReminderAnswer;
 
 const Wrapper = styled.div`
+  width: 100%;
   height: 100vh;
   background-color: #ffffff;
   display: flex;
@@ -74,7 +74,9 @@ const Wrapper = styled.div`
 
   .question {
     margin: 20px 20px 0;
-    color: #1f1f1f;
+    color: ${({ theme }) => theme.palette.neutral[500]};
+    word-break: keep-all;
+    ${({ theme }) => theme.typo.Body_16_SB}
   }
 
   .answer-box {
@@ -89,13 +91,13 @@ const Wrapper = styled.div`
 
     textarea {
       padding: 12px 0;
-      font-size: 14px;
-      font-weight: 500;
       border: 0;
-      color: #1f1f1f;
       outline: none;
       flex: 1;
       resize: none;
+      color: ${({ theme }) => theme.palette.neutral[500]};
+      ${({ theme }) => theme.typo.Body_14_M};
+      line-height: 19.6px;
     }
 
     p {

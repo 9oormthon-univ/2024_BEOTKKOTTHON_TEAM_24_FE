@@ -33,16 +33,18 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
   }
 
-  .scroll::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     display: none;
   }
-
 
   html,
   body {
     font-family: 'Pretendard', sans-serif;
     max-width: 100vw;
     overflow-x: hidden;
+    overflow: -moz-scrollbars-none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   body {

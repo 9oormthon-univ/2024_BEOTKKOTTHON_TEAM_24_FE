@@ -32,7 +32,7 @@ export type InsightDetail = {
     reminderAnswer: string | null;
     questionId: number;
     answeredAt: string | null;
-  };
+  }[];
 };
 
 // GET /insight/share/{folderId}
