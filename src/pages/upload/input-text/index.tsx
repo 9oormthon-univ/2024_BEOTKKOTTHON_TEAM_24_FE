@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import SelectRemindModal from '@/components/upload/SelectRemindModal';
 import SelectFolderModal from '@/components/upload/SelectFolderModal';
@@ -26,18 +26,20 @@ const Upload: NextPage = ({}) => {
     String(insightLink.link),
     insightLink.folderList,
   );
-  const { insightInput, setInsightInput, updateInsightInput } = useInsightInput(router.query)
+  const { insightInput, setInsightInput, updateInsightInput } = useInsightInput(
+    router.query,
+  );
   const { mutate } = usePostInsight();
 
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
-  useEffect(() => {
-    updateInsightLink(router.query)
+  useLayoutEffect(() => {
+    updateInsightLink(router.query);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (result.title) {
       updateInsightInput(result);
     }
