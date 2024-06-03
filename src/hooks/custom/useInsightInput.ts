@@ -15,21 +15,18 @@ interface InsightInputQuery extends ParsedUrlQuery {
   source: string;
   memo: string;
   imageList: string | string[];
-  insightImageList: string | string[];
   link: string;
-  Dict: string;
 }
 
 export default function useInsightInput(query: ParsedUrlQuery) {
   const {
     source: insightSource,
     memo: insightMemo,
-    imageList,
-    insightImageList,
+    imgURLs,
     link: insightUrl,
   }: InsightInputQuery = query as InsightInputQuery;
 
-  const image = useCheckMainImage(imageList, insightUrl);
+  const image = useCheckMainImage(imgURLs, insightUrl);
 
   const [insightInput, setInsightInput] = useState<InsightPostRequest>({
     insightUrl: insightUrl,
@@ -40,7 +37,7 @@ export default function useInsightInput(query: ParsedUrlQuery) {
     viewCount: 0,
     insightTagList: [''],
     insightMemo: insightMemo,
-    insightImageList: toArray(insightImageList),
+    insightImageList: toArray(imgURLs),
     folderName: '폴더',
     enable: false,
     remindType: 'DEFAULT',
@@ -52,7 +49,6 @@ export default function useInsightInput(query: ParsedUrlQuery) {
       ...insightInput,
       insightTitle: String(result.title),
       insightSummary: String(result.summary),
-      insightMainImage: image ? image : defaultImage.src,
       insightTagList: result.keywords ? result.keywords.split(', ') : [],
       folderName: String(result.folderName),
     });

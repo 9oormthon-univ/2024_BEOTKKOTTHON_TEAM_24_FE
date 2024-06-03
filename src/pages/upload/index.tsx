@@ -19,7 +19,7 @@ const LinkInput: NextPage = ({}) => {
   const [errorText, setErrorText] = useState('');
   const [source, setSource] = useState('');
   const { data } = useGetFolder();
-  const { mutate } = usePostInsightImage();
+  const { mutateAsync } = usePostInsightImage();
   const [imageFiles, setImageFiles] = useState<File[]>([]);
 
   useEffect(() => {
@@ -33,32 +33,31 @@ const LinkInput: NextPage = ({}) => {
   }, []);
 
   const handleClickNext = async () => {
-    // 입력 링크 유효성 검사
     if (!link) {
       alert('링크를 입력해주세요.');
       return;
     }
-    if (imageFiles) {
-      imageFiles.forEach((image) => {
-        const formData = new FormData();
-        formData.append('image', image);
-        mutate(formData);
-      });
+    let imgURLs = [];
+    if (imageFiles.length > 0) {
+      imgURLs = await Promise.all(
+        imageFiles.map((value) => {
+          const formData = new FormData();
+          formData.append('image', value);
+          return mutateAsync(formData);
+        }),
+      );
     }
-    // 인사이트 제목, 요약, 키워드 요청
     router.push(
       {
         pathname: '/upload/input-text',
-        query:
-          {
-            link: link,
-            imageList: imageList,
-            insightImageList: imageList,
-            memo: memo,
-            folderNameList: data?.map((folder) => folder.folderName),
-            source: source,
-          },
+        query: {
+          link,
+          imgURLs,
+          memo,
+          source,
+          folderNameList: data?.map((folder) => folder.folderName),
         },
+      },
       '/upload/input-text',
     );
   };

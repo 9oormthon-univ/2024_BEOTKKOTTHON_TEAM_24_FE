@@ -7,9 +7,9 @@ interface Props {
   errorText?: string;
   linkIcon?: boolean;
   biggerTypo?: 'title' | 'input';
-  title: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  title?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }
 
@@ -19,9 +19,11 @@ const InputWithTitle = (props: Props) => {
   return (
     <Wrapper top={props.top} bottom={props.bottom}>
       <div className="header">
-        <Title className={typo === 'title' ? 'Body-16-SB' : 'Body-14-M'}>
-          {props.title}
-        </Title>
+        {props.title && (
+          <Title className={typo === 'title' ? 'Body-16-SB' : 'Body-14-M'}>
+            {props.title}
+          </Title>
+        )}
         <ErrorText>{props.errorText}</ErrorText>
       </div>
       <div className="input">

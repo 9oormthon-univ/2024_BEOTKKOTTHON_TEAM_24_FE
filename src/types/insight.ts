@@ -10,19 +10,29 @@ export type Insight = {
 };
 
 export type InsightDetail = {
+  insightId: number;
+  insightTitle: string;
   insightUrl: string;
+  insightSummary: string;
+  insightMainImage: string;
   insightMemo: string;
   insightSource: string;
-  insightTitle: string;
-  insightSummary: string;
-  insightFolderName: string;
-  insightReminder: {
-    reminderType: string;
-    reminderDay: number[];
-  };
+  viewCount: number;
   insightTagList: string[];
-  insightMainImage: string;
   insightImageList: string[];
+  remindType: RemindType;
+  remindDays: number[];
+  folderName: string;
+  folderId: number;
+  reminderQuestionList: {
+    createdAt: string;
+    updatedAt: string;
+    reminderQuestionId: number;
+    reminderQuestion: string;
+    reminderAnswer: string | null;
+    questionId: number;
+    answeredAt: string | null;
+  }[];
 };
 
 // GET /insight/share/{folderId}

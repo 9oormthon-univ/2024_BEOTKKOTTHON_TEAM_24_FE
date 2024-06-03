@@ -3,10 +3,11 @@ import { Insight } from './insight';
 // GET /reminder/question
 export type QuestionGetResponse = {
   todayClear: boolean;
-  ReminderQuestionList: {
+  reminderQuestionList: {
     reminderQuestion: string;
     insightId: number;
     reminderId: number;
+    reminderQuestionId: number;
     insightTitle: string;
     insightMainImage: string;
     insightTagList: string[];
@@ -15,7 +16,7 @@ export type QuestionGetResponse = {
 
 // POST /reminder/answer
 export type AnswerPostRequest = {
-  reminderId: number;
+  reminderQuestionId: number;
   reminderQuestion: string;
   reminderAnswer: string;
 };

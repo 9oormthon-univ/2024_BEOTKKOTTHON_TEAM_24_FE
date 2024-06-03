@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface Props {
   totalLength: number;
@@ -7,6 +8,7 @@ interface Props {
     reminderQuestion: string;
     insightId: number;
     reminderId: number;
+    reminderQuestionId: number;
     insightTitle: string;
     insightMainImage: string;
     insightTagList: string[];
@@ -16,9 +18,24 @@ interface Props {
 
 const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
   const margin = totalLength === 1 ? 50 : 0;
+  const router = useRouter();
 
   return (
-    <Wrapper margin={margin}>
+    <Wrapper
+      margin={margin}
+      onClick={() =>
+        router.push(
+          {
+            pathname: `/insight/${reminderInfo.insightId}/answer`,
+            query: {
+              reminderQuestionId: reminderInfo.reminderQuestionId,
+              reminderQuestion: reminderInfo.reminderQuestion,
+            },
+          },
+          `/insight/${reminderInfo.insightId}/answer`,
+        )
+      }
+    >
       <div className="reminder-title">
         <strong>Q. {reminderInfo.reminderQuestion}</strong>
       </div>
@@ -26,19 +43,22 @@ const ReminderQuestionBox = ({ totalLength, reminderInfo }: Props) => {
       <Insight>
         <Image
           src={reminderInfo.insightMainImage}
-          width={96}
-          height={68}
           alt="Insight Card image"
-          className="img"
+          style={{ objectFit: 'cover' }}
+          height={68}
+          width={96}
+          className="reminder-img"
         />
-        <div className="card-title-tag">
-          <div className="card-title">{reminderInfo.insightTitle}</div>
-          {reminderInfo.insightTagList.map((value, i) => (
-            <div className="card-tag" key={i}>
-              {value}
-            </div>
-          ))}
-        </div>
+        <TitleTagBox>
+          <div className="title">{reminderInfo.insightTitle}</div>
+          <div className="tag-box">
+            {reminderInfo.insightTagList.map((value, i) => (
+              <div className="tag" key={i}>
+                {value}
+              </div>
+            ))}
+          </div>
+        </TitleTagBox>
       </Insight>
     </Wrapper>
   );
@@ -50,7 +70,7 @@ interface CSSProps {
 
 const Wrapper = styled.div<CSSProps>`
   width: calc(100% - 40px);
-  height: 197px;
+  display: inline-block;
   border-radius: 12px;
   margin: 0 20px ${(props) => props.margin}px;
   padding: 16px;
@@ -65,6 +85,11 @@ const Wrapper = styled.div<CSSProps>`
     font-weight: 600;
     display: flex;
     justify-content: left;
+
+    strong {
+      word-break: keep-all;
+      line-height: 140%;
+    }
   }
 
   .reminder-input {
@@ -83,42 +108,41 @@ const Wrapper = styled.div<CSSProps>`
 
 const Insight = styled.div`
   width: 100%;
-  height: 90px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   border-radius: 12px;
   background-color: #ffffff;
+  flex: 1;
+  padding: 8px 12px;
 
-  .img {
+  .reminder-img {
     border-radius: 12px;
-    margin: 8px 20px 8px 12px;
+    margin-right: 20px;
   }
+`;
 
-  .card-title-tag {
-    margin: 0 20px 0 0;
-  }
+const TitleTagBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 68px;
 
-  .title-tag {
-    margin: 0;
-    justify-content: space-between;
-  }
-
-  .card-title {
-    margin: 0 10px 12px 0;
+  .title {
     font-size: 12px;
     font-weight: 700;
     word-break: keep-all;
     line-height: 18px;
   }
 
-  .card-tag {
+  .tag {
     font-size: 10px;
     font-weight: 600;
     display: inline-block;
     padding: 4px 10px;
-    margin: 0 6px 0 0;
+    margin: 0 6px 6px 0;
     border-radius: 6px;
     background-color: #ffe4e9;
   }

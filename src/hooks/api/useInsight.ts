@@ -85,7 +85,7 @@ export function usePostInsight() {
 
 export function useGetInsight(insightId: number) {
   return useQuery({
-    queryKey: ['insight'],
+    queryKey: ['insight', insightId],
     queryFn: () => getInsight(insightId),
   });
 }
