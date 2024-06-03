@@ -10,7 +10,7 @@ export const theme = {
     },
     neutral: {
       500: '#1F1F1F',
-      400: '#989898',
+      400: '#565656',
       300: '#848484',
       200: '#989898',
       150: '#E1E1E1',
@@ -32,56 +32,79 @@ export const theme = {
   },
   typo: {
     Head_24_B: `
+        font-family: Pretendard;
         font-size: 24px;
         font-weight: 700;
         line-height: 140%;
     `,
     Head_20_B: `
+        font-family: Pretendard;
         font-size: 20px;
         font-weight: 700;
         line-height: 140%;
     `,
     Head_20_M: `
+        font-family: Pretendard;
         font-size: 20px;
         font-weight: 500;
         line-height: 140%;
     `,
     Body_18_B: `
+        font-family: Pretendard;
         font-size: 18px;
         font-weight: 700;
         line-height: 140%;
     `,
     Body_18_R: `
+        font-family: Pretendard;
         font-size: 18px;
         font-weight: 400;
         line-height: 140%;
     `,
     Body_16_SB: `
+        font-family: Pretendard;
         font-size: 16px;
         font-weight: 600;
         line-height: 140%;
     `,
+    Body_16_M: `
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 140%;
+    `,
     Body_14_B: `
+        font-family: Pretendard;
         font-size: 14px;
         font-weight: 700;
         line-height: 140%;
     `,
+    Body_14_SB: `
+        font-family: Pretendard;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 140%;
+    `,
     Body_14_M: `
+        font-family: Pretendard;
         font-size: 14px;
         font-weight: 500;
         line-height: 140%;
     `,
     Caption_12_B: `
+        font-family: Pretendard;
         font-size: 12px;
         font-weight: 700;
         line-height: 140%;
     `,
     Caption_12_M: `
+        font-family: Pretendard;
         font-size: 12px;
         font-weight: 500;
         line-height: 140%;
     `,
     Caption_10_SB: `
+        font-family: Pretendard;
         font-size: 10px;
         font-weight: 600;
         line-height: 140%;
