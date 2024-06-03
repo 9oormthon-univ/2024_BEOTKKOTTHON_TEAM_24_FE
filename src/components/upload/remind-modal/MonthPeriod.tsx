@@ -44,12 +44,8 @@ export default MonthPeriod;
 const Wrapper = styled.div`
   p {
     margin-bottom: 16px;
-    color: var(--Neutral-500, #1f1f1f);
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%;
+    color: ${(props) => props.theme.palette.neutral[500]};
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 `;
 
@@ -61,7 +57,7 @@ const MonthDayBg = styled.div`
   align-items: flex-start;
   gap: 12px;
   border-radius: 8px;
-  background: #f4f5f7;
+  background: ${(props) => props.theme.palette.neutral[100]};
   tr {
     display: flex;
     display: flex;
@@ -78,19 +74,15 @@ const MonthDayBg = styled.div`
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
-    color: #1f1f1f;
+    color: ${(props) => props.theme.palette.neutral[500]};
     text-align: center;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 140%;
+    ${({ theme }) => theme.typo.Body_18_R};
   }
   .selected {
     border-radius: 30px;
-    background: #e9efff;
-    color: #3184ff;
+    background: ${(props) => props.theme.palette.primary[100]};
+    color: ${(props) => props.theme.palette.primary[500]};
     text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 140%;
+    ${({ theme }) => theme.typo.Head_20_B};
   }
 `;

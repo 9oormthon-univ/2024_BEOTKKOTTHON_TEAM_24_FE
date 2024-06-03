@@ -94,8 +94,7 @@ const Wrapper = styled.div`
 
 const TitleBox = styled.div`
   width: 100%;
-  font-size: 14px;
-  font-weight: 500;
+  ${({ theme }) => theme.typo.Body_14_M};
   margin-bottom: 8px;
   display: flex;
   flex-direction: row;
@@ -105,7 +104,7 @@ const TitleBox = styled.div`
   }
 
   .counter {
-    color: #3184ff;
+    color: ${(props) => props.theme.palette.primary[500]};
   }
 `;
 
@@ -127,11 +126,8 @@ const TagWrapper = styled.div`
   align-items: center;
   gap: 6px;
   border-radius: 8px;
-  background: #f4f5f7;
-  color: #1f1f1f;
+  background: ${(props) => props.theme.palette.neutral[100]};
+  color: ${(props) => props.theme.palette.neutral[500]};
   text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%;
+  ${({ theme }) => theme.typo.Body_14_M};
 `;

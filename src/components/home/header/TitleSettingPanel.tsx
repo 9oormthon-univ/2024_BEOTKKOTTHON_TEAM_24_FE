@@ -42,16 +42,14 @@ const InfoBox = styled.div`
   flex-direction: column;
 
   .title {
-    font-size: 20px;
-    font-weight: 700;
+    ${({ theme }) => theme.typo.Head_20_B};
     padding: 4px 0;
     margin: 0 0 2px;
   }
   .description {
-    font-size: 14px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Body_14_M};
     padding: 2px 0;
-    color: #565656;
+    color: ${(props) => props.theme.palette.neutral[400]};
   }
 `;
 

@@ -115,7 +115,7 @@ const PageIndicator = styled.div`
     width: 16px;
     height: 6px;
     border-radius: 20px;
-    background: var(--Primary-500, #3184ff);
+    background: ${(props) => props.theme.palette.primary[500]};
   }
 `;
 
@@ -124,5 +124,5 @@ const PageBtn = styled.button`
   height: 6px;
   border-radius: 20px;
   border: none;
-  fill: var(--Neutral-200, #989898);
+  background: ${(props) => props.theme.palette.neutral[200]};
 `;

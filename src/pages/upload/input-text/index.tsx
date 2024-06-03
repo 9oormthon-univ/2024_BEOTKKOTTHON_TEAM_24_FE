@@ -194,9 +194,7 @@ const PageContainer = styled.div`
 const PageIntro = styled.p`
   width: 100%;
   text-align: left;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 25px;
+  ${({ theme }) => theme.typo.Body_18_B};
   word-break: keep-all;
   margin-top: 8px;
 `;

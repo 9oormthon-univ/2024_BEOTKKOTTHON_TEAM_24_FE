@@ -54,35 +54,20 @@ const Wrapper = styled.div`
 
   .title,
   p {
-    color: var(--Neutral-500, #1f1f1f);
-    /* Head-24-B */
-    font-family: Pretendard;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%; /* 33.6px */
+    color: ${(props) => props.theme.palette.neutral[500]}
+      ${({ theme }) => theme.typo.Head_24_B};
     margin-top: 20px;
   }
   span {
     position: absolute;
     right: 20px;
     top: 12px;
-    color: var(--Primary-500, #3184ff);
-    /* Head-20-M */
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%; /* 28px */
+    color: ${(props) => props.theme.palette.primary[500]}
+      ${({ theme }) => theme.typo.Head_20_M};
   }
   .subtitle {
-    color: var(--Neutral-300, #848484);
-    /* Body-14-M */
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%; /* 19.6px */
+    color: ${(props) => props.theme.palette.neutral[300]}
+      ${({ theme }) => theme.typo.Body_14_M};
   }
 
   :nth-child(2) {
@@ -102,19 +87,14 @@ const NameSection = styled.div`
   position: relative;
   gap: 10px;
   .error {
-    color: var(--System-Warning, #f1404b);
+    color: ${(props) => props.theme.palette.system.warning};
   }
   flex: 1;
 `;
 
 const SubTitle = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
-  /* Head-24-B */
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 33.6px */
+  color: ${(props) => props.theme.palette.neutral[500]}
+    ${({ theme }) => theme.typo.Head_20_M};
   margin-top: 48px;
 `;
 
@@ -125,23 +105,13 @@ const Input = styled.input`
   align-items: flex-start;
   align-self: stretch;
   border-radius: 8.235px;
-  border: 0.8px solid var(--Neutral-300, #848484);
+  border: 0.8px solid ${(props) => props.theme.palette.neutral[300]}
   outline: none;
-  color: var(--Neutral-500, #1f1f1f);
-  /* Body-18-R */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%; /* 25.2px */
+  color: ${(props) => props.theme.palette.neutral[500]}
+  ${({ theme }) => theme.typo.Body_18_R};
 `;
 
 const ValidateText = styled.div`
-  color: var(--Neutral-200, #989898);
-  /* Body-14-M */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
+  color: ${(props) => props.theme.palette.neutral[200]}
+    ${({ theme }) => theme.typo.Body_14_M};
 `;

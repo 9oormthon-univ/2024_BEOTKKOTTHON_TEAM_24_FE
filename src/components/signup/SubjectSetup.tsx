@@ -125,13 +125,8 @@ const Wrapper = styled.div`
   .title,
   p {
     width: 100%;
-    color: var(--Neutral-500, #1f1f1f);
-    /* Head-24-B */
-    font-family: Pretendard;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%; /* 33.6px */
+    color: ${(props) => props.theme.palette.neutral[500]}
+      ${({ theme }) => theme.typo.Head_24_B};
     margin-top: 20px;
   }
 
@@ -143,23 +138,13 @@ const Wrapper = styled.div`
     position: absolute;
     right: 20px;
     top: 12px;
-    color: var(--Primary-500, #3184ff);
-    /* Head-20-M */
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%; /* 28px */
+    color: ${(props) => props.theme.palette.primary[500]}
+      ${({ theme }) => theme.typo.Head_20_M};
   }
   .subtitle {
     margin-top: 8px;
-    color: var(--Neutral-300, #848484);
-    /* Body-14-M */
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%; /* 19.6px */
+    color: ${(props) => props.theme.palette.neutral[300]}
+      ${({ theme }) => theme.typo.Body_14_M};
   }
 `;
 
@@ -177,7 +162,7 @@ const TopicSection = styled.div`
   margin-top: 56px;
   gap: 19px;
   .error {
-    color: var(--System-Warning, #f1404b);
+    color: ${(props) => props.theme.palette.system.warning}
   }
   .selected {
     display: flex;
@@ -186,7 +171,7 @@ const TopicSection = styled.div`
     align-items: center;
     gap: 9.412px;
     border-radius: 8.985px;
-    background: var(--Primary-500, #3184ff);
+    background: ${(props) => props.theme.palette.primary[500]}
     color: #fff;
   }
 `;
@@ -198,13 +183,8 @@ const Topic = styled.div`
   align-items: center;
   gap: 9.412px;
   border-radius: 8.985px;
-  background: var(--Neutral-100, #f4f5f7);
-  color: var(--Neutral-400, #565656);
+  background: ${(props) => props.theme.palette.neutral[100]}
+  color: ${(props) => props.theme.palette.neutral[400]}
   text-align: center;
-  /* Body-16-SB */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
+  ${({ theme }) => theme.typo.Body_16_SB};
 `;

@@ -85,8 +85,8 @@ const Wrapper = styled.div`
   height: 52px;
 
   .right-text {
-    ${({ theme }) => theme.typo.Head_20_M}
-    color: #3184ff;
+    ${({ theme }) => theme.typo.Head_20_M};
+    color: ${(props) => props.theme.palette.primary[500]};
     text-align: right;
   }
 `;

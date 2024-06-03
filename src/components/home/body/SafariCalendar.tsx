@@ -58,11 +58,10 @@ const Calendar = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
 const Wrapper = styled.div`
   margin-bottom: 14px;
   padding: 28px 20px 0;
-  border-bottom: 3px solid #f4f5f7;
+  border-bottom: 3px solid ${(props) => props.theme.palette.neutral[100]};
 
   .year-month {
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 
   .arrows {
@@ -78,8 +77,7 @@ const Board = styled.div`
 `;
 
 const Head = styled.div`
-  font-size: 14px;
-  font-weight: 700;
+  ${({ theme }) => theme.typo.Body_14_B};
   display: flex;
   justify-content: space-between;
   margin: 0 14px 16px;

@@ -107,7 +107,7 @@ const Item = styled.div<{ isSelected: boolean }>`
         ? css`
             background-color: ${(props) => props.theme.palette.primary[500]};
             color: #ffffff;
-            ${({ theme }) => theme.typo.Body_14_M};
+            ${({ theme }) => theme.typo.Body_16_SB};
             width: 28px;
             height: 28px;
             border-radius: 30px;
@@ -118,7 +118,7 @@ const Item = styled.div<{ isSelected: boolean }>`
           `
         : css`
             color: ${(props) => props.theme.palette.neutral[500]};
-            ${({ theme }) => theme.typo.Body_14_M};
+            ${({ theme }) => theme.typo.Body_16_M};
           `}
   }
 `;

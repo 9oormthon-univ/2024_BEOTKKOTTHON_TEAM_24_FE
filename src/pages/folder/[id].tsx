@@ -152,15 +152,9 @@ const Wrapper = styled.div`
     display: none;
   }
   .link {
-    color: #3184ff;
-
+    color: ${({ theme }) => theme.palette.primary[500]};
     text-align: center;
-    font-family: Pretendard;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20.55px; /* 120.885% */
-    letter-spacing: 0.511px;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
   .edit {
     position: absolute;
@@ -197,18 +191,11 @@ const InfoSection = styled.div`
     justify-content: center;
   }
   .count-text {
-    color: var(--Neutral-500, #1f1f1f);
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-
-    /* Body-14-M */
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-  }
+ç  }
   .insight {
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 `;
 
@@ -218,13 +205,19 @@ type IconProps = {
 
 const SmallViewIcon = styled(SmallView)<IconProps>`
   rect {
-    fill: ${(props) => (props.isSmall ? '#1F1F1F' : '#E1E1E1')};
+    fill: ${(props) =>
+      props.isSmall
+        ? props.theme.palette.neutral[500]
+        : props.theme.palette.neutral[150]};
   }
 `;
 
 const LargeViewIcon = styled(LargeView)<IconProps>`
   rect {
-    fill: ${(props) => (props.isSmall ? '#E1E1E1' : '#1F1F1F')};
+    fill: ${(props) =>
+      props.isSmall
+        ? props.theme.palette.neutral[150]
+        : props.theme.palette.neutral[500]};
   }
 `;
 

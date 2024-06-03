@@ -32,8 +32,7 @@ const Wrapper = styled.div`
 
   p {
     margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Body_14_M};
   }
 `;
 
@@ -45,7 +44,7 @@ const FolderIndicator = styled.div`
   align-items: flex-end;
   border: none;
   border-radius: 8px;
-  background: #f4f5f7;
+  background: ${(props) => props.theme.palette.neutral[100]};
 `;
 
 const ChangeFolderBtn = styled.div`
@@ -53,11 +52,7 @@ const ChangeFolderBtn = styled.div`
   align-items: center;
   color: #7f7f7f;
   text-align: center;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: -0.32px;
+  ${({ theme }) => theme.typo.Body_16_M};
   cursor: pointer;
 
   span {

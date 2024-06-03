@@ -41,18 +41,16 @@ const Wrapper = styled.div<WrapperProps>`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  background: #f4f5f7;
+  background: ${(props) => props.theme.palette.neutral[100]};
 `;
 
 const SearchInput = styled.input`
   width: 100%;
   border: none;
   outline: none;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 21px;
-  letter-spacing: -0.32px;
-  background: #f4f5f7;
+  ${({ theme }) => theme.typo.Body_16_SB};
+
+  background: ${(props) => props.theme.palette.neutral[100]};
 `;
 
 export default SearchSection;

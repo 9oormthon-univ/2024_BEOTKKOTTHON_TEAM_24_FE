@@ -37,16 +37,14 @@ const Wrapper = styled.div`
   height: 52px;
 
   .title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1f1f1f;
+    ${({ theme }) => theme.typo.Head_20_B};
+    color: ${(props) => props.theme.palette.neutral[500]};
     text-align: center;
   }
 
   .right-text {
-    font-size: 20px;
-    font-weight: 500;
-    color: #3184ff;
+    ${({ theme }) => theme.typo.Head_20_M};
+    color: ${(props) => props.theme.palette.primary[500]};
     text-align: right;
     margin-bottom: 0 !important;
   }

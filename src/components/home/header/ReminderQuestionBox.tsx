@@ -74,15 +74,14 @@ const Wrapper = styled.div<CSSProps>`
   border-radius: 12px;
   margin: 0 20px ${(props) => props.margin}px;
   padding: 16px;
-  background-color: #e9efff;
+  background: ${(props) => props.theme.palette.primary[100]};
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .reminder-title {
     width: 100%;
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
     display: flex;
     justify-content: left;
 
@@ -94,12 +93,11 @@ const Wrapper = styled.div<CSSProps>`
 
   .reminder-input {
     width: 100%;
-    font-size: 12px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Caption_12_M};
     padding: 10px;
     margin: 12px 0;
     border: 0;
-    color: #848484;
+    color: ${(props) => props.theme.palette.neutral[300]};
     border-radius: 8px;
     background-color: #ffffff;
     text-align: left;
@@ -131,15 +129,13 @@ const TitleTagBox = styled.div`
   min-height: 68px;
 
   .title {
-    font-size: 12px;
-    font-weight: 700;
+    margin: 0 10px 12px 0;
+    ${({ theme }) => theme.typo.Caption_12_B};
     word-break: keep-all;
-    line-height: 18px;
   }
 
   .tag {
-    font-size: 10px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Caption_10_SB};
     display: inline-block;
     padding: 4px 10px;
     margin: 0 6px 6px 0;

@@ -36,9 +36,10 @@ export default RenderTagList;
 const Wrapper = styled.div`
   .selected {
     border-radius: 5.268px;
-    border: 1px solid var(--Neutral-150, #3184ff);
-    background: var(--Primary-500, #3184ff);
+    border: 1px solid ${(props) => props.theme.palette.primary[500]};
+    background: ${(props) => props.theme.palette.primary[500]};
     color: #fff;
+    ${({ theme }) => theme.typo.Body_14_SB};
   }
 `;
 
@@ -50,16 +51,11 @@ const Tag = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
-  color: var(--Neutral-300, #848484);
+  color: ${(props) => props.theme.palette.neutral[300]};
 
   text-align: center;
-  /* Body-14-B */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
+  ${({ theme }) => theme.typo.Body_14_M};
   border-radius: 5.268px;
-  border: 1px solid var(--Neutral-150, #e1e1e1);
+  border: 1px solid ${(props) => props.theme.palette.neutral[150]};
   background: #fff;
 `;

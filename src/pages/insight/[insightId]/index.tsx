@@ -133,7 +133,7 @@ const Title = styled.h1`
 const Summary = styled.p`
   color: #353535;
   margin: 14px 0 8px;
-  ${({ theme }) => theme.typo.Body_14_M}
+  ${({ theme }) => theme.typo.Body_14_M};
 `;
 
 const Tag = styled.div`
@@ -142,8 +142,7 @@ const Tag = styled.div`
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
-
-  ${({ theme }) => theme.typo.Body_14_M}
+  ${({ theme }) => theme.typo.Body_14_M};
 
   .tag {
     border-radius: 8px;
@@ -158,7 +157,7 @@ const Tag = styled.div`
 
 const SubTitle = styled.div`
   color: ${({ theme }) => theme.palette.neutral[500]};
-  ${({ theme }) => theme.typo.Body_14_B}
+  ${({ theme }) => theme.typo.Body_14_B};
   width: 100%;
   text-align: left;
   display: flex;
@@ -183,5 +182,5 @@ const HrLine = styled.hr`
   width: calc(100% + 40px);
   min-height: 14px;
   border: 0;
-  background-color: #f1f3f7;
+  background-color: ${({ theme }) => theme.palette.neutral[100]};
 `;

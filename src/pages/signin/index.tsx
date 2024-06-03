@@ -109,13 +109,8 @@ const InputContainer = styled.div`
 `;
 
 const PageIntro = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
-  /* Head-24-B */
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 33.6px */
+  color: ${(props) => props.theme.palette.neutral[500]};
+  ${({ theme }) => theme.typo.Head_24_B};
   margin-top: 20px;
   width: 100%;
 `;
@@ -128,8 +123,7 @@ const EmailSection = styled.div`
 `;
 
 const SubTitle = styled(PageIntro)`
-  font-size: 20px;
-  font-weight: 500;
+  ${({ theme }) => theme.typo.Head_20_M};
   margin-top: 48px;
 `;
 
@@ -140,15 +134,10 @@ const Input = styled.input`
   align-items: flex-start;
   align-self: stretch;
   border-radius: 8.235px;
-  border: 0.8px solid var(--Neutral-300, #848484);
+  border: 0.8px solid ${(props) => props.theme.palette.neutral[300]};
   outline: none;
-  color: var(--Neutral-500, #1f1f1f);
-  /* Body-18-R */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%; /* 25.2px */
+  color: ${(props) => props.theme.palette.neutral[500]};
+  ${({ theme }) => theme.typo.Body_18_R};
 `;
 
 const PWSection = styled(EmailSection)`
@@ -169,11 +158,6 @@ const PWSection = styled(EmailSection)`
 const ErrorText = styled.div`
   height: 36px;
   padding: 8px 0;
-  color: var(--System-Warning, #f1404b);
-  /* Body-14-M */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
+  color: ${(props) => props.theme.palette.system.warning};
+  ${({ theme }) => theme.typo.Body_14_M};
 `;

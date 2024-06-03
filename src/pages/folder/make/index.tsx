@@ -88,7 +88,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #fbfbfb;
+  background: ${({ theme }) => theme.palette.system.background};
   position: relative;
   justify-content: center;
   > :last-child {
@@ -107,49 +107,36 @@ const TitleSection = styled.div`
   flex-direction: column;
   gap: 10px;
   .error {
-    color: var(--System-Warning, #f1404b);
+    color: ${({ theme }) => theme.palette.system.warning};
   }
   input::placeholder {
-    color: var(--Neutral-200, #989898);
+    color: ${({ theme }) => theme.palette.neutral[200]};
   }
 `;
 
 const SubTitle = styled.div`
   margin-bottom: 8px;
-  color: var(--Neutral-500, #1f1f1f);
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
+  color: ${({ theme }) => theme.palette.neutral[500]};
+  ${({ theme }) => theme.typo.Head_20_M};
 `;
 
 const Input = styled.input`
   width: 100%;
   margin: auto;
   height: 51px;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%; /* 25.2px */
+  ${({ theme }) => theme.typo.Body_18_R};
   border: none;
   outline: none;
   padding: 10px;
   border-radius: 8.235px;
-  background: #f4f5f7;
+  background: ${({ theme }) => theme.palette.neutral[100]};
   color: black;
 `;
 
 const ValidateText = styled.div`
   margin-top: 14px;
-  color: var(--Neutral-200, #989898);
-  /* Body-14-M */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%; /* 19.6px */
+  color: ${({ theme }) => theme.palette.neutral[200]};
+  ${({ theme }) => theme.typo.Body_14_M};
 `;
 
 const ColorSection = styled.div`
