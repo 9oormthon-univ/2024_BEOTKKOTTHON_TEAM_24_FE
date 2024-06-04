@@ -86,7 +86,7 @@ const Wrapper = styled.div<WrapperProps>`
     border: none;
     outline: none;
     padding: 14px 16px ${(props) => (props.counter ? '30px' : '14px')};
-    background: ${(props) => props.theme.palette.neutral[100]};
+    background: ${({ theme }) => theme.palette.neutral[100]};
     color: #161616;
     border-radius: 8px;
     resize: none;
@@ -117,5 +117,5 @@ const Counter = styled.p`
   bottom: 16px;
   text-align: right;
   ${({ theme }) => theme.typo.Caption_12_M};
-  color: ${(props) => props.theme.palette.neutral[200]};
+  color: ${({ theme }) => theme.palette.neutral[200]};
 `;

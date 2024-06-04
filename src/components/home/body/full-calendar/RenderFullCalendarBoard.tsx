@@ -105,7 +105,7 @@ const Item = styled.div<{ isSelected: boolean }>`
     ${({ isSelected }) =>
       isSelected
         ? css`
-            background-color: ${(props) => props.theme.palette.primary[500]};
+            background-color: ${({ theme }) => theme.palette.primary[500]};
             color: #ffffff;
             ${({ theme }) => theme.typo.Body_16_SB};
             width: 28px;
@@ -117,7 +117,7 @@ const Item = styled.div<{ isSelected: boolean }>`
             /* text-decoration: underline; */
           `
         : css`
-            color: ${(props) => props.theme.palette.neutral[500]};
+            color: ${({ theme }) => theme.palette.neutral[500]};
             ${({ theme }) => theme.typo.Body_16_M};
           `}
   }

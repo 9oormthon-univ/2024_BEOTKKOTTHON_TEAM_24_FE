@@ -56,23 +56,23 @@ const Button = styled.button`
   &.disabled {
     color: #ffffff;
     border: 0;
-    background-color: ${(props) => props.theme.palette.neutral[300]};
+    background-color: ${({ theme }) => theme.palette.neutral[300]};
   }
 
   &.activated {
     color: #ffffff;
     border: 0;
-    background-color: ${(props) => props.theme.palette.primary[500]};
+    background-color: ${({ theme }) => theme.palette.primary[500]};
   }
 
   &.borderline {
-    color: ${(props) => props.theme.palette.primary[500]};
-    border: ${(props) => props.theme.palette.primary[500]} solid 2px;
-    background-color: ${(props) => props.theme.palette.neutral[100]};
+    color: ${({ theme }) => theme.palette.primary[500]};
+    border: ${({ theme }) => theme.palette.primary[500]} solid 2px;
+    background-color: ${({ theme }) => theme.palette.neutral[100]};
   }
 
   &.transparent {
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     border: 0;
     background-color: #ffffff;
     ${({ theme }) => theme.typo.Body_16_SB};

@@ -190,7 +190,7 @@ const ModalHeader = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-bottom: 1px solid ${(props) => props.theme.palette.neutral[150]};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutral[150]};
   border-radius: 8px 8px 0px 0px;
   background: white;
 `;
@@ -212,7 +212,7 @@ const ModalTitle = styled.div`
   justify-content: center;
 
   p {
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
     ${({ theme }) => theme.typo.Body_18_B};
     margin-top: 18px;
@@ -223,7 +223,7 @@ const CompleteBtn = styled.div`
   position: absolute;
   top: 18px;
   right: 0px;
-  color: ${(props) => props.theme.palette.primary[500]};
+  color: ${({ theme }) => theme.palette.primary[500]};
   ${({ theme }) => theme.typo.Body_18_B};
   cursor: pointer;
 `;

@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   }
   .switch[data-ison='false'] {
     justify-content: flex-end;
-    background: ${(props) => props.theme.palette.primary[500]};
+    background: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
 

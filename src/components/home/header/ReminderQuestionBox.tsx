@@ -74,7 +74,7 @@ const Wrapper = styled.div<CSSProps>`
   border-radius: 12px;
   margin: 0 20px ${(props) => props.margin}px;
   padding: 16px;
-  background: ${(props) => props.theme.palette.primary[100]};
+  background: ${({ theme }) => theme.palette.primary[100]};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,7 +97,7 @@ const Wrapper = styled.div<CSSProps>`
     padding: 10px;
     margin: 12px 0;
     border: 0;
-    color: ${(props) => props.theme.palette.neutral[300]};
+    color: ${({ theme }) => theme.palette.neutral[300]};
     border-radius: 8px;
     background-color: #ffffff;
     text-align: left;

@@ -58,7 +58,7 @@ const Calendar = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
 const Wrapper = styled.div`
   margin-bottom: 14px;
   padding: 28px 20px 0;
-  border-bottom: 3px solid ${(props) => props.theme.palette.neutral[100]};
+  border-bottom: 3px solid ${({ theme }) => theme.palette.neutral[100]};
 
   .year-month {
     ${({ theme }) => theme.typo.Body_16_SB};

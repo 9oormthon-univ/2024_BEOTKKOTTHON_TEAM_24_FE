@@ -67,7 +67,7 @@ export default ReminderAnswer;
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: ${(props) => props.theme.palette.system.background};
+  background-color: ${({ theme }) => theme.palette.system.background};
   display: flex;
   flex-direction: column;
   padding-bottom: 36px;
@@ -103,7 +103,7 @@ const Wrapper = styled.div`
     p {
       text-align: right;
       ${({ theme }) => theme.typo.Caption_12_M};
-      color: ${(props) => props.theme.palette.neutral[200]};
+      color: ${({ theme }) => theme.palette.neutral[200]};
     }
   }
 `;

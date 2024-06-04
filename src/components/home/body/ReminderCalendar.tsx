@@ -132,9 +132,9 @@ const ViewSetting = styled.div`
     display: inline-block;
     border-radius: 8px;
     ${({ theme }) => theme.typo.Caption_12_M};
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     padding: 6px 10px;
-    background: ${(props) => props.theme.palette.primary[100]};
+    background: ${({ theme }) => theme.palette.primary[100]};
   }
 
   .icons-box {
@@ -153,12 +153,12 @@ const EmptyInsight = styled.div`
   flex: 1;
 
   :first-child {
-    color: ${(props) => props.theme.palette.neutral[400]};
+    color: ${({ theme }) => theme.palette.neutral[400]};
     margin-bottom: 10px;
   }
 
   :last-child {
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
 

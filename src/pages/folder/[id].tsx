@@ -207,8 +207,8 @@ const SmallViewIcon = styled(SmallView)<IconProps>`
   rect {
     fill: ${(props) =>
       props.isSmall
-        ? props.theme.palette.neutral[500]
-        : props.theme.palette.neutral[150]};
+        ? ({ theme }) => theme.palette.neutral[500]
+        : ({ theme }) => theme.palette.neutral[150]};
   }
 `;
 
@@ -216,8 +216,8 @@ const LargeViewIcon = styled(LargeView)<IconProps>`
   rect {
     fill: ${(props) =>
       props.isSmall
-        ? props.theme.palette.neutral[150]
-        : props.theme.palette.neutral[500]};
+        ? ({ theme }) => theme.palette.neutral[150]
+        : ({ theme }) => theme.palette.neutral[500]};
   }
 `;
 

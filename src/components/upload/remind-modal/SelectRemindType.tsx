@@ -49,7 +49,7 @@ export default SelectRemindType;
 const Wrapper = styled.div`
   p {
     margin-bottom: 16px;
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     ${({ theme }) => theme.typo.Body_16_SB};
   }
 `;
@@ -60,11 +60,11 @@ const PeriodList = styled.div`
   width: 100%;
   height: 48px;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
   cursor: pointer;
   .selected {
     border-radius: 8px;
-    background: ${(props) => props.theme.palette.primary[500]};
+    background: ${({ theme }) => theme.palette.primary[500]};
     color: white;
   }
 `;
@@ -79,6 +79,6 @@ const Period = styled.div`
   gap: 10px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
-  color: ${(props) => props.theme.palette.neutral[300]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
+  color: ${({ theme }) => theme.palette.neutral[300]};
 `;

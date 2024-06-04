@@ -81,7 +81,7 @@ const Item = styled.div<ItemProps>`
   ${(props) =>
     props.$isSelected
       ? css`
-          border-bottom: 3px solid ${props.theme.palette.primary[500]};
+          border-bottom: 3px solid ${({ theme }) => theme.palette.primary[500]};
         `
       : css`
           border-bottom: 0;
@@ -92,7 +92,7 @@ const Item = styled.div<ItemProps>`
     margin: 0;
     color: ${(props) =>
       props.$istoday
-        ? props.theme.palette.primary[500]
+        ? ({ theme }) => theme.palette.primary[500]
         : `rgba(31, 31, 31, 0.6)`};
   }
 
@@ -111,13 +111,13 @@ const Item = styled.div<ItemProps>`
     position: absolute;
     ${(props) =>
       props.$istoday
-        ? props.theme.typo.Body_16_SB
-        : props.theme.typo.Body_16_M};
+        ? ({ theme }) => theme.typo.Body_16_SB
+        : ({ theme }) => theme.typo.Body_16_M};
   }
     color: ${(props) =>
       props.$istoday
-        ? props.theme.palette.primary[500]
-        : props.theme.palette.neutral[500]};
+        ? ({ theme }) => theme.palette.primary[500]
+        : ({ theme }) => theme.palette.neutral[500]};
   }
 
   .stamp {

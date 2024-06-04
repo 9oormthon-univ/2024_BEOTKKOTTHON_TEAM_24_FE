@@ -49,7 +49,7 @@ const InfoBox = styled.div`
   .description {
     ${({ theme }) => theme.typo.Body_14_M};
     padding: 2px 0;
-    color: ${(props) => props.theme.palette.neutral[400]};
+    color: ${({ theme }) => theme.palette.neutral[400]};
   }
 `;
 

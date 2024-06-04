@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   border-radius: 12px;
   margin: 0 20px 48px;
   padding: 10px 20px 18px;
-  background: ${(props) => props.theme.palette.primary[100]};
+  background: ${({ theme }) => theme.palette.primary[100]};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -47,11 +47,11 @@ const Wrapper = styled.div`
     span {
       font-size: 14px;
       font-weight: 600;
-      color: ${(props) => props.theme.palette.primary[500]};
+      color: ${({ theme }) => theme.palette.primary[500]};
     }
     p {
       ${({ theme }) => theme.typo.Body_16_SB};
-      color: ${(props) => props.theme.palette.neutral[500]};
+      color: ${({ theme }) => theme.palette.neutral[500]};
     }
   }
 
@@ -59,9 +59,9 @@ const Wrapper = styled.div`
     width: 100%;
     height: 58px;
     ${({ theme }) => theme.typo.Body_16_SB};
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     background-color: #ffffff;
-    border: ${(props) => props.theme.palette.primary[500]} solid 1px;
+    border: ${({ theme }) => theme.palette.primary[500]} solid 1px;
     border-radius: 12px;
   }
 `;

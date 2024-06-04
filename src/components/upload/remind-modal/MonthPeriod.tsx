@@ -44,7 +44,7 @@ export default MonthPeriod;
 const Wrapper = styled.div`
   p {
     margin-bottom: 16px;
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     ${({ theme }) => theme.typo.Body_16_SB};
   }
 `;
@@ -57,7 +57,7 @@ const MonthDayBg = styled.div`
   align-items: flex-start;
   gap: 12px;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
   tr {
     display: flex;
     display: flex;
@@ -74,14 +74,14 @@ const MonthDayBg = styled.div`
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
     ${({ theme }) => theme.typo.Body_18_R};
   }
   .selected {
     border-radius: 30px;
-    background: ${(props) => props.theme.palette.primary[100]};
-    color: ${(props) => props.theme.palette.primary[500]};
+    background: ${({ theme }) => theme.palette.primary[100]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     text-align: center;
     ${({ theme }) => theme.typo.Head_20_B};
   }

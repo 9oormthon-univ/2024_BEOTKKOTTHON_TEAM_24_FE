@@ -60,13 +60,13 @@ const Wrapper = styled.div`
   }
 
   .main-title {
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     text-align: center;
     ${({ theme }) => theme.typo.Head_24_B};
     font-size: 26px;
   }
   .sub-title {
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
     ${({ theme }) => theme.typo.Body_16_SB};
     display: flex;

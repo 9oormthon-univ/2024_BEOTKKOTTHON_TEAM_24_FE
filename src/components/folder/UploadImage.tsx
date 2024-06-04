@@ -112,7 +112,7 @@ const Title = styled.div`
 
   .image-counter {
     ${({ theme }) => theme.typo.Body_14_M};
-    color: ${(props) => props.theme.palette.neutral[400]};
+    color: ${({ theme }) => theme.palette.neutral[400]};
   }
 `;
 
@@ -124,7 +124,7 @@ const ImageWrapper = styled.div`
   height: 131px;
   flex-shrink: 0;
   border-radius: 8.24px;
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
   cursor: pointer;
 `;
 
@@ -153,7 +153,7 @@ const ImageListContainer = styled.div`
     height: 131px;
     flex-shrink: 0;
     border-radius: 8.24px;
-    background: ${(props) => props.theme.palette.neutral[100]};
+    background: ${({ theme }) => theme.palette.neutral[100]};
     object-fit: cover;
   }
 `;

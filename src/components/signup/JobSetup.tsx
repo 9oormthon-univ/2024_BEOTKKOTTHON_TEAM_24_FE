@@ -87,7 +87,7 @@ const Wrapper = styled.div`
   .title,
   p {
     width: 100%;
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     ${({ theme }) => theme.typo.Head_24_B};
     margin-top: 20px;
   }
@@ -100,12 +100,12 @@ const Wrapper = styled.div`
     position: absolute;
     right: 20px;
     top: 12px;
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     ${({ theme }) => theme.typo.Head_20_M};
   }
   .subtitle {
     margin-top: 8px;
-    color: ${(props) => props.theme.palette.neutral[300]};
+    color: ${({ theme }) => theme.palette.neutral[300]};
     ${({ theme }) => theme.typo.Body_14_M};
   }
 
@@ -139,7 +139,7 @@ const Grid = styled.div`
   gap: 16px 16px;
 
   .error {
-    color: ${(props) => props.theme.palette.system.warning};
+    color: ${({ theme }) => theme.palette.system.warning};
   }
   .job-card {
     position: relative;
@@ -147,13 +147,13 @@ const Grid = styled.div`
     height: 167px;
     flex-shrink: 0;
     border-radius: 8px;
-    background: ${(props) => props.theme.palette.neutral[100]};
-    border: 2px solid ${(props) => props.theme.palette.neutral[100]};
+    background: ${({ theme }) => theme.palette.neutral[100]};
+    border: 2px solid ${({ theme }) => theme.palette.neutral[100]};
     padding: 18px 16px;
     box-sizing: border-box;
   }
   .selected {
-    border: 2px solid ${(props) => props.theme.palette.primary[500]};
+    border: 2px solid ${({ theme }) => theme.palette.primary[500]};
   }
   .icon {
     position: absolute;

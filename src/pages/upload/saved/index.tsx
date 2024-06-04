@@ -57,7 +57,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     margin-bottom: 28px;
     text-align: center;
     ${({ theme }) => theme.typo.Body_18_B};
@@ -68,7 +68,7 @@ const Title = styled.div`
   width: 100%;
   margin-left: 20px;
   margin-top: 20px;
-  color: ${(props) => props.theme.palette.neutral[500]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
   ${({ theme }) => theme.typo.Body_18_B};
 `;
 
@@ -76,5 +76,5 @@ const HrLine = styled.hr`
   width: 100%;
   height: 7px;
   border: 0;
-  background-color: ${(props) => props.theme.palette.neutral[100]};
+  background-color: ${({ theme }) => theme.palette.neutral[100]};
 `;

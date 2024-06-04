@@ -105,11 +105,11 @@ const FolderRow = styled.div`
     margin-left: 28px;
   }
   .name {
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     ${({ theme }) => theme.typo.Body_18_B};
   }
   .edit {
-    color: ${(props) => props.theme.palette.neutral[300]};
+    color: ${({ theme }) => theme.palette.neutral[300]};
     ${({ theme }) => theme.typo.Body_16_SB};
   }
   span {

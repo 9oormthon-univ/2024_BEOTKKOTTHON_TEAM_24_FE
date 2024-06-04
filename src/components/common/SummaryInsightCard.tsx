@@ -94,7 +94,7 @@ const Description = styled.div`
   .card-summary {
     ${({ theme }) => theme.typo.Caption_12_M};
     word-break: keep-all;
-    color: ${(props) => props.theme.palette.neutral[400]};
+    color: ${({ theme }) => theme.palette.neutral[400]};
   }
 
   .card-tag {
@@ -103,7 +103,7 @@ const Description = styled.div`
     padding: 4px 10px;
     margin: 0 6px 0 0;
     border-radius: 6px;
-    background-color: ${(props) => props.theme.palette.folder.blue};
+    background-color: ${({ theme }) => theme.palette.folder.blue};
   }
 `;
 

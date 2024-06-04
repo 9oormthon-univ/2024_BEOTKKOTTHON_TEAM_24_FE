@@ -36,8 +36,8 @@ export default RenderTagList;
 const Wrapper = styled.div`
   .selected {
     border-radius: 5.268px;
-    border: 1px solid ${(props) => props.theme.palette.primary[500]};
-    background: ${(props) => props.theme.palette.primary[500]};
+    border: 1px solid ${({ theme }) => theme.palette.primary[500]};
+    background: ${({ theme }) => theme.palette.primary[500]};
     color: #fff;
     ${({ theme }) => theme.typo.Body_14_SB};
   }
@@ -51,11 +51,11 @@ const Tag = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
-  color: ${(props) => props.theme.palette.neutral[300]};
+  color: ${({ theme }) => theme.palette.neutral[300]};
 
   text-align: center;
   ${({ theme }) => theme.typo.Body_14_M};
   border-radius: 5.268px;
-  border: 1px solid ${(props) => props.theme.palette.neutral[150]};
+  border: 1px solid ${({ theme }) => theme.palette.neutral[150]};
   background: #fff;
 `;

@@ -104,7 +104,7 @@ const TitleBox = styled.div`
   }
 
   .counter {
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
 
@@ -126,8 +126,8 @@ const TagWrapper = styled.div`
   align-items: center;
   gap: 6px;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
-  color: ${(props) => props.theme.palette.neutral[500]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
   text-align: center;
   ${({ theme }) => theme.typo.Body_14_M};
 `;

@@ -44,7 +44,7 @@ const FolderIndicator = styled.div`
   align-items: flex-end;
   border: none;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
 `;
 
 const ChangeFolderBtn = styled.div`

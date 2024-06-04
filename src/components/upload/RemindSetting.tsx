@@ -65,7 +65,7 @@ const RemindIndicator = styled.div`
   align-items: center;
   justify-content: right;
   max-width: 200px;
-  color: ${(props) => props.theme.palette.primary[500]};
+  color: ${({ theme }) => theme.palette.primary[500]};
   text-align: right;
   ${({ theme }) => theme.typo.Body_14_M};
   gap: 14px;
@@ -79,5 +79,5 @@ const RemindSetter = styled.div`
   align-items: flex-end;
   border: none;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
 `;

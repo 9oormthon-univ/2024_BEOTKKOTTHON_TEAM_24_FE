@@ -136,7 +136,7 @@ const ModalHeader = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-bottom: 1px solid ${(props) => props.theme.palette.neutral[150]};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutral[150]};
   border-radius: 8px 8px 0px 0px;
   background: white;
 `;
@@ -159,7 +159,7 @@ const ModalTitle = styled.div`
 `;
 
 const Title = styled.div`
-  color: ${(props) => props.theme.palette.neutral[500]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
   text-align: center;
   ${({ theme }) => theme.typo.Body_18_B};
   margin-top: 18px;
@@ -169,7 +169,7 @@ const CompleteBtn = styled.div`
   position: absolute;
   top: 18px;
   right: 18px;
-  color: ${(props) => props.theme.palette.primary[500]};
+  color: ${({ theme }) => theme.palette.primary[500]};
   ${({ theme }) => theme.typo.Body_18_B};
   cursor: pointer;
 `;
@@ -187,11 +187,11 @@ const AddFolder = styled.div`
   cursor: pointer;
   padding: 0px 21px;
   ${({ theme }) => theme.typo.Body_18_B};
-  color: ${(props) => props.theme.palette.neutral[500]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
 `;
 
 const FolderTitle = styled.div`
-  color: ${(props) => props.theme.palette.neutral[500]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
   font-family: Pretendard;
   ${({ theme }) => theme.typo.Body_18_B};
 `;
@@ -207,7 +207,7 @@ const FolderList = styled.div`
   flex-direction: column;
   margin-top: 17px;
   .selected {
-    background: ${(props) => props.theme.palette.neutral[100]};
+    background: ${({ theme }) => theme.palette.neutral[100]};
     border-radius: 8px;
   }
 `;

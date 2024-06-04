@@ -85,7 +85,7 @@ const Title = styled.div`
 `;
 
 const ErrorText = styled.div`
-  color: ${(props) => props.theme.palette.system.warning};
+  color: ${({ theme }) => theme.palette.system.warning};
   ${({ theme }) => theme.typo.Body_14_M};
 `;
 
@@ -97,7 +97,7 @@ const Input = styled.input<InputProps>`
   width: 100%;
   height: 50px;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
   color: black;
   padding: 14px 16px 14px ${(props) => (props.linkIcon ? '53px' : '16px')};
   border: none;

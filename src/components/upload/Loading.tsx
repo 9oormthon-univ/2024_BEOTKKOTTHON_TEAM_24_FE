@@ -32,14 +32,14 @@ const LoadingWrapper = styled.div`
 `;
 
 const LoadingTitle = styled.div`
-  color: ${(props) => props.theme.palette.primary[500]};
+  color: ${({ theme }) => theme.palette.primary[500]};
   text-align: center;
   ${({ theme }) => theme.typo.Head_20_B};
   margin-top: 22px;
 `;
 
 const LoadingContent = styled.div`
-  color: ${(props) => props.theme.palette.neutral[500]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
   width: 179px;
   text-align: center;
   ${({ theme }) => theme.typo.Body_16_SB};

@@ -159,7 +159,7 @@ const InputContainer = styled.div`
 `;
 
 const PageIntro = styled.div`
-  color: ${(props) => props.theme.palette.neutral[500]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
   ${({ theme }) => theme.typo.Head_24_B};
   margin-top: 20px;
 `;
@@ -187,9 +187,9 @@ const Input = styled.input`
   align-items: flex-start;
   align-self: stretch;
   border-radius: 8.235px;
-  border: 0.8px solid ${(props) => props.theme.palette.neutral[300]};
+  border: 0.8px solid ${({ theme }) => theme.palette.neutral[300]};
   outline: none;
-  color: ${(props) => props.theme.palette.neutral[500]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
   ${({ theme }) => theme.typo.Body_18_R};
   margin-top: 10px;
 `;
@@ -212,6 +212,6 @@ const PWSection = styled(EmailSection)`
 const ErrorText = styled.div`
   height: 36px;
   padding: 8px 0;
-  color: ${(props) => props.theme.palette.system.warning};
+  color: ${({ theme }) => theme.palette.system.warning};
   ${({ theme }) => theme.typo.Body_14_M};
 `;

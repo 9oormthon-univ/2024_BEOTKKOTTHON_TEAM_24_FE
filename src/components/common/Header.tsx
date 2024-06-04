@@ -38,13 +38,13 @@ const Wrapper = styled.div`
 
   .title {
     ${({ theme }) => theme.typo.Head_20_B};
-    color: ${(props) => props.theme.palette.neutral[500]};
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
   }
 
   .right-text {
     ${({ theme }) => theme.typo.Head_20_M};
-    color: ${(props) => props.theme.palette.primary[500]};
+    color: ${({ theme }) => theme.palette.primary[500]};
     text-align: right;
     margin-bottom: 0 !important;
   }

@@ -41,7 +41,7 @@ const Wrapper = styled.div<WrapperProps>`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
 `;
 
 const SearchInput = styled.input`
@@ -50,7 +50,7 @@ const SearchInput = styled.input`
   outline: none;
   ${({ theme }) => theme.typo.Body_16_SB};
 
-  background: ${(props) => props.theme.palette.neutral[100]};
+  background: ${({ theme }) => theme.palette.neutral[100]};
 `;
 
 export default SearchSection;
