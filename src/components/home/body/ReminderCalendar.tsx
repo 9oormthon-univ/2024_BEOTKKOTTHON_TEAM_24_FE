@@ -96,7 +96,7 @@ const ReminderCalendar = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #fbfbfb;
+  background: ${(props) => props.theme.palette.system.background};
   margin-bottom: 140px;
 `;
 
@@ -106,13 +106,19 @@ type IconProps = {
 
 const SmallViewIcon = styled(SmallView)<IconProps>`
   rect {
-    fill: ${(props) => (props.$isSmall ? '#1F1F1F' : '#E1E1E1')};
+    fill: ${(props) =>
+      props.$isSmall
+        ? props.theme.palette.neutral[500]
+        : props.theme.palette.neutral[150]};
   }
 `;
 
 const LargeViewIcon = styled(LargeView)<IconProps>`
   rect {
-    fill: ${(props) => (props.$isSmall ? '#E1E1E1' : '#1F1F1F')};
+    fill: ${(props) =>
+      props.$isSmall
+        ? props.theme.palette.neutral[150]
+        : props.theme.palette.neutral[500]};
   }
 `;
 
@@ -125,11 +131,10 @@ const ViewSetting = styled.div`
   .instruction {
     display: inline-block;
     border-radius: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #3184ff;
+    ${({ theme }) => theme.typo.Caption_12_M};
+    color: ${({ theme }) => theme.palette.primary[500]};
     padding: 6px 10px;
-    background-color: #e9efff;
+    background: ${({ theme }) => theme.palette.primary[100]};
   }
 
   .icons-box {
@@ -144,17 +149,16 @@ const EmptyInsight = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 50px 20px;
-  font-size: 16px;
-  font-weight: 600;
+  ${({ theme }) => theme.typo.Body_16_SB};
   flex: 1;
 
   :first-child {
-    color: #565656;
+    color: ${({ theme }) => theme.palette.neutral[400]};
     margin-bottom: 10px;
   }
 
   :last-child {
-    color: #3184ff;
+    color: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
 

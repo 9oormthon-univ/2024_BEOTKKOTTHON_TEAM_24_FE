@@ -52,10 +52,7 @@ const RenderFolderList = (props: Props) => {
           folderName: newFolderName,
         }),
       );
-      setEditedFolderIdList([
-        ...editedFolderIdList,
-        Number(folder.folderId),
-      ]);
+      setEditedFolderIdList([...editedFolderIdList, Number(folder.folderId)]);
     }
     handleBlur();
   };
@@ -77,13 +74,13 @@ const RenderFolderList = (props: Props) => {
               />
             ) : (
               <span
-                className="name text"
+                className="name"
                 onClick={() => setEditingFolder(folder.folderId)}
               >
                 {folder.folderName}
               </span>
             )}
-            <span className="edit text" onClick={() => handleModalOn(folder)}>
+            <span className="edit" onClick={() => handleModalOn(folder)}>
               편집
             </span>
           </div>
@@ -107,21 +104,13 @@ const FolderRow = styled.div`
     justify-content: space-between;
     margin-left: 28px;
   }
-  .text {
-    font-family: Pretendard;
-    font-style: normal;
-    line-height: 140%; /* 25.2px */
-  }
   .name {
-    color: var(--Neutral-500, #1f1f1f);
-
-    font-size: 18px;
-    font-weight: 700;
+    color: ${({ theme }) => theme.palette.neutral[500]};
+    ${({ theme }) => theme.typo.Body_18_B};
   }
   .edit {
-    color: var(--Neutral-300, #848484);
-    font-size: 16px;
-    font-weight: 600;
+    color: ${({ theme }) => theme.palette.neutral[300]};
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
   span {
     min-width: 28px;
@@ -132,10 +121,5 @@ const Input = styled.input`
   border: none;
   outline: none;
 
-  font-family: Pretendard;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 21px; /* 123.529% */
-  letter-spacing: -0.32px;
+  ${({ theme }) => theme.typo.Body_18_B};
 `;

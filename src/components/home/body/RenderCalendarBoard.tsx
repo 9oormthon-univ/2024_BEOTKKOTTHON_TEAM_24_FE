@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Stamp from '@svg/calendar-stamp.svg';
 
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const days = ['일', '월', '화', '수', '목', '금', '토'];
 
 const RenderCalendarBoard = (
   today: string,
@@ -81,17 +81,19 @@ const Item = styled.div<ItemProps>`
   ${(props) =>
     props.$isSelected
       ? css`
-          border-bottom: 3px solid #3184ff;
+          border-bottom: 3px solid ${({ theme }) => theme.palette.primary[500]};
         `
       : css`
           border-bottom: 0;
         `}
 
   .day {
-    font-size: 12px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_14_M};
     margin: 0;
-    color: ${(props) => (props.$istoday ? '#3184FF' : '#1F1F1F')};
+    color: ${(props) =>
+      props.$istoday
+        ? ({ theme }) => theme.palette.primary[500]
+        : `rgba(31, 31, 31, 0.6)`};
   }
 
   .date-container {
@@ -107,9 +109,15 @@ const Item = styled.div<ItemProps>`
 
   .date {
     position: absolute;
-    font-size: 17px;
-    font-weight: 500;
-    color: ${(props) => (props.$istoday ? '#3184FF' : '#1F1F1F')};
+    ${(props) =>
+      props.$istoday
+        ? ({ theme }) => theme.typo.Body_16_SB
+        : ({ theme }) => theme.typo.Body_16_M};
+  }
+    color: ${(props) =>
+      props.$istoday
+        ? ({ theme }) => theme.palette.primary[500]
+        : ({ theme }) => theme.palette.neutral[500]};
   }
 
   .stamp {

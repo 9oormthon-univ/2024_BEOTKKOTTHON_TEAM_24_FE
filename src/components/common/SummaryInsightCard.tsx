@@ -87,28 +87,23 @@ const Description = styled.div`
   padding: 14px 16px 20px;
 
   .card-title {
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
     word-break: keep-all;
-    line-height: 20px;
   }
 
   .card-summary {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 17px;
+    ${({ theme }) => theme.typo.Caption_12_M};
     word-break: keep-all;
-    color: #565656;
+    color: ${({ theme }) => theme.palette.neutral[400]};
   }
 
   .card-tag {
-    font-size: 12px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Caption_12_M};
     display: inline-block;
     padding: 4px 10px;
     margin: 0 6px 0 0;
     border-radius: 6px;
-    background-color: #d7ebff;
+    background-color: ${({ theme }) => theme.palette.folder.blue};
   }
 `;
 

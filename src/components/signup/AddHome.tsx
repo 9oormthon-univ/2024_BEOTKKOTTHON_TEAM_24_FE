@@ -60,23 +60,15 @@ const Wrapper = styled.div`
   }
 
   .main-title {
-    color: var(--Neutral-500, #3184ff);
+    color: ${({ theme }) => theme.palette.primary[500]};
     text-align: center;
-    font-family: Pretendard;
+    ${({ theme }) => theme.typo.Head_24_B};
     font-size: 26px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%; /* 36.4px */
   }
   .sub-title {
-    color: var(--Neutral-500, #1f1f1f);
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
+    ${({ theme }) => theme.typo.Body_16_SB};
     display: flex;
     flex-direction: column;
     margin-top: 12px;

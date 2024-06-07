@@ -96,13 +96,9 @@ const FolderSection = styled.div`
     align-items: center;
   }
   .title-m {
-    color: #1f1f1f;
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 27.146px; /* 135.732% */
+    ${({ theme }) => theme.typo.Body_18_B};
     height: 28px;
     padding-right: 6px;
   }
@@ -125,24 +121,15 @@ const IconContainer = styled.div`
     position: absolute;
     left: 15px;
     bottom: 31px;
-    color: var(--Neutral-500, #1f1f1f);
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
+    color: ${({ theme }) => theme.palette.neutral[500]};
+    text-align: center;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
   .count {
     left: 15px;
     bottom: 11px;
     position: absolute;
-    color: var(--Neutral-400, #565656);
-    /* Caption-12-M */
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%; /* 16.8px */
+    color: ${({ theme }) => theme.palette.neutral[400]};
+    ${({ theme }) => theme.typo.Caption_12_M};
   }
 `;

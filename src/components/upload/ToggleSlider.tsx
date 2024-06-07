@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   }
   .switch[data-ison='false'] {
     justify-content: flex-end;
-    background: var(--blue, #3184ff);
+    background: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
 

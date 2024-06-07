@@ -67,7 +67,7 @@ export default ReminderAnswer;
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.palette.system.background};
   display: flex;
   flex-direction: column;
   padding-bottom: 36px;
@@ -76,7 +76,7 @@ const Wrapper = styled.div`
     margin: 20px 20px 0;
     color: ${({ theme }) => theme.palette.neutral[500]};
     word-break: keep-all;
-    ${({ theme }) => theme.typo.Body_16_SB}
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 
   .answer-box {
@@ -102,9 +102,8 @@ const Wrapper = styled.div`
 
     p {
       text-align: right;
-      font-size: 12px;
-      font-weight: 500;
-      color: #989898;
+      ${({ theme }) => theme.typo.Caption_12_M};
+      color: ${({ theme }) => theme.palette.neutral[200]};
     }
   }
 `;

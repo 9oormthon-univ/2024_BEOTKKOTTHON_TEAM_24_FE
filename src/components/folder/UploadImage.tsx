@@ -107,14 +107,12 @@ const Title = styled.div`
   margin-bottom: 10px;
 
   .title {
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 
   .image-counter {
-    font-size: 14px;
-    font-weight: 500;
-    color: #565656;
+    ${({ theme }) => theme.typo.Body_14_M};
+    color: ${({ theme }) => theme.palette.neutral[400]};
   }
 `;
 
@@ -126,7 +124,7 @@ const ImageWrapper = styled.div`
   height: 131px;
   flex-shrink: 0;
   border-radius: 8.24px;
-  background: #f4f5f7;
+  background: ${({ theme }) => theme.palette.neutral[100]};
   cursor: pointer;
 `;
 
@@ -155,7 +153,7 @@ const ImageListContainer = styled.div`
     height: 131px;
     flex-shrink: 0;
     border-radius: 8.24px;
-    background: #f4f5f7;
+    background: ${({ theme }) => theme.palette.neutral[100]};
     object-fit: cover;
   }
 `;

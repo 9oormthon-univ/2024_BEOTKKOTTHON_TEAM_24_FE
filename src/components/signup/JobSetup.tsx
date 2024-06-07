@@ -87,13 +87,8 @@ const Wrapper = styled.div`
   .title,
   p {
     width: 100%;
-    color: var(--Neutral-500, #1f1f1f);
-    /* Head-24-B */
-    font-family: Pretendard;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%; /* 33.6px */
+    color: ${({ theme }) => theme.palette.neutral[500]};
+    ${({ theme }) => theme.typo.Head_24_B};
     margin-top: 20px;
   }
 
@@ -105,23 +100,13 @@ const Wrapper = styled.div`
     position: absolute;
     right: 20px;
     top: 12px;
-    color: var(--Primary-500, #3184ff);
-    /* Head-20-M */
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%; /* 28px */
+    color: ${({ theme }) => theme.palette.primary[500]};
+    ${({ theme }) => theme.typo.Head_20_M};
   }
   .subtitle {
     margin-top: 8px;
-    color: var(--Neutral-300, #848484);
-    /* Body-14-M */
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%; /* 19.6px */
+    color: ${({ theme }) => theme.palette.neutral[300]};
+    ${({ theme }) => theme.typo.Body_14_M};
   }
 
   > :nth-child(2) {
@@ -154,7 +139,7 @@ const Grid = styled.div`
   gap: 16px 16px;
 
   .error {
-    color: var(--System-Warning, #f1404b);
+    color: ${({ theme }) => theme.palette.system.warning};
   }
   .job-card {
     position: relative;
@@ -162,13 +147,13 @@ const Grid = styled.div`
     height: 167px;
     flex-shrink: 0;
     border-radius: 8px;
-    background: var(--Neutral-100, #f4f5f7);
-    border: 2px solid #f4f5f7;
+    background: ${({ theme }) => theme.palette.neutral[100]};
+    border: 2px solid ${({ theme }) => theme.palette.neutral[100]};
     padding: 18px 16px;
     box-sizing: border-box;
   }
   .selected {
-    border: 2px solid #3184ff;
+    border: 2px solid ${({ theme }) => theme.palette.primary[500]};
   }
   .icon {
     position: absolute;

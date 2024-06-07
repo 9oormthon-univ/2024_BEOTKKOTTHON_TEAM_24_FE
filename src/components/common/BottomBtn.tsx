@@ -48,7 +48,7 @@ const Button = styled.button`
   min-height: 72px;
   margin: 0 20px;
   border-radius: 14px;
-  font-size: 20px;
+  ${({ theme }) => theme.typo.Head_20_B};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,27 +56,26 @@ const Button = styled.button`
   &.disabled {
     color: #ffffff;
     border: 0;
-    background-color: #848484;
+    background-color: ${({ theme }) => theme.palette.neutral[300]};
   }
 
   &.activated {
     color: #ffffff;
     border: 0;
-    background-color: #3184ff;
+    background-color: ${({ theme }) => theme.palette.primary[500]};
   }
 
   &.borderline {
-    color: #3184ff;
-    border: #3184ff solid 2px;
-    background-color: #f4f5f7;
+    color: ${({ theme }) => theme.palette.primary[500]};
+    border: ${({ theme }) => theme.palette.primary[500]} solid 2px;
+    background-color: ${({ theme }) => theme.palette.neutral[100]};
   }
 
   &.transparent {
-    color: #3184ff;
+    color: ${({ theme }) => theme.palette.primary[500]};
     border: 0;
     background-color: #ffffff;
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 `;
 

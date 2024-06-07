@@ -98,26 +98,17 @@ const Wrapper = styled.div`
   position: relative;
   justify-content: center;
   .title {
-    color: #1f1f1f;
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 27.146px; /* 135.732% */
+    ${({ theme }) => theme.typo.Head_20_B};
     height: 28px;
     padding: 18px 20px 16px;
     height: 52px;
   }
   .link {
-    color: var(--Primary-500, #3184ff);
+    color: ${({ theme }) => theme.palette.primary[500]};
     text-align: right;
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
   .edit {
     position: absolute;
@@ -134,13 +125,9 @@ const ResultSection = styled.div`
     align-items: center;
   }
   .title-m {
-    color: #1f1f1f;
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 27.146px; /* 135.732% */
+    ${({ theme }) => theme.typo.Body_18_B};
     height: 28px;
     padding-right: 6px;
   }
@@ -162,11 +149,10 @@ const ViewSetting = styled.div`
   .instruction {
     display: inline-block;
     border-radius: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #3184ff;
+    ${({ theme }) => theme.typo.Caption_12_M};
+    color: ${({ theme }) => theme.palette.primary[500]};
     padding: 6px 10px;
-    background-color: #e9efff;
+    background-color: ${({ theme }) => theme.palette.primary[100]};
   }
 
   .icons-box {
@@ -182,12 +168,18 @@ type IconProps = {
 
 const SmallViewIcon = styled(SmallView)<IconProps>`
   rect {
-    fill: ${(props) => (props.$isSmall ? '#1F1F1F' : '#E1E1E1')};
+    fill: ${(props) =>
+      props.$isSmall
+        ? ({ theme }) => theme.palette.neutral[500]
+        : ({ theme }) => theme.palette.neutral[150]};
   }
 `;
 
 const LargeViewIcon = styled(LargeView)<IconProps>`
   rect {
-    fill: ${(props) => (props.$isSmall ? '#E1E1E1' : '#1F1F1F')};
+    fill: ${(props) =>
+      props.$isSmall
+        ? ({ theme }) => theme.palette.neutral[150]
+        : ({ theme }) => theme.palette.neutral[500]};
   }
 `;

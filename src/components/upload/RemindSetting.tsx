@@ -53,8 +53,7 @@ const Wrapper = styled.div`
   margin-top: 20px;
   p {
     margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Body_14_M};
   }
   span {
     line-height: 160%;
@@ -66,11 +65,9 @@ const RemindIndicator = styled.div`
   align-items: center;
   justify-content: right;
   max-width: 200px;
-  color: #3184ff;
+  color: ${({ theme }) => theme.palette.primary[500]};
   text-align: right;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 140%;
+  ${({ theme }) => theme.typo.Body_14_M};
   gap: 14px;
 `;
 
@@ -82,5 +79,5 @@ const RemindSetter = styled.div`
   align-items: flex-end;
   border: none;
   border-radius: 8px;
-  background: #f4f5f7;
+  background: ${({ theme }) => theme.palette.neutral[100]};
 `;

@@ -91,8 +91,8 @@ const Wrapper = styled.div`
 
   .button {
     background-color: #ffffff;
-    color: #848484;
-    border: #848484 solid 1px;
+    color: ${({ theme }) => theme.palette.neutral[300]};
+    border: ${({ theme }) => theme.palette.neutral[300]} solid 1px;
     height: 25px;
     width: 40px;
     border-radius: 4px;
@@ -110,8 +110,7 @@ const Board = styled.div`
 `;
 
 const Head = styled.div`
-  font-size: 14px;
-  font-weight: 700;
+  ${({ theme }) => theme.typo.Body_14_B};
   display: flex;
   justify-content: space-between;
   margin: auto 14px;
@@ -135,6 +134,7 @@ const Days = styled.div`
 
   & > div {
     margin: 4px auto;
-    font-size: 10px;
+    ${({ theme }) => theme.typo.Body_14_M};
+    color: ${({ theme }) => theme.palette.neutral[400]};
   }
 `;

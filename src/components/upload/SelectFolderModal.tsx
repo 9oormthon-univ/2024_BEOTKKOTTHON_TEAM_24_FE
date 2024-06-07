@@ -136,7 +136,7 @@ const ModalHeader = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-bottom: 1px solid var(--Neutral-150, #e1e1e1);
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutral[150]};
   border-radius: 8px 8px 0px 0px;
   background: white;
 `;
@@ -159,13 +159,9 @@ const ModalTitle = styled.div`
 `;
 
 const Title = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
+  color: ${({ theme }) => theme.palette.neutral[500]};
   text-align: center;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%;
+  ${({ theme }) => theme.typo.Body_18_B};
   margin-top: 18px;
 `;
 
@@ -173,12 +169,8 @@ const CompleteBtn = styled.div`
   position: absolute;
   top: 18px;
   right: 18px;
-  color: var(--Primary-500, #3184ff);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%;
+  color: ${({ theme }) => theme.palette.primary[500]};
+  ${({ theme }) => theme.typo.Body_18_B};
   cursor: pointer;
 `;
 
@@ -194,29 +186,20 @@ const AddFolder = styled.div`
   gap: 28px;
   cursor: pointer;
   padding: 0px 21px;
-  font-size: 17px;
-  font-weight: 700;
-  color: #161616;
+  ${({ theme }) => theme.typo.Body_18_B};
+  color: ${({ theme }) => theme.palette.neutral[500]};
 `;
 
 const FolderTitle = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
+  color: ${({ theme }) => theme.palette.neutral[500]};
   font-family: Pretendard;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%;
+  ${({ theme }) => theme.typo.Body_18_B};
 `;
 
 const FolderInput = styled.input`
   outline: none;
   border: none;
-  font-family: Pretendard;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 21px; /* 123.529% */
-  letter-spacing: -0.32px;
+  ${({ theme }) => theme.typo.Body_18_B};
 `;
 
 const FolderList = styled.div`
@@ -224,7 +207,7 @@ const FolderList = styled.div`
   flex-direction: column;
   margin-top: 17px;
   .selected {
-    background: var(--Neutral-100, #f4f5f7);
+    background: ${({ theme }) => theme.palette.neutral[100]};
     border-radius: 8px;
   }
 `;

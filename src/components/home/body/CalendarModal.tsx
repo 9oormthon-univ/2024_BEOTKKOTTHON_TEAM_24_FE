@@ -85,7 +85,7 @@ const ModalHeader = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-bottom: 1px solid var(--Neutral-150, #e1e1e1);
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutral[150]};
   border-radius: 8px 8px 0px 0px;
   background: white;
 `;

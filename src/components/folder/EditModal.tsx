@@ -149,7 +149,7 @@ const ModalHeader = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-bottom: 1px solid var(--Neutral-150, #e1e1e1);
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutral[150]};
   border-radius: 8px 8px 0px 0px;
   background: white;
 `;
@@ -170,15 +170,8 @@ const ModalBody = styled.div`
     justify-content: space-between;
     align-items: center;
     border-radius: 8px;
-    background: var(--Neutral-100, #f4f5f7);
-
-    color: #000;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 21px; /* 131.25% */
-    letter-spacing: -0.32px;
+    background: ${({ theme }) => theme.palette.neutral[100]};
+    ${({ theme }) => theme.typo.Body_16_M};
   }
 `;
 
@@ -190,13 +183,8 @@ const ModalTitle = styled.div`
 `;
 
 const Title = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
+  color: ${({ theme }) => theme.palette.neutral[500]};
   text-align: center;
-  /* Body-18-B */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 25.2px */
+  ${({ theme }) => theme.typo.Body_18_B};
   margin-top: 18px;
 `;

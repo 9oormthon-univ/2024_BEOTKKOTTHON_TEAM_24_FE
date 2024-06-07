@@ -30,10 +30,8 @@ export default WeekPeriod;
 const Wrapper = styled.div`
   p {
     margin-bottom: 16px;
-    color: #1f1f1f;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 140%;
+    color: ${({ theme }) => theme.palette.neutral[500]};
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 `;
 
@@ -51,11 +49,9 @@ const WeekDayList = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 9.136px;
-    background: #e9efff;
-    color: #3184ff;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 140%;
+    background: ${({ theme }) => theme.palette.primary[100]};
+    color: ${({ theme }) => theme.palette.primary[500]};
+    ${({ theme }) => theme.typo.Head_20_B};
   }
 `;
 
@@ -68,11 +64,8 @@ const WeekDay = styled.div`
   align-items: center;
   gap: 11.419px;
   border-radius: 9.136px;
-  background: #f4f5f7;
-  color: #1f1f1f;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 23.981px;
-  letter-spacing: -0.365px;
+  background: ${({ theme }) => theme.palette.primary[100]};
+  color: ${({ theme }) => theme.palette.neutral[500]};
+  ${({ theme }) => theme.typo.Body_16_M};
   cursor: pointer;
 `;

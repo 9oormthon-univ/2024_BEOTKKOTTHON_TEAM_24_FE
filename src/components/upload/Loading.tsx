@@ -32,22 +32,17 @@ const LoadingWrapper = styled.div`
 `;
 
 const LoadingTitle = styled.div`
-  color: #3184ff;
+  color: ${({ theme }) => theme.palette.primary[500]};
   text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 140%;
+  ${({ theme }) => theme.typo.Head_20_B};
   margin-top: 22px;
 `;
 
 const LoadingContent = styled.div`
-  color: #1f1f1f;
+  color: ${({ theme }) => theme.palette.neutral[500]};
   width: 179px;
   text-align: center;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%;
+  ${({ theme }) => theme.typo.Body_16_SB};
   white-space: wrap;
   word-break: keep-all;
   margin-top: 14px;

@@ -50,6 +50,6 @@ const Color = styled.div`
   border-radius: 8px;
   background-color: ${(props) => props.color};
   .selected {
-    border: 2px solid var(--Primary-500, #3184ff);
+    border: 2px solid ${({ theme }) => theme.palette.primary[500]};
   }
 `;

@@ -76,20 +76,17 @@ const Title = styled.div`
   margin-bottom: 8px;
 
   &.Body-16-SB {
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 
   &.Body-14-M {
-    font-size: 14px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Body_14_M};
   }
 `;
 
 const ErrorText = styled.div`
-  color: #f1404b;
-  font-size: 14px;
-  font-weight: 500;
+  color: ${({ theme }) => theme.palette.system.warning};
+  ${({ theme }) => theme.typo.Body_14_M};
 `;
 
 type InputProps = {
@@ -100,19 +97,17 @@ const Input = styled.input<InputProps>`
   width: 100%;
   height: 50px;
   border-radius: 8px;
-  background: #f4f5f7;
+  background: ${({ theme }) => theme.palette.neutral[100]};
   color: black;
   padding: 14px 16px 14px ${(props) => (props.linkIcon ? '53px' : '16px')};
   border: none;
   outline: none;
 
   &.Body-16-SB {
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 
   &.Body-14-M {
-    font-size: 14px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Body_14_M};
   }
 `;

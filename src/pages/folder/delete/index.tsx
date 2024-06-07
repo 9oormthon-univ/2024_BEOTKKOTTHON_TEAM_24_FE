@@ -94,8 +94,8 @@ const ModalBody = styled.div`
   }
   .cancel {
     border-radius: 8px;
-    background: var(--Neutral-100, #f4f5f7);
-    color: #565656;
+    background-color: ${({ theme }) => theme.palette.neutral[100]};
+    color: ${({ theme }) => theme.palette.neutral[400]};
   }
 `;
 
@@ -110,26 +110,16 @@ const ModalTitle = styled.div`
 `;
 
 const Title = styled.div`
-  color: var(--Neutral-500, #1f1f1f);
+  color: ${({ theme }) => theme.palette.neutral[500]};
   text-align: center;
-  /* Body-18-B */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 25.2px */
+  ${({ theme }) => theme.typo.Body_18_B};
   margin-top: 18px;
 `;
 
 const SubTitle = styled.div`
-  color: var(--Neutral-400, #565656);
+  color: ${({ theme }) => theme.palette.neutral[400]};
   text-align: center;
-  /* Body-16-SB */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
+  ${({ theme }) => theme.typo.Body_16_SB};
   word-break: keep-all;
 `;
 
@@ -142,13 +132,7 @@ const ModalButton = styled.button`
   flex: 1 0 0;
   border-radius: 8px;
   border: none;
-  background: var(--Primary-500, #3184ff);
+  background: ${({ theme }) => theme.palette.primary[500]};
   color: #fff;
-
-  /* Body-16-SB */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%; /* 22.4px */
+  ${({ theme }) => theme.typo.Body_16_SB};
 `;

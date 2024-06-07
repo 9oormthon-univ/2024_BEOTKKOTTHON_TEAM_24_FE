@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   border-radius: 12px;
   margin: 0 20px 48px;
   padding: 10px 20px 18px;
-  background-color: #e9efff;
+  background: ${({ theme }) => theme.palette.primary[100]};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,28 +43,25 @@ const Wrapper = styled.div`
 
   .text-box {
     width: 182px;
-    line-height: 24px;
 
     span {
       font-size: 14px;
       font-weight: 600;
-      color: #3184ff;
+      color: ${({ theme }) => theme.palette.primary[500]};
     }
     p {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1f1f1f;
+      ${({ theme }) => theme.typo.Body_16_SB};
+      color: ${({ theme }) => theme.palette.neutral[500]};
     }
   }
 
   button {
     width: 100%;
     height: 58px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #3184ff;
+    ${({ theme }) => theme.typo.Body_16_SB};
+    color: ${({ theme }) => theme.palette.primary[500]};
     background-color: #ffffff;
-    border: #3184ff solid 1px;
+    border: ${({ theme }) => theme.palette.primary[500]} solid 1px;
     border-radius: 12px;
   }
 `;

@@ -54,7 +54,7 @@ const View = styled.div`
     }
     :last-child {
       margin-left: 10px;
-      color: #3184ff;
+      color: ${({ theme }) => theme.palette.primary[500]};
     }
   }
 `;

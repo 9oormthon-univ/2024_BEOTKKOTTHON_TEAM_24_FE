@@ -190,7 +190,7 @@ const ModalHeader = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-bottom: 1px solid var(--Neutral-150, #e1e1e1);
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutral[150]};
   border-radius: 8px 8px 0px 0px;
   background: white;
 `;
@@ -212,11 +212,9 @@ const ModalTitle = styled.div`
   justify-content: center;
 
   p {
-    color: #1f1f1f;
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 140%;
+    ${({ theme }) => theme.typo.Body_18_B};
     margin-top: 18px;
   }
 `;
@@ -225,11 +223,7 @@ const CompleteBtn = styled.div`
   position: absolute;
   top: 18px;
   right: 0px;
-  color: #3184ff;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%;
+  color: ${({ theme }) => theme.palette.primary[500]};
+  ${({ theme }) => theme.typo.Body_18_B};
   cursor: pointer;
 `;

@@ -66,7 +66,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background-color: #fbfbfb;
+  background-color: ${({ theme }) => theme.palette.system.background};
   position: relative;
   justify-content: space-evenly;
   > :last-child {

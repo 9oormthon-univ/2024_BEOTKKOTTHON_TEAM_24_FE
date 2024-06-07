@@ -25,22 +25,19 @@ const RecommendBg = styled.div`
   padding: 16px 40px 16px 29px;
   align-items: center;
   border-radius: 8.235px;
-  background: #f4f5f7;
+  background: ${({ theme }) => theme.palette.neutral[100]};
   gap: 19px;
 `;
 
 const RecommendText = styled.p`
-  color: #1f1f1f;
+  color: ${({ theme }) => theme.palette.neutral[500]};
   width: 170px;
   word-break: keep-all;
   text-align: left;
   margin-right: 114px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%;
+  ${({ theme }) => theme.typo.Body_16_SB};
   .colored {
-    color: #3184ff;
+    color: ${({ theme }) => theme.palette.primary[500]};
   }
 `;
 

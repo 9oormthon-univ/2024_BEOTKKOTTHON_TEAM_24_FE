@@ -18,13 +18,19 @@ const FolderEdit: NextPage<Props> = ({}) => {
   const { mutate, error } = usePatchFolder();
 
   const [newFolderList, setNewFolderList] = useState<FolderPatchRequest[]>(
-    data ? data.map(({folderId, folderColor, folderName}) => ({...{folderId, folderColor, folderName}})) : [],
+    data
+      ? data.map(({ folderId, folderColor, folderName }) => ({
+          ...{ folderId, folderColor, folderName },
+        }))
+      : [],
   );
-  const [searchedFolderList, setSearchedFolderList] = useState<FolderPatchRequest[]>([]);
-  const [targetFolder, setTargetFolder] = useState<FolderPatchRequest>(newFolderList[0]);
-  const [editedFolderIdList, setEditedFolderIdList] = useState<
-    number[]
+  const [searchedFolderList, setSearchedFolderList] = useState<
+    FolderPatchRequest[]
   >([]);
+  const [targetFolder, setTargetFolder] = useState<FolderPatchRequest>(
+    newFolderList[0],
+  );
+  const [editedFolderIdList, setEditedFolderIdList] = useState<number[]>([]);
   const [isModalOn, setIsModalOn] = useState(false);
 
   const handleSearch = (value: string) => {
@@ -40,7 +46,9 @@ const FolderEdit: NextPage<Props> = ({}) => {
   };
 
   const handleSaveFolders = () => {
-    const editedFolderList = newFolderList.filter((folder) => editedFolderIdList.includes(folder.folderId))
+    const editedFolderList = newFolderList.filter((folder) =>
+      editedFolderIdList.includes(folder.folderId),
+    );
     const saveRequests = editedFolderList.map((folder) => mutate(folder));
     Promise.all(saveRequests).then(() => {
       alert('변경된 폴더 리스트가 저장되었습니다.');
@@ -94,24 +102,15 @@ const Wrapper = styled.div`
   position: relative;
   justify-content: center;
   .title {
-    color: #1f1f1f;
+    color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 27.146px; /* 135.732% */
+    ${({ theme }) => theme.typo.Head_20_B};
     height: 28px;
   }
   .link {
-    color: var(--Primary-500, #3184ff);
+    color: ${({ theme }) => theme.palette.primary[500]};
     text-align: right;
-    /* Body-16-SB */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 22.4px */
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
   .save {
     position: absolute;

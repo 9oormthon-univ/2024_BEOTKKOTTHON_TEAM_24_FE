@@ -55,7 +55,7 @@ const Home: NextPage = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  background-color: #fbfbfb;
+  background-color: ${({ theme }) => theme.palette.system.background};
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -68,5 +68,5 @@ const HrLine = styled.hr`
   width: 100%;
   height: 7px;
   border: 0;
-  background-color: #f1f3f7;
+  background-color: ${({ theme }) => theme.palette.neutral[100]};
 `;

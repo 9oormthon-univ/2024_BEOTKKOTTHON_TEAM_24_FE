@@ -86,15 +86,13 @@ const Wrapper = styled.div<CSSProps>`
   .card-title {
     width: 100%;
     margin: 0 10px 12px 0;
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
     word-break: keep-all;
     line-height: 20px;
   }
 
   .card-tag {
-    font-size: 12px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Caption_12_M};
     display: inline-block;
     padding: 4px 10px;
     margin: 0 6px 0 0;

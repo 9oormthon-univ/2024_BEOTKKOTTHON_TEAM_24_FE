@@ -65,8 +65,7 @@ const Wrapper = styled.div<WrapperProps>`
   }
 
   textarea {
-    font-size: 14px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Body_14_M};
   }
 
   .reminder {
@@ -87,7 +86,7 @@ const Wrapper = styled.div<WrapperProps>`
     border: none;
     outline: none;
     padding: 14px 16px ${(props) => (props.counter ? '30px' : '14px')};
-    background: #f4f5f7;
+    background: ${({ theme }) => theme.palette.neutral[100]};
     color: #161616;
     border-radius: 8px;
     resize: none;
@@ -104,13 +103,11 @@ const Title = styled.div`
   left: 0;
 
   &.small {
-    font-size: 14px;
-    font-weight: 500;
+    ${({ theme }) => theme.typo.Body_14_M};
   }
 
   &.big {
-    font-size: 16px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.Body_16_SB};
   }
 `;
 
@@ -119,7 +116,6 @@ const Counter = styled.p`
   right: 16px;
   bottom: 16px;
   text-align: right;
-  font-size: 12px;
-  font-weight: 500;
-  color: #989898;
+  ${({ theme }) => theme.typo.Caption_12_M};
+  color: ${({ theme }) => theme.palette.neutral[200]};
 `;

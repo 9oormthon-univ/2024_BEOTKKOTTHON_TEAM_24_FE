@@ -57,12 +57,10 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #3184ff;
+    color: ${({ theme }) => theme.palette.primary[500]};
     margin-bottom: 28px;
     text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 140%;
+    ${({ theme }) => theme.typo.Body_18_B};
   }
 `;
 
@@ -70,15 +68,13 @@ const Title = styled.div`
   width: 100%;
   margin-left: 20px;
   margin-top: 20px;
-  color: #1f1f1f;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 140%;
+  color: ${({ theme }) => theme.palette.neutral[500]};
+  ${({ theme }) => theme.typo.Body_18_B};
 `;
 
 const HrLine = styled.hr`
   width: 100%;
   height: 7px;
   border: 0;
-  background-color: #f1f3f7;
+  background-color: ${({ theme }) => theme.palette.neutral[100]};
 `;
