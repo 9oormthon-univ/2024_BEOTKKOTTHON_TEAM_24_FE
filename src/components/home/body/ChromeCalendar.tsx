@@ -5,6 +5,9 @@ import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 import Down from '@svg/down-icon.svg';
 import { useState } from 'react';
+import { usePostReminderCalendar } from '@/hooks/api/useReminder';
+import { CalendarPostRequest } from '@/types/reminder';
+import { useCalendarPostResponseStore } from '@/store/reminder';
 
 interface Props {
   onClickModal: () => void;
@@ -16,9 +19,23 @@ const Calendar2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
   const [direction, setDirection] = useState<string>('');
+  const { mutate } = usePostReminderCalendar();
+  const { setRecommendPostResponse } = useCalendarPostResponseStore();
 
   const handleSelectDate = (date: string | null) => {
     date ? setSelectedDate(date) : setSelectedDate(today);
+    const postReminderCalendarRequest: CalendarPostRequest = {
+      requestDate: dayjs(date).format('YYYY-MM-DD'),
+    };
+    mutate(postReminderCalendarRequest, {
+      onSuccess: (data) => {
+        setRecommendPostResponse(data);
+        console.log(data);
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    });
   };
 
   const handlePrevWeek = () => {
