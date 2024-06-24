@@ -54,7 +54,7 @@ const Wrapper = styled.div`
 
   .title,
   p {
-    color: ${({ theme }) => theme.palette.neutral[500]}
+    color: ${({ theme }) => theme.palette.neutral[500]};
       ${({ theme }) => theme.typo.Head_24_B};
     margin-top: 20px;
   }
@@ -62,11 +62,11 @@ const Wrapper = styled.div`
     position: absolute;
     right: 20px;
     top: 12px;
-    color: ${({ theme }) => theme.palette.primary[500]}
+    color: ${({ theme }) => theme.palette.primary[500]};
       ${({ theme }) => theme.typo.Head_20_M};
   }
   .subtitle {
-    color: ${({ theme }) => theme.palette.neutral[300]}
+    color: ${({ theme }) => theme.palette.neutral[300]};
       ${({ theme }) => theme.typo.Body_14_M};
   }
 
@@ -93,7 +93,7 @@ const NameSection = styled.div`
 `;
 
 const SubTitle = styled.div`
-  color: ${({ theme }) => theme.palette.neutral[500]}
+  color: ${({ theme }) => theme.palette.neutral[500]};
     ${({ theme }) => theme.typo.Head_20_M};
   margin-top: 48px;
 `;
@@ -105,13 +105,13 @@ const Input = styled.input`
   align-items: flex-start;
   align-self: stretch;
   border-radius: 8.235px;
-  border: 0.8px solid ${({ theme }) => theme.palette.neutral[300]}
+  border: 0.8px solid ${({ theme }) => theme.palette.neutral[300]};
   outline: none;
-  color: ${({ theme }) => theme.palette.neutral[500]}
+  color: ${({ theme }) => theme.palette.neutral[500]};
   ${({ theme }) => theme.typo.Body_18_R};
 `;
 
 const ValidateText = styled.div`
-  color: ${({ theme }) => theme.palette.neutral[200]}
+  color: ${({ theme }) => theme.palette.neutral[200]};
     ${({ theme }) => theme.typo.Body_14_M};
 `;
