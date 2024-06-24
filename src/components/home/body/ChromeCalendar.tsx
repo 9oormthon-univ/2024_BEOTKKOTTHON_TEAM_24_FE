@@ -6,8 +6,9 @@ import Right from '@svg/next-icon.svg';
 import Down from '@svg/down-icon.svg';
 import { useState } from 'react';
 import { usePostReminderCalendar } from '@/hooks/api/useReminder';
-import { CalendarPostRequest } from '@/types/reminder';
+import { CalendarPostRequest, CalendarPostResponse } from '@/types/reminder';
 import { useCalendarPostResponseStore } from '@/store/reminder';
+import { Insight } from '@/types/insight';
 
 interface Props {
   onClickModal: () => void;
@@ -29,8 +30,14 @@ const Calendar2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
     };
     mutate(postReminderCalendarRequest, {
       onSuccess: (data) => {
-        setRecommendPostResponse(data);
-        console.log(data);
+        const dataWithFlag: CalendarPostResponse = {
+          ...data,
+          remindInsightList: data.remindInsightList.map((insight: Insight) => ({
+            ...insight,
+            isRead: false,
+          })),
+        };
+        setRecommendPostResponse(dataWithFlag);
       },
       onError: (error) => {
         console.error(error);

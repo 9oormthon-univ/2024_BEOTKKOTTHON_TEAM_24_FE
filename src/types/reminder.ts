@@ -30,9 +30,11 @@ export type CalendarPostRequest = {
   requestDate: string;
 };
 
+type InsightWithIsRead = Insight & { isRead: boolean };
+
 export type CalendarPostResponse = {
   date: string;
   remindRead: number;
   remindTotal: number;
-  remindInsightList: Insight[];
+  remindInsightList: InsightWithIsRead[];
 };

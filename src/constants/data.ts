@@ -13,6 +13,7 @@ export const calendarData: CalendarPostResponse = {
         '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',
       insightTagList: ['UI/UX', '사용자 경험'],
       todayRead: false,
+      isRead: false,
     },
     {
       insightId: 2,
@@ -22,6 +23,7 @@ export const calendarData: CalendarPostResponse = {
         '미드저니는 UX/UI디자인, 그래픽 디자인 등 다양한 분야에서 활용될 수있습니다. 미드저니를 활용해 UX/UI 디자인을 수행하는 경우, 시나리오와 퍼소나를 아주 높은 퀄리티로 시각화 할 수 있습니다.',
       insightTagList: ['UI/UX', '사용자 경험'],
       todayRead: true,
+      isRead: true,
     },
   ],
 };

@@ -20,6 +20,7 @@ export const useCalendarPostResponseStore = create<CalendarPostResponseStore>(
           insightSummary: '',
           insightTagList: [],
           todayRead: false,
+          isRead: false,
         },
       ],
     },
