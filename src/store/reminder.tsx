@@ -6,6 +6,11 @@ interface CalendarPostResponseStore {
   setRecommendPostResponse: (response: CalendarPostResponse) => void;
 }
 
+type Store = {
+  hasFetched: boolean;
+  setHasFetched: (fetched: boolean) => void;
+};
+
 export const useCalendarPostResponseStore = create<CalendarPostResponseStore>(
   (set) => ({
     recommendPostResponse: {
@@ -28,3 +33,8 @@ export const useCalendarPostResponseStore = create<CalendarPostResponseStore>(
       set({ recommendPostResponse: newResponse }),
   }),
 );
+
+export const useFetchStore = create<Store>((set) => ({
+  hasFetched: false,
+  setHasFetched: (fetched) => set({ hasFetched: fetched }),
+}));
