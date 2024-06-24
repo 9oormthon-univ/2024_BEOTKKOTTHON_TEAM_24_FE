@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import InsightCard from '../../common/InsightCard';
 import SummaryInsightCard from '@components/common/SummaryInsightCard';
 import { CalendarPostResponse } from '@/types/reminder';
-import { insightData1, insightData2 } from '@/constants/data';
+import { insightData1 } from '@/constants/data';
 
 interface Props {
   $isSmall: boolean;
@@ -10,20 +10,26 @@ interface Props {
 }
 
 const InsightList = ({ $isSmall, calendarData }: Props) => {
+  const { remindRead, remindTotal, remindInsightList } = calendarData;
   return (
     <View>
       <div>
         <div className="view-title">
           <span>리마인드 인사이트</span>
-          <span>1/1</span>
+          <span>
+            {remindRead}/{remindTotal}
+          </span>
         </div>
-        {$isSmall ? (
-          <InsightCard insightData={calendarData.remindInsightList[0]} />
-        ) : (
-          <SummaryInsightCard
-            favicon="/svg/insight-favicon2.svg"
-            insightData={insightData1}
-          />
+        {remindInsightList.map((insight, idx) =>
+          $isSmall ? (
+            <InsightCard insightData={insight} key={idx} />
+          ) : (
+            <SummaryInsightCard
+              favicon="/svg/insight-favicon.svg"
+              insightData={insight}
+              key={idx}
+            />
+          ),
         )}
       </div>
       <div>
@@ -32,11 +38,11 @@ const InsightList = ({ $isSmall, calendarData }: Props) => {
           <span>1/1</span>
         </div>
         {$isSmall ? (
-          <InsightCard insightData={calendarData.remindInsightList[1]} />
+          <InsightCard insightData={remindInsightList[1]} />
         ) : (
           <SummaryInsightCard
             favicon="/svg/insight-favicon.svg"
-            insightData={insightData2}
+            insightData={insightData1}
           />
         )}
       </div>
