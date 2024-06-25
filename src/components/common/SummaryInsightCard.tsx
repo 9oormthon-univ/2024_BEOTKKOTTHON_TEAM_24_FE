@@ -24,14 +24,14 @@ const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
             }
           : insight,
     );
-    const dataWithFlag: CalendarPostResponse = {
+    const updatedData: CalendarPostResponse = {
       ...recommendPostResponse,
       remindRead: updatedInsightList.filter(
         (insight) => insight.isRead === false,
       ).length,
       remindInsightList: updatedInsightList,
     };
-    setRecommendPostResponse(dataWithFlag);
+    setRecommendPostResponse(updatedData);
     router.push(`/insight/${insightData.insightId}`);
   };
 
