@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Stamp from '@svg/calendar-stamp.svg';
+import { useCalendarPostResponseStore } from '@/store/reminder';
 
 const days = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -33,7 +34,7 @@ const RenderCalendarBoard = (
       $isSelected={selectedDay === v}
       onClick={() => handleSelectDate(v)}
     >
-      {v && <CalendarItem date={v} stamp={today === v} />}
+      {v && <CalendarItem date={v} />}
     </Item>
   ));
 
@@ -50,16 +51,19 @@ const Board = styled.div`
 
 interface CalendarItemProps {
   date: string;
-  stamp: boolean;
 }
 
-const CalendarItem = ({ date, stamp }: CalendarItemProps) => {
+const CalendarItem = ({ date }: CalendarItemProps) => {
+  const { recommendPostResponse } = useCalendarPostResponseStore();
+  const isStamp =
+    recommendPostResponse.remindRead === 0 &&
+    dayjs(date).day() === dayjs().day();
   return (
     <>
       <span className="day">{days[dayjs(date).day()]}</span>
       <div className="date-container">
         <span className="date">{dayjs(date).date()}</span>
-        {stamp ? <Stamp /> : <div className="no-stamp"></div>}
+        {isStamp ? <Stamp /> : <div className="no-stamp"></div>}
       </div>
     </>
   );
