@@ -17,7 +17,7 @@ const InsightList = ({ $isSmall, calendarData }: Props) => {
         <div className="view-title">
           <span>리마인드 인사이트</span>
           <span>
-            {remindRead}/{remindTotal}
+            {remindTotal - remindRead}/{remindTotal}
           </span>
         </div>
         {remindInsightList.map((insight, idx) =>
