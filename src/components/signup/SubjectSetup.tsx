@@ -125,8 +125,8 @@ const Wrapper = styled.div`
   .title,
   p {
     width: 100%;
-    color: ${({ theme }) => theme.palette.neutral[500]}
-      ${({ theme }) => theme.typo.Head_24_B};
+    color: ${({ theme }) => theme.palette.neutral[500]};
+    ${({ theme }) => theme.typo.Head_24_B};
     margin-top: 20px;
   }
 
@@ -138,12 +138,12 @@ const Wrapper = styled.div`
     position: absolute;
     right: 20px;
     top: 12px;
-    color: ${({ theme }) => theme.palette.primary[500]}
+    color: ${({ theme }) => theme.palette.primary[500]};
       ${({ theme }) => theme.typo.Head_20_M};
   }
   .subtitle {
     margin-top: 8px;
-    color: ${({ theme }) => theme.palette.neutral[300]}
+    color: ${({ theme }) => theme.palette.neutral[300]};
       ${({ theme }) => theme.typo.Body_14_M};
   }
 `;
@@ -162,7 +162,7 @@ const TopicSection = styled.div`
   margin-top: 56px;
   gap: 19px;
   .error {
-    color: ${({ theme }) => theme.palette.system.warning}
+    color: ${({ theme }) => theme.palette.system.warning};
   }
   .selected {
     display: flex;
@@ -171,7 +171,7 @@ const TopicSection = styled.div`
     align-items: center;
     gap: 9.412px;
     border-radius: 8.985px;
-    background: ${({ theme }) => theme.palette.primary[500]}
+    background-color: ${({ theme }) => theme.palette.primary[500]};
     color: #fff;
   }
 `;
@@ -183,8 +183,8 @@ const Topic = styled.div`
   align-items: center;
   gap: 9.412px;
   border-radius: 8.985px;
-  background: ${({ theme }) => theme.palette.neutral[100]}
-  color: ${({ theme }) => theme.palette.neutral[400]}
+  background: ${({ theme }) => theme.palette.neutral[100]};
+  color: ${({ theme }) => theme.palette.neutral[400]};
   text-align: center;
   ${({ theme }) => theme.typo.Body_16_SB};
 `;
