@@ -4,8 +4,9 @@ import RenderCalendarBoard from './RenderCalendarBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 import Down from '@svg/down-icon.svg';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { usePostReminderCalendar } from '@/hooks/api/useReminder';
+import { useFetchStore } from '@/store/reminder';
 interface Props {
   onClickModal: () => void;
   selectedDate: string;
@@ -16,9 +17,16 @@ const Calendar2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
   const [direction, setDirection] = useState<string>('');
+  const { mutate } = usePostReminderCalendar();
+  const { hasFetched } = useFetchStore();
+
+  useEffect(() => {
+    !hasFetched && mutate(today);
+  }, []);
 
   const handleSelectDate = (date: string | null) => {
     date ? setSelectedDate(date) : setSelectedDate(today);
+    mutate(String(date));
   };
 
   const handlePrevWeek = () => {

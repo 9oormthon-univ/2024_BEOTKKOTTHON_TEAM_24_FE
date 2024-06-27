@@ -7,8 +7,8 @@ import InsightList from './InsightList';
 import dayjs from 'dayjs';
 import CalendarModal from './CalendarModal';
 import ChromeCalendar from './ChromeCalendar';
-import { calendarData } from '@/constants/data';
 import { checkUnsupportedBrowser } from '@/utils';
+import { useCalendarPostResponseStore } from '@/store/reminder';
 
 // TODO [2] - 날짜 클릭 시 해당 날짜에 리마인드 해야 하는 인사이트 호출
 const ReminderCalendar = () => {
@@ -18,11 +18,12 @@ const ReminderCalendar = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isUnsupportedBrowser, setIsUnsupportedBrowser] =
     useState<boolean>(true);
+  const { recommendPostResponse } = useCalendarPostResponseStore()
 
   useEffect(() => {
     const infoList = [
       '리마인드를 설정하면 캘린더에서 확인할 수 있어요!',
-      `${30 - calendarData.remindTotal}개 더 저장하면 맞춤 콘텐츠를 추천해드려요!`,
+      `${30 - recommendPostResponse.remindTotal}개 더 저장하면 맞춤 콘텐츠를 추천해드려요!`,
     ];
     setInfoText(infoList[Math.floor(Math.random() * 2)]);
     setIsUnsupportedBrowser(checkUnsupportedBrowser());
@@ -73,7 +74,7 @@ const ReminderCalendar = () => {
         </div>
       </ViewSetting>
       {dayjs().isSame(selectedDate, 'day') ? (
-        <InsightList $isSmall={$isSmall} calendarData={calendarData} />
+        <InsightList $isSmall={$isSmall} calendarData={recommendPostResponse} />
       ) : (
         <EmptyInsight>
           <p>확인 할 인사이트가 없습니다.</p>

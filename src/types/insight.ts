@@ -7,6 +7,7 @@ export type Insight = {
   insightSummary: string;
   insightTagList: string[];
   todayRead?: boolean;
+  isRead?: boolean;
 };
 
 export type InsightDetail = {
