@@ -38,7 +38,7 @@ const InsightCard = ({ favicon, insightData }: Props) => {
 
   return (
     <Wrapper
-      opacity={insightData.isRead === true ? 0.6 : 1}
+      opacity={insightData.isRead ? 0.6 : 1}
       onClick={handleClick}
     >
       {favicon && (
