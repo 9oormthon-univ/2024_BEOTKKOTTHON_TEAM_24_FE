@@ -6,7 +6,6 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { insightData1, insightData2 } from '@/constants/data';
-import { useGetInsight } from '@/hooks/api/useInsight';
 import { Insight } from '@/types/insight';
 import { useEffect, useState } from 'react';
 

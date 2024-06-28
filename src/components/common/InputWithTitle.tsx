@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import LinkIcon from '@svg/link-icon.svg';
-import { MouseEventHandler } from 'react';
 
 interface Props {
   top?: number;

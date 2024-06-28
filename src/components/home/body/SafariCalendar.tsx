@@ -4,9 +4,6 @@ import RenderCalendarBoard from './RenderCalendarBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 import Down from '@svg/down-icon.svg';
-import { useEffect } from 'react';
-import { usePostReminderCalendar } from '@/hooks/api/useReminder';
-import { useFetchStore } from '@/store/reminder';
 
 interface Props {
   onClickModal: () => void;

@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { Insight } from '@/types/insight';
 import { useRouter } from 'next/router';
-import { useCalendarPostResponseStore } from '@/store/reminder';
-import { CalendarPostResponse } from '@/types/reminder';
 
 interface CardProps {
   favicon: string;
