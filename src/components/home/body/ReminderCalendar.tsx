@@ -29,8 +29,11 @@ const ReminderCalendar = () => {
     ];
     setInfoText(infoList[Math.floor(Math.random() * 2)]);
     setIsUnsupportedBrowser(checkUnsupportedBrowser());
-    mutate(selectedDate);
   }, []);
+
+  useEffect(() => {
+    mutate(selectedDate);
+  }, [selectedDate]);
 
   const onClickView = () => {
     set$isSmall(!$isSmall);
@@ -76,7 +79,7 @@ const ReminderCalendar = () => {
           />
         </div>
       </ViewSetting>
-      {dayjs().isSame(selectedDate, 'day') && data ? (
+      {data ? (
         <InsightList $isSmall={$isSmall} calendarData={data} />
       ) : (
         <EmptyInsight>
