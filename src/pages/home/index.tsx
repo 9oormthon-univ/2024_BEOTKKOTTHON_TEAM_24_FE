@@ -10,6 +10,7 @@ import { useGetReminderQuestion } from '@/hooks/api/useReminder';
 
 const Home: NextPage = () => {
   const { data, isSuccess } = useGetReminderQuestion();
+  console.log(data);
 
   const renderInnerComponent = () => {
     const dataLength = data?.reminderQuestionList.length;

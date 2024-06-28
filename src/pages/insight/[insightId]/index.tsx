@@ -44,6 +44,7 @@ const InsightDetail: NextPage = () => {
           bottom={18}
           linkIcon
           value={data?.insightUrl}
+          onClick={() => data?.insightUrl && router.push(data.insightUrl)}
         />
         {isSuccess && data.insightImageList.length > 0 && (
           <CarouselWrapper>

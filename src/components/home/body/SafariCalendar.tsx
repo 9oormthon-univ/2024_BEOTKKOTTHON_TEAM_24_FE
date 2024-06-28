@@ -4,6 +4,9 @@ import RenderCalendarBoard from './RenderCalendarBoard';
 import Left from '@svg/prev-icon.svg';
 import Right from '@svg/next-icon.svg';
 import Down from '@svg/down-icon.svg';
+import { useEffect } from 'react';
+import { usePostReminderCalendar } from '@/hooks/api/useReminder';
+import { useFetchStore } from '@/store/reminder';
 
 interface Props {
   onClickModal: () => void;
@@ -11,7 +14,11 @@ interface Props {
   setSelectedDate: (date: string) => void;
 }
 
-const Calendar = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
+const SafariCalendar = ({
+  onClickModal,
+  selectedDate,
+  setSelectedDate,
+}: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
 
@@ -87,4 +94,4 @@ const Head = styled.div`
   }
 `;
 
-export default Calendar;
+export default SafariCalendar;

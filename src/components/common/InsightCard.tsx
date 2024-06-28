@@ -12,35 +12,13 @@ interface Props {
 
 const InsightCard = ({ favicon, insightData }: Props) => {
   const router = useRouter();
-  const { recommendPostResponse, setRecommendPostResponse } =
-    useCalendarPostResponseStore();
 
   const handleClick = () => {
-    const updatedInsightList = recommendPostResponse.remindInsightList.map(
-      (insight: Insight) =>
-        insight.insightId === insightData.insightId
-          ? {
-              ...insight,
-              isRead: true,
-            }
-          : insight,
-    );
-    const dataWithFlag: CalendarPostResponse = {
-      ...recommendPostResponse,
-      remindRead: updatedInsightList.filter(
-        (insight) => insight.isRead === false,
-      ).length,
-      remindInsightList: updatedInsightList,
-    };
-    setRecommendPostResponse(dataWithFlag);
     router.push(`/insight/${insightData.insightId}`);
   };
 
   return (
-    <Wrapper
-      opacity={insightData.isRead ? 0.6 : 1}
-      onClick={handleClick}
-    >
+    <Wrapper opacity={insightData.todayRead ? 0.6 : 1} onClick={handleClick}>
       {favicon && (
         <Image
           src={favicon}

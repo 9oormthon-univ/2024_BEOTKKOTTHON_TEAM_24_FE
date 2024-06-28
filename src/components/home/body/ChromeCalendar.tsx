@@ -13,20 +13,17 @@ interface Props {
   setSelectedDate: (date: string) => void;
 }
 
-const Calendar2 = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
+const ChromeCalendar = ({
+  onClickModal,
+  selectedDate,
+  setSelectedDate,
+}: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
   const [direction, setDirection] = useState<string>('');
-  const { mutate } = usePostReminderCalendar();
-  const { hasFetched } = useFetchStore();
-
-  useEffect(() => {
-    !hasFetched && mutate(today);
-  }, []);
 
   const handleSelectDate = (date: string | null) => {
     date ? setSelectedDate(date) : setSelectedDate(today);
-    mutate(String(date));
   };
 
   const handlePrevWeek = () => {
@@ -115,4 +112,4 @@ const Head = styled.div`
   }
 `;
 
-export default Calendar2;
+export default ChromeCalendar;

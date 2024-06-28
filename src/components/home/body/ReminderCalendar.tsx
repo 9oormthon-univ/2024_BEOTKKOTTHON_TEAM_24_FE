@@ -9,6 +9,7 @@ import CalendarModal from './CalendarModal';
 import ChromeCalendar from './ChromeCalendar';
 import { checkUnsupportedBrowser } from '@/utils';
 import { useCalendarPostResponseStore } from '@/store/reminder';
+import { usePostReminderCalendar } from '@/hooks/api/useReminder';
 
 // TODO [2] - 날짜 클릭 시 해당 날짜에 리마인드 해야 하는 인사이트 호출
 const ReminderCalendar = () => {
@@ -18,7 +19,8 @@ const ReminderCalendar = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isUnsupportedBrowser, setIsUnsupportedBrowser] =
     useState<boolean>(true);
-  const { recommendPostResponse } = useCalendarPostResponseStore()
+  const { recommendPostResponse } = useCalendarPostResponseStore();
+  const { mutate, data } = usePostReminderCalendar();
 
   useEffect(() => {
     const infoList = [
@@ -27,6 +29,7 @@ const ReminderCalendar = () => {
     ];
     setInfoText(infoList[Math.floor(Math.random() * 2)]);
     setIsUnsupportedBrowser(checkUnsupportedBrowser());
+    mutate(selectedDate);
   }, []);
 
   const onClickView = () => {
@@ -73,8 +76,8 @@ const ReminderCalendar = () => {
           />
         </div>
       </ViewSetting>
-      {dayjs().isSame(selectedDate, 'day') ? (
-        <InsightList $isSmall={$isSmall} calendarData={recommendPostResponse} />
+      {dayjs().isSame(selectedDate, 'day') && data ? (
+        <InsightList $isSmall={$isSmall} calendarData={data} />
       ) : (
         <EmptyInsight>
           <p>확인 할 인사이트가 없습니다.</p>
