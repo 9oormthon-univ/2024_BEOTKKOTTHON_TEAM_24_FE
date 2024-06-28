@@ -34,7 +34,7 @@ export const fetchSummary = async (link: string, folderList: string[]) => {
         {
           role: 'system',
           content:
-            'You are helpful assistant. Your job is Get title of article, summarize the article accessible through the provided link in one sentence in Korean, extract three keywords that can be used for classification purposes, and pick one name from the list of folder names I gave you that is the most appropriate for the article. Your response form is as follows: 제목:  , 요약: , 키워드: , 폴더명: ',
+            'You are professional summarizer. Your job is doing four tasks. 1. Get title of article. 2. Summarize the article accessible through link that I give to you in three sentences in Korean. 3. extract three keywords only that can be used for classification purposes. 4. Pick one name from the list of folder names I gave you that is the most appropriate for the article. Your response form is as follows: 제목: , 요약: , 키워드: , 폴더명: ',
         },
         { role: 'user', content: `link: ${link}, list: ${folderList}` },
       ],
