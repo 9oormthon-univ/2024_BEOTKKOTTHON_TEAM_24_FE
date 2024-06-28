@@ -27,7 +27,6 @@ export default function useInsightInput(query: ParsedUrlQuery) {
   }: InsightInputQuery = query as InsightInputQuery;
 
   const image = useCheckMainImage(imgURLs, insightUrl);
-
   const [insightInput, setInsightInput] = useState<InsightPostRequest>({
     insightUrl: insightUrl,
     insightTitle: '',
@@ -51,6 +50,7 @@ export default function useInsightInput(query: ParsedUrlQuery) {
       insightSummary: String(result.summary),
       insightTagList: result.keywords ? result.keywords.split(', ') : [],
       folderName: String(result.folderName),
+      insightMainImage: image ?? defaultImage.src,
     });
   };
   return { insightInput, setInsightInput, updateInsightInput };
