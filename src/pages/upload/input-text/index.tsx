@@ -29,7 +29,7 @@ const Upload: NextPage = ({}) => {
   const { insightInput, setInsightInput, updateInsightInput } = useInsightInput(
     router.query,
   );
-  const { mutate } = usePostInsight();
+  const { mutate } = usePostInsight(insightInput);
 
   const [isModal, setIsModal] = useState('');
   const [remindTerm, setRemindTerm] = useState('');

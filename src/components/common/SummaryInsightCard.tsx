@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { Insight } from '@/types/insight';
 import { useRouter } from 'next/router';
-import { useCalendarPostResponseStore } from '@/store/reminder';
-import { CalendarPostResponse } from '@/types/reminder';
 
 interface CardProps {
   favicon: string;
@@ -12,32 +10,13 @@ interface CardProps {
 
 const SummaryInsightCard = ({ favicon, insightData }: CardProps) => {
   const router = useRouter();
-  const { recommendPostResponse, setRecommendPostResponse } =
-    useCalendarPostResponseStore();
   const handleClick = () => {
-    const updatedInsightList = recommendPostResponse.remindInsightList.map(
-      (insight: Insight) =>
-        insight.insightId === insightData.insightId
-          ? {
-              ...insight,
-              isRead: true,
-            }
-          : insight,
-    );
-    const updatedData: CalendarPostResponse = {
-      ...recommendPostResponse,
-      remindRead: updatedInsightList.filter(
-        (insight) => insight.isRead === false,
-      ).length,
-      remindInsightList: updatedInsightList,
-    };
-    setRecommendPostResponse(updatedData);
     router.push(`/insight/${insightData.insightId}`);
   };
 
   return (
     <Wrapper
-      opacity={insightData.isRead === true ? 0.6 : 1}
+      opacity={insightData.todayRead === true ? 0.6 : 1}
       onClick={handleClick}
     >
       {favicon && (

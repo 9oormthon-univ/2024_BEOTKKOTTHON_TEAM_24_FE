@@ -12,12 +12,7 @@ import { useTransition } from 'react';
 import { FolderSearchPostResponse } from '@/types/folder';
 import SearchSection from '@/components/common/SearchSection';
 
-let count = 0;
-let memoCount = 0;
-
 const FolderSearch: NextPage = ({}) => {
-  count++;
-  console.log('rerender: ', count);
   const [$isSmall, set$isSmall] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
   const { data, mutate, isSuccess } = useSearchFolder();
@@ -43,8 +38,6 @@ const FolderSearch: NextPage = ({}) => {
   };
 
   const resultSection = useMemo(() => {
-    memoCount++;
-    console.log('memo rerendered: ', memoCount);
     return (
       <ResultSection>
         {result?.map((value, i) =>

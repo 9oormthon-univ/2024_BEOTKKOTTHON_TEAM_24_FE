@@ -67,7 +67,9 @@ export const useGetSummary = (link: string, folderList: string[]) => {
   return { isLoading, error, result };
 };
 
-export function usePostInsight() {
+export function usePostInsight(insightInput: InsightPostRequest) {
+  const { insightTitle, insightMainImage, insightSummary, insightTagList } =
+    insightInput;
   const queryClient = useQueryClient();
   const router = useRouter();
 
@@ -77,7 +79,13 @@ export function usePostInsight() {
       queryClient.invalidateQueries({ queryKey: ['insight'] });
       router.replace({
         pathname: '/upload/saved',
-        query: { insightId: data },
+        query: {
+          insightId: data,
+          insightTitle,
+          insightMainImage,
+          insightSummary,
+          insightTagList,
+        },
       });
     },
   });

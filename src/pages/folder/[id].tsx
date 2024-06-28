@@ -90,7 +90,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
                 favicon="/svg/insight-favicon.svg"
                 insightData={{
                   insightId: insight.insightId,
-                  insightMainImage: '/image/reinput.jpeg',
+                  insightMainImage: insight.insightMainImage,
                   insightTitle: insight.insightTitle,
                   insightSummary: insight.insightSummary,
                   insightTagList: insight.insightTagList,
@@ -103,7 +103,7 @@ const FolderDetail: NextPage<Props> = ({}) => {
                 favicon="/svg/insight-favicon.svg"
                 insightData={{
                   insightId: insight.insightId,
-                  insightMainImage: '/image/reinput.jpeg',
+                  insightMainImage: insight.insightMainImage,
                   insightTitle: insight.insightTitle,
                   insightSummary: insight.insightSummary,
                   insightTagList: insight.insightTagList,
@@ -193,7 +193,7 @@ const InfoSection = styled.div`
   .count-text {
     color: ${({ theme }) => theme.palette.neutral[500]};
     text-align: center;
-ç  }
+  }
   .insight {
     ${({ theme }) => theme.typo.Body_16_SB};
   }

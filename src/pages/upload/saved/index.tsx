@@ -6,28 +6,30 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { insightData1, insightData2 } from '@/constants/data';
-import { useGetInsight } from '@/hooks/api/useInsight';
 import { Insight } from '@/types/insight';
 import { useEffect, useState } from 'react';
 
 const Saved: NextPage = ({}) => {
   const router = useRouter();
-  const { insightId } = router.query;
-  const { data, isSuccess } = useGetInsight(Number(insightId));
+  const {
+    insightId,
+    insightTitle,
+    insightMainImage,
+    insightSummary,
+    insightTagList,
+  } = router.query;
   const [insight, setInsight] = useState<Insight>();
+  console.log('tag:', insightTagList);
 
   useEffect(() => {
-    if (!isSuccess || !data) return;
-    const { insightTitle, insightMainImage, insightSummary, insightTagList } =
-      data;
     setInsight({
       insightId: Number(insightId),
-      insightTitle,
-      insightMainImage,
-      insightSummary,
-      insightTagList,
+      insightTitle: String(insightTitle),
+      insightMainImage: String(insightMainImage),
+      insightSummary: String(insightSummary),
+      insightTagList: (insightTagList as string[]) ?? [],
     });
-  }, [isSuccess, data, insightId]);
+  }, [insightId]);
 
   return (
     <NavigationLayout>

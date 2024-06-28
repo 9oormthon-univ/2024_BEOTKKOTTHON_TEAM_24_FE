@@ -11,7 +11,11 @@ interface Props {
   setSelectedDate: (date: string) => void;
 }
 
-const Calendar = ({ onClickModal, selectedDate, setSelectedDate }: Props) => {
+const SafariCalendar = ({
+  onClickModal,
+  selectedDate,
+  setSelectedDate,
+}: Props) => {
   const today = dayjs().format('MM/DD/YY');
   const splited = selectedDate.split('/');
 
@@ -87,4 +91,4 @@ const Head = styled.div`
   }
 `;
 
-export default Calendar;
+export default SafariCalendar;

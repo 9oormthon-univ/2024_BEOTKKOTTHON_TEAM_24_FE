@@ -11,13 +11,14 @@ interface Props {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  onClick?: () => void;
 }
 
 const InputWithTitle = (props: Props) => {
   const typo = props.biggerTypo || 'title';
 
   return (
-    <Wrapper top={props.top} bottom={props.bottom}>
+    <Wrapper top={props.top} bottom={props.bottom} onClick={props.onClick}>
       <div className="header">
         {props.title && (
           <Title className={typo === 'title' ? 'Body-16-SB' : 'Body-14-M'}>
